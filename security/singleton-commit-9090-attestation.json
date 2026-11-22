@@ -1,0 +1,27 @@
+{
+  "scope": "Bounded source/publication-security audit; no private runtime telemetry",
+  "commit": "9090a482677fa5e92cf1a27fa3337f6e9876c06d",
+  "tree": "b59bd07162bd4a38c1531f68f8e9d6d3f09d4f84",
+  "reviewed_index_listing_sha256": "39daa7926b2c86fe41db6e32c8d5656fa51bf2bd109a490e6ccc2fb5896f5cf9",
+  "committed_entries": 13483,
+  "reviewed_changed_blobs": 44,
+  "all_committed_modes_and_blob_ids_match_reviewed_index": true,
+  "open_actionable_findings": 0,
+  "classified_pattern_candidates": 77,
+  "staged_native_pins": 15,
+  "pin_mismatches": 0,
+  "required_notices_retained": true,
+  "private_live_telemetry_included": false,
+  "independent_local_regressions": {
+    "native_singleton_checks": 13,
+    "frontend_setup_tests": 8,
+    "installer_metadata_tests": 4,
+    "wrapper_tests": 12,
+    "all_passed": true,
+    "model_calls": 0,
+    "external_actions": 0
+  },
+  "decision": "No identified source privacy/security/notice blocker in this immutable checkpoint",
+  "limits": "New three-OS CI still running at attestation; no release, live-provider, full-feature or browser acceptance inferred",
+  "no_key_vault_access_or_staging": true
+}

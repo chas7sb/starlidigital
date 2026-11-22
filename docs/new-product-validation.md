@@ -1,6 +1,12 @@
 # New product validation
 
-Historical tested application code: `8283115df7c116e2d620048d508df5795da511b0`. This is the native bots/teams/Boss product; the obsolete frontend has been removed from the current tree. The following matrix predates the single-company browser-first setup change. That change requires a new commit and fresh-install run before this matrix can be applied to it.
+The single-company/browser-first implementation is commit `9090a482677fa5e92cf1a27fa3337f6e9876c06d`. A fresh Windows root-start/frontend-proxy test passed eight checks without CLI initialization: first-admin race/replay denial, native sign-in, one company, closed signup/guest paths, bots, team/human message, and restart persistence. Separate browser acceptance passed ten scoped checks; its [aggregate report](../qa/results/single-company-browser-proof.json) records the frontend bundle provenance limit. No new model calls were made for these setup changes.
+
+Prime also checked the configured preview in the browser: `/` showed sign-in without registration, and existing credentials restored the same company, three bots and earlier conversation. The encrypted connection was preserved. Fresh-checkout cross-platform runs for this implementation are recorded separately from the historical matrix below.
+
+At `9090a48`, [fresh install](https://github.com/chas7sb/starlidigital/actions/runs/45027698072) passed all eight checks on each of Windows x64, Linux x64 and macOS ARM64. [Build/infrastructure](https://github.com/chas7sb/starlidigital/actions/runs/45027688295) passed nine jobs, including frontend setup tests on each host. [Locked backend](https://github.com/chas7sb/starlidigital/actions/runs/45027688319) passed all three hosts: ten foundation checks, thirteen singleton boundaries, nineteen collaboration regressions and seven native callback fixtures per host. The [sanitized installation reports](../qa/results/single-company-install.json) verify the exact commit, clean tracked checkout and source hashes. These runs requested no model calls and do not establish VM execution or full feature parity.
+
+Historical tested application code: `8283115df7c116e2d620048d508df5795da511b0`. This is the native bots/teams/Boss product; the obsolete frontend has been removed from the current tree. The following matrix predates the single-company browser-first setup change; the new policy is verified separately above.
 
 | Check | Windows x64 | Linux x64 | macOS ARM64 |
 | --- | --- | --- | --- |

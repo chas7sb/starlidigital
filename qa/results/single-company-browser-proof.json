@@ -1,0 +1,63 @@
+{
+  "schema": "starli.qa.single-company-browser-proof.v1",
+  "result": "PASS_SCOPED",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Fresh root renders initial administrator setup",
+      "result": "PASS"
+    },
+    {
+      "name": "Browser setup creates the sole company and enters workspace",
+      "result": "PASS"
+    },
+    {
+      "name": "Repeated setup is rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Public registration remains unavailable",
+      "result": "PASS"
+    },
+    {
+      "name": "Second company creation is rejected and only one is listed",
+      "result": "PASS"
+    },
+    {
+      "name": "Foreign company access is rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Six simultaneous fresh setup attempts produce one success and five rejections",
+      "result": "PASS"
+    },
+    {
+      "name": "Browser creates a blank bot and private team",
+      "result": "PASS"
+    },
+    {
+      "name": "Configured root renders sign-in and browser login restores workspace",
+      "result": "PASS"
+    },
+    {
+      "name": "Company bot team and human message persist after process restart",
+      "result": "PASS"
+    }
+  ],
+  "model_calls": 0,
+  "live_preview_modified": false,
+  "source_commit": null,
+  "source_binding": {
+    "status": "PARTIAL",
+    "verified_backend_source_commit": "9090a482677fa5e92cf1a27fa3337f6e9876c06d",
+    "backend_tested_bytes_match_commit": true,
+    "frontend_tested_bundle_unchanged": true,
+    "limitation": "The tested built frontend is untracked, so exact full-commit provenance cannot be independently certified from the saved evidence."
+  },
+  "limitations": [
+    "No sign-out control is exposed in the account menu. Native endpoint sign-out was used to verify the configured sign-in page.",
+    "Acceptance covers local first-admin setup, the single-company policy and persistence. Earlier model and cross-platform proofs are separate."
+  ],
+  "historical_failure_preserved": true
+}
