@@ -1,0 +1,26 @@
+# Additive true AI + human text collaboration proposal v1
+
+Status: protocol for root review; not mounted or advertised as implemented. Isolated dependency declaration only: yjs13.6.27, verified npm registry integrity `sha512-OIDwaflOaq4wC6YlPBy2L6ceKeKuF7DeTxx+jPzv1FHn9tCZ0ZwSRnUBxD05E3yed46fv/FWJbvR+Ud7x0L7zw==`. No app package/lock upgrade and no installation performed. A reviewed CM↔Y.Text binding can use installed CM6 transaction/update APIs; no second editor runtime is needed.
+
+## Required authorization before enabling
+
+Add an explicit resource-scoped shared-edit grant (not ordinary channel read and not inferred from files.manage). Fresh agent1 membership + Drive7 channel/share binding and this grant must be checked inside every append/checkpoint transaction. Native humans remain verified session principals. Bot edits use an internal admitted runtime context `{actorUserId,companyId,botId,conversationId,assistantMessageId,runId,toolCallId}` and a final Stop/config/audience fence on the same connection; bots get no human login or actor override. Both users and agents apply operations to the same document epoch through this service.
+
+## Proposed endpoints and DTOs
+
+- POST `/api/v1/companies/{c}/files/{rid}/collaboration/join` `{baseRevision,clientId,stateVector?}`. Resolve actual Drive file/current UTF-8 bytes; authorize audience. Return `{version:'starli.text-collab.v1',sessionId,epoch,headRevision,seq,readOnly,stateVector,update}`. Update/vector are bounded base64 Yjs data; authoritative initial text is seeded once server-side, not inserted independently by each joining client.
+- WebSocket `/api/v1/text-collaboration/{sessionId}`. Same-origin authenticated upgrade (or first authenticated frame); no tokens in URLs. Session bound to principal incarnation/company/ref/epoch. Typed frames `sync{epoch,stateVector}`, `update{epoch,clientUpdateId,update}`, `ack{epoch,clientUpdateId,seq}`, `remote-update{epoch,seq,update,actor}`, `revoked{reason}`, `checkpoint{barrierSeq,headRevision}`, `error{code}`. Read-only members may sync but cannot append.
+- POST `/api/v1/companies/{c}/files/{rid}/collaboration/checkpoint` `{epoch,barrierSeq,expectedHeadRevision,idempotencyKey}`. Ctrl/CmdS waits for own queued updates' durable acknowledgments, then this barrier. Response `{epoch,seq,revision,sha256}` represents actual Drive bytes persisted through its quota-safe blob/CAS path. A generic websocket send is not a persisted-file receipt.
+- Internal bot tool `company.file.apply_text_update` receives server-bound context plus `{resourceId,epoch,baseStateVector,clientUpdateId,update}`; validates the same room audience and append/checkpoint semantics. Alternative code-edit tools must translate text edits into Y.Text operations, not race whole-file replacement.
+
+## Durable state and replacement fencing
+
+Add `file_collab_documents(company,resource,epoch,head_revision,snapshot,state_vector,last_seq)` and append-only `file_collab_updates(company,resource,epoch,seq,actor_binding,client_update_id,sha256,update)` with unique(epoch,actor_binding,client_update_id). Check ACL + append + audit atomically before ack. Duplicate exact update returns original ack; changed payload for reused ID409. Reconnect uses state vectors/seq and durable replay. Bounded checkpoints compact the op log without dropping unacknowledged operations.
+
+All existing Drive.replace writers must participate in epoch fencing: ordinary whole-file replacement changes epoch atomically and disconnects old sessions, or is rejected while a collaborative epoch owns the write lease. Otherwise a saved CRDT state could overwrite an unrelated new file version. The checkpoint writes quota-safe actual bytes and updates resource revision, epoch state and domain event transactionally. Blob orphan/quota handling follows Drive7. On membership/share/grant removal, terminate streams and reject further appends/checkpoints; client clears content and unsent shared-data buffers. Never acknowledge unauthorized operations then discard them later.
+
+Presence/cursors are separate ephemeral ACL-filtered frames with expiry; server supplies display identity. Undo uses local-origin scoped Y.UndoManager and never silently undoes another writer. Invalid binary updates, unexpected Y types/root keys, huge decoded state, pathological CPU, update storms and oversize documents are rejected in a bounded worker; do not parse untrusted updates on the native web request loop. Initial limits:2MiB UTF-8 document,256KiB update, bounded update rate/session and restart-safe finite work budget, with operator tuning.
+
+## Acceptance required before claiming live coediting
+
+Two real authenticated humans plus an admitted synthetic bot edit concurrently in separate clients; reordered/duplicated updates converge. Reconnect/offline catch-up and service restart preserve acknowledged text. CtrlS returns a Drive revision whose bytes equal the converged text. Stop fences later bot ops. Resource/membership removal mid-stream clears DOM/cursors/drafts and prevents reads/writes. A legacy whole-file replacement changes epoch and cannot be overwritten by stale clients. Test invalid/oversize update bounds and no cross-company updates/cursors. These are additional gates, not substitutes for the existing revision-CAS checks.

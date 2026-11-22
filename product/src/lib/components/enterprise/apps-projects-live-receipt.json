@@ -1,0 +1,52 @@
+{
+  "signinHTTP": 200,
+  "companiesHTTP": 200,
+  "authority": {
+    "http": 200,
+    "json": true,
+    "identityVerified": true,
+    "canCreate": true
+  },
+  "projects": {
+    "http": 200,
+    "json": true,
+    "contractVerified": true,
+    "count": 0,
+    "scopeVerified": true
+  },
+  "mcpCapabilities": {
+    "http": 200,
+    "json": true,
+    "accountWide": true,
+    "version": "starli.account-mcp.v1",
+    "transports": {
+      "streamable-http": false,
+      "sse": false,
+      "stdio": false
+    },
+    "remoteConnected": false
+  },
+  "mcpServers": {
+    "http": 200,
+    "json": true,
+    "count": 0,
+    "pageVerified": true
+  },
+  "manifests": {
+    "http": 200,
+    "json": true,
+    "version": "starli.panel.v1",
+    "companyTypes": 6
+  },
+  "catalog": {
+    "http": 200,
+    "json": true,
+    "tools": 69,
+    "executionFlags": true
+  },
+  "signoutHTTP": 200,
+  "testTokenDenied": true,
+  "scope": "read-only native API acceptance; no project/MCP server mutations or model calls",
+  "controllerTests": 12,
+  "compileWarningsNewComponents": 0
+}

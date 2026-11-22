@@ -3,7 +3,7 @@
   "version": "0.1.0-dev",
   "private": true,
   "license": "Apache-2.0",
-  "description": "Self-hosted StarliDigital dashboard, platform and isolated computer runtime",
+  "description": "Self-hosted StarliDigital bots, teams, Boss collaboration and isolated computer runtime",
   "type": "module",
   "bin": { "starlidigital": "installer/starli.mjs" },
   "engines": { "node": ">=24" },

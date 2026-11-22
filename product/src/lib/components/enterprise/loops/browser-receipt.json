@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "actualComponent": true,
+  "controlledTypedPort": true,
+  "httpApiBound": false,
+  "liveExternalWrites": 0,
+  "browserErrors": [],
+  "checks": [
+    "no human Create control",
+    "owner/source/destination/schedule rules",
+    "dirty CAS conflict keeps draft",
+    "explicit ongoing rule authorization",
+    "uncertain run no retry",
+    "390px",
+    "explicit delete",
+    "access clear"
+  ]
+}

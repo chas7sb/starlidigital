@@ -6,7 +6,17 @@ The requested frontend is being assembled in `product/`, with its native runtime
 
 ## Getting started
 
-The new product installer and joined runtime are being integrated. Release packaging is disabled until the correct frontend preview and bot/team/Boss flows pass local verification. Earlier installation commands and CI results must not be treated as validation of the new product. Read [installation](docs/install.md) for current integration status.
+The native installer now builds `product/` and runs its native company backend. With Node 24, Python 3.11 and `uv` installed, use these commands from the checkout:
+
+```sh
+npm run install:app
+npm run setup
+npm start
+```
+
+Setup asks for a fresh local owner. Open the printed loopback URL, create your company and bots, and connect your own OpenRouter key through `/api/local/provider` or the team model-connection panel. The selected model is Nemotron Ultra free; the application disables paid model fallback. A configured key is not evidence of a successful model reply.
+
+The new frontend and native company/bot/team APIs have run locally. A clean GitHub checkout install and actual OpenRouter Boss/team conversation are separate acceptance gates still being checked. Generated-app workers, their trusted previews and autonomous tool execution remain unconfigured. Earlier legacy application CI does not validate these features. See [installation](docs/install.md) and [backend contract](product-backend/runtime-contract.json).
 
 The native server runs in the foreground; stop it with Ctrl+C. Keep the extracted project in a writable, persistent directory. Node 24+, `uv`, and FFmpeg are prerequisites; the installer prepares the separate application runtimes. QEMU is an additional prerequisite for the isolated computer.
 

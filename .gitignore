@@ -37,5 +37,8 @@ dashboard/backend/data/
 dashboard/data/
 dashboard/build/
 dashboard/.svelte-kit/
+product/build/
+product/.vite-cache/
+product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/
 platform/web/dist/
 docs/*-live.md

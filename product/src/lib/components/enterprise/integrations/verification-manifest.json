@@ -1,0 +1,25 @@
+{
+  "version": "starli.integration-catalog.ui.v1",
+  "verifiedAt": "2026-11-15T14:59:03.316Z",
+  "scope": "native company GET endpoint; metadata only, no create/run controls",
+  "hashes": [
+    {
+      "path": "src/lib/components/enterprise/integrations/integration-catalog.ts",
+      "sha256": "877ef4081aeb177003b9c58d2ea44a093cd58a38e0f9875565d4cbb3314a389f"
+    },
+    {
+      "path": "src/lib/components/enterprise/integrations/IntegrationsCatalog.svelte",
+      "sha256": "0f077d537384d82a40eacbf6655a83d2ec464701295ad11107557f1fcc8c4e3b"
+    }
+  ],
+  "checks": {
+    "strictTypeScript": "PASS",
+    "svelteErrors": 0,
+    "svelteWarnings": 0,
+    "actualComponentControlledBrowser": "PASS",
+    "mobileWidth": 390,
+    "browserErrors": 0,
+    "liveExternalWrites": 0
+  },
+  "productionBinding": "ROOT_OWNS_NATIVE_ENDPOINT_AND_AVAILABILITY_OVERLAY"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "configuration/security integration; no actual inference",
+  "checks": [
+    "reject unknown-key and arbitrary-endpoint credentials",
+    "encrypted company key persistence",
+    "no key in public connection/selection DTO",
+    "per-bot selection persistence",
+    "stale selection conflict",
+    "cross-origin provider mutation denied",
+    "provider options route",
+    "local setup page",
+    "configured-not-verified health"
+  ],
+  "modelCalls": 0,
+  "externalActions": 0
+}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "actualRoute": "/app",
+  "controlledNativeContractFixture": true,
+  "structuredMentionSend": true,
+  "botAddAndRemovalUI": true,
+  "humanRemovalUI": true,
+  "uncertainRetrySameKey": true,
+  "preservedPanelHost": true,
+  "browserErrors": [],
+  "actualAccountWrites": 0,
+  "modelCalls": 0
+}

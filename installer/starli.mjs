@@ -44,28 +44,20 @@ function nativeCommand(command, params) {
   if (dry) { console.log(JSON.stringify({ command, args: params })); return; }
   run(command, params);
 }
-function nativeFlow() {
-  const node = process.env.STARLI_NODE24 || process.execPath;
-  const script = resolve(here, 'native.mjs');
-  const py = resolve(here, '.runtime/python', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
-  if (action === 'help') console.log('StarliDigital — native mode by default\nnode installer/starli.mjs install\nnode installer/starli.mjs setup\nnode installer/starli.mjs start\ninstall prepares separate runtimes/dependencies and builds both apps. setup prompts privately for first owner credentials. start uses that private installation.\nAlso: doctor, build, health. --native is optional. Ctrl+C stops foreground services.\nDocker deployment requires --docker; separate owner provisioning is required.');
-  else if (action === 'install') {
-    const embedded = resolve(here, '.runtime/node22', process.platform === 'win32' ? 'node.exe' : 'bin/node');
-    if (!process.env.STARLI_NODE22 && !existsSync(embedded)) nativeCommand(node, [script, 'bootstrap-node22']);
-    nativeCommand(node, [script, 'install', 'all']);
-    nativeCommand(node, [script, 'build', 'all']);
-  } else if (['doctor', 'build', 'health'].includes(action)) nativeCommand(node, [script, action, 'all']);
-  else if (['setup', 'start'].includes(action)) {
-    if (!dry && !existsSync(py)) fail('Native Python environment is missing. Run install first.');
-    if (action === 'start' && !dry && !existsSync(resolve(root, 'onboarding/.local/setup.json'))) fail('Native owner setup is required. Run setup first; it prompts for credentials privately.');
-    nativeCommand(py, [resolve(root, 'onboarding/first_run.py'), action]);
-  } else fail(`${action} is not a native command. Use --docker for Docker commands, or help. Native services run in the foreground; Ctrl+C stops them.`);
+function productFlow() {
+  if (action === 'help') {
+    console.log('StarliDigital — native mode by default\nNew bots/teams/Boss product: install, setup, start, doctor, build, health.\nnode installer/starli.mjs install\nnode installer/starli.mjs setup\nnode installer/starli.mjs start\nInstall builds product/ and installs its native backend dependencies. Setup prompts privately for a local owner. Start verifies frontend, backend capabilities and API proxy before reporting core readiness. Model/provider/worker readiness is reported separately. Ctrl+C stops foreground services.\n--native is optional. Docker requires --docker and is not yet adapted to the corrected product.');
+    return;
+  }
+  if (!['install', 'setup', 'start', 'doctor', 'build', 'health'].includes(action)) fail(`${action} is not a new product native command. Use help. Ctrl+C stops foreground services.`);
+  nativeCommand(process.env.STARLI_NODE24 || process.execPath, [resolve(here, 'product.mjs'), action, ...(dry ? ['--dry-run'] : [])]);
 }
 try {
   if (!allowed.includes(action) || args.some(a => a !== action && !flags.includes(a)) || (native && docker)) fail('Unknown or conflicting command/option. Use help.');
-  if (native) nativeFlow();
+  if (docker && ['install', 'build', 'setup', 'start'].includes(action)) fail('Docker deployment is not yet adapted to the corrected product. Use native install/setup/start; the legacy frontend will not be substituted.');
+  if (native) productFlow();
   else if (action === 'help') {
-    console.log('StarliDigital Docker deployment (--docker required)\nCommands: doctor/init/install/start/stop/status/logs/config --docker\nAdd --dry-run to print commands. Docker mode does not provision an installation owner.\nNative install/setup/start are the default. No command creates a computer-use VM or publishes the application.');
+    console.log('StarliDigital Docker deployment (--docker required)\nTARGET SOURCE PENDING: install/start suspended; old frontend is not the requested product.\nCommands: doctor/init/install/start/stop/status/logs/config --docker\nAdd --dry-run to print commands. Docker mode does not provision an installation owner.\nNative install/setup/start are the default. No command creates a computer-use VM or publishes the application.');
   } else if (action === 'init') {
     if (existsSync(envFile)) console.log('Local configuration already exists; preserved.');
     else if (dry) console.log('Would create installer/local.env with a new random dashboard session secret.');

@@ -1,0 +1,6 @@
+from pathlib import Path
+p=Path('src/lib/components/enterprise/agents/AgentSettings.svelte');s=p.read_text(encoding='utf-8');anchor=" import {AgentClient,type AgentProfile,type ProviderSelection,type ProviderOption,type MemoryDocument} from './client';";assert anchor in s;s=s.replace(anchor,anchor+"\n import BotPermissions from './BotPermissions.svelte';")
+a=s.index(' {:else}<div class="section-title"><h2>Access with clear boundaries');b=s.index('{/if}\n {#if !loading&&client}',a)
+s=s[:a]+''' {:else}<BotPermissions {companyId} {botId} botName={profile?.name||botName||'this agent'} {accessSignal} {membershipRevision} effectiveCapabilities={profile?.toolCapabilities||[]} on:accesschanged={(e)=>dispatch('accesschanged',e.detail)} on:changed={(e)=>{if(profile&&e.detail.effectiveCapabilities)profile={...profile,toolCapabilities:e.detail.effectiveCapabilities};dispatch('permissionschanged',e.detail);}}/>'''+s[b:]
+p.write_text(s,encoding='utf-8')
+p=Path('src/lib/components/enterprise/agents/verify-add-bot.cjs');s=p.read_text();s=s.replace("['src/lib/components/enterprise/agents/AddBot.svelte'","['src/lib/components/enterprise/agents/BotPermissions.svelte','src/lib/components/enterprise/agents/AddBot.svelte'");p.write_text(s)

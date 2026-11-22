@@ -1,0 +1,21 @@
+const fs=require('node:fs'),ts=require('typescript'),vm=require('node:vm'),assert=require('node:assert/strict');
+const file='src/lib/components/enterprise/account/customer-api-client.ts',moduleCode=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
+const mod={exports:{}};vm.runInNewContext(moduleCode,{module:mod,exports:mod.exports,AbortController,Error,Number,JSON,encodeURIComponent,globalThis});
+const {CustomerApiClient,CUSTOMER_VERSION}=mod.exports;
+const base={id:'a'.repeat(32),name:'Fixture service',scopes:['messages:send'],botAccess:{mode:'selected',botIds:['company:fixture:bot']},createdAt:1,expiresAt:9999999999,lastUsedAt:null,revokedAt:null};
+const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json'}});
+(async()=>{
+ let native='fixture-native-session',calls=[];
+ const fakeSecret='stli_'+'a'.repeat(32)+'.fixtureSecretOnly';
+ const c=new CustomerApiClient(()=>native,async(url,init)=>{calls.push({url,init});return json({version:CUSTOMER_VERSION,...base,token:fakeSecret});});
+ const draft={name:'Fixture service',expiresAt:9999999999,scopes:['messages:send'],botAccess:{mode:'selected',botIds:['company:fixture:bot']}};
+ const made=await c.create(draft);assert.equal(made.secret,fakeSecret);assert.ok(!('token' in made.record));assert.equal(calls[0].url,'/api/v1/starli/api-tokens');assert.equal(calls[0].init.headers.Authorization,'Bearer fixture-native-session');assert.equal(calls[0].init.cache,'no-store');assert.equal(calls[0].init.credentials,'same-origin');assert.deepEqual(JSON.parse(calls[0].init.body),draft);
+ const list=new CustomerApiClient(()=>native,async()=>json({version:CUSTOMER_VERSION,data:[{...base,token:fakeSecret}]}));assert.ok(!('token' in (await list.list())[0]));
+ const revoke=new CustomerApiClient(()=>native,async(url,init)=>{assert.equal(url,'/api/v1/starli/api-tokens/a%2Fb');assert.equal(init.method,'DELETE');return json({version:CUSTOMER_VERSION,revoked:true});});await revoke.revoke('a/b');
+ let resolve;const stale=new CustomerApiClient(()=>native,async()=>new Promise(r=>resolve=r));const pending=stale.create(draft);native='changed';resolve(json({version:CUSTOMER_VERSION,...base,token:fakeSecret}));await assert.rejects(()=>pending,e=>e.status===401);
+ const unavailable=new CustomerApiClient(()=>native,async()=>new Response('<html>SPA</html>',{status:200,headers:{'Content-Type':'text/html'}}));await assert.rejects(()=>unavailable.list(),e=>e.status===503);
+ const version=new CustomerApiClient(()=>native,async()=>json({version:'other',data:[]}));await assert.rejects(()=>version.list(),e=>e.status===503);
+ c.close();await assert.rejects(()=>c.list(),e=>e.status===401);
+ const program=ts.createProgram([file],{strict:true,noEmit:true,skipLibCheck:true,target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,moduleResolution:ts.ModuleResolutionKind.Bundler});const diagnostics=ts.getPreEmitDiagnostics(program);assert.equal(diagnostics.length,0,diagnostics.map(d=>ts.flattenDiagnosticMessageText(d.messageText,'\n')).join('\n'));
+ console.log('PASS customer API: native bearer, exact creation body, secret projection, encoded revocation, session fence, unavailable/version rejection, close, strict TypeScript');
+})().catch(()=>{console.error('FAIL customer API fixture checks');process.exit(1)});

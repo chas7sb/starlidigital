@@ -1,0 +1,4 @@
+/* Keep the company inbox launcher clear of the active phone composer. */
+@media (max-width: 600px) {
+ .sd-shell.company .company-messenger .inbox { left: auto; right: 12px; }
+}

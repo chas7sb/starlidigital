@@ -1,0 +1,43 @@
+<script lang="ts">
+ import {onMount,onDestroy} from 'svelte';
+ import {CompanyClient,botPath} from '$lib/utils/company-workspace';
+ export let companyId:string;
+ export let bots:{id:string;name:string}[]=[];
+ let client:CompanyClient,loaded='',ready=false,available=false,busy=false,error='',notice='',connections:any[]=[],supported:string[]=[],canManage=false;
+ let provider='',key='',rotating='',botId='',choices:any[]=[],selection:any=null,choice='',generation=0;
+ const modelKey=(c:any,m:string)=>JSON.stringify([c.connectionId,m]);
+ $: validChoice=choices.some(c=>c.models.some((m:string)=>modelKey(c,m)===choice));
+ $: if(ready&&loaded!==companyId){loaded=companyId;void reset();}
+ async function reset(){generation++;client?.close();client=new CompanyClient(companyId,()=>localStorage.token||'');connections=[];supported=[];canManage=false;available=false;key='';rotating='';botId='';selection=null;choices=[];choice='';error='';notice='';busy=false;await load();}
+ async function load(){const current=client;try{const d=await current.request('/provider-connections');if(current!==client)return;if(d.companyId!==companyId||!Array.isArray(d.connections)||!Array.isArray(d.supportedProviders)||typeof d.canManage!=='boolean')throw Error();available=true;connections=d.connections;supported=d.supportedProviders;canManage=d.canManage;provider=supported.includes(provider)?provider:supported[0]||'';}catch{if(current===client)error='Company provider settings are unavailable.';}}
+ async function models(){const current=client,n=++generation,id=botId;selection=null;choices=[];choice='';error='';if(!id)return;try{const [o,s]=await Promise.all([current.request(botPath(id)+'/provider-options','GET',undefined,undefined,true),current.request(botPath(id)+'/provider-selection')]);if(current!==client||n!==generation||botId!==id)return;if(s.botId!==id||s.companyId!==companyId)throw Error();choices=o.options;selection=s;if(s.status!=='unconfigured')choice=modelKey(s,s.model);}catch{if(current===client&&n===generation)error='This bot’s provider settings are unavailable.';}}
+ async function credential(){if(busy||!key.trim())return;busy=true;error='';notice='';const current=client,secret=key,target=connections.find(c=>c.connectionId===rotating);key='';try{await current.request(target?'/provider-connections/'+encodeURIComponent(target.connectionId)+'/credential':'/provider-connections',target?'PUT':'POST',target?{credential:{type:'api_key',key:secret},expectedRevision:target.revision}:{provider,credential:{type:'api_key',key:secret}},undefined,true);if(current!==client)return;notice=target?'Company credential rotated.':'Company connection added.';rotating='';await load();await models();}catch{if(current===client)error='Credential could not be saved. Reload settings and enter it again.';}finally{if(current===client)busy=false;}}
+ async function refreshModels(connection:any){if(busy)return;busy=true;error='';const current=client;try{await current.request('/provider-connections/'+encodeURIComponent(connection.connectionId)+'/models/refresh','POST',{expectedRevision:connection.revision},undefined,true);if(current!==client)return;notice='Company model catalog refreshed.';await load();await models();}catch{if(current===client)error='Model refresh could not be confirmed. Reload settings.';}finally{if(current===client)busy=false;}}
+ async function revoke(id:string){if(busy)return;busy=true;error='';const current=client;try{await current.request('/provider-connections/'+encodeURIComponent(id),'DELETE',undefined,undefined,true);if(current!==client)return;notice='Credential revoked. Bots using it require a new selection.';await load();await models();}catch{if(current===client)error='Revocation could not be confirmed. Reload settings.';}finally{if(current===client)busy=false;}}
+ async function choose(){if(busy||!selection||!choices.some(c=>c.models.some((m:string)=>modelKey(c,m)===choice)))return;busy=true;error='';const current=client,id=botId,[connectionId,model]=JSON.parse(choice);try{await current.request(botPath(id)+'/provider-selection','PUT',{connectionId,model,expectedRevision:selection.configurationRevision},undefined,true);if(current!==client)return;notice='Shared bot selection saved.';await models();}catch{if(current===client){error='Selection changed or access is unavailable. Reload before saving again.';}}finally{if(current===client)busy=false;}}
+ function sessionChanged(e:StorageEvent){if(e.key==='token'||e.key===null){client?.close();generation++;available=false;key='';connections=[];selection=null;choices=[];canManage=false;error='Your session changed. Reopen this company.';}}
+ onMount(()=>{ready=true;window.addEventListener('storage',sessionChanged);return()=>window.removeEventListener('storage',sessionChanged);});
+ onDestroy(()=>{generation++;key='';client?.close();});
+</script>
+{#if available}<section class="provider-settings" aria-label="Company providers">
+ <h3>Company providers</h3><p>Connections belong to this company. Members share each bot’s saved provider choice. Personal account credentials are never used here.</p>
+ <button class="sd-button" disabled={busy} on:click={async()=>{error='';await load();await models();}}>Reload settings</button>
+ {#if canManage&&(supported.length||connections.some(c=>c.status==='active'))}
+ <form on:submit|preventDefault={credential}>
+ <label>Connection<select aria-label="Connection" bind:value={rotating} disabled={busy} on:change={()=>key=''}><option value="">Add a company connection</option>{#each connections.filter(c=>c.status==='active') as c}<option value={c.connectionId}>Rotate {c.provider} · {c.connectionId.slice(0,8)}</option>{/each}</select></label>
+ {#if !rotating}<label>Provider<select aria-label="Provider" bind:value={provider} disabled={busy} on:change={()=>key=''}>{#each supported as p}<option value={p}>{p}</option>{/each}</select></label>{/if}
+ <label>API key<input type="password" bind:value={key} autocomplete="new-password" spellcheck={false} disabled={busy} required /></label>
+ <button class="sd-button" disabled={busy||!key.trim()||(!rotating&&!provider)}>{rotating?'Rotate credential':'Add connection'}</button>
+ </form>
+ {/if}
+ {#each connections as c}<div class="connection"><span>{c.provider} · {c.connectionId.slice(0,8)} · {c.status} · revision {c.revision}</span>{#if canManage&&c.status==='active'}<button class="sd-button" disabled={busy} on:click={()=>refreshModels(c)}>Refresh models</button><button class="sd-button" disabled={busy} on:click={()=>revoke(c.connectionId)}>Revoke credential</button>{/if}</div>{/each}
+ <h3>Shared bot choice</h3><label>Bot<select aria-label="Bot" bind:value={botId} disabled={busy} on:change={models}><option value="">Select a company bot</option>{#each bots as bot}<option value={bot.id}>{bot.name}</option>{/each}</select></label>
+ {#if selection}
+ <p>{selection.status==='unconfigured'?'No provider selected.':selection.status==='ready'?'Saved choice: '+selection.provider+' · '+selection.model:'Saved choice is blocked: '+selection.status.replaceAll('_',' ')}. {#if selection.updatedBy}Changed by {selection.updatedBy} · revision {selection.configurationRevision}{#if selection.updatedAt} · {new Date(selection.updatedAt).toLocaleString()}{/if}{/if}</p>
+ <form on:submit|preventDefault={choose}><label>Provider and model<select aria-label="Provider and model" bind:value={choice} disabled={busy}><option value="">Choose an available model</option>{#each choices as c}{#each c.models as model}<option value={modelKey(c,model)}>{c.provider==='hosted'?'StarliDigital hosted':c.provider+' · '+c.connectionId.slice(0,8)} · {model}</option>{/each}{/each}</select></label><button class="sd-button" disabled={busy||!validChoice}>Save shared choice</button></form>
+ <p>A revoked connection stops bot runs until a member saves another choice. Hosted is an explicit choice; its service may be offline.</p>
+ {/if}
+ {#if error}<p role="alert">{error}</p>{/if}{#if notice}<p role="status">{notice}</p>{/if}
+</section>{/if}
+<style>.provider-settings{max-width:760px;padding:16px 0}.provider-settings h3{margin:16px 0 8px;font-weight:650}.provider-settings p{font-size:13px;color:var(--sd-muted);margin:8px 0}form{display:flex;flex-direction:column;gap:10px;margin:16px 0}label{display:flex;flex-direction:column;gap:5px}select,input{background:var(--sd-card);color:inherit;border:1px solid var(--sd-line);padding:9px;border-radius:8px;width:100%;min-width:0}button{align-self:start}.connection{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--sd-line);font-size:13px}@media(max-width:600px){.connection{align-items:start;flex-direction:column}}</style>
+

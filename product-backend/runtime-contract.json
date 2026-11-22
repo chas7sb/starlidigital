@@ -1,0 +1,97 @@
+{
+  "schema": "starli.local-product-backend.v1",
+  "entrypoint": "product-backend/local_server.py",
+  "python": "3.11 (same locked dashboard environment)",
+  "init": [
+    "python",
+    "product-backend/local_server.py",
+    "init",
+    "--state",
+    "work/new-product-local",
+    "--port",
+    "18381"
+  ],
+  "serve": [
+    "python",
+    "product-backend/local_server.py",
+    "serve",
+    "--state",
+    "work/new-product-local",
+    "--port",
+    "18381"
+  ],
+  "bind": "127.0.0.1",
+  "frontendOrigin": "explicit literal-loopback --origin, default same as backend port",
+  "statePolicy": "fresh empty work/ directory or previously marked private instance; current-user private ACL/mode; no foreign existing data adoption",
+  "nativeSourceRoot": "dashboard/backend",
+  "newCandidateSourceRoot": "product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120",
+  "coreCapabilities": [
+    "native-password-auth",
+    "companies-and-authority",
+    "bot-directory-and-explicit-admission",
+    "messaging-and-bounded-team-work-sessions",
+    "cookie-owned-guest-intent-and-provisional-company",
+    "guest-workspace-history-read",
+    "claim-and-history-transfer-routes",
+    "encrypted-company-openrouter-vault",
+    "per-bot-provider-selection-and-profiles",
+    "native-model-chat-with-persisted-receipts",
+    "human-started-bounded-boss-team-text-collaboration"
+  ],
+  "notConfigured": [
+    "user-openrouter-key-until-explicit-entry",
+    "generated-app-build-workers",
+    "trusted-generated-app-preview-lifecycle",
+    "autonomous-tool-execution"
+  ],
+  "sourceHashes": {
+    "product-backend/local_server.py": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+    "product-backend/local_provider.py": "6940c40115d4cd537529207f7d07915a53e15ad31f0d6ac259c53af5f88c2fc9",
+    "product-backend/provider-setup.html": "32c1f6b325822720e245b3e5d6a74644ed1936aa2c4c8ed9ab5da6447f4be096",
+    "product-backend/local_collaboration.py": "b249ecc3f793dee63a1c12966b177ddef5790841b97acf9416a8eb0fc5af6cdb",
+    "product-backend/local_collaboration_routes.py": "bdc7cab2a87e1af135243e438459ae35133d4758e1571b4bd29d6dc4bf63bc04",
+    "product-backend/LOCAL-NATIVE-PINS.json": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
+    "dashboard/backend/requirements.txt": "d9de2195dd468c31787946fc3799200d35483d8f0a6a7023f0109feaad9f5c3e",
+    "packaging/locks/dashboard-linux-x64-py311.json": "d56701bb749ad51ca45abc0e85980575c61b220a70568fc85b87cbe2046fd5eb",
+    "packaging/locks/dashboard-linux-x64-py311.txt": "93a4dc1660595a2264cd33e9e642b21012d20185356973b8335220e2c23b724f",
+    "packaging/locks/dashboard-macos-arm64-py311.json": "787563e526eb4073f4e6fe558badd2c4ae041b876f252bcb023ee26950ca3896",
+    "packaging/locks/dashboard-macos-arm64-py311.txt": "d4090faa2ebbab103e4f7f9442479743e18a6ff17ceded1c6eccfec38dd4d939",
+    "packaging/locks/dashboard-macos-x64-py311.json": "d110c8e94d33647084d9d322e8d5a895d606287d42fce23ebb1a7e451c229fa3",
+    "packaging/locks/dashboard-macos-x64-py311.txt": "9080f1df8bc9dcb0f7da3702e169fee0e240b827902dc98b833d777621c4baeb",
+    "packaging/locks/dashboard-windows-x64-py311.json": "b1486483913ae17fad89b08b439594e26308d341fe4d3043758c02b80351a0f7",
+    "packaging/locks/dashboard-windows-x64-py311.txt": "e88023227a89156d8e9c2570dd82cf899aae20d0510d8e36a9c0808748235086"
+  },
+  "fullJoinedCandidateClosureComplete": false,
+  "fullJoinedBlockedBy": [
+    "assembled/historical references retained only as source",
+    "Linux-specific generated-app execution/sandbox controls",
+    "trusted generated-app preview composition and browser parity"
+  ],
+  "platformGraphqlRequiredForCore": false,
+  "provider": {
+    "id": "openrouter",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "keySetupPath": "/api/local/provider",
+    "keySource": "explicit native owner/company request only",
+    "keyStorage": "Fernet encrypted company vault, derived from private instance key",
+    "ambientCredentials": false,
+    "paidFallback": false,
+    "actualInferenceVerified": false,
+    "catalogVerifiedAt": "2026-11-22",
+    "catalogSource": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b%3Afree"
+  },
+  "collaboration": {
+    "path": "/api/v1/starli/companies/{company}/messaging/rooms/{room}/collaborations",
+    "modelCallsMax": 12,
+    "roundsMax": 2,
+    "teammatesMax": 4,
+    "modelSeconds": 90,
+    "wallSeconds": 360,
+    "nativeHumanSourceRequired": true,
+    "serverOnlySessionContext": true,
+    "executionTools": false,
+    "automaticRetry": false,
+    "orphanAutoResume": false,
+    "fixtureEvidenceIsActualInference": false
+  }
+}

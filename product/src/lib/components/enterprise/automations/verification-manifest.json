@@ -1,0 +1,131 @@
+{
+  "version": "starli.automations.frontend-verification.v3",
+  "verifiedAt": "2026-11-15T13:12:29.685Z",
+  "contractVersion": "starli.automations.v1",
+  "hashes": [
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationApprovalCard.svelte",
+      "sha256": "0085951746fc85ac25453718eb17431809f16589c737a14e7d80009265cfae5a"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationChatConnection.svelte",
+      "sha256": "6376d6fde7cfbe8de83a9f6fd1f3868810feb5f00d6651ab5c3c73d7f56b9371"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationChatFeedback.svelte",
+      "sha256": "9d67e334458f288931e460d2bd97ee65a2ce3b7f55d1ac6a78fad7ac909da8eb"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationConnectionCard.svelte",
+      "sha256": "c4de3ffc9e9a3404e95aaf3925abfd25f047c517719063c0c53861e7ce4961b5"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationInternalRun.svelte",
+      "sha256": "00b0a835739b749f34a6d7541e87816f1decfbddd8615eeab2b9f7a6cc005378"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationOAuthCallback.svelte",
+      "sha256": "d8a2c928331f9cfd76aa266b6e4b656b0be0bd39834010d2c9dec05b994b2b05"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationReviewCard.svelte",
+      "sha256": "c838deb5a286bbd34b67b2c98b49bb904f63e916944bfc0bd648c4b66286ffdb"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationSetupCard.svelte",
+      "sha256": "e5319c11b556766633b4596303a2488f927d8928da5c16816de3f94259b377e3"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/StarliAutomations.svelte",
+      "sha256": "a93419969e66fedbc6ef9a37a4cbba049d991e178831d8b00afd1daf76a012aa"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/automation-message.ts",
+      "sha256": "8f609217a7587a15c827a136113eedcbde370013ce4c4c937db2607640ae4bb2"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/automations-client.ts",
+      "sha256": "a61efc8d719dc1e51852a197cbf9e16f7e7a267f1763e00c424a1eebee3bfc4a"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/automations.css",
+      "sha256": "555f0adea6f52498f4650ac193c3359ab01cef514d25d2f9cad61c0d58c40355"
+    },
+    {
+      "path": "src/routes/app/+page.svelte",
+      "sha256": "0c859072f4307086d55341eb2b4eca245c00eab3148537e03026f58c6382045a"
+    },
+    {
+      "path": "src/routes/app/integrations/[provider]/callback/+page.svelte",
+      "sha256": "de7a91fbe6b2ce81d7864fc5ebf88ad5f9647e8e957694dbf77555f720468a53"
+    },
+    {
+      "path": "src/routes/app/integrations/[provider]/callback/+page.ts",
+      "sha256": "1621bab431d388d79abf46bba51d74603009aa43787570a536b549263ec161f2"
+    }
+  ],
+  "backendReviewed": [
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/http.py",
+      "sha256": "fd2e514683db30dc816b94828ea5cb24a6e9da85e7d6dc2f9ba62ae306011488"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/feedback.py",
+      "sha256": "4c7c23363f3b0f255abf3dd8ee9cb1c110a0ad220cdd9029f9b468558d88a7d7"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/gateway.py",
+      "sha256": "98df706ebad3ef6232de10ae8b90eba048accab74040fecd3c488695bcf3eae7"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/registry.py",
+      "sha256": "919aae895a08c31b261e7f019fb81bba865be0a68122aede74613693943f3393"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/connections.py",
+      "sha256": "3c190b48bb8f3a4ef8b8377d7f0077120b4932b979465badd5febed9520e9683"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v3/starli_automations/business_config.py",
+      "sha256": "dd8f01f17ada5a6fb275ba1efcf2cccf9b12c59121f07b41671123b13c7783f2"
+    }
+  ],
+  "checks": {
+    "clientStrictTypeScript": "PASS",
+    "allAutomationAndCallbackSvelte": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "rootAppAndCallbackCompile": {
+      "warnings": 0
+    },
+    "canonicalConnectionMessageBinding": "PASS",
+    "chatCompanyShopifyConnectionBrowser": "PASS",
+    "fragmentOpaqueHandoffActualRouteBrowser": "PASS",
+    "noRawQueryFallbackSourceGuard": "PASS",
+    "exactSlackMessageApprovalBrowser": "PASS",
+    "inlineFeedbackAndUncertainBrowser": "PASS",
+    "internalApprovalBrowser": "PASS",
+    "managementBrowser": "PASS"
+  },
+  "browserScope": {
+    "actualComponents": true,
+    "controlledFixtures": true,
+    "allApiRequestsIntercepted": true,
+    "liveProviderWrites": 0,
+    "browserErrors": 0,
+    "mobileWidth": 390
+  },
+  "security": {
+    "frontendOAuthReturn": "URL_FRAGMENT_OPAQUE_HANDOFF_ONLY",
+    "scrubBeforeExchange": true,
+    "nativeBearerOnly": true,
+    "privateAppSecretsInUi": false,
+    "rootRouteEditedByThisLane": false
+  },
+  "acceptance": {
+    "rootReportedSignedNativeRoomResume": "PASS (parent report)",
+    "realSlackShopifyConsent": "REQUIRES_PRIVATE_REGISTRATION_AND_HUMAN_PROVIDER_AUTHORIZATION",
+    "liveV3Deployment": "OWNED_BY_ROOT"
+  }
+}

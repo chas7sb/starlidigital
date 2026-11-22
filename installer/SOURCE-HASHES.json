@@ -1,0 +1,14 @@
+{
+  "schema": "starli.installer.source-hashes.v1",
+  "hashNormalization": "canonical-LF",
+  "scope": "Current installer source for parent review; not clean-clone acceptance",
+  "files": {
+    "installer/product.mjs": "d8c5a400177bebfe86d7108c8b01fa13690fad86383056e1557603de8ecc8f80",
+    "installer/starli.mjs": "7e14da975185ccc11046f6bee5c9b340670ca6f3883fae403fb514bd65f5ea8c",
+    "installer/starli.test.mjs": "034c1fbb8b9434043d67fd11834a2b919378bea705a2ed2024203e4cda780bc6",
+    "installer/native.mjs": "27d6796d126784ef6794753fe4399772df500a719ba0b7a36e791bfe87d0decb",
+    "installer/starli.ps1": "132a9740aa251022796ea98bd49164e0394f55f36b5fcdc54660aa92320af64d",
+    "installer/starli.sh": "f5e303a70ea54393b6ee3f897ebba5229f52ed42adf954d4337c2ed90dab6b4a",
+    "docs/install.md": "cdac51c50172b013edfacc8ce91303dca6b366564ab4aba080dd7aa721d206ae"
+  }
+}

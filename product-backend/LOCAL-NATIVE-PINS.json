@@ -1,0 +1,17 @@
+{
+  "open_webui/utils/auth.py": "abf358d42f52867915fdc85b3ffebe6ad8bae0149dce0357549921d46d0ebc6d",
+  "open_webui/routers/starli_session_revocation.py": "f816d52909aa54430f1e7ccaff1b50001ba0094a0dbc17f0b610d5106defd9c0",
+  "open_webui/utils/native_authorization.py": "8a4936495233c5ddea4cee4f5563b15237624259a8af20b9464b0202ce74f5fc",
+  "open_webui/routers/starli_public.py": "f1d55cace8cd57abd97c189b5805b64848d5933a0dadf127f3aaed453cbf908d",
+  "open_webui/company_authority/company_authority_base.py": "7189624e5718c8ed3dd11a8038153e0b25183ed7daebe5240552cf9a755a559d",
+  "open_webui/company_authority/company_rbac.py": "ab77e78a44ad299c309bbdc72c61f3abdb21397b140f41a453147f5b27fdbd16",
+  "company_messaging/native_mount.py": "241f03917a099c13fbde8b273ad41d915bd90d04864da36d403f5cac7ef2969e",
+  "company_messaging/store.py": "ad2e7d546fa02bd79ae2a4510425faf2fcc5479753ed86fcba89e9dbc16302df",
+  "company_messaging/authority.py": "7da7bd8d50de99aff6533f8aa69673b14f2ec7c83921219936a5438e31973a33",
+  "company_messaging/native_authority.py": "5788ea677439d3f90b63d5cc3ba4e55fc0ef6f7ad19733a0ff3f17d6fe437b76",
+  "company_messaging/http.py": "25c54ef95adbdf10974baad6322610981686e1732d02c0bd3d30551aa7ea1796",
+  "open_webui/company_drive/resources.py": "ede54f6147120f1389741b3c8c6019ea42b5bf2f8a19a1b8a87aa053fcb96399",
+  "starli_memory/registry.py": "f7896ea0566280c89e861df39cdcea4976b18bfdf59ee20da05398ff580cd1c5",
+  "open_webui/models/users.py": "7ad105dc80a0cfb9088a7f0ca685897f04ed0fcc8f9879ebc5550ca65380ddb9",
+  "open_webui/models/auths.py": "0279abd52e6ad07314c913700e8756479e5b13dd9f6f2b53e260ef05dfa11303"
+}

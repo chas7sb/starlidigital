@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "frontend_directory": "product",
+  "release_enabled": false,
+  "preview_confirmed": true,
+  "status": "Prime confirmed local new-product visual preview. Release remains disabled pending fresh-Git install, actual model proof and joined runtime closure.",
+  "frontend_manifest": "product/package.json",
+  "frontend_lockfile": "product/package-lock.json",
+  "runtime_inputs": [
+    "product-backend/local_server.py",
+    "product-backend/runtime-contract.json",
+    "product-backend/LOCAL-NATIVE-PINS.json",
+    "product-backend/SOURCE-MANIFEST.json",
+    "dashboard/backend/requirements.txt",
+    "packaging/locks/dashboard-windows-x64-py311.txt",
+    "packaging/locks/dashboard-windows-x64-py311.json",
+    "packaging/locks/dashboard-linux-x64-py311.txt",
+    "packaging/locks/dashboard-linux-x64-py311.json",
+    "packaging/locks/dashboard-macos-x64-py311.txt",
+    "packaging/locks/dashboard-macos-x64-py311.json",
+    "packaging/locks/dashboard-macos-arm64-py311.txt",
+    "packaging/locks/dashboard-macos-arm64-py311.json",
+    "dashboard/package.json",
+    "dashboard/CHANGELOG.md",
+    "dashboard/LICENSE",
+    "product/LICENSE.upstream"
+  ],
+  "runtime_contract_confirmed": false,
+  "joined_release_pins_sha256": null,
+  "preview_evidence": {
+    "observed_by": "Prime",
+    "origin": "http://127.0.0.1:5186",
+    "scope": "new product visual proof; does not attest fresh-clone install or model execution"
+  },
+  "fresh_git_install_confirmed": false,
+  "actual_model_execution_confirmed": false
+}

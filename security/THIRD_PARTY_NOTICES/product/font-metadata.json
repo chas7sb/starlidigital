@@ -1,0 +1,91 @@
+[
+  {
+    "path": "product/static/assets/fonts/Archivo-Variable.ttf",
+    "sha256": "ed648e6308957e7b2d45b755d8a0461c4d10cd99bc501ee859f91935cb3d8727",
+    "metadata": {
+      "0": [
+        "Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)"
+      ],
+      "1": [
+        "Archivo SemiBold"
+      ],
+      "5": [
+        "Version 2.001"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "product/static/assets/fonts/InstrumentSerif-Italic.ttf",
+    "sha256": "a3edbfddd920b3f79b6a4b63288f375e9ff38e17b13d3a395ff0d602910bd372",
+    "metadata": {
+      "0": [
+        "Copyright 2022 The Instrument Serif Project Authors (https://github.com/Instrument/instrument-serif)"
+      ],
+      "1": [
+        "Instrument Serif"
+      ],
+      "5": [
+        "Version 1.000; ttfautohint (v1.8.4.7-5d5b);gftools[0.9.27]"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "product/static/assets/fonts/InstrumentSerif-Regular.ttf",
+    "sha256": "3f3f7e5b35df7986803b7608f92bc2e72b35649cf1031a6107285fd5beb2f652",
+    "metadata": {
+      "0": [
+        "Copyright 2022 The Instrument Serif Project Authors (https://github.com/Instrument/instrument-serif)"
+      ],
+      "1": [
+        "Instrument Serif"
+      ],
+      "5": [
+        "Version 1.000; ttfautohint (v1.8.4.7-5d5b);gftools[0.9.27]"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "product/static/assets/fonts/Inter-Variable.ttf",
+    "sha256": "cf3cb43b0366e2dc6df60e1132b1c9a4c15777f0cd8e5a53e0c15124003e9ed4",
+    "metadata": {
+      "0": [
+        "Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)"
+      ],
+      "1": [
+        "Inter"
+      ],
+      "5": [
+        "Version 3.019;git-0a5106e0b"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "product/static/assets/fonts/Mona-Sans.woff2",
+    "sha256": "c8847174a74b389b8484715048111f028ae383e0bc702d0bcf6fbfffa23b742c",
+    "metadata": {}
+  }
+]

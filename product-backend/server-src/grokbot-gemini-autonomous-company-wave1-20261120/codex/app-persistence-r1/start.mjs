@@ -1,0 +1,43 @@
+import {readFileSync,mkdirSync} from 'node:fs';
+import {resolve,join,isAbsolute} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {parseArgs} from 'node:util';
+const {values:v}=parseArgs({options:{config:{type:'string'}}});
+const fail=code=>{throw new Error(code)};
+try {
+ for(const key of ['GB3_NATIVE_JWT','WEBUI_SECRET_KEY','STARLI_AUTHORITY_MASTER_KEY']) if(process.env[key]) fail('PRIVILEGED_CREDENTIAL_IN_APP_ENV');
+ if(!v.config) fail('CONFIG_REQUIRED');
+ const c=JSON.parse(readFileSync(resolve(v.config),'utf8'));
+ for(const k of ['authorityPackage','authorityUrl','build','dataRoot','leaseId','approvedParentOrigin']) if(typeof c[k]!=='string'||!c[k]) fail('CONFIG_REQUIRED_'+k);
+ for(const k of ['authorityPackage','build','dataRoot']) if(!isAbsolute(c[k])) fail('ABSOLUTE_PATH_REQUIRED_'+k);
+ if(!Number.isSafeInteger(c.generation)||c.generation<1) fail('GENERATION_REQUIRED');
+ const u=new URL(c.authorityUrl); if(!['127.0.0.1','localhost','[::1]'].includes(u.hostname)) fail('LOOPBACK_AUTHORITY_REQUIRED');
+ if(new URL(c.approvedParentOrigin).origin!==c.approvedParentOrigin) fail('EXACT_PARENT_ORIGIN_REQUIRED');
+ if(!c.loopbackTest && !c.approvedParentOrigin.startsWith('https://')) fail('HTTPS_PARENT_REQUIRED');
+ const secret=process.env.STARLI_APP_AUTHORITY_KEY; if(!secret) fail('AUTHORITY_KEY_REQUIRED');
+ const load=n=>import(pathToFileURL(join(c.authorityPackage,'server',n+'.ts')).href);
+ const {createAppServer,loadVerifiedBuild}=await load('app-server');
+ const {RemoteTrustedAppAuthority}=await load('trusted-authority-service');
+ const {openSqlite,migrateSqlite,SqliteDogStore}=await load('storage');
+ const build=loadVerifiedBuild(c.build);
+ const r=await fetch(c.authorityUrl+'/internal/v1/authority/meta',{headers:{'X-Starli-Authority-Key':secret},signal:AbortSignal.timeout(5000)});
+ if(!r.ok) fail('AUTHORITY_META_UNAVAILABLE');
+ const meta=await r.json();
+ if(meta.executionClass!=='NATIVE_NONPRODUCTION'||!['GROKBOT1_NATIVE_ADAPTER','REMOTE_NATIVE_AUTHORITY'].includes(meta.authorityKind)) fail('NATIVE_AUTHORITY_REQUIRED');
+ const expected={companyId:build.spec.binding.companyId,projectId:build.spec.binding.projectId,leaseId:c.leaseId,processGeneration:c.generation,artifactDigest:build.receipt.artifactDigest};
+ for(const [k,val] of Object.entries(expected)) if(meta[k]!==val) fail('AUTHORITY_BINDING_MISMATCH_'+k);
+ const dir=join(c.dataRoot,createHash('sha256').update(expected.companyId+'\0'+expected.projectId).digest('hex'));
+ mkdirSync(dir,{recursive:true,mode:0o700});
+ const db=openSqlite(join(dir,'doglove.sqlite')); migrateSqlite(db);
+ const store=new SqliteDogStore(db,build.spec.fields.some(f=>f.name==='notes')?2:1);
+ const authority=new RemoteTrustedAppAuthority({baseUrl:c.authorityUrl,sharedSecret:secret});
+ const origins=[];
+ const server=createAppServer({build,store,authority,allowedOrigins:origins,executionClass:'NATIVE_NONPRODUCTION',leaseId:c.leaseId,startGeneration:c.generation,approvedParentOrigin:c.approvedParentOrigin,isLoopbackTest:c.loopbackTest===true});
+ server.listen(c.port??0,'127.0.0.1',()=>{
+  const port=server.address().port; origins.push('http://127.0.0.1:'+port);
+  process.stdout.write(JSON.stringify({ready:true,pid:process.pid,port,baseUrl:origins[0],...expected,dbPath:join(dir,'doglove.sqlite'),authorityKind:authority.kind,executionClass:'NATIVE_NONPRODUCTION',storageEngine:store.engine,storageImplementation:'SQLITE_DISK_BACKED',storagePersistence:'PER_COMPANY_PROJECT_DURABLE',authorityEvidenceClass:'NATIVE_NONPRODUCTION',productionReady:false})+'\n');
+ });
+ const stop=()=>{server.close(()=>{try{store.close()}catch{};try{db.close()}catch{};process.exit(0)});setTimeout(()=>process.exit(1),3000).unref()};
+ process.on('SIGTERM',stop);process.on('SIGINT',stop);
+} catch(e){process.stderr.write(JSON.stringify({error:e.message})+'\n');process.exitCode=1}

@@ -1,0 +1,9 @@
+export type AutonomyLevel='OBSERVE'|'RECOMMEND'|'DRAFT'|'EXECUTE_SAFE'|'EXECUTE_APPROVED';
+export type AutonomyScopeKind='WORKFLOW'|'CAPABILITY';
+export type Day='MON'|'TUE'|'WED'|'THU'|'FRI'|'SAT'|'SUN';
+export type ContactChannel='EMAIL'|'SMS'|'PHONE'|'SOCIAL_DM'|'ONSITE';
+export interface DiscoveredAutonomyScope{scopeId:string;kind:AutonomyScopeKind;label:string;description:string;maxLevel:AutonomyLevel;}
+export interface StoredAutonomyScope{scopeId:string;kind:AutonomyScopeKind;level:AutonomyLevel;paused:boolean;updatedAt:string;}
+export interface QuietHoursPolicy{enabled:boolean;timezone:string;startLocal:string;endLocal:string;days:Day[];channels:ContactChannel[];}
+export interface AutonomyPolicyRecord{id:string;tenantId:string;pauseAll:boolean;defaultLevel:AutonomyLevel;scopeOverrides:StoredAutonomyScope[];quietHours:QuietHoursPolicy;updatedAt:string;}
+export interface AutonomyPolicySummary{id:string;policyId:string;pauseAll:boolean;defaultLevel:AutonomyLevel;scopes:Array<DiscoveredAutonomyScope&{level:AutonomyLevel;paused:boolean}>;quietHours:QuietHoursPolicy;doNotContact:{enabled:true;enforcement:'HARD_BLOCK';channels:Array<'EMAIL'|'SMS'|'PHONE'|'SOCIAL_DM'>;honorExplicitOptOuts:true;sourceOfTruth:'CRM_AND_CONSENT_RECORDS'};updatedAt:string;}

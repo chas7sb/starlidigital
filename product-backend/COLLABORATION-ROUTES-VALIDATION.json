@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "scope": "native collaboration integration with explicit model fixture",
+  "actualInference": false,
+  "externalCalls": 0,
+  "checks": [
+    "native human source required",
+    "selected company bots only",
+    "Boss request/teammate reply/Boss final native persisted agent messages",
+    "per-bot selected configuration captured",
+    "durable run/model/message receipts",
+    "idempotent replay",
+    "cross-origin mutation denied"
+  ]
+}

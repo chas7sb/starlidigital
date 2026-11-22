@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "controlledFixture": true,
+  "actualComponent": true,
+  "liveProviderWrites": 0,
+  "browserErrors": [],
+  "checks": [
+    "Shopify-only draft no Slack/approver requirement",
+    "model invalidation does not activate",
+    "non-destructive readiness test",
+    "one explicit activation",
+    "Pause/Resume CAS and resume confirmation",
+    "verified same-room order notification",
+    "no per-order approvals",
+    "390px"
+  ]
+}

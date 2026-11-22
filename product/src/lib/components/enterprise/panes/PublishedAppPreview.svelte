@@ -1,0 +1,12 @@
+<script lang="ts">
+ import {onMount,onDestroy} from 'svelte';import {publishedUrl,type PublishedPreview} from './published-preview';
+ export let preview:PublishedPreview;export let companyId:string;export let actorId:string;export let conversationId:string;export let accessSignal:AbortSignal;
+ let allowed=true,reload=0,loading=true;
+ $: url=allowed&&!!actorId&&!accessSignal?.aborted&&companyId===preview?.companyId&&conversationId===preview?.conversationId?publishedUrl(preview?.url):'';
+ $: frameKey=url+':'+preview?.revision+':'+reload;
+ $: if(frameKey)loading=true;
+ function revoke(){allowed=false;}
+ onMount(()=>{accessSignal.addEventListener('abort',revoke,{once:true});if(accessSignal.aborted)revoke();});onDestroy(()=>accessSignal?.removeEventListener('abort',revoke));
+</script>
+<section class="published-preview" aria-label="Published website preview"><header><div><strong>{preview.title||'Website preview'}</strong><small>{loading?'Loading published site…':'Published site'} · Revision {preview.revision}</small></div><div class="actions"><button type="button" disabled={!url} on:click={()=>reload++}>Reload</button>{#if url}<a href={url} target="_blank" rel="noopener noreferrer">Open site ↗</a>{/if}</div></header>{#if url}{#key frameKey}<iframe src={url} title={preview.title||'Published website preview'} sandbox="allow-scripts allow-forms allow-downloads" referrerpolicy="no-referrer" allow="camera 'none'; microphone 'none'; geolocation 'none'; clipboard-read 'none'; clipboard-write 'none'" on:load={()=>loading=false}/>{/key}{:else}<p role="status">This published preview is unavailable in the current conversation.</p>{/if}</section>
+<style>.published-preview{height:100%;display:flex;flex-direction:column;min-height:0;background:#f8faff;color:#17233b}header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid #e2e8f0;background:#fff}strong{font-size:13px;font-weight:650}small{display:block;font-size:10px;color:#64748b;margin-top:4px}.actions{display:flex;gap:7px;align-items:center}button,a{border:1px solid #d6e0ee;border-radius:7px;padding:6px 9px;background:#fff;color:#2563eb;font:inherit;font-size:11px;text-decoration:none;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #2563eb;outline-offset:3px}button:disabled{opacity:.5;cursor:default}iframe{display:block;border:0;width:100%;flex:1;min-height:360px;background:#fff}p{padding:24px;font-size:12px;color:#64748b}</style>

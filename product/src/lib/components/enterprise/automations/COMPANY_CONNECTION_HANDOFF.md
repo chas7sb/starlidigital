@@ -1,0 +1,9 @@
+# Generic protected company connection card
+
+Import CompanyConnectionCard.svelte and companyConnectionSelection from company-connections-client.ts. Selection requires canonical starliCompanyConnection exact version/company/current room/source room/native agent/current assistant message. Props companyId, actorId, conversationId, requestId, credentialType, accessSignal; events close/denied. No root page edits in this package.
+
+Native version starli.company-engine-connections.v1. GET /api/v1/starli/companies/{c}/engine-connections/requests/{id}?conversationId; GET /schema/{credentialType}?conversationId; POST /requests/{id}/submit?conversationId with {expectedRevision,schemaHash,displayName,data}. Fields come from official installed schema, never guessed per connector. Scalar string/password, number/integer, boolean and select supported; select preserves original string/number/boolean values using option indices. Unsupported object/array schemas and OAuth platform setup block submit. Secrets never hydrate defaults, enter chat, or go into browser storage/logs. Form resets after submit/access/session/scope change and unmount. Unknown save outcome has no replay button; refresh saved receipt first.
+
+STORED_NOT_VERIFIED explicitly does not claim account verification, connector execution permission or broad connector readiness. OAuth NEEDS_PLATFORM_APP explains missing platform configuration. Existing credentials are never read back. Do not add raw credential values to canonical message metadata.
+
+Verification: strict client fixtures PASS exact query/body, company/source/message guard, secretdefault rejection, OAuth/uncertain/session blocks. Actual Chrome390px3 controlled API journeys PASS scalar rendering/password transport+clear/no credentialstorage, truthful stored receipt, OAuth/unsupported submit blocked. Scoped Svelte0errors0warnings. Tests use controlled fixture fields only, no actual customer account or provider effect.

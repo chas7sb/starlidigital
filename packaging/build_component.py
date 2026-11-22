@@ -9,11 +9,13 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 
 def build(component, test=False):
+    if component == 'dashboard':
+        raise ValueError('OpenWebUI UI build superseded; await the new product frontend contract')
     directory = ROOT / component
     package = json.loads((directory / 'package.json').read_text(encoding='utf-8-sig'))
     if not (directory / 'package-lock.json').is_file():
         raise ValueError(f'{component}: package-lock.json required for npm ci')
-    expected = {'platform': 24, 'dashboard': 22}[component]
+    expected = {'platform': 24, 'product': 22}[component]
     major = int(subprocess.check_output(['node', '--version'], text=True).strip().lstrip('v').split('.')[0])
     if major != expected:
         raise ValueError(f'{component} requires Node {expected} in this build contract, found {major}')
@@ -25,7 +27,9 @@ def build(component, test=False):
     npm = shutil.which('npm.cmd') or shutil.which('npm')
     if not npm:
         raise ValueError('npm unavailable')
-    if component == 'dashboard':
+    if component == 'product':
+        os.environ.setdefault('VITE_PUBLIC_STARLI_BOSS_INTAKE_ENABLED', 'true')
+        os.environ.setdefault('VITE_PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED', 'true')
         # Upstream ORT supports CPU on all targets; CUDA downloads are optional.
         os.environ.setdefault('ONNXRUNTIME_NODE_INSTALL_CUDA', 'skip')
         os.environ.setdefault('CYPRESS_INSTALL_BINARY', '0')
@@ -39,7 +43,7 @@ def build(component, test=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('component', choices=['platform', 'dashboard'])
+    parser.add_argument('component', choices=['platform', 'product'])
     parser.add_argument('--test', action='store_true')
     args = parser.parse_args()
     build(args.component, args.test)

@@ -1,0 +1,21 @@
+<script lang="ts">
+ import {onMount,onDestroy,createEventDispatcher} from 'svelte';
+ import {panelFromCompanyEvent} from './panels/receipt-dispatch.mjs';
+ import {companyTurnPath,projectCompanyEvent,readCompanyEvents,turnFinished,verifiedCompanyTurn,type CompanyTurn,type TurnProjection} from '$lib/utils/company-turn';
+ export let turn:CompanyTurn;
+ export let canViewComputer=false;
+ const dispatch=createEventDispatcher(),controller=new AbortController();let state:TurnProjection={cursor:0,status:turn.status,tools:[]},error='',mounted=false;
+ const labels:Record<string,string>={QUEUED:'Queued',RUNNING:'Agent is working',ANSWERED:'Finished',FAILED:'Could not finish',CANCELLED:'Stopped',UNCERTAIN:'Outcome unconfirmed'};
+ const toolLabel=(name:string)=>name==='computer.status'?'Checking computer':name==='computer.display_note'?'Updating computer':'Tool activity';
+ async function request(path:string,token:string){const response=await fetch(path,{signal:controller.signal,credentials:'same-origin',cache:'no-store',headers:{Accept:path.endsWith('/events')?'text/event-stream':'application/json',Authorization:'Bearer '+token,'Last-Event-ID':String(state.cursor)}});if(token!==localStorage.token)throw Error('Session changed');if([401,403,404].includes(response.status)){state={cursor:0,status:'',tools:[]};dispatch('denied');controller.abort();throw Error('Access changed');}if(!response.ok)throw Error('Live activity unavailable.');return response;}
+ async function follow(){const token=localStorage.token,base=companyTurnPath(turn);let failures=0;while(mounted&&!controller.signal.aborted){
+  try{const response=await request(base+'/events',token);await readCompanyEvents(response,controller.signal,event=>{if(token!==localStorage.token||controller.signal.aborted)return;const next=projectCompanyEvent(turn,state,event);if(next===state)return;state=next;error='';const panel=panelFromCompanyEvent(event,turn);if(panel)dispatch('panel',panel);if(event.type==='turn.state')dispatch('state',{status:state.status});if(event.type==='text.delta'||event.type==='turn.state')dispatch('refresh');});if(controller.signal.aborted)return;
+   const responseState=await request(base,token),fresh=await responseState.json();if(controller.signal.aborted||token!==localStorage.token)return;if(!verifiedCompanyTurn(fresh,turn.companyId,turn.conversationId,turn.assistantMessageId))throw Error('Live activity scope changed.');state={...state,status:fresh.status};dispatch('state',{status:state.status});failures=0;if(turnFinished(state.status)){dispatch('refresh');return;}
+  }catch{if(controller.signal.aborted||!mounted)return;if(++failures>=4){error='Live updates paused. Reopen this conversation to reconnect.';return;}}
+  await new Promise<void>(resolve=>{const timer=setTimeout(resolve,Math.min(500*2**failures,5000));controller.signal.addEventListener('abort',()=>{clearTimeout(timer);resolve();},{once:true});});
+ }}
+ function changed(e:StorageEvent){if(e.key==='token'||e.key===null){controller.abort();state={cursor:0,status:'',tools:[]};dispatch('denied');}}
+ onMount(()=>{mounted=true;void follow();window.addEventListener('storage',changed);return()=>window.removeEventListener('storage',changed);});onDestroy(()=>{mounted=false;controller.abort();});
+</script>
+<div class="turn-activity" aria-label="Agent activity" data-assistant-message={turn.assistantMessageId}><span role="status">{labels[state.status]||''}</span>{#if state.tools.length}<details><summary>Activity</summary>{#each state.tools as tool(tool.id)}<div class="tool"><span>{toolLabel(tool.name)}</span><small>{tool.status==='COMPLETED'?'Done':tool.status==='RUNNING'?'In progress':tool.status==='FAILED'?'Failed':'Unconfirmed'}</small></div>{/each}</details>{/if}{#if canViewComputer&&state.tools.some(t=>t.name.startsWith('computer.'))}<button type="button" on:click={()=>dispatch('computer')}>Watch Computer</button>{/if}{#if error}<small role="status">{error}</small>{/if}</div>
+<style>.turn-activity{margin-top:8px;font-size:12px;color:var(--sd-muted);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}.turn-activity details{flex-basis:100%}.turn-activity summary{cursor:pointer}.tool{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--sd-line)}small{font-size:12px}</style>

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "actualComponent": true,
+  "controlledNativeRoutes": true,
+  "liveProviderWrites": 0,
+  "browserErrors": [],
+  "checks": [
+    "personal connection does not auto-delegate",
+    "own-account Page/Instagram selection",
+    "explicit exact company delegation",
+    "publishing readiness stays separate",
+    "CAS revoke keeps personal account",
+    "different owner cannot read assets",
+    "client unconfigured truthful",
+    "390px/session abort"
+  ]
+}

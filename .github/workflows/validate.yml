@@ -1,4 +1,4 @@
-name: Source and platform validation
+name: Product build and infrastructure validation
 on:
   pull_request:
   push:
@@ -21,6 +21,16 @@ jobs:
         id: python
         with:
           python-version: '3.11'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install locked platform dependencies for native runtime integration
+        run: npm ci --prefix platform --no-audit --no-fund
+      - name: Install locked agent runtime dependencies
+        run: npm ci --prefix platform/extensions/starli-runtime --no-audit --no-fund
+      - name: Verify actual agent SDK, tenant boundaries and image results
+        run: npm test --prefix platform/extensions/starli-runtime
       - name: Verify archive integrity and exclusion rules
         run: python -m unittest discover -s packaging -p "test_*.py" -v
       - name: Check backend environment lock freshness
@@ -40,11 +50,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04, windows-2025, macos-15]
-        component: [platform, dashboard]
+        component: [platform, product]
         include:
           - component: platform
             node: '24'
-          - component: dashboard
+          - component: product
             node: '22'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
@@ -52,6 +62,8 @@ jobs:
       CYPRESS_INSTALL_BINARY: '0'
       ONNXRUNTIME_NODE_INSTALL_CUDA: skip
       NODE_OPTIONS: --max-old-space-size=6144
+      VITE_PUBLIC_STARLI_BOSS_INTAKE_ENABLED: 'true'
+      VITE_PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED: 'true'
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -82,10 +94,3 @@ jobs:
         env:
           PYTHON_BIN: ${{ steps.python.outputs.python-path }}
         run: python packaging/build_component.py ${{ matrix.component }} ${{ matrix.component == 'platform' && '--test' || '' }}
-      - name: Compile dashboard Python source without importing or starting services
-        if: matrix.component == 'dashboard'
-        run: >-
-          python -c "from pathlib import Path; import compileall;
-          p=Path('dashboard/backend/open_webui');
-          assert p.is_dir(), 'Dashboard backend missing';
-          assert compileall.compile_dir(p, quiet=1), 'Backend syntax failures'"

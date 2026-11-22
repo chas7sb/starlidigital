@@ -1,0 +1,69 @@
+{
+  "modelCalls": 0,
+  "resourceWrites": 0,
+  "signinHTTP": 200,
+  "file": {
+    "http": 200,
+    "contract": "starli.company-drive.v2",
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [
+      "contract",
+      "data"
+    ],
+    "firstRowKeys": []
+  },
+  "task": {
+    "http": 200,
+    "contract": "starli.company-drive.v2",
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [
+      "contract",
+      "data"
+    ],
+    "firstRowKeys": []
+  },
+  "sheet": {
+    "http": 200,
+    "contract": null,
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [],
+    "firstRowKeys": []
+  },
+  "knowledge": {
+    "http": 200,
+    "contract": "starli.company-drive.v2",
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [
+      "contract",
+      "data"
+    ],
+    "firstRowKeys": []
+  },
+  "project": {
+    "http": 200,
+    "contract": "starli.company-drive.v2",
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [
+      "contract",
+      "data"
+    ],
+    "firstRowKeys": []
+  },
+  "email": {
+    "http": 200,
+    "contract": null,
+    "listArray": true,
+    "count": 0,
+    "envelopeKeys": [
+      "drafts"
+    ],
+    "firstRowKeys": []
+  },
+  "signoutHTTP": 200,
+  "testTokenDenied": true
+}

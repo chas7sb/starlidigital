@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "checks": [
+    "truthful health",
+    "native password signin",
+    "native company create",
+    "owner company directory",
+    "two actual company bots installed and explicitly admitted",
+    "bounded two-bot team work session created",
+    "team session persisted readback without simulated inference",
+    "unauthenticated company denied",
+    "native cookie guest intent and provisional company",
+    "persisted guest workspace readback",
+    "unconfigured inference fails closed without fallback",
+    "unconfigured worker fails closed"
+  ],
+  "modelCalls": 0,
+  "externalActions": 0,
+  "state": "disposable local work directory; credentials omitted",
+  "limitations": [
+    "No model/provider credentials configured",
+    "No orchestration execution or preview lifecycle claimed",
+    "ASGI TestClient validation; separate socket launch validation required"
+  ]
+}

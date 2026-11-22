@@ -1,0 +1,15 @@
+--- a/open_webui/main.py	2026-11-20 07:38:11.628475097 +0000
++++ b/open_webui/main.py	2026-11-20 07:38:11.681476269 +0000
+@@ -1027,7 +1027,11 @@
+     from starli_memory.native_directory import build_native_router
+     from company_messaging.native_mount import install_from_environment
+     app.include_router(build_native_router(), prefix="/api/v1/bot-directory", tags=["bot-directory"])
+-    install_from_environment(app)
++    _starli_company_store = install_from_environment(app)
++    if os.getenv("STARLI_GROKBOT1_CLAIM_ENABLED") == "1":
++        # grokbot1 W1 guest->verified claim (PROPOSAL; fail-closed; see grokbot1/CONTRACT.md)
++        from grokbot1_routes import install_from_environment as _grokbot1_install
++        _grokbot1_install(app, _starli_company_store)
+     from open_webui.routers import company_pilot
+     app.include_router(company_pilot.router, prefix="/api/v1/company-pilot", tags=["company-pilot"])
+ 

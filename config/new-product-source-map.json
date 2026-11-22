@@ -1,0 +1,72 @@
+{
+  "target": "Joined bots/teams/Boss product; old UI acceptance is superseded",
+  "observedDate": "2026-11-22",
+  "candidate": {
+    "coordinatorRecord": "coordinator-r1/CURRENT-VERIFIED-STATE.json latestPrivateDemo",
+    "joinedPins": "assembly-r1/next-v9/JOINED-RELEASE-PINS.json",
+    "joinedPinsSha256": "6b6307c5ff3031df981dfbe05e891a09921a562c01f020c3e547dca3345fbbc4",
+    "matchingPinnedCodeFiles": 9,
+    "frontendRoot": "assembly-r1/next-v9/frontend/app",
+    "newerDirectoriesObserved": [
+      "next-v10",
+      "next-v11",
+      "next-v12"
+    ],
+    "currentLiveRevisionConfirmed": false,
+    "freshVisualMatchConfirmed": false
+  },
+  "frontend": {
+    "http": "same-origin /api/v1; no working VITE_API_URL override established",
+    "consumedConfigurationNames": [
+      "VITE_STARLI_SOCKET_URL",
+      "VITE_STARLI_SOCKET_PATH",
+      "PUBLIC_STARLI_BOSS_INTAKE_ENABLED",
+      "PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED",
+      "VITE_PUBLIC_STARLI_BOSS_INTAKE_ENABLED",
+      "VITE_PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED"
+    ],
+    "nodeEngine": ">=18.13.0 <=22.x.x",
+    "packageSha256": "1dd83f6715c2c8fed38f253e18506df80c9fa00f8b4ed504c43e8cb7771bcd5f",
+    "constantsSha256": "32dde2348acfc87b4db99d06c4023bbae94382d1455b10caadd8b6be6242500b",
+    "preserveProductEntry": [
+      "src/lib/components/marketing/Homepage.svelte",
+      "src/routes/guest/+page.svelte"
+    ]
+  },
+  "backend": {
+    "configurationNamesOnly": [
+      "STARLI_INSTANCE_NONCE",
+      "STARLI_PRIVATE_OPENROUTER_KEY_FILE",
+      "STARLI_PREVIEW_CONTROLLER_URL",
+      "STARLI_PREVIEW_CONTROL_KEY"
+    ],
+    "additionalLauncherArguments": [
+      "--root",
+      "--origin",
+      "--port"
+    ],
+    "requiredCodeComponents": [
+      "claim-review-r1/native_auth_staging.py",
+      "guest-session-refresh-r1/guest_session_refresh.py",
+      "assembly-r1/adapters/native_company_chat.py",
+      "assembly-r1/adapters/claimed_chat_defaults.py",
+      "provider-integration-r1/guest_workspace.py",
+      "native-wiring-r3/native_claim_execution_routes.py",
+      "preview-lifecycle-r1/native_preview_routes.py"
+    ],
+    "blockers": [
+      "Hardcoded immutable backend release",
+      "Disposable root prefix + UID997 guard must become reviewed local-owner policy",
+      "Dev frontend proxy routes to original production service",
+      "Frontend MCP/customer/social/preview production address defaults",
+      "Live candidate selection and visual match pending source owners"
+    ]
+  },
+  "exclusions": [
+    "No production environment/config values",
+    "No demo keys/tokens/cookies/profiles",
+    "No copied native root or preview state",
+    "No edits to active source workspace",
+    "No old UI parity claim"
+  ]
+}

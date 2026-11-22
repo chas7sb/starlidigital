@@ -1,0 +1,49 @@
+{
+  "version": "starli.company-social.frontend-verification.v1",
+  "verifiedAt": "2026-11-15T15:16:49.407Z",
+  "hashes": [
+    {
+      "path": "src/lib/components/enterprise/social/company-social-client.ts",
+      "sha256": "2c1674a983ee2c356d08fef0487a1583f7e96c48206f28a13fd84c6f6f7ffbec"
+    },
+    {
+      "path": "src/lib/components/enterprise/social/CompanySocialConnections.svelte",
+      "sha256": "15a2b24b3eea723f1da7eede6eb114411af2704d1fdd9b3985b83b7ef3eb3cf9"
+    },
+    {
+      "path": "src/lib/components/enterprise/social/CompanySocialOAuthCallback.svelte",
+      "sha256": "07dbe4e63ca69237a16920749d7358f13a382f93ae9255e0d63914cb6c4626f8"
+    },
+    {
+      "path": "src/lib/components/enterprise/social/social-message.ts",
+      "sha256": "7eca5fbbc30bbd1f70e5cc44e8dfebfa0c3df07a48af7db0f868e7b0bfa95f32"
+    },
+    {
+      "path": "src/routes/app/integrations/[provider]/callback/+page.svelte",
+      "sha256": "ff03dc7ef0ba2437f094ff1981a947a21bb93b3abda17888eb973b04ad026863"
+    }
+  ],
+  "backendReviewed": {
+    "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/company-social-native/starli_company_social/core.py",
+    "sha256": "1d3a71feb5496ce014330387eba0b437bf0921e69fd23e35d3f9af0970c09327"
+  },
+  "checks": {
+    "strictTypeScript": "PASS",
+    "nativeMessageBinding": "PASS",
+    "actualCardControlledBrowser": "PASS",
+    "actualOpaqueCallbackRouteBrowser": "PASS",
+    "svelteErrors": 0,
+    "svelteWarnings": 0,
+    "mobileWidth": 390,
+    "browserErrors": 0,
+    "liveProviderWrites": 0
+  },
+  "security": {
+    "noAccountGlobalFallback": true,
+    "noAutomaticCompanyDelegation": true,
+    "noRawOAuthCodeQuery": true,
+    "noAppSecretsInUi": true,
+    "readinessServerDerived": true
+  },
+  "productionBinding": "ROOT_AND_BACKEND_OWNER"
+}

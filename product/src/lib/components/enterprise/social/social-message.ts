@@ -1,0 +1,8 @@
+/** Metadata is only a lookup hint from an already native-authorized room message. */
+export function socialConnectionSelection(message:{id:string;speaker?:{kind:string;id:string};data?:unknown},roomId:string,companyId:string):{providerId:'facebook'|'instagram';assistantMessageId:string}|null{
+ const data=message.data;if(!data||typeof data!=='object'||Array.isArray(data))return null;const card=(data as Record<string,unknown>).starliSocial as Record<string,unknown>|undefined;
+ if(!card||card.version!=='starli.company-social.v1'||card.kind!=='connection'||card.companyId!==companyId||(card.conversationId!==undefined&&card.conversationId!==roomId)||card.sourceConversationId!==roomId||card.assistantMessageId!==message.id||(card.originAssistantMessageId!==undefined&&typeof card.originAssistantMessageId!=='string')||message.speaker?.kind!=='agent'||card.requestingBotId!==message.speaker.id||!(card.providerId==='facebook'||card.providerId==='instagram'))return null;
+ return {providerId:card.providerId,assistantMessageId:message.id};
+}
+
+export function socialPostSelection(message:any,roomId:string,companyId:string){const card=message.data?.starliSocialPost;if(!card||card.version!=='starli.company-social.v1'||card.kind!=='post'||card.companyId!==companyId||card.sourceConversationId!==roomId||card.assistantMessageId!==message.id||message.speaker?.kind!=='agent'||card.requestingBotId!==message.speaker.id||!['facebook','instagram'].includes(card.platform)||typeof card.postId!=='string'||!/^[A-Za-z0-9_.:-]{1,180}$/.test(card.postId))return null;return {postId:card.postId,requestingBotId:card.requestingBotId};}

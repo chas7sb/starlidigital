@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "actualBrowser": "headless Chrome",
+  "sanitizer": "existing DOMPurify",
+  "scriptExecution": false,
+  "externalRequests": 0,
+  "sandboxed": true,
+  "applicationAccountsUsed": false
+}

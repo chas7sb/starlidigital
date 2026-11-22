@@ -1,0 +1,25 @@
+{
+  "version": "starli.scheduled-loops.ui.v1",
+  "verifiedAt": "2026-11-15T14:59:03.322Z",
+  "scope": "injectable native company port; actual HTTP adapter pending",
+  "hashes": [
+    {
+      "path": "src/lib/components/enterprise/loops/scheduled-loops.ts",
+      "sha256": "18e14a4743a4ccfd7990d424a5554f5364808e75ecf56856bc6c31c6464ff6e3"
+    },
+    {
+      "path": "src/lib/components/enterprise/loops/ScheduledLoops.svelte",
+      "sha256": "0adfe0407fdb7b2a64eabc3957ab37abbaddf53d955a4eb5be2b9fbe450ef243"
+    }
+  ],
+  "checks": {
+    "strictTypeScript": "PASS",
+    "svelteErrors": 0,
+    "svelteWarnings": 0,
+    "actualComponentControlledBrowser": "PASS",
+    "mobileWidth": 390,
+    "browserErrors": 0,
+    "liveExternalWrites": 0
+  },
+  "productionBinding": "PENDING_COMPANY_SOCIAL_ADAPTER"
+}

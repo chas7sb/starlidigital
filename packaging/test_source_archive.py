@@ -21,7 +21,12 @@ class ArchiveTests(unittest.TestCase):
         for name, content in {
             'LICENSE': 'Fixture license', 'dashboard/LICENSE': 'Upstream notice',
             'platform/package.json': '{}', 'platform/package-lock.json': '{}',
+            'product/package.json': '{}', 'product/package-lock.json': '{}', 'product/LICENSE.upstream':'Upstream product license fixture',
+            'packaging/release-gate.json': json.dumps({'frontend_directory':'product','release_enabled':True,'preview_confirmed':True,'frontend_manifest':'product/package.json','frontend_lockfile':'product/package-lock.json','runtime_inputs':['platform/package.json','platform/package-lock.json'],'runtime_contract_confirmed':True,'joined_release_pins_sha256':'0'*64,'fresh_git_install_confirmed':True,'actual_model_execution_confirmed':True}),
             'dashboard/package.json': '{}', 'dashboard/package-lock.json': '{}',
+            'dashboard/backend/native.py': '# native foundation fixture',
+            'product-backend/local_server.py': '# native product fixture',
+            'dashboard/CHANGELOG.md': '# Native foundation history fixture',
             'dashboard/pyproject.toml': '[project]', 'installer/start.sh': '#!/bin/sh\n',
         }.items():
             self.write(name, content)
@@ -108,6 +113,55 @@ class ArchiveTests(unittest.TestCase):
         with zipfile.ZipFile(result) as z:
             self.assertEqual(z.read('starlidigital-test/docs/space name.txt'), b'same content')
             self.assertEqual(z.read('starlidigital-test/docs/\u00e9vidence.txt'), b'same content')
+
+    def test_unconfirmed_product_preview_blocks_archive_even_with_sources(self):
+        self.write('packaging/release-gate.json', json.dumps({
+            'frontend_directory':'product','release_enabled':True,'preview_confirmed':False}))
+        self.stage()
+        with self.assertRaisesRegex(ValueError, 'confirmed preview required'):
+            archive.create(self.root,self.root/'out','test')
+
+    def test_confirmed_preview_without_runtime_contract_still_blocks_release(self):
+        gate=json.loads((self.root/'packaging/release-gate.json').read_text())
+        gate['runtime_contract_confirmed']=False
+        self.write('packaging/release-gate.json',json.dumps(gate))
+        self.stage()
+        with self.assertRaisesRegex(ValueError,'joined candidate and runtime contract required'):
+            archive.create(self.root,self.root/'out','test')
+
+    def test_distribution_contains_new_product_backend_but_excludes_old_frontend(self):
+        self.write('dashboard/src/old-ui.svelte','old UI fixture')
+        self.write('dashboard/static/old-ui.js','old UI fixture')
+        self.write('product/src/App.svelte','new product fixture')
+        self.stage()
+        result=archive.create(self.root,self.root/'out','test')
+        with zipfile.ZipFile(result) as z:
+            paths=z.namelist()
+            self.assertIn('starlidigital-test/product-backend/local_server.py',paths)
+            self.assertIn('starlidigital-test/product/src/App.svelte',paths)
+            self.assertIn('starlidigital-test/dashboard/backend/native.py',paths)
+            self.assertNotIn('starlidigital-test/dashboard/src/old-ui.svelte',paths)
+            self.assertIn('starlidigital-test/dashboard/package.json',paths)
+            self.assertNotIn('starlidigital-test/dashboard/package-lock.json',paths)
+
+    def test_product_backend_private_config_cannot_enter_archive(self):
+        self.write('product-backend/controller.private.json','{}')
+        self.stage()
+        with self.assertRaisesRegex(ValueError,'Sensitive/runtime'):
+            archive.checked_paths(self.root)
+
+    def test_native_foundation_metadata_resource_is_required(self):
+        (self.root/'dashboard/CHANGELOG.md').unlink()
+        self.stage()
+        with self.assertRaisesRegex(ValueError,'dashboard/CHANGELOG.md'):
+            archive.create(self.root,self.root/'out','test')
+
+    def test_core_checks_cannot_substitute_for_actual_model_proof(self):
+        gate=json.loads((self.root/'packaging/release-gate.json').read_text())
+        gate['actual_model_execution_confirmed']=False
+        self.write('packaging/release-gate.json',json.dumps(gate));self.stage()
+        with self.assertRaisesRegex(ValueError,'fresh Git installation and actual model proof required'):
+            archive.create(self.root,self.root/'out','test')
 
 if __name__ == '__main__':
     unittest.main()

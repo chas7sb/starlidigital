@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';import {DatabaseSync} from 'node:sqlite';import {Readable} from 'node:stream';import {mkdtempSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {createCollectionRoutes} from './collections.mjs';import {validateAppSchema} from './schema.mjs';
+const dir=mkdtempSync(join(tmpdir(),'starli-model-crud-')),file=join(dir,'data.sqlite');let db=new DatabaseSync(file);
+const schema={schemaVersion:1,name:'Client tracker',description:'Client records',collections:[{name:'clients',label:'Clients',fields:[{name:'name',label:'Name',type:'text',required:true},{name:'email',label:'Email',type:'email',required:true},{name:'status',label:'Status',type:'select',required:true,options:['New','Active']},{name:'notes',label:'Notes',type:'text',required:false}]}]},routes={schemaVersion:1,collections:[{name:'clients',operations:['list','create','update','delete']}]};
+let allowed=true;const make=(company)=>createCollectionRoutes({db,schema,routes,scope:{companyId:company,projectId:'project'},authorizeRead:async()=>{if(!allowed)throw Error('REVOKED')},authorizeAndCommit:async(req,commit)=>{if(!allowed)throw Error('REVOKED');db.exec('BEGIN');try{const result=commit();db.exec('COMMIT');return result}catch(e){db.exec('ROLLBACK');throw e}}});
+const req=(method,url,value)=>Object.assign(Readable.from(value===undefined?[]:[JSON.stringify(value)]),{method,url,headers:{'content-type':'application/json'}});
+let a=make('A'),b=make('B');const record={name:'Mira',email:'mira@example.com',status:'New',notes:'Follow up'};
+let result=await a.handle(req('POST','/api/app/clients',record));assert.equal(result.status,201);const id=result.body.id;
+await a.handle(req('PATCH','/api/app/clients/'+id,{...record,status:'Active'}));assert.equal((await a.handle(req('GET','/api/app/clients'))).body.items[0].status,'Active');
+assert.equal((await b.handle(req('GET','/api/app/clients'))).body.items.length,0);
+await assert.rejects(()=>b.handle(req('PATCH','/api/app/clients/'+id,record)),/RECORD_NOT_FOUND/);
+await assert.rejects(()=>a.handle(req('POST','/api/app/clients',{...record,companyId:'B'})),/RECORD_FIELD_DENIED/);
+await assert.rejects(()=>a.handle(req('POST','/api/app/clients',{...record,email:'bad'})),/INVALID_EMAIL/);
+assert.throws(()=>validateAppSchema({...schema,collections:[{...schema.collections[0],name:'x;DROP TABLE app_records'}]},routes),/APP_COLLECTION_INVALID/);
+allowed=false;await assert.rejects(()=>a.handle(req('POST','/api/app/clients',record)),/REVOKED/);allowed=true;
+db.close();db=new DatabaseSync(file);a=make('A');assert.equal((await a.handle(req('GET','/api/app/clients'))).body.items[0].status,'Active');
+await a.handle(req('DELETE','/api/app/clients/'+id));assert.equal((await a.handle(req('GET','/api/app/clients'))).body.items.length,0);db.close();
+console.log(JSON.stringify({passed:true,checks:10,evidenceClass:'TRUSTED_RUNTIME_COMPONENT_REAL_SQLITE_SYNTHETIC_AUTH',dbPath:file}));

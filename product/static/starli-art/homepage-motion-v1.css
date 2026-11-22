@@ -1,0 +1,44 @@
+/* GPT PRO BO$$ | public homepage motion v1.
+   Real bot accounts and company workspace are never modified.
+   The existing four-point star logo remains the original element. */
+.site-header a.brand .brand-mark {
+  position:relative;
+  overflow:visible;
+  transform-origin:50% 50%;
+  animation:starli-brand-shine 4.4s ease-in-out infinite;
+  will-change:filter;
+}
+@keyframes starli-brand-shine {
+  0%,33%,100%{filter:brightness(1) drop-shadow(0 0 0 transparent);transform:scale(1)}
+  43%{filter:brightness(1.4) drop-shadow(0 0 7px rgba(113,106,254,.72));transform:scale(1.055)}
+  52%{filter:brightness(1.12) drop-shadow(0 0 3px rgba(47,171,255,.35));transform:scale(1.015)}
+}
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator] {position:relative;transition:opacity .24s ease,transform .24s ease}
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator].starli-cycle-out {opacity:.38;transform:translateY(2px)}
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator] .character {position:relative;display:block;flex-shrink:0}
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator] .character > svg{opacity:0}
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator] img.starli-rotator-avatar {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+ul[aria-label="Illustrative AI team roles"] > li.starli-custom-bot-v33[data-starli-rotator] > .starli-static-custom {
+ display:flex;align-items:center;gap:9px;padding:7px 10px;min-height:49px;width:100%;cursor:default;
+ border:0;color:#344766;text-align:left;font:inherit;
+}
+ul[aria-label="Illustrative AI team roles"] > li.starli-custom-bot-v33[data-starli-rotator] > .starli-static-custom img {
+ width:38px;height:38px;object-fit:contain;flex:0 0 38px
+}
+.instruction-card blockquote {
+  min-height:4.5em;
+  display:block;
+  white-space:normal;
+}
+.instruction-card blockquote::after {
+ content:"";display:inline-block;height:.95em;width:2px;margin-left:3px;vertical-align:-.1em;background:currentColor;
+ animation:starli-caret .88s steps(1) infinite;
+}
+@keyframes starli-caret {0%,49%{opacity:.95}50%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce) {
+ .site-header a.brand .brand-mark{animation:none;will-change:auto}
+ ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator]{transition:none;transform:none}
+ .instruction-card blockquote::after{animation:none;opacity:0}
+}
+
+ul[aria-label="Illustrative AI team roles"] > li[data-starli-rotator] .character .avatar-svg{opacity:0}

@@ -1,0 +1,28 @@
+{
+  "status": "SOURCE_CHECKPOINT_READY",
+  "date": "2026-11-22",
+  "contractSha256": "ad8f16b833b29947fa1b4b2ed6aa35c2f4cd598f19067e05196b55ec18d899b9",
+  "nativePins": {
+    "status": "PASS",
+    "pinnedNativeFiles": 15,
+    "rawHashMismatches": 0,
+    "nonCanonicalLF": 0,
+    "freshCheckoutPolicy": "Git LF checkout bytes; strict raw verification unchanged"
+  },
+  "validation": {
+    "configurationSecurity": "PASS",
+    "nativeCollaborationAndDirectChat": "PASS_WITH_EXPLICIT_MODEL_FIXTURE",
+    "transportNoNetworkTests": 3,
+    "actualProviderInferenceVerified": false,
+    "externalCallsByAgentX3": 0
+  },
+  "sourceHashVerification": "ALL_MATCH",
+  "liveRuntime": "18381; same AgentX10 native state; retained during user key handoff",
+  "setupUrl": "http://127.0.0.1:5186/api/local/provider",
+  "restartDuringKeyHandoff": false,
+  "pendingAfterSave": [
+    "coordinated same-state reload for latest receipts/timeouts/engine refinements",
+    "actual selected-model chat and Boss/team conversation QA"
+  ],
+  "fullJoinedGeneratedAppPreviewVerified": false
+}

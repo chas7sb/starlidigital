@@ -13,7 +13,7 @@ DENIED = {'.git', 'node_modules', '.venv', 'venv', '__pycache__', 'data',
           'uploads', 'backups', '.runtime', '.local', 'work', 'dist', 'build'}
 SOURCE_NAMES = {'data', 'dist', 'build'}
 ALLOWED = {'platform', 'dashboard', 'installer', 'runtime', 'config', 'security',
-           'qa', 'docs', 'packaging', '.github', 'onboarding'}
+           'qa', 'docs', 'packaging', '.github', 'onboarding', 'product', 'product-backend'}
 # Only these vendored source roots can contain source directories whose names
 # overlap generated directories. Each exception must match an indexed manifest.
 SOURCE_EVIDENCE = {
@@ -50,6 +50,16 @@ def blobs(root, object_ids):
         if not process.stdin.closed:
             process.stdin.close()
 
+def distribution_path(name):
+    # Retain the native Python foundation and its upstream notices, not its
+    # superseded frontend source, npm build recipe or static UI payload.
+    if name.startswith('dashboard/'):
+        parts = PurePosixPath(name).parts
+        return name.startswith('dashboard/backend/') or (
+            len(parts) == 2 and (parts[1] in {'package.json', 'CHANGELOG.md'} or parts[1].upper().startswith(('LICENSE', 'NOTICE', 'COPYING'))))
+    return True
+
+
 def checked_paths(root, with_oids=False):
     raw = subprocess.check_output(['git', 'ls-files', '--stage', '-z'], cwd=root)
     entries = []
@@ -81,6 +91,8 @@ def checked_paths(root, with_oids=False):
     result = []
     resolved_root = root.resolve()
     for name, mode, oid, stage in entries:
+        if not distribution_path(name):
+            continue
         p = PurePosixPath(name)
         if stage != '0' or mode not in {'100644', '100755'}:
             raise ValueError(f'Unsupported index entry: {name}')
@@ -99,7 +111,7 @@ def checked_paths(root, with_oids=False):
             if not verified:
                 raise ValueError(f'Runtime/generated data is tracked (no matching source evidence): {name}')
         lower = p.name.lower()
-        if ((lower.startswith('.env') or lower.endswith('.env')) and lower != '.env.example') or lower == '.webui_secret_key' or re.search(r'\.(db(?:-wal|-shm)?|sqlite3?(?:-wal|-shm)?|pem|key|pfx|p12|qcow2|vmdk|vdi)$', lower):
+        if ((lower.startswith('.env') or lower.endswith('.env')) and lower != '.env.example') or lower == '.webui_secret_key' or lower.endswith('.private.json') or lower == '.ephemeral-test-key' or re.search(r'\.(db(?:-wal|-shm)?|sqlite3?(?:-wal|-shm)?|pem|key|pfx|p12|qcow2|vmdk|vdi)$', lower):
             raise ValueError(f'Sensitive/runtime file is tracked: {name}')
         if name == 'SOURCE-MANIFEST.json':
             raise ValueError('Root SOURCE-MANIFEST.json is reserved for archive metadata')
@@ -121,9 +133,27 @@ def create(root, output, version, index_snapshot=None):
         raise ValueError('Version must contain only letters, numbers, dots, underscores and hyphens')
     files = checked_paths(root, with_oids=True) if index_snapshot is None else index_snapshot
     names = {name for name, _, _ in files}
-    required = {'platform/package.json', 'platform/package-lock.json',
-                'dashboard/package.json', 'dashboard/package-lock.json',
-                'dashboard/pyproject.toml', 'dashboard/LICENSE'}
+    # The product correction supersedes all prior OpenWebUI UI build proofs.
+    gate_name = 'packaging/release-gate.json'
+    gate_oid = next((oid for name, _, oid in files if name == gate_name), None)
+    if gate_oid is None:
+        raise ValueError('Product release blocked: reviewed target/preview gate is missing from index')
+    gate = json.loads(next(blobs(root, [gate_oid])))
+    if gate.get('frontend_directory') != 'product' or gate.get('release_enabled') is not True or gate.get('preview_confirmed') is not True:
+        raise ValueError('Product release blocked: new bots/teams/Boss frontend and confirmed preview required; old UI is superseded')
+    if gate.get('fresh_git_install_confirmed') is not True or gate.get('actual_model_execution_confirmed') is not True:
+        raise ValueError('Product release blocked: fresh Git installation and actual model proof required')
+    frontend_manifest = gate.get('frontend_manifest')
+    frontend_lockfile = gate.get('frontend_lockfile')
+    runtime_inputs = gate.get('runtime_inputs', [])
+    pins = gate.get('joined_release_pins_sha256')
+    if gate.get('runtime_contract_confirmed') is not True or not isinstance(pins, str) or not re.fullmatch(r'[0-9a-f]{64}', pins):
+        raise ValueError('Product release blocked: pinned joined candidate and runtime contract required')
+    if not all(isinstance(path, str) and path.startswith('product/') for path in [frontend_manifest, frontend_lockfile]) or not isinstance(runtime_inputs, list) or not runtime_inputs:
+        raise ValueError('Product release blocked: explicit frontend manifests and runtime inputs required')
+    required = {frontend_manifest, frontend_lockfile, *runtime_inputs, 'product/LICENSE.upstream'}
+    if any(name.startswith('dashboard/backend/') for name in names):
+        required.update({'dashboard/LICENSE','dashboard/package.json','dashboard/CHANGELOG.md'})
     missing = required - names
     if missing:
         raise ValueError('Required tracked source/provenance missing: ' + ', '.join(sorted(missing)))

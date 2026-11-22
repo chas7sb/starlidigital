@@ -1,0 +1,51 @@
+--- /srv/starlidigital/mcp-workspace/server/src/grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/lifecycle.mjs
++++ /srv/starlidigital/mcp-workspace/server/src/grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/lifecycle.mjs
+@@ -3,7 +3,7 @@
+ import {pathToFileURL} from 'node:url';
+ import {spawnScopedProcess,stopScopedProcess} from './process-group.mjs';
+ import {createHash,createHmac,randomBytes} from 'node:crypto';
+-import {resolveVerifiedContext} from './verified-context.mjs';
++import {createAsyncNativeVerifier} from './async-context.mjs';
+ const fail=c=>{throw Object.assign(new Error(c),{code:c})};
+ const sha=x=>createHash('sha256').update(x).digest('hex');
+ function atomic(file,data){const temp=file+'.'+process.pid+'.tmp';writeFileSync(temp,JSON.stringify(data,null,2),{mode:0o600});renameSync(temp,file);}
+@@ -25,23 +25,25 @@
+  if(new URL(approvedParentOrigin).origin!==approvedParentOrigin)fail('EXACT_PARENT_ORIGIN_REQUIRED');
+  mkdirSync(stateRoot,{recursive:true,mode:0o700});
+  const instances=new Map(),locks=new Map();
++ const asyncVerifier=createAsyncNativeVerifier({nativeRoot,authorityPackage,orchestrationPackage});
+  const load=n=>import(pathToFileURL(join(authorityPackage,'server',n+'.ts')).href);
+  const runLocked=(id,fn)=>{if(locks.has(id))fail('PREVIEW_OPERATION_IN_PROGRESS');const p=Promise.resolve().then(fn).finally(()=>locks.delete(id));locks.set(id,p);return p;};
+- const context=({intentId,nativeJwt},allowStoppedGraph=false)=>resolveVerifiedContext({nativeRoot,authorityPackage,orchestrationPackage,intentId,nativeJwt,allowStoppedGraph});
++ const context=({intentId,nativeJwt},allowStoppedGraph=false)=>asyncVerifier.context({intentId,nativeJwt,allowStoppedGraph});
+  function publicRecord(i){return {previewId:i.id,intentId:i.context.intentId,companyId:i.context.companyId,projectId:i.context.projectId,requestId:i.context.requestId,graphId:i.context.graphId,sourceMessageId:i.context.sourceMessageId,originalPromptMessageId:i.context.originalPromptMessageId,roomId:i.context.roomId,taskIds:i.context.taskIds,leaseId:i.leaseId,generation:i.context.generation,artifactDigest:i.build.receipt.artifactDigest,buildFingerprint:i.build.receipt.buildFingerprint,buildRevision:i.build.receipt.buildRevision,previewUrl:i.app.ready.baseUrl,appPid:i.app.child.pid,authorityPid:i.host.child.pid,appUid:i.app.ready.uid,authorityUid:i.host.ready.uid,storageIsolationScope:'APPLICATION_TENANT_DATABASE',osSandboxVerified:false,servingMemoryEnforced:false,servingMemory:{nodeHeapLimitMiB:256,cgroupLimitApplied:false},status:'PRIVATE_PROCESS_READY',previewReady:false,executionClass:'NATIVE_NONPRODUCTION',provider:i.context.provider,modelCalls:i.context.modelCalls};}
++ async function observedFetch(phase,url,options={}){const started=Date.now();try{return await fetch(url,{...options,signal:AbortSignal.timeout(5000)});}catch(e){if(e?.name==='TimeoutError'||e?.code===23){const code=phase+'_FETCH_TIMEOUT';console.error(JSON.stringify({event:'PREVIEW_PROBE_FAILED',phase,code,durationMs:Date.now()-started}));throw Object.assign(Error(code),{code,phase,durationMs:Date.now()-started});}throw e;}}
+  async function healthy(i){
+-  const base=i.app.ready.baseUrl;const h=await fetch(base+'/api/v1/app/health',{signal:AbortSignal.timeout(5000)});if(h.status!==200)fail('APP_HEALTH_FAILED');const body=await h.json();
++  const base=i.app.ready.baseUrl;const h=await observedFetch('HEALTH',base+'/api/v1/app/health');if(h.status!==200)fail('APP_HEALTH_FAILED');const body=await h.json();
+   for(const [k,v] of Object.entries({artifactDigest:i.build.receipt.artifactDigest,leaseId:i.leaseId,startGeneration:i.context.generation}))if(body[k]!==v)fail('APP_HEALTH_BINDING_MISMATCH');
+-  const html=await fetch(base+'/',{headers:{Referer:approvedParentOrigin+'/'},signal:AbortSignal.timeout(5000)});if(html.status!==200)fail('APP_HTML_FAILED');
++  const html=await observedFetch('HTML',base+'/',{headers:{Referer:approvedParentOrigin+'/'}});if(html.status!==200)fail('APP_HTML_FAILED');
+   const htmlText=await html.text();const match=htmlText.match(/src=["']([^"']+\.js)["']/);if(!match)fail('APP_JS_REFERENCE_REQUIRED');const script=new URL(match[1],base);if(script.origin!==base)fail('APP_JS_ORIGIN_DENIED');
+-  const js=await fetch(script,{headers:{Referer:base+'/'},signal:AbortSignal.timeout(5000)});if(js.status!==200)fail('APP_JS_FAILED');
++  const js=await observedFetch('JS',script,{headers:{Referer:base+'/'}});if(js.status!==200)fail('APP_JS_FAILED');
+   const receipt={schemaVersion:1,status:'AUTHORIZED_HEALTHY_PREVIEW',previewId:i.id,companyId:i.context.companyId,projectId:i.context.projectId,requestId:i.context.requestId,graphId:i.context.graphId,revision:i.build.receipt.buildRevision,audience:'PRIVATE_SCOPED',storageIsolationScope:'APPLICATION_TENANT_DATABASE',osSandboxVerified:false,servingMemoryEnforced:false,leaseId:i.leaseId,generation:i.context.generation,artifactDigest:i.build.receipt.artifactDigest,checks:{html200:true,js200:true,apiPostReadback:false,restartPersistence:false,browserExecuted:false}};
+   const signature=createHmac('sha256',i.masterKey).update(JSON.stringify(receipt)).digest('hex');
+   return {receipt,receiptSignature:signature,receiptSignatureValid:createHmac('sha256',i.masterKey).update(JSON.stringify(receipt)).digest('hex')===signature,expectedProjectId:i.context.projectId,authorizedPreviewId:i.id,expectedRevision:i.build.receipt.buildRevision,isolatedStorageAttested:true,storageIsolationScope:'APPLICATION_TENANT_DATABASE',osSandboxVerified:false,servingMemoryEnforced:false,authorityState:'USABLE',previewOrigin:base,parentOrigin:approvedParentOrigin,trustedFrameUrl:base+'/',allowStagingLoopback:true,statusMessage:'Private app is running; full browser acceptance remains pending.'};
+  }
+  async function issue(i,nativeJwt){
+-  const {verifyNativeJwt}=await load('native-authority');const {PortableAppAuthority}=await load('portable-authority');
+-  const v=verifyNativeJwt(nativeRoot,i.context.companyId,nativeJwt);if(v.nativeUserId!==i.context.subjectId||v.role!=='owner'||v.membershipRevision!==i.context.authorizationRevision)fail('CURRENT_NATIVE_OWNER_REQUIRED');
++  const {PortableAppAuthority}=await load('portable-authority');
++  const v=await asyncVerifier.nativeJwt(i.context.companyId,nativeJwt);if(v.nativeUserId!==i.context.subjectId||v.role!=='owner'||v.membershipRevision!==i.context.authorizationRevision)fail('CURRENT_NATIVE_OWNER_REQUIRED');
+   const a=PortableAppAuthority.open({stateDir:i.stateDir,masterKey:i.masterKey});try{const now=Date.now();const issued=a.issueTicket({companyId:i.context.companyId,projectId:i.context.projectId,userId:v.nativeUserId,role:v.role,scope:v.scope,leaseId:i.leaseId,processGeneration:i.context.generation,artifactDigest:i.build.receipt.artifactDigest,authorityRevision:v.membershipRevision,nativeTokenHash:v.nativeTokenHash,nativeFamilyHash:v.nativeFamilyHash,nativeExp:v.nativeExp,issuedAt:now,expiresAt:Math.min(now+120000,v.nativeExp?v.nativeExp*1000:Infinity)});const verified=a.verifyTicket(issued.ticket,{companyId:i.context.companyId,projectId:i.context.projectId,leaseId:i.leaseId,processGeneration:i.context.generation,artifactDigest:i.build.receipt.artifactDigest});if(!verified.ok)fail('NATIVE_TICKET_VERIFICATION_FAILED');return issued.ticket;}finally{a.close();}
+  }
+  async function startApp(i){i.app=await startProcess(appAdapter,['--config',i.runtimeConfig],{STARLI_APP_AUTHORITY_KEY:i.appKey},join(i.dir,'app-process.json'));}
+@@ -78,6 +80,6 @@
+  async function stopInstance(i){i.leases.deactivateLease(i.leaseId);const app=await terminate(i.app),authority=await terminate(i.host);const confirmedStopped=app.confirmedStopped&&authority.confirmedStopped;atomic(join(i.dir,'lifecycle.json'),{status:confirmedStopped?'STOPPED':'STOP_PENDING',previewId:i.id,app,authority});if(confirmedStopped)instances.delete(i.id);return {previewId:i.id,stopState:confirmedStopped?'STOPPED':'STOP_PENDING',confirmedStopped,leaseInactive:true,app,authority};}
+  async function stop(input){const i=await owned(input,true);return runLocked(i.context.intentId,()=>stopInstance(i));}
+  async function cleanup({intentId}){const owned=[...instances.values()].filter(i=>i.context.intentId===intentId);if(!owned.length)fail('ACTIVE_PREVIEW_NOT_FOUND');return Promise.all(owned.map(stopInstance));}
+- async function close(){return Promise.all([...instances.values()].map(stopInstance));}
++ async function close(){await asyncVerifier.close();return Promise.all([...instances.values()].map(stopInstance));}
+  return {open,bootstrap,restart,stop,cleanup,close,context};
+ }

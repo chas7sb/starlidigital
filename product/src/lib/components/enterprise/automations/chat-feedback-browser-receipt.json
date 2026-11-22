@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "actualInlineComponent": true,
+  "controlledFixture": true,
+  "liveWrites": 0,
+  "browserErrors": [],
+  "checks": [
+    "canonical scoped snapshot",
+    "native bearer SSE invalidation refetch",
+    "same-room human approval with explicit confirmation",
+    "verified provider receipt only",
+    "native event uncertain state removes old receipt",
+    "390px no overflow",
+    "abort clears persisted view"
+  ]
+}

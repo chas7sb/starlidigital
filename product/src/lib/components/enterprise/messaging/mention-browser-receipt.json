@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tests": 5,
+  "actualComponent": true,
+  "keyboardAndCaret": true,
+  "revocationClearsAndDisables": true,
+  "apiRequests": 0,
+  "errors": []
+}

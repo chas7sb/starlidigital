@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {NativeCompletionReceiptIssuer} from './native-completion-receipt-issuer.mjs';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync} from 'node:fs';
+const artifactPath=new URL('./deterministic-native-worker.mjs',import.meta.url);
+const digest=createHash('sha256').update(readFileSync(artifactPath)).digest('hex');
+let calls=0;
+const issuer=new NativeCompletionReceiptIssuer({issueFromCanonicalCompletion(input){calls++;return input;}});
+const base={artifactPath,agencyReceipt:{executionClass:'NATIVE_NONPRODUCTION',outputDigest:digest},executionClass:'NATIVE_NONPRODUCTION'};
+assert.throws(()=>issuer.issueFromCanonicalCompletion({...base,agencyReceipt:{outputDigest:digest}}),/EXPLICIT_NONPRODUCTION_PROVENANCE_REQUIRED/);
+assert.throws(()=>issuer.issueFromCanonicalCompletion({...base,agencyReceipt:{executionClass:'NATIVE_NONPRODUCTION'}}),/EXACT_NATIVE_OUTPUT_DIGEST_REQUIRED/);
+assert.throws(()=>issuer.issueFromCanonicalCompletion({...base,executionClass:'NATIVE_PRODUCTION'}),/EXPLICIT_NONPRODUCTION_PROVENANCE_REQUIRED/);
+assert.throws(()=>issuer.issueFromCanonicalCompletion({...base,agencyReceipt:{...base.agencyReceipt,outputDigest:'0'.repeat(64)}}),/EXACT_NATIVE_OUTPUT_DIGEST_REQUIRED/);
+assert.equal(calls,0);issuer.issueFromCanonicalCompletion(base);assert.equal(calls,1);
+const result={executionClass:'COMPONENT_PROVENANCE_TEST',passed:5,checks:['missing class denied','missing digest denied','production class denied','wrong digest denied','explicit staged exact digest forwarded']};
+if(process.env.STARLI_NATIVE_ISSUER_OUTPUT)writeFileSync(process.env.STARLI_NATIVE_ISSUER_OUTPUT,JSON.stringify(result,null,2));
+console.log(JSON.stringify(result));

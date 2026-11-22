@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "actualComponent": true,
+  "installedMetadataConnectors": 445,
+  "listedOperations": 3369,
+  "allRawMetadataNotExecutable": true,
+  "nativeCompanyRouteIntercepted": true,
+  "liveWrites": 0,
+  "browserErrors": [],
+  "checks": [
+    "provider/action search",
+    "explicit not executable status",
+    "no create/run controls",
+    "availability filter",
+    "opaque internal IDs hidden",
+    "390px details",
+    "session abort clear"
+  ]
+}

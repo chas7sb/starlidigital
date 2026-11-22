@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "actualComponents": true,
+  "controlledFixture": true,
+  "liveWrites": 0,
+  "checks": [
+    "missing-field-only question",
+    "CAS answer",
+    "secure OAuth unavailable",
+    "non-destructive test receipt",
+    "activation confirmation",
+    "exact approval confirmation",
+    "390px no overflow",
+    "access abort clears"
+  ],
+  "fixtureWrites": 5,
+  "browserErrors": []
+}

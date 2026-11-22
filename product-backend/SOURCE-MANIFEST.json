@@ -1,0 +1,1578 @@
+{
+  "sourceRoot": "/srv/starlidigital/mcp-workspace/server/src",
+  "transport": "private SSH stdin/stdout; no server files written",
+  "archiveSha256": "26511689d660103a0026862f0a133b70ac2235c9bebb86e2220d51cc8dae85db",
+  "components": [
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/provider-integration-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-company-authority-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-build-tools-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-session-refresh-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/postclaim-name-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-controlled-reopen-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-compile-repair-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5",
+    "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/claim-review-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4",
+    "customer-capabilities",
+    "starli-orchestrator",
+    "machinery-run",
+    "agency-execution",
+    "business-engine"
+  ],
+  "files": [
+    {
+      "path": "agency-approvals/service.ts",
+      "sha256": "e7f68dcc1a1665a57703d8a506a87e3bce325f881f8cb0d9c36c28fd644a43bb",
+      "bytes": 4929
+    },
+    {
+      "path": "agency-approvals/types.ts",
+      "sha256": "3021ee769e364d076ea04392ca48005d27a2794671ddf9212fb9b04a03053ac0",
+      "bytes": 424
+    },
+    {
+      "path": "agency-execution/bridge.ts",
+      "bytes": 2333,
+      "sha256": "e0679c3d733df5bcaf0820008157c44f4d0c86105f14b18f87642331d667e254"
+    },
+    {
+      "path": "agency-execution/canonical-consumer.ts",
+      "bytes": 8912,
+      "sha256": "88f2ea59c93174b17548fe93377ecbee33ebab20c3b56ed81b6134f5c234bd80"
+    },
+    {
+      "path": "agency-execution/index.ts",
+      "bytes": 128,
+      "sha256": "ce064d5cbfa7ec308f38ebff2d5232d78fd3d4667a3b99425169d127a4b08584"
+    },
+    {
+      "path": "agency-execution/service.ts",
+      "bytes": 17975,
+      "sha256": "c10a73a240ce3568bfbffcbe6837447151f8c9ee7496a80ed036aa319cd08534"
+    },
+    {
+      "path": "agency-execution/types.ts",
+      "sha256": "491dad551ce2ab742a8da5c49f4059e37184054719b405309203db446675d05d",
+      "bytes": 1919
+    },
+    {
+      "path": "agency-intelligence/types.ts",
+      "sha256": "6be823d67195c7a8127360a4dc7f843177060286fa668dd767cf2c15adfc630c",
+      "bytes": 3413
+    },
+    {
+      "path": "autonomy-policy/service.ts",
+      "sha256": "8c6b650b9c99d3ba859047ef0cd0183f761dd3be75ee65e75826af2f665a40c8",
+      "bytes": 5552
+    },
+    {
+      "path": "autonomy-policy/types.ts",
+      "sha256": "f4e4df4b499747eb1abded81cf5b7518b5ad9da6394f3b54f9e8dd5bd5617b42",
+      "bytes": 1272
+    },
+    {
+      "path": "business-engine/compiler.ts",
+      "sha256": "c27e0912a2d1bc5337194f01a2a019dd71d1c33461c99a87e1fad98faaeca49f",
+      "bytes": 8164
+    },
+    {
+      "path": "business-engine/domain.ts",
+      "sha256": "c2015cc5f2db45f3bbf6eca439f3e072a666d073c60bf306a5a10bceb16927d7",
+      "bytes": 5976
+    },
+    {
+      "path": "business-engine/graphql.ts",
+      "bytes": 5801,
+      "sha256": "750edc0d518466697e18754282845cee75cc915113efab0c5ceba5d42f9fb870"
+    },
+    {
+      "path": "business-engine/index.ts",
+      "bytes": 327,
+      "sha256": "0f66ae2fd54f57b0b929313ac537e16813aadc65b3dc576b2a844429cbc53742"
+    },
+    {
+      "path": "business-engine/machinery-preflight.ts",
+      "sha256": "47de60cd02bb474ddaf06f9f578da133d3f159fbf3e43866c1f049d84e4263b4",
+      "bytes": 9084
+    },
+    {
+      "path": "business-engine/marketing-work-packages.ts",
+      "bytes": 8926,
+      "sha256": "37a8e69621aa368714020bfacd98612c65b346e015891a67a25da3f788d9503f"
+    },
+    {
+      "path": "business-engine/materializer.ts",
+      "sha256": "3475a0c2afe7c3ff32545bfd70535fafb05e55c21ad541ed278963ae752490a1",
+      "bytes": 15258
+    },
+    {
+      "path": "business-engine/onboarding.ts",
+      "sha256": "3ef3b1c4ab6923177a4e7db8efff9504fce8e18277a2650872df2e8efade5363",
+      "bytes": 13312
+    },
+    {
+      "path": "business-engine/orchestration-materializer.ts",
+      "sha256": "cdc59cef13de069369c5fdcfbbc8e7964a7861bd877f6328d99977ad582d40a7",
+      "bytes": 7678
+    },
+    {
+      "path": "business-engine/service.ts",
+      "sha256": "4e10fe2fe3e9d4b7b6d84840d4ee5b47f7e6e3413539bdd81aaa95f15e74b0c6",
+      "bytes": 15762
+    },
+    {
+      "path": "company-events.ts",
+      "sha256": "ebf8b77f9dc7c97e7f2c57a087ad7b83605e615b1a75d37af652338afcdacf14",
+      "bytes": 13387
+    },
+    {
+      "path": "creative-projects/orchestration-links.ts",
+      "sha256": "f2d41667882abe9c030e6ab0a8506677dffb1fa5e8c54b27c28ac6e455417d9b",
+      "bytes": 6241
+    },
+    {
+      "path": "creative-projects/service.ts",
+      "sha256": "ca7f31e33dc165c500e00966db506e8cf6dcfaeda7cf669f40da10f2eed895f1",
+      "bytes": 32635
+    },
+    {
+      "path": "creative-projects/types.ts",
+      "sha256": "bc1a1cb94b36aded65bc46dd218c41123130cc06078649807cd4693ee39d443c",
+      "bytes": 3860
+    },
+    {
+      "path": "customer-capabilities/connectors/audit.ts",
+      "bytes": 1565,
+      "sha256": "5df8342da95595f0be948204ee6aeb89a58583bd94ab33a10a486bb481b50183"
+    },
+    {
+      "path": "customer-capabilities/connectors/catalog.ts",
+      "bytes": 3045,
+      "sha256": "7512da1d4184e5718e73b26f50e3df8d76c049c9496237e4bd3e6da42e6b3b51"
+    },
+    {
+      "path": "customer-capabilities/connectors/fakes.ts",
+      "bytes": 4661,
+      "sha256": "fef51329133df61d6ef601fe38b320d1147b6e5ac0e60c10afa0caeb60970f94"
+    },
+    {
+      "path": "customer-capabilities/connectors/index.ts",
+      "bytes": 207,
+      "sha256": "beec9c1f0fe87c38b1a78ab42c85ecc80b8a8b05d8934ee67fcb2538d37ba113"
+    },
+    {
+      "path": "customer-capabilities/connectors/lifecycle.ts",
+      "bytes": 4586,
+      "sha256": "9aae0b6a6d390e72c748b0f8d1b846bafe5f7cbce175e126c70aacadadba33c9"
+    },
+    {
+      "path": "customer-capabilities/connectors/registry.ts",
+      "bytes": 7087,
+      "sha256": "59d7d891e341b76ce762172e334514339f6fdde3bc5e5893e159c4150bc42502"
+    },
+    {
+      "path": "customer-capabilities/connectors/service.ts",
+      "bytes": 9246,
+      "sha256": "142edd99766e6374a895fb39fceb6916fe8c9cd6d218fdfd4ab5cda969d79a69"
+    },
+    {
+      "path": "customer-capabilities/connectors/types.ts",
+      "bytes": 4221,
+      "sha256": "88f00b0de0927a65e3948d3661557c3c59b9236788f7b971a8fa9030faedddc1"
+    },
+    {
+      "path": "customer-capabilities/gateway.ts",
+      "bytes": 13761,
+      "sha256": "f0a2319604a5605d1f9c2bf2828b54a7bd767e4376eadaa1dcb64480b27c7f28"
+    },
+    {
+      "path": "customer-capabilities/graphql.ts",
+      "bytes": 6842,
+      "sha256": "dc9e77ecef49746642b9261b38c47ac513cbaf7603190c797f7c4def0b590488"
+    },
+    {
+      "path": "customer-capabilities/index.ts",
+      "bytes": 1507,
+      "sha256": "fd9bd6c17a8d6748157104b235ee3a37fb65f8d8c756f4ac36aece29c9bff337"
+    },
+    {
+      "path": "customer-capabilities/integrity.ts",
+      "bytes": 3602,
+      "sha256": "dac9645102b461bcc3260a455b9f2aac66f5ff77c50262be03e293b8df7c47ff"
+    },
+    {
+      "path": "customer-capabilities/memory.ts",
+      "bytes": 3067,
+      "sha256": "a2f5fc15aa7d4003225a0bca3187026f66f71b9c715887a028360363b546545a"
+    },
+    {
+      "path": "customer-capabilities/registry.ts",
+      "bytes": 1279,
+      "sha256": "6cec445a8b69915f772d2f152443c24c2996d68f9b4dc09e84a46934d7c1f4c9"
+    },
+    {
+      "path": "customer-capabilities/runtime.ts",
+      "bytes": 7299,
+      "sha256": "ce1ddf75d0ba358a505eea76db3060d7b37b0b03483e22c81eb949a9c0bbe458"
+    },
+    {
+      "path": "customer-capabilities/security.ts",
+      "bytes": 6874,
+      "sha256": "d6e7963092e8f8fc4c3fc23a122b4162afcbb433d0aab9e09d80b02f69f5fb9d"
+    },
+    {
+      "path": "customer-capabilities/starter.ts",
+      "bytes": 7647,
+      "sha256": "edab53fcca2059b8d8965c647a91abcbc3e6bd479e79bffcd8d810755b5ef27d"
+    },
+    {
+      "path": "customer-capabilities/store.ts",
+      "bytes": 6249,
+      "sha256": "a9997c4a5554c9276d91400ff9de3ff0fd25e65199b694aea07e0b9dcbe21978"
+    },
+    {
+      "path": "customer-capabilities/types.ts",
+      "sha256": "18996ad08eacf5f5bf95d536c89e262e5a52e8b19d3e626265f04ed4575496c4",
+      "bytes": 8069
+    },
+    {
+      "path": "events.ts",
+      "sha256": "ac950ab50798c31020b93a6c6c6a3407b7401d34030bf81036ce02f4929fe4b7",
+      "bytes": 2168
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/build.mjs",
+      "bytes": 1112,
+      "sha256": "78761da8a21b7c444e2d2883990024941a7ed331c23bdf4f5efd8ccf7e83222c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/contracts/app-contracts.ts",
+      "bytes": 10026,
+      "sha256": "5f6170d8109567871df29817570ce13057c2ffcdbd9c89aadfd0e01756421457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/component-build-b/web/src/api.ts",
+      "bytes": 2179,
+      "sha256": "1d307f5ca98c01b2b9dee812961e1dbf3255e07625f3d0bd43c46936ad820365"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/component-build-b/web/src/app-config.ts",
+      "bytes": 1171,
+      "sha256": "a8953ac1efb3f68a21d67a98b062f733fe8f08167eb6f0e2812c8b6b71697233"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/component-build/web/src/api.ts",
+      "bytes": 2179,
+      "sha256": "1d307f5ca98c01b2b9dee812961e1dbf3255e07625f3d0bd43c46936ad820365"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/component-build/web/src/app-config.ts",
+      "bytes": 1167,
+      "sha256": "80b10bdacbea6b0b0cc3a3a36fe4b937a99ab5f018b58b24dfedfc5a3f13d01e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-4ddf2b8c1a/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-4ddf2b8c1a/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-4ddf2b8c1a/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-591d153807/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-591d153807/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-591d153807/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-61c9baa97b/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-61c9baa97b/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-61c9baa97b/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-a969deeccb/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-a969deeccb/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-a969deeccb/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-bfbe058a7a/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-bfbe058a7a/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-bfbe058a7a/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-f280dbbe6f/native-source/backend/pets.mjs",
+      "bytes": 697,
+      "sha256": "46cec342f36e9199a527fad2b8b7745d395aabc4165e0487ce0323e73153fb3d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-f280dbbe6f/native-source/backend/route.mjs",
+      "bytes": 461,
+      "sha256": "ef1ad602291f0ccffd298eeb8f4c4e91db7ebbccedcc256beb3e7485b595b9a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/native-claim-f280dbbe6f/native-source/frontend/api.mjs",
+      "bytes": 425,
+      "sha256": "d900e33b579b7e4022023d8d30e32eb064a2e1d7782c7834a09135bf7fcf913f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generator/generate.mjs",
+      "bytes": 8325,
+      "sha256": "0a4ec558d26883aac1318923a142e4d708a3531a63c0ba7b1fe2172fbb0824c7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/native-build.mjs",
+      "bytes": 11770,
+      "sha256": "0c6eef0db52731d578158ce80fd434fe1072935e063a69d528de0d7640d9f59c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/native-start.mjs",
+      "bytes": 7643,
+      "sha256": "02322279fe69280e860e994ef6eb8e3231cf3ea24c6f8a3586ffcc78af691dae"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/restart-acceptance.mjs",
+      "bytes": 3858,
+      "sha256": "963cbc420d95c0f7402c6e431e60d7cb9f0576ae565f98478817016fd7afd2a2"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/server/app-server.ts",
+      "bytes": 12412,
+      "sha256": "6ec87487924a7ffe957124c1f71ad123c2cf7df888ab549ca46b10097bf45ae8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/server/authority.ts",
+      "bytes": 8121,
+      "sha256": "75afe3788d2d3462dd64de14968e67c2d4aa3dd300608555dc8c1e7439e4a0ef"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/server/cli.ts",
+      "bytes": 6789,
+      "sha256": "7aecc0e48d19d7b5d026e257b0b9acb18e256428e8dbb0116fc1325d31a93a07"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/server/native-authority.ts",
+      "bytes": 10267,
+      "sha256": "534c3001f8c7c80ce6d414f2a8a62b3445b6e0d97e85df92770a194bd4bb3c5c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/server/storage.ts",
+      "bytes": 12896,
+      "sha256": "ac2ecd75f9432b2ae366e80a978b2cc66e6e345d19b12c2c7ab6d20ea628e290"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/start.mjs",
+      "bytes": 3902,
+      "sha256": "a1963c584cfdb18025ddae5f641d444d12a198beb2f450552f740e8eb117d9bf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/adapter-native-component.mjs",
+      "bytes": 4914,
+      "sha256": "41f187cda07bbc3dccc097cde420c1fb5bc0ea50316b395e04cf738cb6e26b1c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/authority-startup-smoke.mjs",
+      "bytes": 4728,
+      "sha256": "cb11804ae657359a79365cf8c2a5979501901e8c92bd79dcf58ce6a091245626"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/native-build-claim.py",
+      "bytes": 9038,
+      "sha256": "004a64c64dbda10d5d56265e04b8c2bb2f345024d4bb9ee5dbd19d2306249747"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/native-output-runtime.mjs",
+      "bytes": 7278,
+      "sha256": "0e5cc676b0bb9356afe02ffdef3af3e72478ee8df32d1aee8fc57af0f40af27c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/startup-denials.mjs",
+      "bytes": 851,
+      "sha256": "e224a697b04737948e03860bbfc27c97deb428dda06762071049e5d353f93f2f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/tests/storage.mjs",
+      "bytes": 1874,
+      "sha256": "bb01a85b3db8e49fdca3ee73a6b42430baf7cb9558a873cf9d5bc4636c779dc8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/web-template/src/api.ts",
+      "bytes": 2179,
+      "sha256": "1d307f5ca98c01b2b9dee812961e1dbf3255e07625f3d0bd43c46936ad820365"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/app-preview-bootstrap-adapter.ts",
+      "bytes": 9105,
+      "sha256": "1a4233564cf8dc0c939c647f76ecba377b575a694102bf263c8349ffbc65bcde"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/claimed_chat_defaults.py",
+      "bytes": 3030,
+      "sha256": "ed9b8b80e8fc285cf61c8b07fc38aeaa529b4127edaf188f414dfb219aa4633a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/controller-observed.mjs",
+      "bytes": 9147,
+      "sha256": "68bfa5ad7f3956b78df87c607bdcc70f677421fe2fbf5426036794e6f3253b01"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/install_model_apps_repair.py",
+      "bytes": 1797,
+      "sha256": "ba88df659b87db9fae4f1b5079385d72941d1c0bf1136dced0da57d6994caea8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/model_app_claim_guard.py",
+      "bytes": 2327,
+      "sha256": "012e24ff306433e4c95ceca28d985f08cb0c6470ac725df4c81f2a1e42e7a118"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/model_app_controlled_reopen.py",
+      "bytes": 4648,
+      "sha256": "f269d1da596edb5ba9e447f3edeaa0d2b289026f42e67ab7865599ed91db1469"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/model_app_owner_facts.py",
+      "bytes": 3519,
+      "sha256": "93a27e3e254a8221ea9ed8528b52ff0e02f41888c6e13984a63f836170cd0e69"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/model_app_status_guard.py",
+      "bytes": 1042,
+      "sha256": "da511a28e25b740abda499ad587ab633b2340c7a8816788b80b0f0c5a6794bc5"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/native_company_chat.py",
+      "bytes": 4351,
+      "sha256": "6f329d12fa7c96f9ce7bc57647b5e96f7f844c0d7de94bb24ad8d53a462210f8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/native_company_chat_with_transfer.py",
+      "bytes": 5025,
+      "sha256": "86e2a3f7ce771b0dcd480305a82dee6d72d68691fb29890635fb9dc9c829979d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/orchestration-progress-api.mjs",
+      "bytes": 10668,
+      "sha256": "d7b7d667c21202a940903d0cc2cb682a3e35a4b0139c588c94ee5b1366164366"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/preview-url.ts",
+      "bytes": 2072,
+      "sha256": "e76b30bc659117e553fcf674d973814637a418d4eb6b76cfda72e01af7e62de1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/adapters/private_native_bearer_only.py",
+      "bytes": 645,
+      "sha256": "d91460f510f1951ffa307866e84c7aa0429484e71fb78475e90a8e675d1d465c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/browser_controls.mjs",
+      "bytes": 11811,
+      "sha256": "49c8f644a899b150b50e1b7d814805fddc6c64e0f216020fcbab994e5757c92f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/claim_resume_routes.py",
+      "bytes": 3846,
+      "sha256": "1f6ddaea32f634475375237550adea139a2a1e5a169adeb5a5a07dd6bf5cc267"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/freeze_candidate.py",
+      "bytes": 999,
+      "sha256": "0314f06d47254f7f9e12ef5a26fe70d6c52d1342f1f774f8e56175fd2909c479"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/joined_supervisor.py",
+      "bytes": 7151,
+      "sha256": "846c7997cb901893789531b7c133aa74d6ae360aba450578fbf3337efdbfb360"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/reload_private_demo.py",
+      "bytes": 4202,
+      "sha256": "3b00a50628311ddb1d9b9fe2f9a4630b7ed0371891a8ca35780dbb8f34214b7f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/reload_private_demo_v8b.py",
+      "bytes": 4375,
+      "sha256": "6ddb49f95e17e9524d8fb58ea28f71ed0802b8ecbe0a395fbd8c4b4b19cad328"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/reload_private_demo_v9.py",
+      "bytes": 4598,
+      "sha256": "9baebea6cbb4959b99f6077acbda0db7dd323f3310073660481d60b4a2e02fd1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/run_assembly_r5.py",
+      "bytes": 23415,
+      "sha256": "e496e6eb40fcfa5f83e6ecc6c1cd76ca9976369fa1f102fdb5200c983973d6fc"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/serve_frontend.py",
+      "bytes": 1087,
+      "sha256": "0eeeb7c0708d7c1b5e515aa24031dd393149b5fbdc0c7ed4e7ad86385d589909"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/server_snapshot.mjs",
+      "bytes": 5392,
+      "sha256": "c9c7af64b223a63e73024770467a1246d9512dc9b12ba0b6b4cc6d7e8524cb0a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/start_native_auth.py",
+      "bytes": 1607,
+      "sha256": "ae1cef806feb759605b98d0ece239955eec983344ab9f40f4c14917a1c38cc9c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/start_native_chat.py",
+      "bytes": 2587,
+      "sha256": "2c16ac3acae0adf87bc7a43e5e2a7c866f0cc4683b56b479799a4bcb7b12a214"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/start_native_model_apps.py",
+      "bytes": 4031,
+      "sha256": "9f8b7cc745f4121214004c7e9a7f7d61d612f68131c69f61d9cdcc83ee605b37"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/assembly-r1/scripts/verify_pins.py",
+      "bytes": 6020,
+      "sha256": "e1fde679bd98439fc46f108a681de9e4342908190796ac021f88387ae21259dc"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/contracts/app-contracts.ts",
+      "bytes": 10026,
+      "sha256": "5f6170d8109567871df29817570ce13057c2ffcdbd9c89aadfd0e01756421457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/native-bridge/gb3_native_bridge.py",
+      "bytes": 9097,
+      "sha256": "48392490f59b10480faaee1862ae235550ee3c61f0465ac3e76010755eb5de37"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/app-server.ts",
+      "bytes": 15776,
+      "sha256": "a05b350d6c0225a59f9705682c74925cee51e0b831d483126e842f1b806b4438"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/authority.ts",
+      "bytes": 9815,
+      "sha256": "65876590459e9873e1b8b1c27778e3879487cd4f58d9e51e81e934c712db2677"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/cli.ts",
+      "bytes": 7600,
+      "sha256": "709f55d889ee0d674e9d9a9aa1f43b98a84af09be639d33f1c8c32c41ddd09d3"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/lease-store.ts",
+      "bytes": 4888,
+      "sha256": "d454b56a7646c3bfde7cad78bc5b261ca83c206f2b8a2b6f047430281159405e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/native-authority.ts",
+      "bytes": 10751,
+      "sha256": "f0aea65eaad194834b6e3e65f3f06e26b5e279d6be743e155d96bb4380818367"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/native-host.ts",
+      "bytes": 5125,
+      "sha256": "92245537041c3bf3dc81087823538244d033e81e731c87b14de57d3be0e4ba1c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/portable-authority.ts",
+      "bytes": 19267,
+      "sha256": "754b67aeff9349ccdb184752c7c2de21b8be0f3f452c6267938b2c4a2adba871"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/preview-embed-policy.ts",
+      "bytes": 2877,
+      "sha256": "121a0c19414077b0458de68304763e78fd0bf337b434924189b8fd03294f6a04"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/storage.ts",
+      "bytes": 13927,
+      "sha256": "c71f10619e42433f42f5c31b50c9d3005e72979d01810f958265bd47945d7ca9"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/trusted-authority-service.ts",
+      "bytes": 3975,
+      "sha256": "6f9f0ec83276946be91c74175beed49fe3664614615eb83ab324d537930e8c83"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/package/server/trusted-host-cli.ts",
+      "bytes": 3549,
+      "sha256": "d5ae16444af061293b74107e06622d7e51ed31aa3c39152a47f0cc9ee6c5fd59"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/redeem-worker.mjs",
+      "bytes": 382,
+      "sha256": "544013f3dbba33c812b62f2a18e47166f85c23ebf5f2c3d80ecd781df59d03df"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/authority-r1/test-authority.mjs",
+      "bytes": 8978,
+      "sha256": "a6b2dfb3e2231f41d0ff1b97b5497bb13f7b178522a0848cbdaffffcc2a0043e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/claim-review-r1/native_auth_staging.py",
+      "bytes": 5240,
+      "sha256": "1fde277c0804911edb71f1a1f6ce56bf3914da57e539f21d03efdf29cb82f3ad"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/claim-review-r1/test_native_auth_staging.py",
+      "bytes": 4856,
+      "sha256": "8dd344d5b01c00b6005b6365720abc7cc38da476ec9f36b64ee5db75f5f24dbc"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-build-tools-r1/guest_build_tools.py",
+      "bytes": 8590,
+      "sha256": "e7608edec3900f998a0f662d2b07ec15d48d0a029f9a2224b9e12d2218395711"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-build-tools-r1/test_bridge.py",
+      "bytes": 6211,
+      "sha256": "495193a05da014c4c6ea6f47b321b392d72aed45cfc849e4c873d717a074655d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-company-authority-r1/guest_company_authority.py",
+      "bytes": 31859,
+      "sha256": "752b634d15f5badcc9aa0a26ba86d249c575580bbe62cc9b2a99a36e10d7b46f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-company-authority-r1/guest_workspace.py",
+      "bytes": 8901,
+      "sha256": "f518a1240102f9b1af17b6cb1d312c305664a8513ecefd6a3751c776b0a2d457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-company-authority-r1/test_authority.py",
+      "bytes": 8608,
+      "sha256": "2ac5642b4cd8f5bd1b24cbada69d0d6ee528d4f4682cab199f487a2c593c3389"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-session-refresh-r1/guest_session_refresh.py",
+      "bytes": 2090,
+      "sha256": "62f8bea543285441e8d529a31121ad82ced925b4c879ec56217f08b1003973ef"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/guest-session-refresh-r1/test_refresh.py",
+      "bytes": 6027,
+      "sha256": "69cbcce6ce07349cf754777f45617cbec4ffb769d396ca81cdf10aabe54d6877"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-compile-repair-r1/model_app_compile_repair.py",
+      "bytes": 6231,
+      "sha256": "678064e781c6a96f22c43d954992ea5b79d7ea5c55f164bf1245e62d073791b5"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-compile-repair-r1/test_route.py",
+      "bytes": 3726,
+      "sha256": "b18deea3a49cebaf087f32d723b49368ae431587378a5d26e00033ab5c157a8b"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-controlled-reopen-r1/model_app_controlled_reopen_route.py",
+      "bytes": 5735,
+      "sha256": "407ce7e5899cc8de9a450e168a3944466dc2aaa951a0a25e17a900d23c273577"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-controlled-reopen-r1/test_route.py",
+      "bytes": 4295,
+      "sha256": "608108bff494955b090bb7d9a7485b969efad17fe58b72a7cd759760d0070fdc"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/deterministic-native-worker.mjs",
+      "bytes": 3558,
+      "sha256": "88d112fd9a7281d4b25df0aafcb457d52bf28cb5eca18808c7476e3b4ad6f5c5"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/generated_app_component_host.mjs",
+      "bytes": 1233,
+      "sha256": "4a53c239e49ba5f616acdc0a21a4fb4e5c52515969bf440195cb4e936ea6ba20"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/guest_model_build.py",
+      "bytes": 10607,
+      "sha256": "e1dc326f68621d165b393122e8815d1744d380857c990f858df208bf5b60534a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-api-authority.mjs",
+      "bytes": 2977,
+      "sha256": "9a1dc8b1119a8aafa903c3d9e93d0aa8be28b7ffc870627de136d60f18140b86"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-claim-execution.py",
+      "bytes": 7251,
+      "sha256": "1d4595f56b85bc71db47f6f98e1f2e2dd15062b93ca29027ef9ad1c6616dc53e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-http-stop.py",
+      "bytes": 13293,
+      "sha256": "87e403ae5e6a6ad4e2324d2c157adb200448af8913cd1dd1bf37bdcda86c9bbf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-issuer.mjs",
+      "bytes": 1737,
+      "sha256": "37022bbb978751ff5ebde7e099b71b0a8d47528317da8cce6703202bfd88e358"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-process-stop.ts",
+      "bytes": 5468,
+      "sha256": "3d96c9979f8179cf0562f4c1d07f07579c0aca5ef77a94b6070a3dfe2b712514"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-terminal-quiescence.py",
+      "bytes": 13920,
+      "sha256": "d6c5a15e649d2823f83b634bd9719119e1a8151ca5ffa010402a3b869c6842fb"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-native-workers.ts",
+      "bytes": 5524,
+      "sha256": "76b4d37caf444f115e6538e4d5f4a300946b95cfe65083ffe3a4fa558d04eeec"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/test-queue-restart.py",
+      "bytes": 1755,
+      "sha256": "bca0c779ddab70acfacd6df54dc6578a6b56af64f204163f5a262f80f5ae0b90"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/install_model_apps.py",
+      "bytes": 1286,
+      "sha256": "751f48ec323dfc86ba5f4c33309703323ef943989b41fb28856d067ed9e0f6fd"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/model-native-worker.py",
+      "bytes": 5516,
+      "sha256": "e47b9f484a8fdc362f03dd08c86c4bad276d5a02ebdfe2c362145f76ed553d7a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/model_app_control.py",
+      "bytes": 2496,
+      "sha256": "09d35d25d5897cd3cddb813277e31ec96cbf7e49cefdceb2897f7c7022ca3b52"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/model_node_dispatcher.py",
+      "bytes": 7307,
+      "sha256": "07f0c7ee78cf472c7d4f782fe250f153b873834c87f9a9aaf4e8f1d4a18ee021"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/model_provider.py",
+      "bytes": 2784,
+      "sha256": "3724ec9e0d177d7a7f5ae20e14675137bac7d7398586602012c888970e3127d1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native-agency-output-join.mjs",
+      "bytes": 5299,
+      "sha256": "178a250fae32569b356ab264287dfc82ffa6f26060bd6c62d9deea2fbc62e935"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native-completion-receipt-issuer.mjs",
+      "bytes": 763,
+      "sha256": "f0497bd38ceeb8423f63965b0c5c535ebd58da29bbb3bb4697626f0733749adf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native-worker-cli.ts",
+      "bytes": 8619,
+      "sha256": "dc8901fa9b191dbc616bd689fe072bd963210e4ae8548a128609d0876c5b2d79"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native-worker-command-api.mjs",
+      "bytes": 2596,
+      "sha256": "46cfead8280431d355be6b3b2fd355c895651af698668d06a96ca6ad7eea9433"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native-worker-service.ts",
+      "bytes": 20896,
+      "sha256": "fa81b8c2814002d71a3cc978df3415ba020082f0b8e136457a043e87f5a3434e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native_build_queue.py",
+      "bytes": 5632,
+      "sha256": "36346a424c939e8c9686dd2427d7e76b4a2e5d1c216a6da5f847b4995a513c53"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native_claim_execution_routes.py",
+      "bytes": 15489,
+      "sha256": "6120b02c8cc82ebb920181ce3e6c0a13404d72b24132628b9b8c4f72b2b8966c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/native_node_dispatcher.py",
+      "bytes": 7066,
+      "sha256": "92d7e6e3cc1e95bf3d050775265ff14f4ea9a423eeadfa4a558549e46491b8f8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/orchestration-progress-api.mjs",
+      "bytes": 10796,
+      "sha256": "676fcf2ac89a4971f01afa6c7706bfa0b500865aef4ced346f5e22d359f94961"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/terminal_quiescence.py",
+      "bytes": 8069,
+      "sha256": "c32b131c51d08cca87aa14b1e56dca6b91b47022172e9751544c243a97098fb7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/test_actual_api.py",
+      "bytes": 5482,
+      "sha256": "e24f33a7dba40345611812efe6b7be0ceb289c01f6a5edd98dee2dd9a4ecfcc1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/collections.mjs",
+      "bytes": 3360,
+      "sha256": "ea1dcc392429d15bd002dabba28d1f5bda7b9c29e4881af072a70e486e2a0099"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/model-build-loader.mjs",
+      "bytes": 2756,
+      "sha256": "2b0265854df708dbbe25f36fbe1983b902891bd51851ddbefbea0be0695daebf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/model_app_lifecycle.py",
+      "bytes": 7452,
+      "sha256": "07ee22c078d5bd326e84ce834f6d69bccd5698af878d449da03b66b7e7786cd2"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/native-build.mjs",
+      "bytes": 13317,
+      "sha256": "f0e2709216c4031b0e9708f56b1880cf4a4a80b1c7914154a69ca352ebd2aef7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/native-start.mjs",
+      "bytes": 8421,
+      "sha256": "fe55904945820aae4c793d52186dcbb547aa04acb7f12cbfad17f9c57b339bfa"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/schema.mjs",
+      "bytes": 3260,
+      "sha256": "9ab4d226918c8a4d985bb8b1b8722e78bc195d22c681400f3401167b4a05a7a9"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/test-collections.mjs",
+      "bytes": 2976,
+      "sha256": "6d6408780abb5f2f25e166c977e0ee3be6f1e5887c365a63e8aaafe374720f3f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/collections.mjs",
+      "bytes": 3360,
+      "sha256": "ea1dcc392429d15bd002dabba28d1f5bda7b9c29e4881af072a70e486e2a0099"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/model-build-loader.mjs",
+      "bytes": 3284,
+      "sha256": "7976dc96863e93746e2be3f949bf52d47acaa402be93ca36d8aca354293f194b"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/model_app_lifecycle.py",
+      "bytes": 7461,
+      "sha256": "ddca2b797766145726f290ab8aebb1e70cda65e0bc07123a956724398f009b63"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/native-build.mjs",
+      "bytes": 13946,
+      "sha256": "eb343f96638350dec9a3a75c11e449ffe4a71f0dd4434ae08e23929de59a3711"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/native-start.mjs",
+      "bytes": 8421,
+      "sha256": "fe55904945820aae4c793d52186dcbb547aa04acb7f12cbfad17f9c57b339bfa"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/schema.mjs",
+      "bytes": 3260,
+      "sha256": "9ab4d226918c8a4d985bb8b1b8722e78bc195d22c681400f3401167b4a05a7a9"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/syntax-transform.mjs",
+      "bytes": 797,
+      "sha256": "f17a8814cc271ebf04aee3809f52f500d614de4b86defe55466c56d19151d7db"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/test-collections.mjs",
+      "bytes": 2976,
+      "sha256": "6d6408780abb5f2f25e166c977e0ee3be6f1e5887c365a63e8aaafe374720f3f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/deterministic-native-worker.mjs",
+      "bytes": 3558,
+      "sha256": "88d112fd9a7281d4b25df0aafcb457d52bf28cb5eca18808c7476e3b4ad6f5c5"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/generated_app_component_host.mjs",
+      "bytes": 1233,
+      "sha256": "4a53c239e49ba5f616acdc0a21a4fb4e5c52515969bf440195cb4e936ea6ba20"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native-agency-output-join.mjs",
+      "bytes": 5233,
+      "sha256": "4630db5caa9f498552bffb1490891606f2bf17ea85e879a827c935cc41ab6dfd"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native-completion-receipt-issuer.mjs",
+      "bytes": 763,
+      "sha256": "f0497bd38ceeb8423f63965b0c5c535ebd58da29bbb3bb4697626f0733749adf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native-worker-cli.ts",
+      "bytes": 8622,
+      "sha256": "62e6235b45f76da47dd0f146683366359686718e777fab23284570833692db75"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native-worker-command-api.mjs",
+      "bytes": 2596,
+      "sha256": "46cfead8280431d355be6b3b2fd355c895651af698668d06a96ca6ad7eea9433"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native-worker-service.ts",
+      "bytes": 17009,
+      "sha256": "215b5e0fd64289bc9f34797cd8c0de76cd8a8fbadbf459e096f55da2eb53a6ba"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native_build_queue.py",
+      "bytes": 5632,
+      "sha256": "36346a424c939e8c9686dd2427d7e76b4a2e5d1c216a6da5f847b4995a513c53"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native_claim_execution_routes.py",
+      "bytes": 15489,
+      "sha256": "6120b02c8cc82ebb920181ce3e6c0a13404d72b24132628b9b8c4f72b2b8966c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/native_node_dispatcher.py",
+      "bytes": 6653,
+      "sha256": "3423ebdd72d04e6c2a12103858f4436af5a170f56eceeb729809c6bafe789ce0"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/orchestration-progress-api.mjs",
+      "bytes": 10796,
+      "sha256": "676fcf2ac89a4971f01afa6c7706bfa0b500865aef4ced346f5e22d359f94961"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/terminal_quiescence.py",
+      "bytes": 8069,
+      "sha256": "c32b131c51d08cca87aa14b1e56dca6b91b47022172e9751544c243a97098fb7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-api-authority.mjs",
+      "bytes": 2977,
+      "sha256": "9a1dc8b1119a8aafa903c3d9e93d0aa8be28b7ffc870627de136d60f18140b86"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-claim-execution.py",
+      "bytes": 7251,
+      "sha256": "1d4595f56b85bc71db47f6f98e1f2e2dd15062b93ca29027ef9ad1c6616dc53e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-http-stop.py",
+      "bytes": 13293,
+      "sha256": "87e403ae5e6a6ad4e2324d2c157adb200448af8913cd1dd1bf37bdcda86c9bbf"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-issuer.mjs",
+      "bytes": 1737,
+      "sha256": "37022bbb978751ff5ebde7e099b71b0a8d47528317da8cce6703202bfd88e358"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-process-stop.ts",
+      "bytes": 5468,
+      "sha256": "3d96c9979f8179cf0562f4c1d07f07579c0aca5ef77a94b6070a3dfe2b712514"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-terminal-quiescence.py",
+      "bytes": 13920,
+      "sha256": "d6c5a15e649d2823f83b634bd9719119e1a8151ca5ffa010402a3b869c6842fb"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-native-workers.ts",
+      "bytes": 5524,
+      "sha256": "76b4d37caf444f115e6538e4d5f4a300946b95cfe65083ffe3a4fa558d04eeec"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/native-wiring-r3/test-queue-restart.py",
+      "bytes": 1755,
+      "sha256": "bca0c779ddab70acfacd6df54dc6578a6b56af64f204163f5a262f80f5ae0b90"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/postclaim-name-r1/claimed_coordinator_name.py",
+      "bytes": 3761,
+      "sha256": "38dd2ff95e0389b77e0a69b91a091bb494f5fd9aea1aaa0b17d27ff6271f1a82"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/postclaim-name-r1/test_name.py",
+      "bytes": 5325,
+      "sha256": "61b79615119278a07a1adcdb0c59d82125b67d30a035d41752f3189d9a306b31"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/LIFECYCLE-DIFF.patch",
+      "bytes": 8649,
+      "sha256": "a43dda05a374b61b11ce0d1655cf4cb6f6ac71f3b87d8d4a1c86604bcef0a648"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/async-context.mjs",
+      "bytes": 2757,
+      "sha256": "7761615ca2d3dbd9b6c1747bbbad318a2ce08344bd5c69dc94a6a7a354a102fe"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/context-worker.mjs",
+      "bytes": 1487,
+      "sha256": "4f968b73d8c1328710eecf553fab3b4a62756f28f76911e106fc069e20664680"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/lifecycle.mjs",
+      "bytes": 13883,
+      "sha256": "682d4fb9345680943744f601191c8eef79a5207a6674b6d242b04091a745f04c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/process-group.mjs",
+      "bytes": 3027,
+      "sha256": "5487cf22123b540b12d4a27c5a1e454c444449da8b7dcb935d573a6ba72d017b"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/test-async.mjs",
+      "bytes": 2100,
+      "sha256": "03e1d7f12cce584106e4b67eadaba86862d4911a121022f1ad7ccf38440f185c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-async-context-r1/test-native-async.py",
+      "bytes": 7990,
+      "sha256": "90818e346b9baa4f1320ba844b76d48d717fb0f53cba9e16639a38875fc701c1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/controller.mjs",
+      "bytes": 2413,
+      "sha256": "c65fdb403c056bcfff53729cf9371de25790ce9d47ab54c1af3c304b219f9457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/lifecycle.mjs",
+      "bytes": 13482,
+      "sha256": "8a8df79d7c5e54d8e8e8f36385becb064b17d05d01bce968d565f41ec828f041"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/native_preview_routes.py",
+      "bytes": 3687,
+      "sha256": "0caddca2862bc03007c7b2bb31ec82076d358acae09bafab54962bb5603672ba"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/process-group.mjs",
+      "bytes": 3027,
+      "sha256": "5487cf22123b540b12d4a27c5a1e454c444449da8b7dcb935d573a6ba72d017b"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-context.mjs",
+      "bytes": 2137,
+      "sha256": "0463b82f707587b16f72c8e242ef1afc9a55cf168db08e008c51510c5a45594a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-lifecycle.mjs",
+      "bytes": 4707,
+      "sha256": "67577fcb082d40c3ef4b38e6c1460c3e8b0121457d5fdd870e1ec7740ead63b8"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-native-context.py",
+      "bytes": 7992,
+      "sha256": "eeccb63ccde47b2644e7b552ef9457003c8bee7b02f3970f8510583564b1874c"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-native-lifecycle-two-tenant.py",
+      "bytes": 10258,
+      "sha256": "47b682a048689799ff5ec94ccff559bab83d19f06bcdbca3bc09b86db3ef12a6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-native-lifecycle.py",
+      "bytes": 8172,
+      "sha256": "5d5976fd9914235623b4c14c9263da0f1d94b3d5b0d69b38290fe024576145d1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/test-process-group.mjs",
+      "bytes": 1668,
+      "sha256": "df9a2b6ea7fc55f0a444c7aa56fa7339ae63da382c368f03ce87f5242775edd1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/preview-lifecycle-r1/verified-context.mjs",
+      "bytes": 6986,
+      "sha256": "d08fa96fb90855dc711022b66e4f11b39c946a2540541be10e77948f25c85a70"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/provider-integration-r1/guest_workspace.py",
+      "bytes": 8217,
+      "sha256": "52e592ba52164e12f0c17fc8d4838d0e9df14e88bc91f71031066c7a7ecb9e8e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/provider-integration-r1/openrouter_provider.py",
+      "bytes": 3950,
+      "sha256": "d00ab04ae7ab4610aff1e778f5f3505246f8e324192c9c98241c4dd7a5a910c7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/codex/provider-integration-r1/test_guest.py",
+      "bytes": 5745,
+      "sha256": "fab60970b5556895100971ba6648384cc1476f7dee2a9441fd3f5fbeaada609d"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/contracts/app-contracts.ts",
+      "bytes": 10026,
+      "sha256": "5f6170d8109567871df29817570ce13057c2ffcdbd9c89aadfd0e01756421457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/native-bridge/gb3_native_bridge.py",
+      "bytes": 9623,
+      "sha256": "73d1a788a61ffa0c9363bfa41ba784d1d8c9dd45f704ffdb187993442fa02ecc"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/app-server.ts",
+      "bytes": 14772,
+      "sha256": "f7e4d7081c2d3b1d840a2fba55eb141376c064df96c660db4d6767d4e14040d7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/authority.ts",
+      "bytes": 8286,
+      "sha256": "b9ff92843d645637a4084582d899f29f0974e65f8c7b9567302e4da3c5b6899a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/cli.ts",
+      "bytes": 6789,
+      "sha256": "7aecc0e48d19d7b5d026e257b0b9acb18e256428e8dbb0116fc1325d31a93a07"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/native-authority.ts",
+      "bytes": 10376,
+      "sha256": "fe6ddc005e2d3dba1725e2c282d9386f3d22b97a0c9069372f2af9a542d40864"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/portable-authority.ts",
+      "bytes": 7982,
+      "sha256": "90cb9c2e16086a15a0a4dc10a8bf6a7401483a8fcc9d2fb6a506ab4f97604d19"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/preview-embed-policy.ts",
+      "bytes": 2877,
+      "sha256": "121a0c19414077b0458de68304763e78fd0bf337b434924189b8fd03294f6a04"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/storage.ts",
+      "bytes": 12896,
+      "sha256": "ac2ecd75f9432b2ae366e80a978b2cc66e6e345d19b12c2c7ab6d20ea628e290"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/package/server/trusted-authority-service.ts",
+      "bytes": 6229,
+      "sha256": "34fe4a21017cf9f684b893dcec0804838f3f600c1f673309602c3a6e1479e0ac"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/tests/portable-authority-and-preview.mjs",
+      "bytes": 7683,
+      "sha256": "93bd0ade21b630291b8fdb148a36c2f5b204b8c49696e75b2e7688363409f839"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/app-authority-r4/tests/revocation-store-regression.mjs",
+      "bytes": 12109,
+      "sha256": "9e489d8ffe8db33b5b84a86e4abdaaa1113a3ff56079e13f382e62e1f43dfaef"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/orchestration-r4/durable-orchestration-stop.mjs",
+      "bytes": 15634,
+      "sha256": "94c923cc01eb347a27422bf3cf8691c94fbad25a8d449f17fdff7378241f2890"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/orchestration-r4/test-durable-orchestration.mjs",
+      "bytes": 7694,
+      "sha256": "c71d52affa394465836976d52b076f19780cd98db686fba02382a0eee6cef346"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/run_connected_r4.py",
+      "bytes": 7267,
+      "sha256": "433f66e2924c7caf9d834782c97340cd0af27e262cd15298950f18ae92736834"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/tests_r4_all.mjs",
+      "bytes": 16997,
+      "sha256": "6ad9522ff912cb675b24f9a5d138a78ef17c37a3705b6b11181ff9eef6f60059"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/ui/worker-task-progress.ts",
+      "sha256": "228d585cd6a0f8204c9ad133ac7f84cf89e7e4623fba90ed4f4ece77a7f246c8",
+      "bytes": 16982
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/canonical-agency-receipt-adapter.mjs",
+      "bytes": 4079,
+      "sha256": "510b9e5567d9a5ed2a5e18aa4237929bbb87bf20159f16a52ad480210df44e1a"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/canonical-registration-adapter.mjs",
+      "bytes": 5752,
+      "sha256": "6e4f25d82435f326e09c100f771cb11d5830e416c9575af1f4dd6b0265f12fc3"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/durable-orchestration-stop.mjs",
+      "bytes": 25409,
+      "sha256": "e1de990c02b2bb6751bc3b1fb732026c5c3b8208cf848965223b837c34945ed7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/executor-receipt-issuer.mjs",
+      "bytes": 8647,
+      "sha256": "01133e97bedfadbdd30effae31dc97be788c5558a19935b80a616e24dbff305b"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/machinery-run/execution-driver.ts",
+      "sha256": "3f1b149ce5eb31b3c778a7e01467dd85047d428756624eb471f50610a296ace8",
+      "bytes": 10738
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/orchestration-progress-api.mjs",
+      "bytes": 10273,
+      "sha256": "1ff5d070b74bd886bfe179f1e8b507a39dd970bf78411b5ddf69c87cce3fbbeb"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/patches/machinery-run-execution-driver.ts.patch",
+      "bytes": 4850,
+      "sha256": "3d48c08273efcbea71750625f4e0a11c9a6330d8be6397a1bb92a2a97a84ed64"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/patches/machinery-run-graphql.ts.patch",
+      "bytes": 2377,
+      "sha256": "8dead2e4439cd3b1d269d18d6205617a5ecc935bb4ffef8f397dbb1bbbb59834"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/tests/test-orchestration-r6.mjs",
+      "bytes": 30107,
+      "sha256": "34492935c12e2cd490bb2955914bc6a7c0f789caf20f023f7a6f82087753d545"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/ui/worker-task-progress.ts",
+      "sha256": "228d585cd6a0f8204c9ad133ac7f84cf89e7e4623fba90ed4f4ece77a7f246c8",
+      "bytes": 16982
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/contracts/app-contracts.ts",
+      "bytes": 10026,
+      "sha256": "5f6170d8109567871df29817570ce13057c2ffcdbd9c89aadfd0e01756421457"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/native-bridge/gb3_native_bridge.py",
+      "bytes": 8891,
+      "sha256": "aee9677c5869d3c51116a3156fe3797b85f3419d8201c095f497a0da28cbf635"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/app-server.ts",
+      "bytes": 14772,
+      "sha256": "f7e4d7081c2d3b1d840a2fba55eb141376c064df96c660db4d6767d4e14040d7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/authority.ts",
+      "bytes": 9815,
+      "sha256": "65876590459e9873e1b8b1c27778e3879487cd4f58d9e51e81e934c712db2677"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/cli.ts",
+      "bytes": 6789,
+      "sha256": "7aecc0e48d19d7b5d026e257b0b9acb18e256428e8dbb0116fc1325d31a93a07"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/lease-store.ts",
+      "bytes": 4888,
+      "sha256": "d454b56a7646c3bfde7cad78bc5b261ca83c206f2b8a2b6f047430281159405e"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/native-authority.ts",
+      "bytes": 10376,
+      "sha256": "fe6ddc005e2d3dba1725e2c282d9386f3d22b97a0c9069372f2af9a542d40864"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/portable-authority.ts",
+      "bytes": 18629,
+      "sha256": "f2921bf4710408bb6b8dd2c374dc12366071a381328b9725eb35a31604e26f32"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/preview-embed-policy.ts",
+      "bytes": 2877,
+      "sha256": "121a0c19414077b0458de68304763e78fd0bf337b434924189b8fd03294f6a04"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/storage.ts",
+      "bytes": 12896,
+      "sha256": "ac2ecd75f9432b2ae366e80a978b2cc66e6e345d19b12c2c7ab6d20ea628e290"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/gemini3/app-authority-r5/package/server/trusted-authority-service.ts",
+      "bytes": 6229,
+      "sha256": "34fe4a21017cf9f684b893dcec0804838f3f600c1f673309602c3a6e1479e0ac"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/grokbot1_claim.py",
+      "bytes": 39750,
+      "sha256": "db62b76088944289e2cd6b580e0cc5468aa365d8e3132162a03ff820767b4462"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/grokbot1_routes.py",
+      "bytes": 9358,
+      "sha256": "6c8ac0ffc79f73f57aa52e6f0ac346fb87bbf50e8d478b9d3512d1fee4429ba2"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/migration/001_forward.sql",
+      "bytes": 2505,
+      "sha256": "49e2d2b6f902eedfa40755324bfb3649f93382feee5de3e49542ded37010ae68"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/migration/001_rollback.sql",
+      "bytes": 1209,
+      "sha256": "f4b5f0fe4e92ec25b602fff4b3640e98995991c8a76650e52d653e27ffe97e80"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/native_harness.py",
+      "bytes": 9843,
+      "sha256": "3752a984fd132a24d6dc242e1f299822ba3031802479bed1893ab1906bc8d2db"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/patch/0001-native-main-mount-grokbot1.PROPOSAL.patch",
+      "bytes": 929,
+      "sha256": "e648fd9b7032764a4f57d94b09789206d927e60f2e042b466d2c0e7c2da8b4d7"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/tests/flow.py",
+      "bytes": 4001,
+      "sha256": "ddbfbab231c9eefb6a3c6b93a6aec520b3688eeb1023b73ac7b387e5e29c762f"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/tests/test_inprocess_w1.py",
+      "bytes": 22889,
+      "sha256": "51c362cc0b07967f1d82af1fd82da20151a35a047d5621a37b83f0e44e432de6"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/tests/test_multiprocess_w1.py",
+      "bytes": 17812,
+      "sha256": "c6493ea1ee052b52a730ffdaf0b6f45dbbd7ac30808f8ddcf811addbd2393b29"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/tests/worker_proc.py",
+      "bytes": 4566,
+      "sha256": "98b8e6b1dcc5c1e7d30411cb62901bf124ff887a78d650d2b15070aba594c3cd"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/vendor/guest_intents.py",
+      "bytes": 13721,
+      "sha256": "630cd708486ecbb3a58d66a17fc1a792646b36b50b0fecc78127697c15e211b1"
+    },
+    {
+      "path": "grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/vendor/provisional.py",
+      "bytes": 15149,
+      "sha256": "e87117b33cfe39577be1510c78ce887408c4d68d585a6749bddb1e18ebbfcd0e"
+    },
+    {
+      "path": "hosted-agents/tools/types.ts",
+      "sha256": "8f2bafae4d54a8ba344f45094fedb1e020fb472a31efb12eb9a655a5226d10f9",
+      "bytes": 2349
+    },
+    {
+      "path": "hosted-agents/tools/universal/calculator.ts",
+      "sha256": "21a61f8c31c0a70f85934c76fbeb54351527300827e6bb6bbba008a618c36b6b",
+      "bytes": 10723
+    },
+    {
+      "path": "machinery-audit/service.ts",
+      "sha256": "d08c2f2e933222024adb1aefde29f5649d8432e996aaf951a66c515038d92cd8",
+      "bytes": 12682
+    },
+    {
+      "path": "machinery-audit/types.ts",
+      "sha256": "7c2a6d7a2d7777021f704b170da3dd286bda26f0de103013989bbbe21609b368",
+      "bytes": 1045
+    },
+    {
+      "path": "machinery-run/authority.ts",
+      "sha256": "d1623df6392aa0dbabdd0416a0af51ea505b98f3f537d756c7755d10e896376e",
+      "bytes": 2592
+    },
+    {
+      "path": "machinery-run/execution-driver.ts",
+      "bytes": 8207,
+      "sha256": "27e557205999a91dd8800413365cce4f1f2806092b9ac0737849550d6eef7682"
+    },
+    {
+      "path": "machinery-run/graphql.ts",
+      "bytes": 7180,
+      "sha256": "31d3daa70fb297c6c0ca1fd936aebc403d7c55cf2aee302bd5a67a3be6e4790c"
+    },
+    {
+      "path": "machinery-run/index.ts",
+      "bytes": 218,
+      "sha256": "0c6c9ccbfffe8dc3a7e1bde554839cb272e8f608e0433dcd8b20e24dd8bec965"
+    },
+    {
+      "path": "machinery-run/policy.ts",
+      "sha256": "730603d5baac115c968e1d7e8b7eeb1cc8dcd68bbce100a556ce8d5aab4c34ce",
+      "bytes": 2693
+    },
+    {
+      "path": "machinery-run/runtime.ts",
+      "bytes": 2718,
+      "sha256": "ddb3afd127e862c714d606dc59db0a151e35825daf4910fe5db4987521607c4b"
+    },
+    {
+      "path": "machinery-run/service.ts",
+      "sha256": "5b7da36531f3828eabdde578812947c4e97dde630a18081eb3f8291c085ecd84",
+      "bytes": 22066
+    },
+    {
+      "path": "machinery-run/types.ts",
+      "sha256": "269eec6e865e82d1819aef01d7b1bf5cfdc1b6f63466ba97993b5890fd5ae406",
+      "bytes": 2647
+    },
+    {
+      "path": "media-workspace/types.ts",
+      "sha256": "577d3a9afd1eb84e13590390ec3b8cd64997757be4adb76ba15651db0ae08490",
+      "bytes": 2544
+    },
+    {
+      "path": "operator-auth.ts",
+      "sha256": "8e1626ad573bb66a4c9ff0a71fb8bff5543b372283c474f89490c679cb3552b3",
+      "bytes": 7408
+    },
+    {
+      "path": "operator-jobs.ts",
+      "sha256": "2130513aece55137b98c46c0e6eba6f362c6fa2cf2e1c46a58395caba1a425c2",
+      "bytes": 13917
+    },
+    {
+      "path": "security.ts",
+      "sha256": "9e7c3d835e63ca3b85050b47c3f88c72af0b1496a0ec17fde407b7d8f4994db6",
+      "bytes": 6346
+    },
+    {
+      "path": "social-publishing/connection-truth.ts",
+      "sha256": "a2f1f42fe10588c1f7f22fda2ad7592451afc1091a26d2a6e47285b56c6cce43",
+      "bytes": 3524
+    },
+    {
+      "path": "social-publishing/types.ts",
+      "sha256": "5b4336669131f1e00e201fdd1ada0fb0a5a0dc94b6b6e5047a0c61e2343923cb",
+      "bytes": 6879
+    },
+    {
+      "path": "starli-orchestrator/agency-adapter.ts",
+      "bytes": 1254,
+      "sha256": "ca008eac0a37648ff7cf112e4d67a330d461cb40de4f1fe8cf4bacaf345bd9df"
+    },
+    {
+      "path": "starli-orchestrator/business-engine-adapter.ts",
+      "sha256": "a8b5469cd86b7dba8760db14f01da1f1c0fd5e7596c08acc74c6b9f5e0a3bbe6",
+      "bytes": 2389
+    },
+    {
+      "path": "starli-orchestrator/domain.ts",
+      "sha256": "047bd030cb9387ee23ee718d00566a5c9e5d3ce354c2a5356e0a73878d7656c8",
+      "bytes": 5259
+    },
+    {
+      "path": "starli-orchestrator/execution-adapter.ts",
+      "bytes": 450,
+      "sha256": "eaf3555e432b1ce801b7b8a087ce0e608612c4ddbb7031e541bd96f64778d4f6"
+    },
+    {
+      "path": "starli-orchestrator/index.ts",
+      "bytes": 244,
+      "sha256": "d2de5c12adc6f2cf26137da514fc25350b44397328fd95d46ee4fb30760321ac"
+    },
+    {
+      "path": "starli-orchestrator/policy.ts",
+      "sha256": "ef14c950e1e4f5e51d9e1da4dba97102bf132c06f357cc0b11e0d538fec6571b",
+      "bytes": 8924
+    },
+    {
+      "path": "starli-orchestrator/projection.ts",
+      "bytes": 1677,
+      "sha256": "8a83ecc3c57399b1ae2c515cf80088a9516f176eab8f14ef932a0debdc561e56"
+    },
+    {
+      "path": "starli-orchestrator/service.ts",
+      "sha256": "798e0648691e556d8906d7d7834ffbb6a46a3fc71b187c9fe8e6318c1e6ac04f",
+      "bytes": 29201
+    },
+    {
+      "path": "starli-os/contracts.ts",
+      "sha256": "15eb9e7f3ddd5e4d6e1246748e1e90f11ce2d28a3ff4c46ae838c874cb8f6406",
+      "bytes": 11841
+    },
+    {
+      "path": "store.ts",
+      "sha256": "08ec07cd682263e40f4c99d7927e38312e50748375367bbe0e6194f572350a0c",
+      "bytes": 4276
+    },
+    {
+      "path": "video/types.ts",
+      "sha256": "f176fdfa5c40be87339a6eedfd5190b3eeecbc625d9b1e71531c7ef145ddaeac",
+      "bytes": 2069
+    }
+  ],
+  "skipped": [],
+  "status": "source snapshot; not a portable runtime or acceptance claim",
+  "unresolvedSourceReferences": [
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/native-source/frontend/App.jsx",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/native-source/frontend/api.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/gemini1/orchestration-r6/durable-orchestration-stop.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/gemini1/orchestration-r6/executor-receipt-issuer.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/native-completion-receipt-issuer.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/native-worker-service.ts",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-execution-r1/historical-r3-baseline/orchestration-progress-api.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/native-source/frontend/App.jsx",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r1/native-source/frontend/api.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/codex/model-app-persistence-r2/native-source/frontend/api.mjs",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/business-engine/machinery-preflight.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/agency-execution/canonical-consumer.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/starli-orchestrator/domain.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/starli-orchestrator/service.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/machinery-run/types.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/gemini1/orchestration-r6/machinery-run/service.js",
+    "grokbot-gemini-autonomous-company-wave1-20261120/store.ts"
+  ],
+  "closureArchiveSha256": "e39fc296859d8e9f527b58518f89761201399548c2bde04692c16acbf44c5f0e"
+}

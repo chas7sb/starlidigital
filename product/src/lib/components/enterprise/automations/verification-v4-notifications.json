@@ -1,0 +1,53 @@
+{
+  "version": "starli.automations.frontend-v4-notifications",
+  "verifiedAt": "2026-11-15T14:40:26.412Z",
+  "intent": "shopify_new_order_chat",
+  "hashes": [
+    {
+      "path": "src/lib/components/enterprise/automations/automations-client.ts",
+      "sha256": "48ec9128d7ba0b10d04d2a62d528470a7580baf4491b97d27890a5740472f334"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationReviewCard.svelte",
+      "sha256": "1316e0d196ea9692d3aeb9e398048807f91d408ad30aa4582dfda4aeb65f029d"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/AutomationChatFeedback.svelte",
+      "sha256": "20b1c5e6deb4f68c8f778dabcbdc394849006c67c3397963ca0596959ce6bb34"
+    },
+    {
+      "path": "src/lib/components/enterprise/automations/StarliAutomations.svelte",
+      "sha256": "4a773b55303aca6962e8466b8826e74d4e190c447fb99eae8a459969c8106f85"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v4/starli_automations/http.py",
+      "sha256": "9604acf88892a09601a9d6a76e78c6453615ce6b2a09f691a998eeacb44e3fe3"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v4/starli_automations/gateway.py",
+      "sha256": "9f60592c9c09ba7d985580b48d6a69740c649939c01fead4e557680e8a8be4b0"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v4/starli_automations/registry.py",
+      "sha256": "992154e0bb2f7a11b22f28150b518d380b37ac1a12f2b720f5df9811fd82ab0c"
+    },
+    {
+      "path": "C:/Users/Administrator/Documents/Codex/2026-11-12/c/work/starli-automations-v4/starli_automations/shopify_orders.py",
+      "sha256": "e20a18623284a021ba5328f64ad8531d8ecaab6ee6e4ac5b52f9dcf2b101fb7b"
+    }
+  ],
+  "checks": {
+    "strictClient": "PASS",
+    "svelte": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "controlledActualBrowser": "PASS",
+    "journeys": 8,
+    "noHumanPerOrderApproval": true,
+    "noSlackRequirement": true,
+    "noConversationCreated": true
+  },
+  "liveProviderWrites": 0,
+  "liveMerchantWebhookAcceptance": "OWNED_BY_ROOT"
+}

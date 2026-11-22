@@ -1,0 +1,21 @@
+# Structured company resources — 15 November 2026
+
+Owner files: panes/ResourcePicker.svelte, StructuredResourcePane.svelte, resource-services.ts and their verification scripts/receipts. No route, existing FileWorkspacePane, old panel UI, dependencies, backend or production edits. Root owns composition.
+
+ResourcePicker props: companyId:string, actorId:string, accessSignal:AbortSignal, kinds:string[]. Supported kinds task/project/file/knowledge/sheet/email are filtered against the authenticated native registry. Events: open exact {scope:'company',ownerId,kind,id} only after canonical snapshot verification; close; denied {status}. File/knowledge/project refs can continue through root's existing FileWorkspacePane. Task/sheet/email open StructuredResourcePane. Partial list outages are labeled without inventing records or falling back to personal resources.
+
+StructuredResourcePane props: companyId, actorId, accessSignal, resource exact company ref, verifiedEmailActions:string[] default empty. Events close, denied {status}, dirty {dirty}. Root should also preserve its dirty-close/route-change confirmation. Pane Close/Reload confirms unsaved cell edits. Ctrl/Cmd+S applies only when focus is within this pane. Parent abort/session/identity/resource change clears saved values, drafts, previews/reviews and authorization-bound client state; old responses cannot restore them.
+
+Adapters:
+- Task/project/file/knowledge: actual /api/v1/panels/company/{company}/{kind}/{id}/snapshot. Task is read-only here. Root file/knowledge/project editor remains preferred.
+- Sheets: actual company /sheets listing; native sheet panel snapshot and POST /edit {expectedRevision,value}. Stored cell table is paged30rows x10columns. Existing style/offscreen workbook data is retained on explicit cell edits. Formula text is inert and external/executable formulas are rejected; this pane does not calculate. Editing requires active manifest editable plus files.manage and a snapshot small enough for the panel128KiB request contract. Large/unsupported sheets remain read-only. CAS conflicts retain draft and require Reload; no automatic write replay or export controls.
+- Email: actual company /email-studio discovery and canonical email panel snapshot with starli.email/1 value. JSON is read-only. Preview/review/approve are enabled only by active workflowBinding+workflowActions or an explicitly verified trusted assembly prop. Root directive: KEEP verifiedEmailActions EMPTY until active backend advertises support; do not infer from staged source alone. Approval is exact-revision human confirmation; no send or controlled-send endpoint/button exists in this component. Previews use existing DOMPurify, restrictive injected CSP and sandbox with no permissions; no raw HTML in parent document, remote requests, forms or link navigation.
+
+Validation:
+- Both new Svelte components compile0warnings.
+- Strict TypeScript check of new resource client + shared service:0diagnostics.
+- verify-resource-services.cjs:12 executed helper/client checks PASS (scope/ref validation, preserved offscreen data/style, inert formulas/external formula rejection, exact CAS/no retry, unadvertised action/send rejection, registry-filtered lists, denied-row isolation, late response after abort, no export/raw parent HTML, preview security config).
+- verify-preview-xss.cjs: actual isolated headless Chrome + installed DOMPurify PASS: malicious script/handler/form/refresh/navigation removed, parent script never executed, sandbox intact,0externalrequests. No application account used in browser test. Receipt resource-preview-xss-receipt.json.
+- Native readonly account acceptance: signin200, all six company list routes200 with supported envelopes, currently0records. Own signout200 then bearer denied401. No resources created/edited, approval/send/model calls0. Receipt resource-live-receipt.json. Nonempty live snapshot/save/approval acceptance remains open and must not be claimed from controlled tests.
+
+Email discovery nonempty list currently requires each DTO companyId (or matching envelope companyId) plus id/revision. Active empty response is {drafts:[]}; confirm actual nonempty DTO from backend owner12 before changing this scope check. No private email body or credentials are in receipts.

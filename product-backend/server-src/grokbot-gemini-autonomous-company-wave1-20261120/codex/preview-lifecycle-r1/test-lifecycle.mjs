@@ -1,0 +1,23 @@
+import {createPreviewLifecycle} from './lifecycle.mjs';
+import {resolveVerifiedBuild} from '../app-persistence-r1/native-build.mjs';
+import {readFileSync} from 'node:fs';
+import {DatabaseSync} from 'node:sqlite';
+import {join} from 'node:path';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+let raw='';for await(const b of process.stdin)raw+=b;const input=JSON.parse(raw);
+const lifecycle=createPreviewLifecycle({...input,resolveVerifiedBuild});const checks=[];
+const one={intentId:input.intentId,nativeJwt:input.nativeJwt};
+try{
+ const opened=await lifecycle.open(one);assert.equal(opened.appUid,997);assert.equal(opened.authorityUid,997);assert.equal(opened.receipt.checks.html200,true);assert.equal(opened.receipt.checks.browserExecuted,false);checks.push('native claimed build dynamically starts unprivileged bound authority/app');
+ const boot=await fetch(opened.previewUrl+'/api/v1/app/session/bootstrap',{method:'POST',headers:{Origin:input.approvedParentOrigin,'Content-Type':'application/json'},body:JSON.stringify({ticket:opened.bootstrapTicket})});assert.equal(boot.status,200,await boot.clone().text());const cookie=boot.headers.get('set-cookie').split(';')[0],session=await boot.json();assert.ok(session.csrfToken);checks.push('owner scoped actual private bootstrap and CSRF');
+ let r=await fetch(opened.previewUrl+'/api/pets',{method:'POST',headers:{Cookie:cookie,Origin:opened.previewUrl,'Content-Type':'application/json','x-csrf-token':session.csrfToken},body:JSON.stringify({name:'Lifecycle Luna'})});assert.equal(r.status,201,await r.clone().text());checks.push('actual generated backend creates persisted dog');
+ const restarted=await lifecycle.restart(one);assert.notEqual(restarted.appPid,opened.appPid);r=await fetch(restarted.previewUrl+'/api/pets',{headers:{Cookie:cookie}});assert.equal(r.status,200);assert.equal((await r.json())[0].name,'Lifecycle Luna');checks.push('independent generated app process restart persists native backend read');
+ const again=await lifecycle.open(one);assert.equal(again.appPid,restarted.appPid);assert.equal(again.previewId,opened.previewId);checks.push('repeated open reuses exact scoped app process');
+ if(input.second){const second=await lifecycle.open(input.second);const b=await fetch(second.previewUrl+'/api/v1/app/session/bootstrap',{method:'POST',headers:{Origin:input.approvedParentOrigin,'Content-Type':'application/json'},body:JSON.stringify({ticket:second.bootstrapTicket})});assert.equal(b.status,200);const cookieB=b.headers.get('set-cookie').split(';')[0];r=await fetch(second.previewUrl+'/api/pets',{headers:{Cookie:cookieB}});assert.equal(r.status,200);assert.deepEqual(await r.json(),[]);r=await fetch(second.previewUrl+'/api/pets',{headers:{Cookie:cookie}});assert.ok([401,403].includes(r.status));checks.push('second native claimed app usable and cross tenant session denied');}
+ await assert.rejects(lifecycle.open({...one,intentId:'unknown-claim'}),e=>e.code==='COMMITTED_CLAIM_REQUIRED');checks.push('unclaimed preview request denied');
+ const db=new DatabaseSync(join(input.nativeRoot,'data/company-authority.sqlite3'));db.prepare('UPDATE members SET active=0,revision=revision+1 WHERE company_id=? AND kind=?').run(opened.companyId,'person');db.close();
+ r=await fetch(restarted.previewUrl+'/api/pets',{headers:{Cookie:cookie}});assert.equal(r.status,403);r=await fetch(restarted.previewUrl+'/api/pets',{method:'POST',headers:{Cookie:cookie,Origin:restarted.previewUrl,'Content-Type':'application/json','x-csrf-token':session.csrfToken},body:JSON.stringify({name:'Unauthorized'})});assert.equal(r.status,403);const appDb=new DatabaseSync(join(input.stateRoot,'data',createHash('sha256').update(opened.companyId+'\0'+opened.projectId).digest('hex'),'doglove.sqlite'),{readOnly:true});assert.equal(appDb.prepare('SELECT count(*) n FROM doglove_pets').get().n,1);appDb.close();checks.push('live native revocation denies generated app read/write with zero unauthorized rows');
+ const cleanup=await lifecycle.cleanup({intentId:input.intentId});assert.ok(cleanup.every(x=>x.confirmedStopped&&x.leaseInactive));checks.push('private cleanup after revoke confirms app/authority exits and inactive lease');
+ console.log(JSON.stringify({passed:true,executionClass:'NATIVE_NONPRODUCTION',browserExecuted:false,modelCalls:0,uid:process.getuid(),checks,companyId:opened.companyId,projectId:opened.projectId,requestId:opened.requestId,graphId:opened.graphId,sourceMessageId:opened.sourceMessageId,previewId:opened.previewId,artifactDigest:opened.artifactDigest,oldAppPid:opened.appPid,newAppPid:restarted.appPid,memory:{nodeHeapLimitMiB:256,cgroupLimitApplied:false}}));
+}finally{await lifecycle.close();}

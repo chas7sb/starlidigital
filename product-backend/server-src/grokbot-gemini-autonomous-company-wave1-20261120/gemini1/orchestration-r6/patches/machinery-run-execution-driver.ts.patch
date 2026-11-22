@@ -1,0 +1,99 @@
+--- a/server/src/machinery-run/execution-driver.ts
++++ b/server/src/machinery-run/execution-driver.ts
+@@ -13,6 +13,7 @@
+  |'PAUSED'
+  |'BLOCKED'
+  |'UNCERTAIN'
++ |'STOP_PENDING'
+  |'TERMINAL'
+  |'NO_EXECUTABLE_WORK';
+ 
+@@ -20,6 +21,9 @@
+   disposition:MachineryDriverDisposition;
+   snapshot:MachineryRunSnapshot;
+   transitionedWork?:{orchestrationPlanId:string;workPackageId:string;execution:CanonicalExecutionLoopResult};
++  confirmedStopped?:boolean;
++  stopOutcomes?:unknown[];
++  computeStopHandoff?:unknown;
+   detail:string;
+ }
+ 
+@@ -65,17 +69,73 @@
+     return{disposition:'NO_EXECUTABLE_WORK',snapshot,detail:'No selected canonical READY executable work is available. Planning-only work must be completed by its authoritative planner.'};
+   }
+ 
+-  stop(actor:MachineryRunActor,runId:string,reason='Stopped by operator'):MachineryDriverResult{
++  async stop(actor:MachineryRunActor,runId:string,reason='Stopped by operator'):Promise<MachineryDriverResult>{
+     const run=this.machinery.getRun(actor,runId);
+     const orchActor=this.orchestrationActor(actor);
++    const stopOutcomes:unknown[]=[];
++    let requiredCount=0;
++    let allConfirmed=true;
++    let anyUncertain=false;
++    let latestComputeStopHandoff:unknown=undefined;
+     for(const selection of run.selections){
+       const plan=this.orchestrator.getPlan(orchActor,selection.orchestrationPlanId);
+-      const selected=selection.workPackageIds.map(id=>plan.workPackages.find(p=>p.id===id)).find((p):p is OrchestrationWorkPackage=>!!p);
+-      if(!selected)continue;
+-      this.execution.stop(orchActor,{tenantId:plan.tenantId,orchestrationPlanId:plan.id,workPackageId:selected.id},reason);
++      const selectedPackages=selection.workPackageIds.map(id=>plan.workPackages.find(p=>p.id===id)).filter((p):p is OrchestrationWorkPackage=>!!p);
++      if(selectedPackages.length===0){
++        allConfirmed=false;
++        continue;
++      }
++      for(const selected of selectedPackages){
++        requiredCount++;
++        const outcome:any=await Promise.resolve(this.execution.stop(orchActor,{tenantId:plan.tenantId,orchestrationPlanId:plan.id,workPackageId:selected.id},reason));
++        stopOutcomes.push(outcome);
++        if(outcome&&typeof outcome==='object'&&outcome.computeStopHandoff!==undefined){
++          latestComputeStopHandoff=outcome.computeStopHandoff;
++        }
++        const isUncertain=Boolean(outcome&&typeof outcome==='object'&&(outcome.state==='UNCERTAIN'||outcome.stopState==='UNCERTAIN'));
++        if(isUncertain)anyUncertain=true;
++        const handoffOk=!outcome||typeof outcome!=='object'||outcome.computeStopHandoff===undefined||(outcome.computeStopHandoff&&typeof outcome.computeStopHandoff==='object'&&outcome.computeStopHandoff.confirmedStopped===true&&outcome.computeStopHandoff.stopState!=='STOP_PENDING');
++        const explicitlyConfirmed=Boolean(
++          outcome&&
++          typeof outcome==='object'&&
++          outcome.confirmedStopped===true&&
++          outcome.stopState!=='STOP_PENDING'&&
++          outcome.state!=='STOP_PENDING'&&
++          !isUncertain&&
++          handoffOk
++        );
++        if(!explicitlyConfirmed){
++          allConfirmed=false;
++        }
++      }
+     }
+     const snapshot=this.machinery.refresh(actor,runId);
+-    return{...this.describe(snapshot),detail:snapshot.state==='STOPPED'?'Canonical plan/Agency STOP applied. Late effects cannot revive the machinery run.':'STOP was a canonical no-op for already-terminal selected work.'};
++    if(anyUncertain||snapshot.state==='UNCERTAIN'){
++      return{
++        disposition:'UNCERTAIN',
++        snapshot,
++        confirmedStopped:false,
++        stopOutcomes,
++        ...(latestComputeStopHandoff!==undefined?{computeStopHandoff:latestComputeStopHandoff}:{}),
++        detail:'STOP outcome is UNCERTAIN; physical cancellation is not confirmed. Inspect canonical state.'
++      };
++    }
++    if(requiredCount===0||!allConfirmed){
++      return{
++        disposition:'STOP_PENDING',
++        snapshot,
++        confirmedStopped:false,
++        stopOutcomes,
++        ...(latestComputeStopHandoff!==undefined?{computeStopHandoff:latestComputeStopHandoff}:{}),
++        detail:'STOP requested; logical stop alone or missing/unconfirmed cancellation cannot confirm physical teardown (STOP_PENDING).'
++      };
++    }
++    return{
++      ...this.describe(snapshot),
++      confirmedStopped:true,
++      stopOutcomes,
++      ...(latestComputeStopHandoff!==undefined?{computeStopHandoff:latestComputeStopHandoff}:{}),
++      detail:snapshot.state==='STOPPED'?'Canonical plan/Agency STOP applied and physical cancellation explicitly confirmed. Late effects cannot revive the machinery run.':'STOP explicitly confirmed for already-terminal selected work.'
++    };
+   }
+ 
+   private describe(snapshot:MachineryRunSnapshot):MachineryDriverResult{

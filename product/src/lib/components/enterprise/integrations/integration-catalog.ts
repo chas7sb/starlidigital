@@ -1,0 +1,20 @@
+export const INTEGRATION_VERSION='starli.integration-catalog.v1';
+export const INTEGRATION_STATUSES=['AVAILABLE','CONNECTION_REQUIRED','PLATFORM_SETUP_REQUIRED','NOT_EXECUTABLE'] as const;
+export type IntegrationStatus=typeof INTEGRATION_STATUSES[number];
+export type IntegrationOperation={id:string;resource?:string;operation?:string;title:string;description?:string;executionStatus?:IntegrationStatus};
+export type IntegrationConnector={id:string;title:string;description:string;kind:string;credentialTypes?:string[];operations:IntegrationOperation[];executionStatus:IntegrationStatus};
+export type IntegrationCatalog={version:typeof INTEGRATION_VERSION;companyId:string;connectors:IntegrationConnector[]};
+export class IntegrationCatalogError extends Error{constructor(public status:number,message:string){super(message);}}
+export function validateIntegrationCatalog(value:any,companyId:string):IntegrationCatalog{
+ if(value?.version!==INTEGRATION_VERSION||value.companyId!==companyId||!Array.isArray(value.connectors)||value.connectors.length>2000||value.connectors.some((c:any)=>typeof c.id!=='string'||!c.id||typeof c.title!=='string'||typeof c.description!=='string'||typeof c.kind!=='string'||!INTEGRATION_STATUSES.includes(c.executionStatus)||c.credentialTypes!==undefined&&(!Array.isArray(c.credentialTypes)||c.credentialTypes.some((v:unknown)=>typeof v!=='string'))||!Array.isArray(c.operations)||c.operations.length>5000||c.operations.some((o:any)=>typeof o.id!=='string'||typeof o.title!=='string'||o.description!==undefined&&typeof o.description!=='string'||o.resource!==undefined&&typeof o.resource!=='string'||o.operation!==undefined&&typeof o.operation!=='string'||o.executionStatus!==undefined&&!INTEGRATION_STATUSES.includes(o.executionStatus))))throw new IntegrationCatalogError(0,'The company integration catalog could not be verified.');
+ if(new Set(value.connectors.map((c:IntegrationConnector)=>c.id)).size!==value.connectors.length)throw new IntegrationCatalogError(0,'Integration identities are ambiguous.');return value;
+}
+export class IntegrationCatalogClient{
+ private controller=new AbortController();private session:string;private detach:()=>void;readonly root:string;
+ constructor(readonly companyId:string,private tokenNow:()=>string,signal:AbortSignal,private transport:typeof fetch=(input,init)=>globalThis.fetch(input,init)){this.session=tokenNow();this.root='/api/v1/starli/companies/'+encodeURIComponent(companyId)+'/automations/integrations/catalog';const close=()=>this.close();signal.addEventListener('abort',close,{once:true});this.detach=()=>signal.removeEventListener('abort',close);if(signal.aborted)this.close();}
+ close(){this.controller.abort();this.detach?.();this.session='';}
+ private current(){if(this.controller.signal.aborted||!this.session||this.session!==this.tokenNow())throw new IntegrationCatalogError(401,'Your session changed. Reopen Starli Integrations.');}
+ async catalog():Promise<IntegrationCatalog>{this.current();const response=await this.transport(this.root,{method:'GET',credentials:'same-origin',cache:'no-store',signal:this.controller.signal,headers:{Authorization:'Bearer '+this.session,Accept:'application/json'}});this.current();if(!response.ok)throw new IntegrationCatalogError(response.status,response.status===401||response.status===403?'Your company access changed. Reopen this workspace.':'The native integration catalog is not available on this deployment.');if(!response.headers.get('content-type')?.includes('application/json'))throw new IntegrationCatalogError(503,'The native integration catalog is not available on this deployment.');const value=await response.json();this.current();return validateIntegrationCatalog(value,this.companyId);}
+}
+export const integrationLabel:Record<IntegrationStatus,string>={AVAILABLE:'Available',CONNECTION_REQUIRED:'Connect account',PLATFORM_SETUP_REQUIRED:'Needs platform setup',NOT_EXECUTABLE:'Not executable yet'};
+export function catalogText(value:string):string{return value.replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\bn8n\b/gi,'automation').replace(/\s+/g,' ').trim();}

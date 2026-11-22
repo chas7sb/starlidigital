@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "pinnedNativeFiles": 15,
+  "rawHashMismatches": 0,
+  "nonCanonicalLF": 0,
+  "freshCheckoutPolicy": "Git LF checkout bytes; strict raw verification unchanged"
+}
