@@ -7,6 +7,7 @@ consent is unchanged. This is a separate opt-in from the read-only client.
 """
 from __future__ import annotations
 import starli_portable as _portable
+from .private_storage import ensure_private_database
 
 import base64, hashlib, hmac, html, json, os, re, secrets, sqlite3, time
 from contextlib import contextmanager
@@ -46,15 +47,10 @@ class Start(BaseModel):
 class Store:
     def __init__(self,path):
         self.path=Path(path)
-        parent=self.path.parent
-        parent.mkdir(parents=True,exist_ok=True,mode=0o700)
-        if parent.is_symlink() or parent.stat().st_mode&0o077:
-            refuse(503,"MCP_DEV_OAUTH_STORAGE_DENIED")
-        fd=os.open(self.path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
         try:
-            stat=os.fstat(fd)
-            if stat.st_nlink!=1 or stat.st_mode&0o077:refuse(503,"MCP_DEV_OAUTH_STORAGE_DENIED")
-        finally:os.close(fd)
+            ensure_private_database(self.path)
+        except OSError:
+            refuse(503,"MCP_DEV_OAUTH_STORAGE_DENIED")
         with self.db() as db:
             db.execute("""CREATE TABLE IF NOT EXISTS flows(
               state_hash TEXT PRIMARY KEY, owner TEXT NOT NULL,

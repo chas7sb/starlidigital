@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-22",
+  "scope": "authorized source repository and source ZIP; not a bundled runnable binary/image distribution",
+  "decision": "no-currently-identified-security-or-missing-component-notice-blocker-in-reviewed-source-snapshot",
+  "authorization": "User authorized open source and selected Apache-2.0 for StarliDigital-owned code; third-party notices retain their own terms.",
+  "reviewed_index_listing_sha256": "0b1040b0dcb1928cfa58b5526de3ccf9aa80923b3f40fe96025ad0e848244e80",
+  "reviewed_index_entries": 12553,
+  "required_checks": {
+    "scoped_root_license_notice": "present",
+    "dashboard_license": "retained; deployed original byte copy also preserved",
+    "openpencil_license": "MIT text retained",
+    "searxng_license": "AGPL version 3 text retained",
+    "bundled_font_notices": "recovered official texts, embedded copyright/version mapping and hashes retained",
+    "actionable_embedded_secret_patterns": "remediated in reviewed staged source",
+    "runtime_customer_data_credential_paths": "none found in reviewed index",
+    "all_reviewed_secret_pattern_candidates": "148 candidates dispositioned; no confirmed live leaks; no network credential tests"
+  },
+  "remaining_publication_action": "For any changed index or final archive, verify changed bytes and source manifest/notice inclusion and runtime-data exclusions. This is an artifact-consistency check, not an indefinite research gate.",
+  "nonblocking_followups": [
+    "Exact historical upstream Git revision recovery, with existing uncertainty disclosed",
+    "Exact bundled-font binary-to-upstream-commit matching, with official notices already included",
+    "Expanded attribution inventory for npm/pip dependencies fetched separately by installation",
+    "Native installation, runtime parity and computer-use validation before claiming those product capabilities"
+  ],
+  "future_distribution_scope": "Bundled dependency trees, executable installers, containers, VM images, weights or new assets require their own concrete notice and privacy review if distributed later.",
+  "limitations": "Bounded factual source audit, not a legal compatibility opinion or guarantee that patterns detect all secrets. New files are not cleared by this snapshot."
+}

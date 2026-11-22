@@ -4,6 +4,7 @@ import socket
 import json
 import threading
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('vm', Path(__file__).parents[1] / 'vm.py')
@@ -14,7 +15,7 @@ class LifecycleTests(unittest.TestCase):
     def test_default_boundary_and_explicit_accelerator(self):
         cfg = dict(disk='C:/some,where/disk.qcow2', iso='installer.iso', memory_mb=1024,
                    cpus=1, accel='whpx', network='none', vnc_port=5901)
-        with patch.object(vm, 'binary', return_value='qemu'):
+        with patch.object(vm, 'binary', return_value='qemu'), patch.object(vm.platform, 'machine', return_value='x86_64'):
             args = vm.command(cfg, 12345, 'test')
         self.assertEqual(args[args.index('-accel') + 1], 'whpx')
         self.assertEqual(args[args.index('-nic') + 1], 'none')
@@ -50,7 +51,23 @@ class LifecycleTests(unittest.TestCase):
     def test_bad_vnc_port_rejected(self):
         with patch.object(vm, 'binary', return_value='qemu'):
             with self.assertRaises(RuntimeError):
-                vm.command({'vnc_port': 80}, 12345, 'test')
+                vm.command({'vnc_port': 80, 'accel': 'tcg'}, 12345, 'test')
+
+    def test_arm_requires_explicit_software_emulation(self):
+        with patch.object(vm.platform, 'machine', return_value='arm64'):
+            with self.assertRaisesRegex(RuntimeError, 'explicitly select --accel tcg'):
+                vm.init(SimpleNamespace(accel=None))
+            with patch.object(vm, 'binary', return_value='qemu'):
+                with self.assertRaisesRegex(RuntimeError, 'ARM host'):
+                    vm.command({'accel': 'hvf'}, 12345, 'test')
+
+    def test_persistent_uuid_passed_to_guest(self):
+        identity = '5b66e7d1-9e4f-4c28-a8fb-e6275c252a9e'
+        cfg = dict(disk='desktop.qcow2', iso=None, memory_mb=1024, cpus=1,
+                   accel='tcg', network='none', vnc_port=5901, instance_id=identity)
+        with patch.object(vm, 'binary', return_value='qemu'):
+            args = vm.command(cfg, 12345, 'test')
+        self.assertEqual(args[args.index('-uuid') + 1], identity)
 
 if __name__ == '__main__':
     unittest.main()

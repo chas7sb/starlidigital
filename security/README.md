@@ -1,5 +1,14 @@
 # Extraction review tools
 
+For a reusable staged-index screen from any working directory:
+
+```sh
+python /path/to/security/scan_index.py --root /path/to/checkout --output /path/to/report.json
+python /path/to/security/scan_index.py --root /path/to/checkout --output /path/to/delta.json --base-ref HEAD
+```
+
+The first scans all staged blobs. The second scans content only for entries differing from the resolved base commit, while checking paths across the entire index. It does not clear unchanged content or apply previous dispositions. Both record immutable blob IDs, SHA-256s, a full index fingerprint, skipped files and whether the index changed during the run. Exit 0 means no configured candidates in the selected scope; 1 means candidates need review; 2 means error or changing index. `--help` works without an existing checkout/report. `--max-bytes` adjusts the default 2 MB text limit. Historical audit-specific `audit_index.py`/`review_index.py` scripts are not the general CLI and do not grant clearance to a new snapshot.
+
 Run with Python 3 on Windows, macOS or Linux; no packages, network, server mutations or application startup are required.
 
 ```sh

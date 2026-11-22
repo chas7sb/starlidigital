@@ -1,11 +1,11 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';import {Client} from '@modelcontextprotocol/sdk/client/index.js';import {InMemoryTransport} from '@modelcontextprotocol/sdk/inMemory.js';
 import {tenantStore} from './tenant-store.ts';
-const {Store}=await import('/srv/starlidigital/current/server/src/store.ts');
-const {Events}=await import('/srv/starlidigital/current/server/src/events.ts');
-const {createCrmServices}=await import('/srv/starlidigital/current/server/src/crm/services.ts');
-const {registerProjectTools}=await import('/srv/starlidigital/current/control-plane/src/tools/projects.ts');
-const {registerCrmTools}=await import('/srv/starlidigital/current/control-plane/src/tools/crm.ts');
+const {Store}=await import(new URL('../../server/src/store.ts',import.meta.url).href);
+const {Events}=await import(new URL('../../server/src/events.ts',import.meta.url).href);
+const {createCrmServices}=await import(new URL('../../server/src/crm/services.ts',import.meta.url).href);
+const {registerProjectTools}=await import(new URL('../../control-plane/src/tools/projects.ts',import.meta.url).href);
+const {registerCrmTools}=await import(new URL('../../control-plane/src/tools/crm.ts',import.meta.url).href);
 const parse=(result:any)=>JSON.parse(result.content.find(c=>c.type==='text').text);
 async function setup(owner:string,store:any){
  const scoped=tenantStore(store,owner),events=new Events();

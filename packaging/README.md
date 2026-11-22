@@ -11,8 +11,8 @@ gates pass. Dependencies, model weights and VM images are not bundled.
 - `dashboard/`: Node 22 (the upstream manifest caps support at 22), `npm ci`,
   then `npm run build`. Its build invokes the upstream Pyodide fetch script and
   may require network access beyond npm.
-- Dashboard backend declares Python >=3.11,<3.13. CI uses Python 3.11 for syntax
-  compilation only. Native backend dependency installation, startup, migrations,
+- Dashboard backend declares Python >=3.11,<3.13. CI uses Python 3.11 for backend syntax
+  compilation, focused router/privacy tests and the locked NumPy/Arrow ABI pair. Native backend dependency installation, startup, migrations,
   integration tests and VM execution are separate release gates.
 - Dashboard Python dependencies include unpinned entries; no fully reproducible
   Python runtime environment is claimed. Node major versions are deliberately
@@ -73,10 +73,12 @@ The actual deployment installs `dashboard/backend/requirements.txt`; it differs
 from the upstream `pyproject.toml`, so these locks use that requirements file.
 `lock_backend.py` targets Python 3.11 separately for Windows x64, Linux x64,
 macOS x64 and macOS ARM64. It uses uv, pins every resolved package and emits
-package SHA256 hashes plus source/lock SHA256 metadata. Requirements changes
+package SHA256 hashes plus source/lock SHA256 metadata (canonical LF line endings). Requirements changes
 invalidate the lock check. Resolution is not proof of native wheel availability,
 successful installation, startup, or compatibility with system libraries.
-These locks have not yet replaced the installer's requirements input.
+The native installer now consumes these locks with hash enforcement and freshness
+checks. Its Windows backend hash-lock install passed in AgentX5 validation;
+Linux/macOS native installation and the Compose dependency path remain unverified.
 
 ```text
 python packaging/lock_backend.py windows-x64
@@ -91,3 +93,28 @@ version. Run targets sequentially when sharing a cache, or pass a distinct
 `--cache-dir` for concurrent work. Lock generation has a 30-minute timeout and
 promotes its temporary output only on success. Full runtime reproducibility also
 requires pinned OS libraries, Python builds, model assets and container bases.
+
+## Verified local execution and CI findings
+
+Windows validation completed: platform clean npm install, all workspace builds,
+and 483 passing tests (two source-declared Docker-dependent skips); dashboard
+Node 22 clean install and full production build including setup and local VM UI;
+nine packaging tests; four backend hash locks and freshness checks; NumPy/Arrow
+array and Parquet roundtrip. The generated dashboard build is for local review.
+
+The first hosted matrix exposed missing video-engine Python/FFmpeg prerequisites,
+Linux's optional ONNX CUDA download failure, and a macOS frontend heap limit.
+The workflow now installs the pinned video requirements in its separate platform
+job, installs FFmpeg, selects that Python explicitly, retains CPU ONNX inference,
+and gives frontend compilation a 6144 MB heap. The next hosted execution must
+validate these fixes. Upstream Svelte warnings remain, including an undefined
+createModelTag in ManageOllama; successful bundling does not establish that feature.
+
+Backend NumPy 1.26.4 and PyArrow 21.0.0 are pinned in both dependency entry points.
+PyArrow 26's undeclared runtime NumPy >=2 requirement caused a real startup import
+failure despite successful dependency resolution. The replacement pair passed
+local ABI tests and the native installer owner's datasets import test. CI runs
+`backend_abi_smoke.py --install` against only the hash-locked binary wheels in a
+separate environment. Video-engine NumPy 2.4.4 belongs in its own runtime.
+
+Reference for the selected ABI pair: [Arrow 21 installation dependencies](https://arrow.apache.org/docs/21.0/python/install.html#dependencies).

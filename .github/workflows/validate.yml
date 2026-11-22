@@ -12,17 +12,29 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-2025, macos-15]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           persist-credentials: false
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        id: python
         with:
           python-version: '3.11'
       - name: Verify archive integrity and exclusion rules
         run: python -m unittest discover -s packaging -p "test_*.py" -v
       - name: Check backend environment lock freshness
         run: python packaging/check_backend_locks.py
+      - name: Check actual private filesystem boundaries
+        run: python -m unittest discover -s dashboard/backend/tests -p test_private_storage.py -v
+      - name: Check first-owner onboarding boundaries
+        run: python -m unittest discover -s onboarding -p test_first_run.py -v
+      - name: Install bounded VM router test dependencies
+        run: python -m pip install --disable-pip-version-check fastapi==0.115.7 httpx==0.28.1 pydantic==2.10.6
+      - name: Check VM protocol, image, console, adapter and authorization logic
+        run: python -m unittest discover -s runtime/tests -p "test_*.py" -v
+      - name: Verify hash-locked backend NumPy and Arrow ABI
+        run: python packaging/backend_abi_smoke.py --install
   build:
     strategy:
       fail-fast: false
@@ -38,18 +50,37 @@ jobs:
     timeout-minutes: 45
     env:
       CYPRESS_INSTALL_BINARY: '0'
+      ONNXRUNTIME_NODE_INSTALL_CUDA: skip
+      NODE_OPTIONS: --max-old-space-size=6144
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           persist-credentials: false
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        id: python
         with:
           python-version: '3.11'
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: ${{ matrix.node }}
           package-manager-cache: false
+      - name: Install isolated video-engine Python dependencies
+        if: matrix.component == 'platform'
+        run: python -m pip install --disable-pip-version-check -r platform/video-engine/requirements.txt
+      - name: Install FFmpeg on Linux
+        if: matrix.component == 'platform' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Install FFmpeg on macOS
+        if: matrix.component == 'platform' && runner.os == 'macOS'
+        run: brew install ffmpeg
+      - name: Install FFmpeg on Windows
+        if: matrix.component == 'platform' && runner.os == 'Windows'
+        run: choco install ffmpeg --no-progress --yes
       - name: Install locked dependencies and run manifest build
+        env:
+          PYTHON_BIN: ${{ steps.python.outputs.python-path }}
         run: python packaging/build_component.py ${{ matrix.component }} ${{ matrix.component == 'platform' && '--test' || '' }}
       - name: Compile dashboard Python source without importing or starting services
         if: matrix.component == 'dashboard'

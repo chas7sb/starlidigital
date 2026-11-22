@@ -1,0 +1,29 @@
+{
+  "status": "source-restored-with-targeted-runtime-validation",
+  "countsExcludingInstalledDependenciesAndCaches": {
+    "computer-broker": 5,
+    "openpencil": 5857,
+    "mission-control": 366,
+    "search": 759,
+    "starli-runtime": 36
+  },
+  "archiveSha256": "8bb72fdbe45f23db9b8a7156c42fa1905f980af414bf87325e9e6907b26527e7",
+  "starliRuntimeArchiveSha256": "a73ef09b57924a47958649d4b9c1c8f43bb0908a81b11426f580cce4ee6c6715",
+  "validated": [
+    "Windows Pi catalog42providers1712models without credentials",
+    "Native runtime Node tests15/15",
+    "Windows stdlib concurrent lock tests3/3",
+    "Windows shared privacy and actual empty-vault helper tests3/3",
+    "Windows OpenPencil gateway auth/save/path checks",
+    "Linux MissionControl fresh-state startup and unauthenticated denial",
+    "Search failclosed defaults and unique key setup"
+  ],
+  "notValidated": [
+    "Live provider OAuth/inference",
+    "Complete dashboard feature parity",
+    "Full OpenPencil frontend build/MCP session",
+    "Full computer enrollment/VM workflow",
+    "Live search requests",
+    "macOS execution"
+  ]
+}

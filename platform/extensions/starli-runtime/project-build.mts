@@ -3,8 +3,9 @@ import {createInterface} from 'node:readline';
 import {createRequire} from 'node:module';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-const trustedRoot='/srv/starlidigital/current';
-const require=createRequire(trustedRoot+'/package.json');
+import {fileURLToPath} from 'node:url';
+const trustedRoot=fileURLToPath(new URL('.',import.meta.url)).replace(/[\\/]$/,'');
+const require=createRequire(import.meta.url);
 const esbuild=require('esbuild');
 const lines=createInterface({input:process.stdin,crlfDelay:Infinity})[Symbol.asyncIterator]();
 const first=await lines.next();if(first.done)throw Error('SOURCE_SNAPSHOT_REQUIRED');
@@ -107,10 +108,10 @@ function csp(){return "default-src 'none'; script-src 'unsafe-inline' blob:; sty
 function safeHtml(html:string){return html.replace(/<meta\b[^>]*http-equiv\s*=\s*["']?content-security-policy["']?[^>]*>/gi,'').replace(/<head\b[^>]*>/i,m=>m+'<meta http-equiv="Content-Security-Policy" content="'+csp()+'"><meta name="robots" content="noindex,nofollow">');}
 async function cssCompile(css:string){
  if(!/@theme|@apply|@import|@tailwind/.test(css)&&![...files.values()].some(f=>/className\s*=/.test(f.content)))return css;
- const tailwindRequire=createRequire('/srv/starlidigital/webui-current/package.json');
+ const tailwindRequire=createRequire(import.meta.url);
  const {compile}=tailwindRequire('tailwindcss');
- const theme=await readFile('/srv/starlidigital/webui-current/node_modules/tailwindcss/theme.css','utf8');
- const preflight=await readFile('/srv/starlidigital/webui-current/node_modules/tailwindcss/preflight.css','utf8');
+ const theme=await readFile(tailwindRequire.resolve('tailwindcss/theme.css'),'utf8');
+ const preflight=await readFile(tailwindRequire.resolve('tailwindcss/preflight.css'),'utf8');
  const source=theme+'\n'+preflight+'\n@tailwind utilities;\n'+css.replace(/@import\s+["']tailwindcss[^"']*["'];?/g,'').replace(/@tailwind\s+[^;]+;/g,'');
  const compiler=await compile(source,{loadModule:async()=>{throw Error('Preview plugins are disabled')},loadStylesheet:async()=>{throw Error('External CSS imports require a bundled local file')}});
  const candidates=new Set<string>();

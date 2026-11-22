@@ -22,7 +22,7 @@ async function tenantInference(prompt:string,messages:any[],images:any[],signal:
  for(let attempt=0;attempt<3;attempt++){
   const result:any=await new Promise((resolve,reject)=>{
    const helper=fileURLToPath(new URL('./provider-infer.py',import.meta.url));
-   const child=spawn('/opt/starlidigital/webui-runtime/bin/python',[helper],{cwd:fileURLToPath(new URL('.',import.meta.url)),detached:true,env:{PATH:process.env.PATH||'/usr/bin:/bin',LANG:'C.UTF-8',STARLI_PROVIDER_OWNER:owner||'',STARLI_STATE_DIR:state},stdio:['pipe','pipe','ignore']});
+   const child=spawn(process.env.STARLI_PYTHON_BIN||'python',[helper],{cwd:fileURLToPath(new URL('.',import.meta.url)),detached:true,env:{PATH:process.env.PATH||'/usr/bin:/bin',LANG:'C.UTF-8',STARLI_PROVIDER_OWNER:owner||'',STARLI_STATE_DIR:state,...Object.fromEntries(['STARLI_NODE_BIN','STARLI_PI_MODULE_PATH','STARLI_MANAGED_ENV_FILE','STARLI_DASHBOARD_ROOT'].filter(k=>process.env[k]).map(k=>[k,process.env[k]!]))},stdio:['pipe','pipe','ignore']});
    let output='',settled=false;
    const kill=()=>{if(child.pid){try{process.kill(-child.pid,'SIGTERM');}catch{child.kill('SIGTERM');}}};
    const abort=()=>{kill();finish(undefined,signal.reason||Error('ABORTED'));};
@@ -66,7 +66,7 @@ export type PiSession={
 export type PiFactory=(model:string,signal:AbortSignal)=>Promise<PiSession>;
 
 export async function createPiXaiSession(model:string,signal:AbortSignal):Promise<PiSession>{
- const modulePath=process.env.STARLI_PI_MODULE_PATH||'/srv/starlidigital/mcp-workspace/codex-runtime/node_modules/@earendil-works/pi-coding-agent/dist/index.js';
+ const modulePath=process.env.STARLI_PI_MODULE_PATH||import.meta.resolve('@earendil-works/pi-coding-agent');
  const pi:any=await import(modulePath);
  const agentDir=process.env.PI_CODING_AGENT_DIR||join(homedir(),'.pi','agent');
  const runtime=await pi.ModelRuntime.create({authPath:join(agentDir,'auth.json'),modelsPath:join(agentDir,'models.json'),allowModelNetwork:false,signal});

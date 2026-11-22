@@ -34,6 +34,12 @@ class AdapterTests(unittest.TestCase):
             (state/'process.json').write_text(json.dumps({'name':'other-service','qmp_port':4120}))
             with patch.object(adapter, 'ROOT', root), patch.object(adapter.vm, 'STATE', state):
                 with self.assertRaises(adapter.Unavailable): adapter.status()
+    def test_canonical_tracking_uuid_is_accepted(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); state = root / 'state'; state.mkdir()
+            (state/'process.json').write_text(json.dumps({'name':'starlidigital-4cae0f4e-fd9a-44d2-b72f-51128c105229','qmp_port':54321}))
+            with patch.object(adapter, 'ROOT', root), patch.object(adapter.vm, 'STATE', state), patch.object(adapter.vm, 'status', return_value={'state':'running','accel':'whpx'}):
+                self.assertEqual(adapter.status()['state'],'running')
     def test_lifecycle_refuses_disk_paths_outside_fixed_guest_disk(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); state = root / 'state'; state.mkdir()

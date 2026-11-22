@@ -45,8 +45,9 @@ for path, mode, oid, stage in entries:
     if path in targets:
         text = content.decode('utf-8')
         targeted[path] = {'oid': oid, 'sha256': digest, 'working_tree_matches_index': Path(path).exists() and hashlib.sha256(Path(path).read_bytes()).hexdigest() == digest,
-                          'recovery_fallback': 'ADMIN_RECOVERY_EMAIL||' in text or 'ADMIN_RECOVERY_EMAIL ||' in text,
-                          'upstream_mailbox_literal_lines': [i for i, s in enumerate(text.splitlines(), 1) if '@starlidigital.ro' in s and ('imapUser' in s or 'email:' in s or 'user:' in s)]}
+                          'working_tree_matches_index_ignoring_crlf': Path(path).exists() and Path(path).read_bytes().replace(b'\r\n', b'\n') == content.replace(b'\r\n', b'\n'),
+                          'recovery_fallback_nonempty_literal': any(bool(m.group(2)) for m in re.finditer(r'''recoveryEmail\s*:\s*process\.env\.ADMIN_RECOVERY_EMAIL\s*\|\|\s*(["'])(.*?)\1''', text)),
+                          'upstream_mailbox_literal_lines': [i for i, s in enumerate(text.splitlines(), 1) if '@starlidigital.ro' in s and ('imapUser' in s or ('email:' in s and 'recoveryEmail:' not in s) or 'user:' in s)]}
     if size > 2_000_000 or b'\x00' in content:
         skipped.append({'path': path, 'type': 'oversize-or-binary'})
         continue
@@ -65,6 +66,7 @@ pipe.stdin.close()
 pipe.wait()
 snapshot = hashlib.sha256(raw).hexdigest()
 report = {'schema': 1, 'date': '2026-11-22', 'index_entry_count': len(entries), 'index_listing_sha256': snapshot,
+          'index_unchanged_during_scan': raw == subprocess.check_output(['git', 'ls-files', '--stage', '-z']),
           'scope': 'staged Git blob bytes only; no network validity checks; binary/large files require asset review',
           'target_verification': targeted, 'findings': findings, 'skipped': skipped, 'blobs': hashes}
 Path('security/index-audit.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

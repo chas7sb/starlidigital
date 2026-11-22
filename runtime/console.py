@@ -38,6 +38,9 @@ def vnc():
         sock.sendall(b'\x01')
         header = receive(sock, 24)
         receive(sock, struct.unpack('!I', header[20:24])[0])
+        # QEMU initializes per-client absolute pointer mode in SetEncodings.
+        # Without this normal RFB handshake step it treats clicks as relative.
+        sock.sendall(struct.pack('!BBHi', 2, 0, 1, 0))
         yield sock, struct.unpack('!HH', header[:4])
 
 def type_text(text):

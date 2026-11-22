@@ -10,7 +10,7 @@ The inspected backend manifest requires Node.js 24 or later. The separate dashbo
 
 ## Onboarding sequence
 
-An implementation is now available in `onboarding/README.md`: trusted local first-owner and company setup, fresh private state, native start, and actual authenticated checks. Run it with the installed dashboard Python after dependency installation completes. Then use the dashboard `/setup` page to configure a provider/model. Full HTTP integration validation is still pending; helper unit checks and actual isolated Node/company model checks have passed. The public signup endpoint intentionally refuses zero-user bootstrap.
+An implementation is now available in `onboarding/README.md`: trusted local first-owner and company setup, fresh private state, native start, and actual authenticated checks. Run it with the installed dashboard Python after dependency installation completes. Then use the dashboard `/setup` page to configure a provider/model. Actual disposable first-owner/company creation and migrations have passed. Full HTTP integration currently reaches a Windows-incompatible `fcntl` import in the memory store during dashboard startup; the earlier account-MCP ACL gate has been fixed. Helper tests do not override source gates. The public signup endpoint intentionally refuses zero-user bootstrap.
 
 1. Obtain a complete sanitized source archive with its dependency lockfiles and required upstream notices. Confirm the archive includes the dashboard and its Python API, not only the older `web` workspace.
 2. Follow the integrated packaging instructions to install dependencies and build each runtime. Upstream commands below are evidence for maintainers, not a tested installation recipe.

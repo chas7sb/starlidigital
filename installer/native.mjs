@@ -35,6 +35,7 @@ function node22() {
 }
 function envFor(node) { return { ...process.env, PATH: dirname(node) + delimiter + process.env.PATH }; }
 function python() { return join(cache, 'python', win ? 'Scripts/python.exe' : 'bin/python'); }
+function videoPython() { return join(cache, 'video-python', win ? 'Scripts/python.exe' : 'bin/python'); }
 function backendLock() {
   const os = { win32: 'windows', darwin: 'macos', linux: 'linux' }[process.platform];
   const lock = join(root, 'packaging/locks', `dashboard-${os}-${process.arch}-py311.txt`);
@@ -49,14 +50,14 @@ function dashboardEnv() {
   if (!existsSync(local)) writeFileSync(local, `WEBUI_SECRET_KEY=${randomBytes(48).toString('hex')}\n`, { flag: 'wx', mode: 0o600 });
   const key = readFileSync(local, 'utf8').split(/\r?\n/).find(l => l.startsWith('WEBUI_SECRET_KEY='))?.slice(17);
   if (!key) throw new Error('installer/local.env lacks WEBUI_SECRET_KEY; restore the local configuration.');
-  const data = join(cache, 'dashboard-data');
+  const data = resolve(root, process.env.DATA_DIR || join(cache, 'dashboard-data'));
   mkdirSync(data, { recursive: true });
   return { WEBUI_SECRET_KEY: key, WEBUI_AUTH: 'true', ENABLE_PERSISTENT_CONFIG: 'false',
     ENABLE_SIGNUP: 'false', ENABLE_OPENAI_API: 'false', ENABLE_OLLAMA_API: 'false',
     ENABLE_COMMUNITY_SHARING: 'false', ENABLE_VERSION_UPDATE_CHECK: 'false', OFFLINE_MODE: 'true', ANONYMIZED_TELEMETRY: 'false', STARLI_LOCAL_VM_ENABLED: '1',
     CORS_ALLOW_ORIGIN: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'};http://127.0.0.1:${process.env.STARLI_DASHBOARD_PORT || '8080'}`,
-    HF_HUB_OFFLINE: '1', STARLI_COMPANY_MESSAGING_ENABLED: 'false',
-    DATA_DIR: data, STARLI_NODE_BINARY: node24(), STARLI_PLATFORM_ORIGIN: `http://127.0.0.1:${process.env.PORT || '4100'}`, STARLI_CONTROL_PLANE_ORIGIN: 'http://127.0.0.1:4120',
+    HF_HUB_OFFLINE: '1', STARLI_COMPANY_MESSAGING_ENABLED: '1',
+    DATA_DIR: data, STARLI_NODE_BINARY: node24(), STARLI_NODE_BIN: node24(), STARLI_PYTHON_BIN: python(), STARLI_PLATFORM_ORIGIN: `http://127.0.0.1:${process.env.PORT || '4100'}`, STARLI_CONTROL_PLANE_ORIGIN: 'http://127.0.0.1:4120',
     STARLI_PUBLIC_ORIGIN: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'}`, WEBUI_URL: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'}`,
     STARLI_STATE_DIR: join(data, 'starli-state'), STARLI_TASK_HOME: join(data, 'tasks'),
     STARLI_SOURCE_DATABASE: join(root, 'platform/server/data/starli.sqlite'),
@@ -121,10 +122,27 @@ try {
     const components = target === 'all' ? ['platform', 'dashboard'] : [target];
     const selected = components.map(component => ({ component, dir: source(component), node: component === 'platform' ? node24() : node22() }));
     for (const { component, dir, node } of selected) {
-      const env = envFor(node);
-      if (action === 'doctor') { run(node, ['--version']); run(node, [npm(node), '--version']); }
+      const env = { ...(component === 'dashboard' ? { ONNXRUNTIME_NODE_INSTALL_CUDA: 'skip', CYPRESS_INSTALL_BINARY: '0', NODE_OPTIONS: '--max-old-space-size=6144' } : {}), ...envFor(node) };
+      if (action === 'doctor') {
+        run(node, ['--version']); run(node, [npm(node), '--version']);
+        const py = component === 'platform' ? videoPython() : python();
+        if (!existsSync(py)) throw new Error(`${component} Python environment missing; run install ${component}.`);
+        run(py, ['-c', component === 'platform' ? 'import PIL,numpy,cv2,edge_tts; print("Video Python dependencies import successfully")' : 'import fastapi,pyarrow,numpy; print("Dashboard Python dependencies import successfully")']);
+        if (component === 'platform') {
+          const result = spawnSync('ffmpeg', ['-version'], { stdio: 'ignore', timeout: 10000, windowsHide: true });
+          if (result.error || result.status !== 0) throw new Error('ffmpeg is unavailable; install it and add its executable directory to PATH.');
+          console.log('ffmpeg: available');
+        }
+      }
       if (['install', 'install-backend', 'install-frontend'].includes(action)) {
         if (action !== 'install-backend') run(node, [npm(node), 'ci', '--include=dev'], dir, env);
+        if (component === 'platform' && action === 'install') {
+          const runtime = join(dir, 'extensions/starli-runtime');
+          if (!existsSync(join(runtime, 'package-lock.json'))) throw new Error('Restored provider runtime lockfile is missing.');
+          run(node, [npm(node), 'ci', '--include=dev'], runtime, env);
+          if (!existsSync(videoPython())) run('uv', ['venv', '--python', '3.11', join(cache, 'video-python')]);
+          run('uv', ['pip', 'install', '--python', videoPython(), '-r', join(dir, 'video-engine/requirements.txt')]);
+        }
         if (component === 'dashboard' && action !== 'install-frontend') {
           if (!existsSync(python())) run('uv', ['venv', '--python', '3.11', join(cache, 'python')]);
           run('uv', ['pip', 'install', '--python', python(), '--require-hashes', '-r', backendLock()]);
@@ -136,7 +154,12 @@ try {
         const params = component === 'platform' ? [npm(node), 'run', 'start'] : ['-m', 'uvicorn', 'workspace_entry:app', '--host', '127.0.0.1', '--port', process.env.STARLI_DASHBOARD_PORT || '8080'];
         if (!existsSync(command)) throw new Error(`Runtime missing: ${command}. Run install.`);
         const childEnv = { ...(component === 'dashboard' ? dashboardEnv() : {}), ...env, HOST: '127.0.0.1' };
-        if (component === 'dashboard') childEnv.DATABASE_URL = process.env.STARLI_DASHBOARD_DATABASE_URL || 'sqlite:///' + join(cache, 'dashboard-data/webui.db').replaceAll('\\', '/');
+        if (component === 'platform') childEnv.PYTHON_BIN = process.env.STARLI_VIDEO_PYTHON || videoPython();
+        if (component === 'dashboard') {
+          childEnv.DATABASE_URL = process.env.STARLI_DASHBOARD_DATABASE_URL || 'sqlite:///' + join(process.env.DATA_DIR || join(cache, 'dashboard-data'), 'webui.db').replaceAll('\\', '/');
+          childEnv.PYTHONUTF8 = '1';
+          childEnv.PYTHONIOENCODING = 'utf-8';
+        }
         const child = spawn(command, params, { cwd: component === 'platform' ? dir : join(dir, 'backend'), env: childEnv, stdio: 'inherit', windowsHide: true, detached: !win });
         children.push(child);
         child.on('error', e => { console.error(e.message); stop(); process.exitCode = 1; });

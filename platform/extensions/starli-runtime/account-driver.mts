@@ -2,7 +2,7 @@
 import {isDeepStrictEqual} from 'node:util';
 import {modelFetchDeadline} from './model-fetch-deadline.mts';
 
-const SDK = '/srv/starlidigital/mcp-workspace/codex-runtime/node_modules/@earendil-works/pi-coding-agent/dist/index.js';
+const SDK = process.env.STARLI_PI_MODULE_PATH || import.meta.resolve('@earendil-works/pi-coding-agent');
 
 type Selection = {
 	provider: string;

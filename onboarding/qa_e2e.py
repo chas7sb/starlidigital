@@ -21,12 +21,12 @@ def execute():
         m.input = lambda prompt: next(values)
         m.getpass.getpass = lambda prompt: credentials['password']
         m.sys.stdin = types.SimpleNamespace(isatty=lambda: True)
-        m.setup(types.SimpleNamespace(dashboard='http://127.0.0.1:18980', platform='http://127.0.0.1:18981'))
+        m.setup(types.SimpleNamespace(dashboard='http://127.0.0.1:18280', platform='http://127.0.0.1:18281'))
         return 0
     m.LOCAL = m.ROOT / 'work' / ('onboarding-e2e-' + secrets.token_hex(6)); m.CONFIG = m.LOCAL / 'setup.json'
     credentials = {'email': 'owner@example.invalid', 'password': secrets.token_urlsafe(24)}
     m.private_write(m.LOCAL / 'qa-credentials.json', credentials)
-    m.stopped('http://127.0.0.1:18980'); m.stopped('http://127.0.0.1:18981')
+    m.stopped('http://127.0.0.1:18280'); m.stopped('http://127.0.0.1:18281')
     creationflags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
     with (m.LOCAL / 'bootstrap.log').open('w') as log:
         result = subprocess.run([sys.executable, __file__, '--bootstrap', str(m.LOCAL)], stdout=log, stderr=log, creationflags=creationflags)
@@ -38,7 +38,7 @@ def execute():
     try:
         for label, command, cwd in [
             ('platform', [os.getenv('STARLI_NODE24', 'node'), '--import', 'tsx', 'server/src/index.ts'], m.ROOT / 'platform'),
-            ('dashboard', [sys.executable, '-m', 'uvicorn', 'workspace_entry:app', '--host', '127.0.0.1', '--port', '18980'], m.ROOT / 'dashboard/backend')]:
+            ('dashboard', [sys.executable, '-m', 'uvicorn', 'workspace_entry:app', '--host', '127.0.0.1', '--port', '18280'], m.ROOT / 'dashboard/backend')]:
             stream = (m.LOCAL / (label + '.log')).open('w'); logs.append(stream)
             children.append(subprocess.Popen(command, cwd=cwd, env=env, stdout=stream, stderr=stream, creationflags=creationflags))
         deadline = time.monotonic() + 180
@@ -78,8 +78,29 @@ def execute():
         else:
             raise RuntimeError('Unauthenticated administrator request succeeded')
         print('PASS: fresh owner/company, two service health checks, real sign-in, admin binding, customer identity, company list/owner authority, unauthenticated denial')
+        vm_result = {'passed': False}
+        try:
+            status = m.request(config['dashboard'], '/api/v1/starli/local-vm/status', token=token)
+            if status.get('enabled') is not True:
+                raise RuntimeError('Local VM owner bridge disabled')
+            frame = m.request(config['dashboard'], '/api/v1/starli/local-vm/frame', token=token, raw=True)
+            if frame['content_type'] != 'image/png' or not frame['data'].startswith(b'\x89PNG\r\n\x1a\n'):
+                raise RuntimeError('VM frame did not return a PNG')
+            (m.LOCAL / 'vm-frame.png').write_bytes(frame['data'])
+            vm_result = {'passed': True, 'frame_bytes': len(frame['data'])}
+            print('PASS: authenticated same-origin VM status and PNG frame; no guest control sent')
+        except Exception as error:
+            print('VM read check failed: ' + str(error))
+            vm_result['error'] = str(error)
+        m.private_write(m.LOCAL / 'qa-result.json', {'core_passed': True, 'vm': vm_result})
         print('Private disposable artifacts: ' + str(m.LOCAL))
-        return 0
+        if '--serve' in sys.argv:
+            m.private_write(m.LOCAL / 'qa-processes.json', {'supervisor': os.getpid(), 'children': [child.pid for child in children]})
+            print('READY for visual QA: ' + config['dashboard'] + '/setup', flush=True)
+            while all(child.poll() is None for child in children):
+                time.sleep(1)
+            raise RuntimeError('A QA service exited during visual handoff')
+        return 0 if vm_result['passed'] else 1
     except Exception as error:
         print('FAIL: ' + str(error) + '; private artifacts: ' + str(m.LOCAL))
         return 1

@@ -1,5 +1,7 @@
 # AgentX 4 — isolated VM runtime
 
+GUI INPUT PASSED: Openbox+Firefox160 now running as locked non-root operator on persistent disk. Screenshot runtime/state/browser-input-verified.png shows rendered HTML and text "Verified AaZz :<>?" entered after actual pointer click. IMPORTANT bridge fix: QEMU requires RFB SetEncodings after ServerInit to initialize per-client absolute pointer mode. Added `sock.sendall(struct.pack('!BBHi',2,0,1,0))` after header/name read in console.py vnc(); before this clicks remained at old cursor. Bridge _vnc currently omits this and needs same step. Official QEMU ui/vnc.c set_encodings invokes check_pointer_type_change. Current bridge-uppercase note below also applies. Proceeding to graceful ACPI stop/restart verification.
+
 Ownership: `runtime/` and `docs/runtime.md` (plus this coordination note).
 
 Implemented standard-library Python QEMU lifecycle with doctor/init/start/status/stop, identity-checked QMP, loopback VNC and serial, state lock, no mounts/clipboard/passthrough, default network off. Explicit WHPX/KVM/HVF accelerator selection, explicit opt-in TCG. Added basic screenshot/keyboard bridge. Three protocol/boundary tests pass.

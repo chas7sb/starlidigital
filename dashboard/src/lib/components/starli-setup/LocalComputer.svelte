@@ -11,7 +11,7 @@
  const base = '/api/v1/starli/local-vm';
  const keys = ['Enter', 'Tab', 'Escape', 'Backspace', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'];
  let account = '';
- $: if (account !== ($user?.id || '')) { account = $user?.id || ''; epoch++; controller?.abort(); pending = false; state = null; clearFrame(); error = ''; }
+ $: if (account !== ($user?.id || '')) { account = $user?.id || ''; epoch++; controller?.abort(); pending = false; state = null; clearFrame(); text = ''; error = ''; }
  function clearFrame() { if (frame) URL.revokeObjectURL(frame); frame = ''; }
  async function request(path: string, body?: any) {
   const token = localStorage.token;
@@ -47,7 +47,7 @@
   const box = image.getBoundingClientRect();
   run('input', { kind: 'pointer', x: Math.floor((event.clientX - box.left) * image.naturalWidth / box.width), y: Math.floor((event.clientY - box.top) * image.naturalHeight / box.height), button: 'left' });
  }
- async function sendText() { const value = text; text = ''; await run('input', { kind: 'text', text: value }); }
+ async function sendText() { const value = text; await run('input', { kind: 'text', text: value }); if (!error && text === value) text = ''; }
  onMount(() => { if ($user?.role === 'admin') run(); });
  onDestroy(() => { epoch++; controller?.abort(); clearFrame(); });
 </script>

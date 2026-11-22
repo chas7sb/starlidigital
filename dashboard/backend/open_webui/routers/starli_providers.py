@@ -1,6 +1,7 @@
 """Per-account Pi providers. Credentials are encrypted at rest and never returned to browsers."""
 from __future__ import annotations
 import starli_portable as _portable
+from starli_private_fs import ensure_private_directory, ensure_private_file, create_private_file, require_private_file
 import asyncio,hashlib,json,os,secrets,sqlite3,time,uuid
 from contextlib import contextmanager
 from pathlib import Path
@@ -24,29 +25,34 @@ def owner(user):
     return uid
 
 def root():
-    p=state_dir()/"providers";p.mkdir(parents=True,exist_ok=True,mode=0o700)
-    if p.is_symlink():raise HTTPException(503,"Provider storage unavailable")
-    p.chmod(0o700);return p
+    p=state_dir()/"providers"
+    try:ensure_private_directory(p)
+    except OSError:raise HTTPException(503,"Provider storage unavailable: owner-private permissions required") from None
+    return p
 
 def cipher():
     p=root()/"master.key"
-    if not p.exists():
-        try:
-            fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
-            with os.fdopen(fd,"wb") as f:f.write(Fernet.generate_key())
-        except FileExistsError:pass
-    info=p.lstat()
-    if p.is_symlink() or info.st_mode&0o077 or info.st_size!=44:raise HTTPException(503,"Provider vault unavailable")
-    return Fernet(p.read_bytes())
+    try:
+        if not p.exists():
+            try:create_private_file(p,Fernet.generate_key())
+            except FileExistsError:pass
+        require_private_file(p)
+        if p.stat().st_size!=44:raise ValueError()
+        return Fernet(p.read_bytes())
+    except (OSError,ValueError):raise HTTPException(503,"Provider vault unavailable") from None
 
 @contextmanager
 def database():
-    p=root()/"accounts.sqlite";c=sqlite3.connect(p,timeout=10)
-    p.chmod(0o600);c.execute("PRAGMA busy_timeout=10000")
+    p=root()/"accounts.sqlite"
+    try:ensure_private_file(p)
+    except OSError:raise HTTPException(503,"Provider storage unavailable: owner-private permissions required") from None
+    c=sqlite3.connect(p,timeout=10)
+    c.execute("PRAGMA busy_timeout=10000")
     c.execute("CREATE TABLE IF NOT EXISTS accounts(owner TEXT PRIMARY KEY,sealed BLOB NOT NULL,updated REAL NOT NULL)")
     try:
         with c:yield c
     finally:c.close()
+
 
 def account(uid):
     with database() as c:row=c.execute("SELECT sealed FROM accounts WHERE owner=?",(uid,)).fetchone()
@@ -63,7 +69,9 @@ def lock(uid):
     return _LOCKS[uid]
 
 def environment(uid):
-    home=root()/"homes"/hashlib.sha256(uid.encode()).hexdigest();home.mkdir(parents=True,exist_ok=True,mode=0o700)
+    home=root()/"homes"/hashlib.sha256(uid.encode()).hexdigest()
+    try:ensure_private_directory(home)
+    except OSError:raise HTTPException(503,"Provider home unavailable") from None
     # Do not inherit operator API keys, cloud credentials, proxies or Pi auth files.
     return {"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8","HOME":str(home)}
 

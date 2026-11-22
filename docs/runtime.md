@@ -1,6 +1,6 @@
 # Isolated Linux computer runtime
 
-The runtime uses QEMU system virtualization, not a privileged container. The Python 3.10+ launcher has no third-party Python dependencies. It selects WHPX on Windows, KVM on Linux, and HVF on Intel macOS. Hardware acceleration never silently falls back. `--accel tcg` explicitly selects QEMU software emulation and is slower; this is also the current x86 guest route on Apple Silicon. An accelerated native ARM guest is not implemented.
+The runtime uses QEMU system virtualization, not a privileged container. The Python 3.10+ launcher has no third-party Python dependencies. It selects WHPX on Windows, KVM on Linux, and HVF on Intel macOS. Hardware acceleration never silently falls back. `--accel tcg` explicitly selects QEMU software emulation and is slower; this is also the current x86 guest route on ARM hosts, including Apple Silicon. An accelerated native ARM guest is not implemented.
 
 ## Host installation
 
@@ -18,7 +18,7 @@ python runtime/vm.py status
 python runtime/vm.py stop
 ```
 
-On Windows use a full Windows ISO path. If WHPX is unavailable, fix the host prerequisite or deliberately initialize with `--accel tcg`. On Linux, `/dev/kvm` must be accessible to the current user. On Intel macOS use HVF; on Apple Silicon use `--accel tcg` for this x86-only implementation. Linux and macOS execution have not been tested in this Windows session.
+On Windows use a full Windows ISO path. If WHPX is unavailable, fix the host prerequisite or deliberately initialize with `--accel tcg`. On x86 Linux, `/dev/kvm` must be accessible to the current user. On Intel macOS use HVF. On ARM hosts use `--accel tcg` for this x86-only implementation. Linux and macOS execution have not been tested in this Windows session.
 
 Connect a VNC client to `127.0.0.1:5901` to complete OS installation. `init` creates a blank qcow2 disk; it does not claim to install Linux. After installation, stop the VM and set `iso` to `null` in `runtime/state/config.json` to boot from disk. The `-no-reboot` launch policy exits QEMU when the guest reboots, rather than accidentally booting the installer again. Inspect process state before removing stale `process.json` after such an exit. No automatic disk deletion/reset exists.
 
@@ -54,7 +54,9 @@ The Windows host reported an existing hypervisor and HypervisorPlatform enabled,
 
 Installed QEMU 11.1.0 from the Windows distributor linked by qemu.org into the ignored `runtime/vendor/qemu` directory, verifying the download against the distributor's SHA-512 checksum. Alpine Linux 3.24.4 virt x86_64 ISO was downloaded from the official Alpine CDN and verified against its SHA-256 file. Verified digest values and local launch evidence are in `runtime/validation.json`.
 
-Created a real guest with WHPX, 2 vCPUs, 2048 MiB RAM, and a 12 GiB qcow2 disk. Verified Linux 6.18.60-0-virt boot to login, QMP status/identity, VNC screenshots and keyboard input. Forced stop/start was exercised before installing any guest data. All observed listening sockets were loopback. Networking was initially disabled and explicitly enabled as NAT for installing guest desktop packages. Desktop installation and persistent-disk boot are still being validated; do not advertise full browser-agent readiness from the process status.
+Created a real guest with WHPX, 2 vCPUs, 2048 MiB RAM, and a 12 GiB qcow2 disk. Installed Alpine to disk, detached the ISO, and verified kernel 6.18.64-0-virt with `/dev/vda2` as root. Provisioned Openbox, LightDM and Firefox160.0-r0; browser runs as locked non-root `operator`. Verified rendered HTML, mouse focus, mixed-case/punctuation keyboard input, native PNG frames, graceful ACPI stop (QEMU process exited), and automatic desktop/browser return after restart. Evidence screenshots are retained in ignored `runtime/state/browser-input-verified.png` and `desktop-after-restart.png`. All observed host TCP listeners were loopback. Networking was initially disabled and explicitly enabled as NAT for installing guest packages. The launcher still reports process readiness separately from guest readiness.
+
+Two input bugs were caught against the actual guest: uppercase keysyms must retain their case with Shift, and QEMU requires the RFB SetEncodings step to initialize each new client's absolute pointer mode. Both are corrected in `console.py`. Printable US keyboard input is verified; Unicode/layout-specific input is untested. The launcher rejects implicit x86 hardware acceleration on ARM hosts, supports an optional valid persistent `instance_id` as QEMU firmware UUID, and supplies a built-in entropy backend through virtio-rng for new guest starts.
 
 Run the meaningful launcher protocol/boundary checks with:
 
@@ -62,7 +64,7 @@ Run the meaningful launcher protocol/boundary checks with:
 python -m unittest discover -s runtime/tests -v
 ```
 
-Current tests cover the explicit accelerator/no-sharing boundary, loopback VNC/QMP arguments, invalid VNC ports, and QMP response matching in the presence of asynchronous events. No cross-platform boot certification is implied.
+Launcher/console tests cover the explicit accelerator/no-sharing boundary, loopback VNC/QMP arguments, invalid VNC ports, ARM explicit-emulation requirement, persistent UUID, asynchronous QMP response matching, uppercase input regression, and pointer bounds. Additional image/dashboard tests are owned by their integration modules. No cross-platform boot certification is implied.
 
 ## Upstream references
 

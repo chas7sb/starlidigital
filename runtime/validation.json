@@ -24,7 +24,13 @@
     "persistent_kernel_observed": "6.18.64-0-virt",
     "persistent_root_observed": "/dev/vda2",
     "installer_detached": true,
-    "desktop_ready": false,
+    "desktop_ready": true,
+    "desktop": "Openbox with LightDM autologin as locked non-root operator",
+    "browser": "Firefox 160.0-r0",
+    "browser_render_verified": true,
+    "gui_pointer_and_keyboard_verified": true,
+    "graceful_acpi_stop_verified": true,
+    "desktop_after_restart_verified": true,
     "dashboard_agent_connected": false
   },
   "platforms": {"windows": "boot tested", "macos": "not tested", "linux": "not tested"}

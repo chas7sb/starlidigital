@@ -10,11 +10,12 @@
   "scripts": {
     "starli": "node installer/starli.mjs",
     "native": "node installer/native.mjs",
-    "doctor": "node installer/starli.mjs doctor",
-    "setup": "node installer/starli.mjs init",
-    "build": "node installer/starli.mjs install",
-    "start": "node installer/starli.mjs start",
-    "stop": "node installer/starli.mjs stop",
-    "status": "node installer/starli.mjs status"
+    "doctor": "node installer/starli.mjs doctor --native",
+    "setup": "node installer/starli.mjs setup --native",
+    "build": "node installer/starli.mjs build --native",
+    "install:app": "node installer/starli.mjs install --native",
+    "start": "node installer/starli.mjs start --native",
+    "stop": "node installer/starli.mjs stop --native",
+    "status": "node installer/starli.mjs health --native"
   }
 }

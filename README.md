@@ -6,7 +6,7 @@ The existing dashboard source is preserved rather than replaced with a mockup. S
 
 ## Getting started
 
-Read [installation](docs/install.md) and run `npm run doctor` to check prerequisites. `npm run setup` generates fresh local configuration. The application launcher currently supports Docker Compose; consult the installation guide for native runtime progress. The dashboard requires its Python backend as well as its frontend.
+Read [installation](docs/install.md) and run `npm run doctor` to check prerequisites. For a native installation, run `npm run install:app`, `npm run setup`, then `npm start`. Setup prompts privately for the first owner and creates fresh local state. The dashboard requires its Python backend as well as its frontend. Docker Compose is an additional deployment option described in the guide.
 
 Windows, macOS and Linux are installation targets. Platform validation and outstanding requirements are recorded in the installation and [VM runtime](docs/runtime.md) guides. A running application container does not establish that a computer-use VM is ready.
 

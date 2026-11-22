@@ -45,6 +45,7 @@
 
 	let createModelLoading = false;
 	let createModelName = '';
+	let createModelTag = '';
 	let createModelObject = '';
 
 	let createModelDigest = '';
@@ -454,12 +455,11 @@
 			return;
 		}
 
+		const payload = { model: createModelName, ...modelObject };
+		createModelTag = payload.model;
 		const res = await createModel(
 			localStorage.token,
-			{
-				model: createModelName,
-				...modelObject
-			},
+			payload,
 			urlIdx
 		).catch((error) => {
 			toast.error(`${error}`);
@@ -531,6 +531,7 @@
 		createModelLoading = false;
 
 		createModelName = '';
+		createModelTag = '';
 		createModelObject = '';
 		createModelDigest = '';
 		createModelPullProgress = null;

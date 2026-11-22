@@ -1,0 +1,50 @@
+[
+  {
+    "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
+    "index_sha256": "76dd95291db11246d7003b1bd321b4dca09fa4703f819f127bb6c66fcd12c638",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  },
+  {
+    "path": "platform/extensions/mission-control/server/src/index.ts",
+    "index_sha256": "79e078bcd7a02c94b3d0076e419bda96f08b1999f526f1bca89cbcdfb7bffda9",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  },
+  {
+    "path": "platform/extensions/mission-control/server/src/mailbox/service.ts",
+    "index_sha256": "79aefd76f1bb7de7c054abbc3500dd43140f1f8bfa1c3f631a5a2ffc15e8c214",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  },
+  {
+    "path": "platform/extensions/search/source/searx/engines/pexels.py",
+    "index_sha256": "ba0ffab5c0fa6b5e1af28dcb7e78a43254ff7a0745aab03fc141b4f6f05f0ac6",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  },
+  {
+    "path": "platform/extensions/search/source/searx/settings.yml",
+    "index_sha256": "625e01084e4bad88adc627d84a156719a3d8e5bfae9abab169a18b594dc9697f",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  },
+  {
+    "path": "platform/extensions/search/wsgi.py",
+    "index_sha256": "113a71b6ad7efeb73d834c1bb8782bc6ffbb1b88eb405a090fca1ecbd1ae30bd",
+    "manifest_working_hash_matches": true,
+    "index_matches_working_ignoring_crlf": true,
+    "google_key_literal": false,
+    "recovery_fallback_nonempty_literal": false
+  }
+]

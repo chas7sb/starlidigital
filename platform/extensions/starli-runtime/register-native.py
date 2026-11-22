@@ -1,15 +1,16 @@
 from pathlib import Path
-import json
+import json,os
 from open_webui.models.users import Users
 from open_webui.models.tools import Tools,ToolForm,ToolMeta
 from open_webui.models.models import Models,ModelForm,ModelMeta,ModelParams
 from open_webui.utils.tools import get_tool_specs
 from open_webui.routers.starli_native_tools import Tools as NativeTools
-root=Path('/srv/starlidigital/mcp-workspace/starli-ultra-openwebui-v3/preview-runtime')
-login=json.loads((root/'preview-login.json').read_text())
-user=Users.get_user_by_email(login['email'])
-assert user and user.role=='admin'
-content=Path('/srv/starlidigital/mcp-workspace/starli-ultra-openwebui-v3/starli-ultra-fork/backend/open_webui/routers/starli_native_tools.py').read_text()
+email=os.environ.get('STARLI_REGISTER_ADMIN_EMAIL','')
+if not email:raise RuntimeError('STARLI_REGISTER_ADMIN_EMAIL_REQUIRED')
+dashboard=Path(os.environ.get('STARLI_DASHBOARD_ROOT',Path(__file__).resolve().parents[3]/'dashboard'))
+user=Users.get_user_by_email(email)
+if not user or user.role!='admin':raise RuntimeError('LOCAL_ADMIN_REQUIRED')
+content=(dashboard/'backend/open_webui/routers/starli_native_tools.py').read_text()
 specs=get_tool_specs(NativeTools())
 tool_id='starli-platform-native'
 form=ToolForm(id=tool_id,name='Starli Platform',content=content,meta=ToolMeta(description='CRM, platform tools, live browser and Pi delegation'),access_control={})
@@ -22,7 +23,7 @@ assert result
 print(json.dumps({'tool':tool_id,'functions':[s['name'] for s in specs],'model':'starli-ultra','private':True}))
 
 from open_webui.models.functions import Functions,FunctionForm,FunctionMeta
-pipe_content=Path('/srv/starlidigital/mcp-workspace/starli-ultra-openwebui-v3/starli-ultra-fork/scripts/starli-runtime/starli-pi-pipe.py').read_text()
+pipe_content=Path(__file__).with_name('starli-pi-pipe.py').read_text()
 form=FunctionForm(id='starli_pi',name='Starli AI · Pi',content=pipe_content,meta=FunctionMeta(description='Primary Starli Pi runtime with live tools and bounded delegation'))
 if Functions.get_function_by_id('starli_pi'):
  result=Functions.update_function_by_id('starli_pi',form.model_dump())

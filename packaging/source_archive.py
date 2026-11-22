@@ -116,10 +116,10 @@ def write_entry(z, version, name, mode, data):
     info.external_attr = (0o100000 | mode) << 16
     z.writestr(info, data)
 
-def create(root, output, version):
+def create(root, output, version, index_snapshot=None):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', version):
         raise ValueError('Version must contain only letters, numbers, dots, underscores and hyphens')
-    files = checked_paths(root, with_oids=True)
+    files = checked_paths(root, with_oids=True) if index_snapshot is None else index_snapshot
     names = {name for name, _, _ in files}
     required = {'platform/package.json', 'platform/package-lock.json',
                 'dashboard/package.json', 'dashboard/package-lock.json',

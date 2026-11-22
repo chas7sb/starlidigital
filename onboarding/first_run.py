@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import secrets
+import shutil
 import socket
 import sqlite3
 import subprocess
@@ -38,7 +39,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         raise RuntimeError('Redirect refused')
 
-def request(base, path, payload=None, token=None):
+def request(base, path, payload=None, token=None, raw=False):
     headers = {'Content-Type': 'application/json'}
     if token:
         headers['Authorization'] = 'Bearer ' + token
@@ -47,6 +48,11 @@ def request(base, path, payload=None, token=None):
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
     try:
         with opener.open(req, timeout=15) as response:
+            if raw:
+                data = response.read(20 * 1024 * 1024 + 1)
+                if len(data) > 20 * 1024 * 1024:
+                    raise RuntimeError('Response exceeded 20 MiB limit')
+                return {'content_type': response.headers.get_content_type(), 'data': data}
             return json.load(response)
     except urllib.error.HTTPError as error:
         raise RuntimeError(f'{path}: HTTP {error.code}; response omitted to protect credentials') from None
@@ -69,15 +75,19 @@ def environment(config):
     env = dict(os.environ)
     # Explicit fresh data paths override inherited production configuration.
     env.update(WEBUI_SECRET_KEY=config['secret'], WEBUI_AUTH='true', ENABLE_SIGNUP='false', ENABLE_LOGIN_FORM='true',
+        PYTHONIOENCODING='utf-8', PYTHONUTF8='1',
         ENABLE_PERSISTENT_CONFIG='false', DATA_DIR=str(data / 'dashboard'), DATABASE_URL='sqlite:///' + (data / 'dashboard/webui.db').as_posix(),
+        STARLI_DATA_DIR=str(data / 'dashboard'), STARLI_CONFIG_DIR=str(LOCAL / 'config'),
+        STARLI_WORKSPACE_ROOT=str(data / 'workspace'), ASSET_STORAGE_DIR=str(data / 'assets'), VIDEO_STORAGE_DIR=str(data / 'videos'),
         DATABASE_PATH=str(data / 'platform.sqlite'), STARLI_SOURCE_DATABASE=str(data / 'platform.sqlite'),
         STARLI_BINDINGS_PATH=str(LOCAL / 'bindings.json'), STARLI_STATE_DIR=str(data / 'state'),
         STARLI_COMPANY_DATABASE=str(data / 'dashboard/company-authority.sqlite3'), STARLI_COMPANY_BOT_DATABASE=str(data / 'company-bot.sqlite'),
         ACCOUNT_EMAIL_DOMAIN='local.invalid',
         STARLI_LOCAL_VM_ENABLED='1',
+        STARLI_COMPANY_MESSAGING_ENABLED='1',
         STARLI_TASK_HOME=str(data / 'tasks'), STARLI_MEMORY_ROOT=str(data / 'memory'),
         STARLI_PLATFORM_SOURCE_ROOT=str(ROOT / 'platform'), STARLI_RUNTIME_CODE_DIR=str(ROOT / 'platform/extensions/starli-runtime'),
-        STARLI_NODE_BINARY=os.getenv('STARLI_NODE24', 'node'),
+        STARLI_NODE_BINARY=os.getenv('STARLI_NODE24') or shutil.which('node') or 'node',
         STARLI_PLATFORM_ORIGIN=config['platform'], PUBLIC_API_URL=config['platform'],
         WEBUI_URL=config['dashboard'], PUBLIC_APP_URL=config['dashboard'], STARLI_PUBLIC_ORIGIN=config['dashboard'],
         CORS_ALLOW_ORIGIN=config['dashboard'], STARLI_ALLOWED_ORIGINS=config['dashboard'],

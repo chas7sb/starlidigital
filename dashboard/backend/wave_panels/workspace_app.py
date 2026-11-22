@@ -1,7 +1,7 @@
 """Product composition for an isolated b-viewer release."""
 import json,os,subprocess
 from pathlib import Path
-from fastapi import HTTPException
+from fastapi import HTTPException,Depends
 from open_webui.main import app
 from open_webui.config import DATA_DIR
 from open_webui.company_authority import Authority
@@ -47,9 +47,24 @@ app.include_router(create_controlled_router(rpc,get_verified_user,_mutation_guar
                    enabled=os.getenv("WAVE_CONTROLLED_SMTP")=="1"))
 app.include_router(create_router(rpc,get_verified_user,_mutation_guard,capture_request_fence))
 from enterprise_messaging import install_enterprise_messaging
-install_enterprise_messaging(app)
+def unavailable_feature(prefix,code):
+    async def unavailable(company:str,path:str='',user=Depends(get_verified_user)):
+        raise HTTPException(503,code)
+    app.add_api_route(prefix,unavailable,methods=['GET','POST','PUT','PATCH','DELETE'])
+    app.add_api_route(prefix+'/{path:path}',unavailable,methods=['GET','POST','PUT','PATCH','DELETE'])
+
+if hasattr(app.state,'company_messaging') and hasattr(app.state,'company_messaging_session'):
+    install_enterprise_messaging(app)
+else:
+    app.state.workspace_enterprise_messaging_unavailable='COMPANY_MESSAGING_NOT_CONFIGURED'
+    unavailable_feature('/api/v1/starli/companies/{company}/messaging','COMPANY_MESSAGING_NOT_CONFIGURED')
 from starli_engine_connections.smtp_http import install_production as install_company_smtp
-install_company_smtp(app, app.state.company_bot_runtime)
+company_runtime=getattr(app.state,'company_bot_runtime',None)
+if company_runtime is not None and getattr(app.state,'starli_automations',None) is not None:
+    install_company_smtp(app,company_runtime)
+else:
+    app.state.workspace_company_smtp_unavailable='NATIVE_COMPANY_VAULT_NOT_CONFIGURED'
+    unavailable_feature('/api/v1/starli/companies/{company}/integrations/smtp','NATIVE_COMPANY_VAULT_NOT_CONFIGURED')
 # Nested installers can insert before the SPA mount; do not slice by old length.
 added=[route for route in app.router.routes if id(route) not in native_ids]
 idx=next((i for i,route in enumerate(native_routes) if getattr(route,'path',None)==''),len(native_routes))

@@ -1,74 +1,82 @@
 {
   "schema": 1,
   "date": "2026-11-22",
-  "index_entry_count": 12518,
-  "index_listing_sha256": "49eeac21175561f1a9edcc6bfe3fe1c92a099e7cc20a48fd5693a731a5e4e9ed",
+  "index_entry_count": 12553,
+  "index_listing_sha256": "0b1040b0dcb1928cfa58b5526de3ccf9aa80923b3f40fe96025ad0e848244e80",
+  "index_unchanged_during_scan": true,
   "scope": "staged Git blob bytes only; no network validity checks; binary/large files require asset review",
   "target_verification": {
     ".gitignore": {
-      "oid": "98d1d9888615dbf97657562d7de243f5b8cd0d58",
-      "sha256": "4927f74e5003124c368865733b8e6626ef5b9e9fb05258f120142cae095b956b",
+      "oid": "707398b8e4b667cc874ef900ad48582c9750bb2c",
+      "sha256": "ab43e7b18a963ba2b2943c0e06b49f6798e16eb2d0aa7e99bdf1b0f41d3b3cde",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/mission-control/server/src/index.ts": {
       "oid": "1f50573d17798889fd42ac48adc9b0ad3cbde22d",
       "sha256": "79e078bcd7a02c94b3d0076e419bda96f08b1999f526f1bca89cbcdfb7bffda9",
       "working_tree_matches_index": false,
-      "recovery_fallback": true,
-      "upstream_mailbox_literal_lines": [
-        50
-      ]
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/mission-control/server/src/mailbox/service.ts": {
       "oid": "3ca16b73366d16d36350624a412b886ce2d34346",
       "sha256": "79aefd76f1bb7de7c054abbc3500dd43140f1f8bfa1c3f631a5a2ffc15e8c214",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/openpencil/source/packages/core/src/constants.ts": {
-      "oid": "27f982966c701b588390c45984b3293a17046ab7",
-      "sha256": "086ccfdd0f200aec1ce3404ac5d8723e8e7b4b6f1a98e4ce376d93279b52700c",
+      "oid": "170101cd5871ea9b85ba048156e4e009b7c76356",
+      "sha256": "76dd95291db11246d7003b1bd321b4dca09fa4703f819f127bb6c66fcd12c638",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/search/init-settings.py": {
       "oid": "571ac6b374c4ca1541246c6ec63fe336205cdbd2",
       "sha256": "3c911d3b06a97deb82ed246fa3b44c8c2ec9521bb0f35644f220a79155123406",
       "working_tree_matches_index": true,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/search/source/searx/engines/pexels.py": {
       "oid": "84323713d0630834eb8b81b934f971a970828e11",
       "sha256": "ba0ffab5c0fa6b5e1af28dcb7e78a43254ff7a0745aab03fc141b4f6f05f0ac6",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/extensions/search/wsgi.py": {
       "oid": "ed2cca053086d4a9a87b3ce3cd214b567c02277d",
       "sha256": "113a71b6ad7efeb73d834c1bb8782bc6ffbb1b88eb405a090fca1ecbd1ae30bd",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/server/src/index.ts": {
       "oid": "87c3c9a2ac8a1ca755f72952981a93fcf5de7cf2",
       "sha256": "1cc395572b52cbe3cb9d7d5fe6b18d536979165ebcd335ce56793c0dac814ddc",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     },
     "platform/server/src/mailbox/service.ts": {
       "oid": "1616e90b0ba7a2c17a56d9e9043792e9efde8a2a",
       "sha256": "344bd13c31aeb6d41d7e89da82525cea875c41d67288881b6f6d38491f8e8b5c",
       "working_tree_matches_index": false,
-      "recovery_fallback": false,
-      "upstream_mailbox_literal_lines": []
+      "working_tree_matches_index_ignoring_crlf": true,
+      "upstream_mailbox_literal_lines": [],
+      "recovery_fallback_nonempty_literal": false
     }
   },
   "findings": [
@@ -433,16 +441,6 @@
       "type": "credential-literal-review"
     },
     {
-      "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
-      "line": 489,
-      "type": "credential-literal-review"
-    },
-    {
-      "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
-      "line": 489,
-      "type": "google-key-literal"
-    },
-    {
       "path": "platform/extensions/openpencil/source/packages/feedback/tests/harness.ts",
       "line": 61,
       "type": "credential-literal-review"
@@ -540,6 +538,26 @@
     {
       "path": "platform/extensions/search/source/searx/settings.yml",
       "line": 473,
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.test.ts",
+      "line": 13,
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.test.ts",
+      "line": 33,
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.test.ts",
+      "line": 44,
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.test.ts",
+      "line": 52,
       "type": "credential-literal-review"
     },
     {
@@ -1855,6 +1873,10 @@
     {
       "path": "platform/extensions/openpencil/source/tests/e2e/text/formatting.spec.ts-snapshots/typography-panel-openpencil-darwin.png",
       "type": "oversize-or-binary"
+    },
+    {
+      "path": "security/index-audit.json",
+      "type": "oversize-or-binary"
     }
   ],
   "blobs": [
@@ -1865,18 +1887,18 @@
     },
     {
       "path": ".github/workflows/source-archive.yml",
-      "oid": "175e2ef00b38901219bd2cac7e6baa51b46b998f",
-      "sha256": "46c794eb32c401f83a25aa90d68447d30f6432eb7a36477abf55b2505a23447e"
+      "oid": "02cbaac3a4625e205d1c3bea8e6aad472a118ab1",
+      "sha256": "6a2221c389fdead1f9855bc7dc29a913dee6b85ca85c05ced4634416ef2fcebd"
     },
     {
       "path": ".github/workflows/validate.yml",
-      "oid": "75ca3cebc7320d084821436c354874d558654b9a",
-      "sha256": "484b455aa0d88b096ad57db1a1b52b2a1908c785bb224cb033cd7c0603f0d072"
+      "oid": "2da3bc9d2b24ae5dde185b2a94aa64e19f51bd7f",
+      "sha256": "94d6d55f40b8215bc199f1384ba1af4cddfa8c25aeab12761ba49e14731f0106"
     },
     {
       "path": ".gitignore",
-      "oid": "98d1d9888615dbf97657562d7de243f5b8cd0d58",
-      "sha256": "4927f74e5003124c368865733b8e6626ef5b9e9fb05258f120142cae095b956b"
+      "oid": "707398b8e4b667cc874ef900ad48582c9750bb2c",
+      "sha256": "ab43e7b18a963ba2b2943c0e06b49f6798e16eb2d0aa7e99bdf1b0f41d3b3cde"
     },
     {
       "path": "LICENSE",
@@ -2350,8 +2372,8 @@
     },
     {
       "path": "dashboard/backend/open_webui/main.py",
-      "oid": "7f261cf0025bd8d071c6112cc2607fb3bc029d6c",
-      "sha256": "0420108af324f9e2d8b0a3dccafa0800907dd3f855f9cba41c8122a398a26c49"
+      "oid": "60a16fefc69081063e8da1e6261cde7e62c5a64d",
+      "sha256": "6638273d2572a068e75d3a15171b81a59288f694fd642e134c83a35780f72748"
     },
     {
       "path": "dashboard/backend/open_webui/migrations/README",
@@ -6694,9 +6716,14 @@
       "sha256": "4854f38fd671e1f74ee5dc407e759b30501051374ddbcc28cbe3f6691037fada"
     },
     {
+      "path": "dashboard/src/lib/components/starli-setup/LocalComputer.svelte",
+      "oid": "6945436e487ac1096cae413a96ef4d21cb3f19c0",
+      "sha256": "705373e591a7cd27f9cae6a27c69130d256c0efb720a4243f4c58815356d7003"
+    },
+    {
       "path": "dashboard/src/lib/components/starli-setup/SetupPanel.svelte",
-      "oid": "a357f8daf085e8d3ec25ae2971529b54e4149fd0",
-      "sha256": "72f3767eb0d9b135e24d797e2d44fd29070bcaa7055f6d555153585e111a703b"
+      "oid": "569392e2250739ee25ecb278dabd550054d3de34",
+      "sha256": "c7cfc900e465abc02240cfee1a3d5a94abfbd10d3b593fc0700ee36b51ff5227"
     },
     {
       "path": "dashboard/src/lib/components/workspace/Knowledge.svelte",
@@ -26875,8 +26902,8 @@
     },
     {
       "path": "docs/agentx10-status.md",
-      "oid": "a71ef6ec4949128c055035f3c44b313a6c97030e",
-      "sha256": "c1a54bee2112abf9005d37ed25a7e2f01c17b3ab1715e1f939fb217671c07760"
+      "oid": "c9c598848c355b273f657ac0a1840e7d39213c8d",
+      "sha256": "7a2deb0371eead42fe3e3f4b86f010ff3b37f2e3ac08ba856b1392676e8a8d31"
     },
     {
       "path": "docs/agentx2-status.md",
@@ -26885,18 +26912,18 @@
     },
     {
       "path": "docs/agentx3-status.md",
-      "oid": "4aabcbe7847712c5f9a9fdd8fa96cf642fb2f5de",
-      "sha256": "69dde1d7c2367ee4cac5ed183565d07325a960a431bce81c3d0d518555b173f7"
+      "oid": "8839045e2b60faf620708e3d9fc17506d6913855",
+      "sha256": "c931a2f30de3784702062ec8fd8d39b47ab32a6d903f8842aa00091408b9c515"
     },
     {
       "path": "docs/agentx4-status.md",
-      "oid": "238a7528234d6a90d50708d2b63d04f38416a647",
-      "sha256": "190029b86e8b029ab3194701d22f86c377bdd8236e1a7ffef223c1d94fa0796e"
+      "oid": "9bdf6e3c8f836fb7624ddd889e2e0b6dd2a8d835",
+      "sha256": "93e542a138eb6d95daf3bb68c0bfb8ad0757ce553229379c681bbdffc5e78fa5"
     },
     {
       "path": "docs/agentx5-status.md",
-      "oid": "181591133e0ad14539f1ba347a768ce36868743f",
-      "sha256": "21072590ddd014d203f3ab1db87d30097c97744c9ccfb409cd28148eae5cbdc7"
+      "oid": "9f6fce33064b7ddb60caa6e89a233c87a4b5e7bf",
+      "sha256": "689476591a022095ea0ae8a8e7263c02aefaf5e8a830e1cf850d5c5861b52677"
     },
     {
       "path": "docs/agentx7-status.md",
@@ -26910,8 +26937,8 @@
     },
     {
       "path": "docs/agentx9-status.md",
-      "oid": "ed5f07fc760ea066f82f98931b18c19ff95923b7",
-      "sha256": "8d21e10c778fb6e341a3c056c3687f04f7c875a66d97177c33ccb2954d52d503"
+      "oid": "cf7e90c54c2690a402370253eff5a8be680b837b",
+      "sha256": "cf64ebcb7f93328be3f24422fdc2eac14bc3a104d22808e074dba915662f8ddd"
     },
     {
       "path": "docs/architecture.md",
@@ -26942,6 +26969,11 @@
       "path": "docs/integration-notes.md",
       "oid": "6800b128d0efebe20c762811feadcdc468ca7802",
       "sha256": "1347d7cc24fdebf209377b8293b162d68ff53f6758482feaf0acc138e5ac4623"
+    },
+    {
+      "path": "docs/integration-security-remediations.json",
+      "oid": "f20956042d0e8249e8478cb6261d61bfa028c61a",
+      "sha256": "055b4290309313bb801f3bc4f0674e7882f077d7c7b2af45ce3c93520a8e9200"
     },
     {
       "path": "docs/prime-ledger.md",
@@ -26990,8 +27022,8 @@
     },
     {
       "path": "installer/native.mjs",
-      "oid": "53c68df64621811338f0331cac7faea1f0c02ff9",
-      "sha256": "43950588f794543a8ab5bb562dfdc06ca2d829c455d2da3f5e00cffa789899d3"
+      "oid": "e6b459be5b87d9b8524a5aad8b978da024b8f6fb",
+      "sha256": "80ff105ac8d6c6b5c34ea3c635ee7bf7c7ef73a4c2265a3bb49e3b06631f5a46"
     },
     {
       "path": "installer/platform.Dockerfile",
@@ -27025,18 +27057,18 @@
     },
     {
       "path": "onboarding/README.md",
-      "oid": "7ee4342f3e66f8b32e32f40d879618eeb01353b7",
-      "sha256": "6b3e4e9ef711cc28b42cebc50ff5a6c3ef9c75ec680b10044530a71247c5ae3e"
+      "oid": "9c47b557b5fbb8a9eb8240a4eb649ca0905a7203",
+      "sha256": "6f250175759c460080d316872057cc682d181dbb5dc5117aa6bfb477105bbc75"
     },
     {
       "path": "onboarding/first_run.py",
-      "oid": "b9f81a1a34a23d5333cb5d46f0aedecf971d19a3",
-      "sha256": "76bdf500d4603ef56f5cc033f1ee9bb1f4dc44c26d335702863bf0eb9eeb9a8a"
+      "oid": "25c44e36c11a232e9a7f442aa91dfea13e013b86",
+      "sha256": "df2fb6958209ce8119206fbf2285299f4d589d9bd4b4ce0cd6a1940660d00dc3"
     },
     {
       "path": "onboarding/platform-owner.mjs",
-      "oid": "d15e0a2d4c21be43b63a4aa9501c170166c01e24",
-      "sha256": "939ea629005e7fda6678af7eb8dd407a2118b3f99974235a25a6f6e600120830"
+      "oid": "b942e31114c26fc324292b488d91586e694bc3fb",
+      "sha256": "b185af596fda3213688651fced2de75273b39d0a5f4b6c6e219af0cb82083d1c"
     },
     {
       "path": "onboarding/qa_e2e.py",
@@ -27045,8 +27077,8 @@
     },
     {
       "path": "onboarding/test_first_run.py",
-      "oid": "c06e508302842b0759915db5e0152d42e8157f07",
-      "sha256": "9333f6892e699036ba4666a98c168c6898b283a15df732cbc9d8edff4550b76b"
+      "oid": "13b99200e46e4a9afa2876cdbee6285bbaf2ac29",
+      "sha256": "5a5d22503e42644149c85dd0e9427beddb2f4b7ab56b67da6de66d90c9ab1592"
     },
     {
       "path": "package.json",
@@ -27070,18 +27102,28 @@
     },
     {
       "path": "packaging/check_backend_locks.py",
-      "oid": "b9bfb9ed2d685acb0c54c79b4f7bf746a89fddbf",
-      "sha256": "4cb8800d7e376f7cc761219e0621cbfebf6d4d8f77b60f261a83f7ef46dd53e9"
+      "oid": "8039739fc93777878ba6cfbb0a571f81e7d532f3",
+      "sha256": "5db3265981d004c04e0deec117178307b46d3799bbe3b1ae9cf57d4cb0b60cd7"
     },
     {
       "path": "packaging/lock_backend.py",
-      "oid": "14bbf6def7639604eee65fc26258e690c945d89a",
-      "sha256": "c1b301142c072ccdf48915903d3b222dca9740970aeb008b1d60523c75fae674"
+      "oid": "7394a0658be025ce31334e832a0a3ac3848df277",
+      "sha256": "96c0ea479051d1c4415c339f72080fc97ecebc7c5bb5e4992946f185fd60a9ee"
+    },
+    {
+      "path": "packaging/locks/dashboard-linux-x64-py311.json",
+      "oid": "e9db5a93f47b3c615fd481a0ee678768e30bd6fc",
+      "sha256": "a2085c9ff8e5f238686d1d8163c41e41e9bdfe0a7a716b5bfa9684b81177ed39"
+    },
+    {
+      "path": "packaging/locks/dashboard-linux-x64-py311.txt",
+      "oid": "0366be8e0967956a69a414e69e3866aaca6a339c",
+      "sha256": "4d6532fe356382e152b790ea02c700fd0c8abc1c380a8059564ba8fdb77c6bd1"
     },
     {
       "path": "packaging/locks/dashboard-macos-arm64-py311.json",
-      "oid": "3588530b6d47561182fee0e45cf5212aa4808571",
-      "sha256": "0338b39949cb9dfd52b4f8863fb69bf75fd933009745713aa4e0321a6e1c769d"
+      "oid": "79d80de6288364e4e3ad958b88dbafc716b082ed",
+      "sha256": "0011f095fa81e96b54c1b3fee29bd471714772297b8d79df2686918264e0e363"
     },
     {
       "path": "packaging/locks/dashboard-macos-arm64-py311.txt",
@@ -27090,8 +27132,8 @@
     },
     {
       "path": "packaging/locks/dashboard-macos-x64-py311.json",
-      "oid": "f5926728838fe911933f93d26c21b93d9a1179b2",
-      "sha256": "ed0319bf96e041c3f52fc9e204b8e94504022a0c3f359a74199b63536334b499"
+      "oid": "383020b705c415e41cfe1c8123573e04e6570cf0",
+      "sha256": "ca76f635378a9748fe74b2e240a9c248f6e2d80915150a6dd4054ebace54192d"
     },
     {
       "path": "packaging/locks/dashboard-macos-x64-py311.txt",
@@ -27100,8 +27142,8 @@
     },
     {
       "path": "packaging/locks/dashboard-windows-x64-py311.json",
-      "oid": "a6655d86a58b5ab3b9816382d9c462fa5d1192c2",
-      "sha256": "0e304501dd8e5f667ce675fa2f84a9675176ae5b10509d1234c6535b2f15a4da"
+      "oid": "e6d6418f8c1683a0e7f538ac789222946875669a",
+      "sha256": "50f0e5758384ba589b6db85df04eb1014a806aa315a3ebfedd5cee615569f88b"
     },
     {
       "path": "packaging/locks/dashboard-windows-x64-py311.txt",
@@ -27110,18 +27152,23 @@
     },
     {
       "path": "packaging/source_archive.py",
-      "oid": "95c0b73b04d6487adfbbfd5235ba721159568c9e",
-      "sha256": "6e2306b91b38522ea20c96af2e644ebef6eac340eb79ce2de0c1abaf1baff4e3"
+      "oid": "d28e5308115546384fdc01f64ec65a80f3d00c9f",
+      "sha256": "3dfa72c77139a078d732e898834c491e5d4dd9d22fb0ee63a9e920cda85b9a7f"
     },
     {
       "path": "packaging/test_source_archive.py",
-      "oid": "7ee179232c4cb5f685b846e26f0a52eee56ca3d8",
-      "sha256": "892486ec8ef25e8e8e7b034e70f66dec67f69fcbe43abbd04e7f28828f46283c"
+      "oid": "0451daa291021a0a03b88373a35ec068aa34b53f",
+      "sha256": "84cf7dc3f1a46e40746e52ffc7094a25e059d58d1d3b6e70fbdf2bd28e0129cf"
     },
     {
       "path": "platform/RECOVERY-MANIFEST.json",
       "oid": "69750c7d2a1e61fdee652b0f56d69fae5a658478",
       "sha256": "4f99e9c566677d781df86db8ca63fa3fdfe430eea4757adbd0173e928bee18a0"
+    },
+    {
+      "path": "platform/SOURCE-ADAPTATIONS.md",
+      "oid": "f57559d18a87d1faab3c270be01f1145d1e5091f",
+      "sha256": "247ba1ebdb4acd6567550a7253c3e51af1561d3368b6a9bd3e2de623f9452867"
     },
     {
       "path": "platform/SOURCE-MANIFEST.json",
@@ -27410,8 +27457,8 @@
     },
     {
       "path": "platform/control-plane/test/agency.test.ts",
-      "oid": "611562bdee463ded71a9dca706a76804c54c75c0",
-      "sha256": "b349c939b853845148ffcf221854a3fd1ec0e921080c531d30a12998ca46e70b"
+      "oid": "69dd8ef0aac28f871963bd237990b0fa888ce67b",
+      "sha256": "0a0386f38d2b4541a5e20a52560a8a1afdfbc6494b019494605721936c3d000a"
     },
     {
       "path": "platform/control-plane/test/batch-01.test.ts",
@@ -27445,8 +27492,8 @@
     },
     {
       "path": "platform/control-plane/test/outreach-mcp.test.ts",
-      "oid": "3e153f7af37621bbe8637a507bb367f26c200424",
-      "sha256": "15927b13c2cb11a2a0c8b9b512d761e88a2d0ef582b6d3a074e93ee943c7c760"
+      "oid": "69bd0cef86bf57a357a8f619c35a9726b9d01444",
+      "sha256": "a8853e6d706e7d548b5f2c8662fffedea761b8f6288138f43aac5c9efc6b4db2"
     },
     {
       "path": "platform/control-plane/test/proposal-delivery-mcp.test.ts",
@@ -30745,8 +30792,8 @@
     },
     {
       "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
-      "oid": "27f982966c701b588390c45984b3293a17046ab7",
-      "sha256": "086ccfdd0f200aec1ce3404ac5d8723e8e7b4b6f1a98e4ce376d93279b52700c"
+      "oid": "170101cd5871ea9b85ba048156e4e009b7c76356",
+      "sha256": "76dd95291db11246d7003b1bd321b4dca09fa4703f819f127bb6c66fcd12c638"
     },
     {
       "path": "platform/extensions/openpencil/source/packages/core/src/design-jsx/index.ts",
@@ -62579,6 +62626,136 @@
       "sha256": "9370fc95f9a7cf3e08acf5116e24708e55ceae3c17df013ecda587ac5e1114b1"
     },
     {
+      "path": "platform/extensions/starli-runtime/account-driver.mts",
+      "oid": "bae7e872f8927fb156d4fadfa3b9b5a9216067cb",
+      "sha256": "c9ced28beb69e706041331f7a74593df86ad981e89cb0f8e9712be62a7a041d1"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/dependency-provenance/package-lock.json",
+      "oid": "9d6072a0ef9cf479c5f637b17b0ab9aa4f8b06fb",
+      "sha256": "b7ecbd22a47267c6160a64e286beb16ed8b1870352e44106297f8c29283053d4"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/dependency-provenance/package.json",
+      "oid": "9b4672b5a1582540774142e034fc275a2989b85b",
+      "sha256": "c3da4b65bf48979653aa2a138e7848ffd5a75843b2f773efeb9256bc64d4244c"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/dependency-provenance/pi-package.json",
+      "oid": "705be3d3de78a185a556c1c6ed504a7de5ee84d5",
+      "sha256": "990aac3caff17b717294fa792b4e3f60b991d274d9f4ab6977d6aa42aa43c95e"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/extraction-manifest.json",
+      "oid": "bb64ea70034afc4eeeac0b6e8a40adbeea60eadd",
+      "sha256": "dd0dd8128ed67b2471b3eb61fd1d206fbc3804e0dbb7149a8818fb4d31e4de1b"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/model-fetch-deadline.mts",
+      "oid": "f4efc687a32c56b2a2fff3a5880a23ca49cde81d",
+      "sha256": "017730849e20c73bc407997d4a4e5af00c9096d5f7c817f316fb08d70bdc411c"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/personal-memory-context.mts",
+      "oid": "7695a08eae8975f673fbf3076f2214d9388c89e1",
+      "sha256": "234a575745aa69e02525dc0b99b710e6533a7317ceaa426d89d57b91876be70b"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-client.ts",
+      "oid": "5f8030f22a2e9940bd30ee40c31613c9f58ad8c7",
+      "sha256": "0623e7ae75eb621d9de892c83a2fac5220959378682bf290befd3a88717d04e9"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-decision.test.ts",
+      "oid": "fbd98a1dae5411e36392b5105248bfa43b7ab11c",
+      "sha256": "fbdefde7b04916772912c14b1a9b392a706b131105fd771fe738abc50aa8b67b"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-decision.ts",
+      "oid": "e3c367009c766dbc5eeac66779a0bdaf9e8fa1e9",
+      "sha256": "e9c85cb0794de1113b6b0cc5e0e19fd16dd33fd8450b680b9bfdac9d82f36e34"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-live-agent.mts",
+      "oid": "b85dc2b2fe1a83153732ceabbb7c2115909e1b6c",
+      "sha256": "7278fc499e8cd82ebb823ad9c02170e65de3131c84b2e9000e4e6a50c73026d1"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-native-worker.mts",
+      "oid": "a38161e791601d5c1a10f5c00f4abff229e3216c",
+      "sha256": "06723611bbdcc7d95b53aab54c3811aacc758baca5bc2946077c6936250a41a2"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-prompt.test.mts",
+      "oid": "bfbf5bc53c53987c0620b81ad0e537bae9b482b9",
+      "sha256": "da420fb855d7038abb8c86cc16e58ff47466d6d03cc666733e4f18169dcbec9e"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-prompt.ts",
+      "oid": "7ed40d880fc9d3223e119ed334e39cf0e9d380a6",
+      "sha256": "fa76e34604662f157428bb2d70c0d2d9367ddd55f7f344220b94510c68092399"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/pi-worker.mts",
+      "oid": "75a4e31d45f43a693e7d9115479a993990d464ad",
+      "sha256": "ff49653e8a8736d499447e83d63b7df42ce7a68873704f47da6ebab84cfbf5af"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/platform-bridge.mts",
+      "oid": "7afb1c0f20371dde5935d50a1c85c6ecf396915d",
+      "sha256": "5d01f666a1857bdd1bce717dc6a1212588e188d438c749e0e331da26d8de2ee3"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/project-build.mts",
+      "oid": "36df41008f67ae0408df187f38ff3a73d0237913",
+      "sha256": "a6ade7d1b94a8ed11603fe331517c75cb2e97f4ed3978ec858c94d0f9d03a6c1"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/project-build.test.ts",
+      "oid": "3b8d232272a05975d6bdb61d96b3ee611e35fcf3",
+      "sha256": "4e27e7d5aed79444d9ca7ac6a0dcf4d0fb68c8e549075a8e40976c5cb0e53479"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-infer.py",
+      "oid": "0ce8603a8b1b21eb738e4bce274480b145022bde",
+      "sha256": "dbf6406d24577587895cef58a11750e6f4364caf7d6966dec7cae4b4b8ee9900"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.mts",
+      "oid": "4e7c55b95f41fe7443da3a224bfbb1f2330e1f53",
+      "sha256": "9fe0806946dc1cbc2d5bfe9aa301d7d8668788a0aecf01b63b7394c37f12564a"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/provider-runtime.test.ts",
+      "oid": "c8ba24d06d3445005f93ad1405ed312e3591a34b",
+      "sha256": "c743769636f442f26dd0b02c8116952c9da63047e683b3c8274ca1505e262bf8"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/register-native.py",
+      "oid": "99f7e75f3bf1066854cec8baf6795fb80dd4a7d9",
+      "sha256": "b7c5b13f9e6d57738adb8b75645e33a1196c3c0364154ed6f89014f1efbcc7ce"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/starli-message.mts",
+      "oid": "d56244514c4b35de833fd82611be56be6e036b1a",
+      "sha256": "13707a4f8527604746e69cd407d4c377b08232fac5f4f01cd04971ee41ebcda5"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/starli-pi-pipe.py",
+      "oid": "ef4b1fda607b6492ea9c0b61601244eb293c1ce6",
+      "sha256": "e468a63f3e9200c7be4249dafc92a2a692e87220651b861f93c933c297bd7856"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/tenant-store.integration.test.ts",
+      "oid": "616f30e03581f4d36b688bdb66ec1d671f73f74e",
+      "sha256": "d969c6f2835b7e96260ebdbe23bdc7aac6f218ff69618f747f715249675f11f0"
+    },
+    {
+      "path": "platform/extensions/starli-runtime/tenant-store.ts",
+      "oid": "35bd85232651f7d92d4d3a441331d602c948b839",
+      "sha256": "935da05e88bb34b0d0acc034b08993e9ef722a3e14dc736ab81e7d1a3ee242b0"
+    },
+    {
       "path": "platform/extensions/tests/broker-smoke.mjs",
       "oid": "f76fc61e40c7363e363ca8fac1e0e7e72cdf5846",
       "sha256": "659ed16e7975343197ab3a49a8a2037f82f13197904db862bd3f31115065e357"
@@ -64290,13 +64467,23 @@
     },
     {
       "path": "runtime/dashboard_adapter.py",
-      "oid": "d4d67b7066af536431fb99601e082645f8a617ce",
-      "sha256": "e62f40238356b4ebe3620a839b1e0386e4897bcf2cf183109e07528d62a94dd9"
+      "oid": "87b80831c2e0c1582de19198e4e3f7944b846ab2",
+      "sha256": "8a7a8ec90eb3cb0a93c0d18ce2ecfe3407bc53805e6097b0c979ef84bc5b2f53"
     },
     {
       "path": "runtime/guest/desktop-alpine.sh",
-      "oid": "b23a5e418b00820cbb3aaf578564900fd2056449",
-      "sha256": "4bf3f4a1ff04f0d546eb49683f5033510645c790f3d052fd5fc0017e4486bb84"
+      "oid": "a1ef9671ca790e3a94742ca9abf280c45dbbb9a9",
+      "sha256": "b1337f81cd8ec7c8da74fb654c89847df2834d2e8d3fffa54595a947f5704df3"
+    },
+    {
+      "path": "runtime/tests/test_dashboard_adapter.py",
+      "oid": "2611e40b1c05b08488ae0f270873a92e6ac0102a",
+      "sha256": "873147170c7176cf66cd1f2dcc005491ae29f36a9f97392b64aa33f2965b2a06"
+    },
+    {
+      "path": "runtime/tests/test_dashboard_routes.py",
+      "oid": "78531a10093952f2f740deae3e3bb61f2f228095",
+      "sha256": "83996b562f02a06d4dd80738ac718823803d500823df9141dce6c4552c42c714"
     },
     {
       "path": "runtime/tests/test_vm.py",
@@ -64305,23 +64492,23 @@
     },
     {
       "path": "runtime/validation.json",
-      "oid": "ac8aca2901a0b681578c37dd0b49a77d8d1f9b47",
-      "sha256": "f56ad4239577ba53a8ff7cd155124b29dbee31d2113bb7ec1f28d062e832790f"
+      "oid": "94832e034d91d24a0cf9a4e59da0bd8c577769f8",
+      "sha256": "bf2a85d8167b40eebd6e80745ad50c7944961b07a20f24e786d42cb04c3697cb"
     },
     {
       "path": "runtime/vm.py",
-      "oid": "6ad5171ecb45019e434f0b134e4a182976107945",
-      "sha256": "4f53ee096c2d1279d3623d2cd1f97e5ad4497fc1a88350a4a8fb6bcf834963a6"
+      "oid": "a1d9c5253ffb45f7205dd8de4fde6d3cb95e09bf",
+      "sha256": "a3a56b6b463cd45d8e53fdf8c9fcb07913ac91e314e98758232374afadede1fb"
     },
     {
       "path": "security/README.md",
-      "oid": "637ce581a2894ed659ea50916a014b7ff218a8fb",
-      "sha256": "06839d20d442b05a24ba49d5a58c2d864cc045f3f6619e4c614e6e972ca2f1c1"
+      "oid": "212aee31a93dd9b1a257457e02f9ef57115f148b",
+      "sha256": "af1229f58cf4ba8343988cbe73667d84939fd677c06dd96774f67235563d22da"
     },
     {
       "path": "security/STATUS.md",
-      "oid": "1a07645965c84e0020cc31b2617bb1007d0a296b",
-      "sha256": "0be67de9840f048f70955b47bbe3fae2a35f90d57d832ffff29036f6231ee212"
+      "oid": "e6a54712c2d7ee0d3301e9e5c31698b56beb7178",
+      "sha256": "9bc3301217ad75034e0d887f0baabaeca6cd7c8b2c36bf4f9fb9ff90d59d3c6e"
     },
     {
       "path": "security/THIRD_PARTY_NOTICES/NotoSans-OFL.txt",
@@ -64369,6 +64556,11 @@
       "sha256": "6c4b8d8034b9a5795643e1771716689a22638a7d6779d422136a008ecfaf3951"
     },
     {
+      "path": "security/audit_index.py",
+      "oid": "5055a07282e1e9c84a0fde967f1e8e201ef41965",
+      "sha256": "2103c9ff47a536cbcb13ebbb095e4c6bef56320855618dfe2c99de691553f2b2"
+    },
+    {
       "path": "security/build_dispositions.py",
       "oid": "f28c90f2bf984cc769ae040d5d8cb1c7fdd6da87",
       "sha256": "eabe3166dfb78e405fea738f57ced2f91d379dd9b0479a2c898877d831957e4a"
@@ -64397,6 +64589,11 @@
       "path": "security/font_inventory.py",
       "oid": "85406e500f54438ed6822a93506858a5f1ff7665",
       "sha256": "1006a5184f8c1471a0041ff75fbba54004e5ab5b4961492afac374eddcc7e589"
+    },
+    {
+      "path": "security/index-audit.json",
+      "oid": "867b54493fe1e859c35b47403affc73e41704573",
+      "sha256": "c62ea59efff2f738328a1a9057ecbe58dd327d628a82ccc76d783281be604bfc"
     },
     {
       "path": "security/local-dashboard-scan.json",

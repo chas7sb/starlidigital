@@ -10,11 +10,15 @@ const root = resolve(here, '..');
 const envFile = resolve(here, 'local.env');
 const args = process.argv.slice(2);
 const dry = args.includes('--dry-run');
-const action = args.find(a => a !== '--dry-run') || 'help';
-const allowed = ['help', 'doctor', 'init', 'install', 'start', 'stop', 'status', 'logs', 'config'];
+const native = args.includes('--native');
+const docker = args.includes('--docker');
+const flags = ['--dry-run', '--native', '--docker'];
+const action = args.find(a => !flags.includes(a)) || 'help';
+const allowed = ['help', 'doctor', 'init', 'install', 'build', 'setup', 'health', 'start', 'stop', 'status', 'logs', 'config'];
 function fail(message) { throw new Error(message); }
 function run(command, params, capture = false) {
-  const result = spawnSync(command, params, { cwd: root, stdio: capture ? 'pipe' : 'inherit', encoding: 'utf8', windowsHide: true });
+  const result = spawnSync(command, params, { cwd: root, stdio: capture ? 'pipe' : 'inherit', encoding: 'utf8', windowsHide: true, ...(capture ? { timeout: 15000, killSignal: 'SIGTERM' } : {}) });
+  if (result.error?.code === 'ETIMEDOUT') fail('Docker diagnostics timed out after 15 seconds. Start a responsive Linux-container Docker engine, then retry doctor.');
   if (result.error) fail(`Cannot run ${command}: ${result.error.message}`);
   if (result.status !== 0) fail(`${command} exited with code ${result.status ?? 'unknown'}${capture ? ': ' + (result.stderr || '').trim() : ''}`);
   return result.stdout?.trim();
@@ -36,10 +40,32 @@ function compose(params) {
   if (dry) { console.log(JSON.stringify({ command: 'docker', args: full })); return; }
   run('docker', full);
 }
+function nativeCommand(command, params) {
+  if (dry) { console.log(JSON.stringify({ command, args: params })); return; }
+  run(command, params);
+}
+function nativeFlow() {
+  const node = process.env.STARLI_NODE24 || process.execPath;
+  const script = resolve(here, 'native.mjs');
+  const py = resolve(here, '.runtime/python', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
+  if (action === 'help') console.log('StarliDigital native installation\nnode installer/starli.mjs install --native\nnode installer/starli.mjs setup --native\nnode installer/starli.mjs start --native\ninstall prepares separate runtimes/dependencies and builds both apps. setup prompts privately for first owner credentials. start uses that private installation.\nAlso: doctor, build, health with --native. Ctrl+C stops foreground services.\nDocker deployment: use --docker; separate owner provisioning is required.');
+  else if (action === 'install') {
+    const embedded = resolve(here, '.runtime/node22', process.platform === 'win32' ? 'node.exe' : 'bin/node');
+    if (!process.env.STARLI_NODE22 && !existsSync(embedded)) nativeCommand(node, [script, 'bootstrap-node22']);
+    nativeCommand(node, [script, 'install', 'all']);
+    nativeCommand(node, [script, 'build', 'all']);
+  } else if (['doctor', 'build', 'health'].includes(action)) nativeCommand(node, [script, action, 'all']);
+  else if (['setup', 'start'].includes(action)) {
+    if (!dry && !existsSync(py)) fail('Native Python environment is missing. Run install --native first.');
+    if (action === 'start' && !dry && !existsSync(resolve(root, 'onboarding/.local/setup.json'))) fail('Native owner setup is required. Run setup --native first; it prompts for credentials privately.');
+    nativeCommand(py, [resolve(root, 'onboarding/first_run.py'), action]);
+  } else fail(`${action} is not a native command. Use --native help. Native services run in the foreground; Ctrl+C stops them.`);
+}
 try {
-  if (!allowed.includes(action) || args.some(a => a !== action && a !== '--dry-run')) fail('Unknown command or option. Use help.');
-  if (action === 'help') {
-    console.log('StarliDigital local app deployment\nUsage: node installer/starli.mjs <command> [--dry-run]\nCommands: doctor, init, install, start, stop, status, logs, config\ninstall: build images; start: start and wait for health; stop: preserve data\nNo command creates a computer-use VM or publishes the application.');
+  if (!allowed.includes(action) || args.some(a => a !== action && !flags.includes(a)) || (native && docker)) fail('Unknown or conflicting command/option. Use help.');
+  if (native) nativeFlow();
+  else if (action === 'help') {
+    console.log('StarliDigital\nNative: install --native, setup --native, start --native\nDocker: doctor/init/install/start/stop/status/logs/config --docker\nWithout a mode flag, Docker mode is retained for compatibility.\nAdd --dry-run to print commands. Native install builds apps; setup prompts for owner credentials. Docker mode does not provision an installation owner.\nNo command creates a computer-use VM or publishes the application.');
   } else if (action === 'init') {
     if (existsSync(envFile)) console.log('Local configuration already exists; preserved.');
     else if (dry) console.log('Would create installer/local.env with a new random dashboard session secret.');
@@ -61,6 +87,7 @@ try {
     }
     if (missing.length) process.exitCode = 1;
   } else {
+    if (['setup', 'build', 'health'].includes(action)) fail(`${action} requires --native. Docker setup is not implemented; do not claim an owner account exists.`);
     if (['install', 'start'].includes(action)) checkSources();
     if (!existsSync(envFile) && !dry) fail('Local configuration missing. Run init first.');
     const commands = { install: ['build'], start: ['up', '-d', '--wait', '--wait-timeout', '300'],

@@ -6,6 +6,7 @@ private URL egress, token in browser, or unauthenticated callback write.
 """
 from __future__ import annotations
 import starli_portable as _portable
+from .private_storage import ensure_private_database
 
 import asyncio
 import base64
@@ -217,16 +218,10 @@ class Remove(BaseModel):
 class Store:
     def __init__(self, path: Path):
         self.path = Path(path)
-        self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        if self.path.is_symlink() or self.path.parent.is_symlink() or self.path.parent.stat().st_mode & 0o077:
-            deny(503, "MCP_EXT_STORAGE_DENIED")
-        fd = os.open(self.path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
         try:
-            s = os.fstat(fd)
-            if s.st_nlink != 1 or s.st_mode & 0o077:
-                deny(503, "MCP_EXT_STORAGE_DENIED")
-        finally:
-            os.close(fd)
+            ensure_private_database(self.path)
+        except OSError:
+            deny(503, "MCP_EXT_STORAGE_DENIED")
         with self.db() as db:
             db.execute("""CREATE TABLE IF NOT EXISTS configs(
               owner TEXT NOT NULL, server_id TEXT NOT NULL, revision INTEGER NOT NULL,

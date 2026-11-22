@@ -3,6 +3,7 @@ import hashlib,ipaddress,json,os,re,sqlite3,uuid
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
+from .private_storage import ensure_private_database
 from urllib.parse import urlsplit
 class Fault(Exception):
  def __init__(self,code,status=400):self.code=code;self.status=status;super().__init__(code)
@@ -53,11 +54,8 @@ class Lease:
 class Registry:
  def __init__(self,path,*,cipher,authorize,owned_agent):
   self.path=Path(path);self.cipher=cipher;self.authorize=authorize;self.owned_agent=owned_agent
-  if not self.path.is_absolute()or self.path.is_symlink():fail("MCP_STORAGE_DENIED",503)
-  self.path.parent.mkdir(mode=0o700,parents=True,exist_ok=True)
-  if self.path.parent.is_symlink()or self.path.parent.stat().st_mode&0o077:fail("MCP_STORAGE_DENIED",503)
-  fd=os.open(self.path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600);os.close(fd)
-  if self.path.stat().st_mode&0o077 or self.path.stat().st_nlink!=1:fail("MCP_STORAGE_DENIED",503)
+  try:ensure_private_database(self.path)
+  except OSError:fail("MCP_STORAGE_DENIED",503)
   with self.db()as c:c.execute("CREATE TABLE IF NOT EXISTS servers(owner TEXT,id TEXT,revision INTEGER,name TEXT,url TEXT,transport TEXT,enabled INTEGER,sealed BLOB,tools TEXT,deleted INTEGER,PRIMARY KEY(owner,id))")
  @contextmanager
  def db(self):

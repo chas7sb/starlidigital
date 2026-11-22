@@ -1,6 +1,7 @@
 """Run manifest-defined npm build using each component's supported Node major."""
 import argparse
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -24,6 +25,11 @@ def build(component, test=False):
     npm = shutil.which('npm.cmd') or shutil.which('npm')
     if not npm:
         raise ValueError('npm unavailable')
+    if component == 'dashboard':
+        # Upstream ORT supports CPU on all targets; CUDA downloads are optional.
+        os.environ.setdefault('ONNXRUNTIME_NODE_INSTALL_CUDA', 'skip')
+        os.environ.setdefault('CYPRESS_INSTALL_BINARY', '0')
+        os.environ.setdefault('NODE_OPTIONS', '--max-old-space-size=6144')
     subprocess.run([npm, 'ci', '--no-audit', '--no-fund'], cwd=directory, check=True)
     subprocess.run([npm, 'run', 'build'], cwd=directory, check=True)
     if test:

@@ -1,0 +1,44 @@
+{
+  "schema": "starlidigital.starli-runtime.v1",
+  "source": "effective dashboard and external worker STARLI_RUNTIME_CODE_DIR",
+  "upstreamPiSdk": "@earendil-works/pi-coding-agent@1.5.0",
+  "install": {
+    "npmCwd": "platform/extensions/starli-runtime",
+    "npmCommand": ["npm", "ci"],
+    "pythonRequirements": "platform/extensions/starli-runtime/requirements.txt",
+    "pythonEnvironment": "dashboard Python environment"
+  },
+  "dashboardEnvironment": {
+    "STARLI_RUNTIME_CODE_DIR": "absolute path to platform/extensions/starli-runtime",
+    "STARLI_PLATFORM_SOURCE_ROOT": "absolute path to platform",
+    "STARLI_DASHBOARD_ROOT": "absolute path to dashboard (optional in this source layout)",
+    "STARLI_STATE_DIR": "fresh absolute private per-instance state directory",
+    "STARLI_SOURCE_DATABASE": "this instance's platform database",
+    "STARLI_PYTHON_BIN": "dashboard Python executable",
+    "STARLI_NODE_BIN": "Node24 executable"
+  },
+  "optionalOperatorConfiguration": [
+    "STARLI_MANAGED_ENV_FILE (explicit private operator env file; no production fallback)",
+    "STARLI_PI_MODULE_PATH (module file URL override; default resolves installed package)",
+    "PI_CODING_AGENT_DIR (private Pi state; no existing auth files supplied)"
+  ],
+  "catalog": {
+    "cwd": "platform/extensions/starli-runtime",
+    "command": ["node", "--import", "tsx", "provider-runtime.mts"],
+    "stdin": {"operation": "catalog", "credentials": {}}
+  },
+  "privateStorage": {
+    "validator": "dashboard/backend/starli_private_fs.py require_private_file",
+    "windows": "current-user owned, protected owner-only DACL; LocalSystem allowed; reject inherited broad access, reparse points and hardlinks",
+    "posix": "current uid, owner-only file/directory modes, no symlink and single-link regular file",
+    "lock": "bounded stdlib msvcrt first-byte exclusive lock on Windows; nonblocking fcntl exclusive lock on POSIX; max30s wait in helper",
+    "refresh": "encrypted SQLite BEGIN IMMEDIATE transaction; merge only when selected stored credential still matches original"
+  },
+  "validatedOnWindows": {
+    "catalog": {"exitCode": 0, "providers": 42, "models": 1712, "credentialsUsed": false},
+    "nodeTests": {"passed": 15, "failed": 0},
+    "concurrentLockTests": {"passed": 3, "failed": 0},
+    "sharedPrivateStorageTests": {"passed": 3, "failed": 0}
+  },
+  "notValidated": ["Live provider login/OAuth", "Paid model inference", "Existing production vault migration", "Complete dashboard tool workflow", "macOS runtime execution"]
+}

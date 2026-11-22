@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:starlidigital:vm-image:v1",
+  "title": "StarliDigital standalone base VM image",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "created_at", "image", "clean_base_review", "excluded", "guest_sanitization", "source_image_mutated", "network_default", "readiness"],
+  "properties": {
+    "schema": { "const": "starlidigital.vm-image.v1" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "image": {
+      "type": "object", "additionalProperties": false,
+      "required": ["filename", "format", "architecture", "sha256", "bytes", "virtual_size"],
+      "properties": {
+        "filename": { "const": "starlidigital-base.qcow2" },
+        "format": { "const": "qcow2" },
+        "architecture": { "const": "x86_64" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 72 },
+        "virtual_size": { "type": "integer", "minimum": 1, "maximum": 274877906944 }
+      }
+    },
+    "clean_base_review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attested", "scope"],
+      "properties": {
+        "attested": { "const": true },
+        "scope": { "const": "operator-attestation-not-automatic-sanitization" }
+      }
+    },
+    "excluded": {
+      "type": "array", "uniqueItems": true,
+      "items": { "enum": ["installer-iso", "host-config", "process-tracking", "host-tokens", "host-session-state"] },
+      "minItems": 5, "maxItems": 5
+    },
+    "guest_sanitization": { "const": "NOT_AUTOMATICALLY_VERIFIED" },
+    "source_image_mutated": { "const": false },
+    "network_default": { "const": "none" },
+    "readiness": { "type": "string", "minLength": 1 }
+  }
+}

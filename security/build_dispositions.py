@@ -57,14 +57,15 @@ actions[0]['verification'] = 'Git ignore now covers platform/server/data/ and al
 actions[0]['status'] = 'verified-source-exclusion'
 actions[1]['verification'] = 'Executable key default removed; local search initializer disables Pexels and supplies no key.'
 actions[1]['status'] = 'verified-fixed'
-actions[2]['verification'] = 'Main platform fallback removed; Mission Control duplicate still contains ADMIN_RECOVERY_EMAIL fallback at review time.'
-actions[2]['status'] = 'partially-fixed'
+actions[2]['verification'] = 'Main platform and Mission Control now use empty recovery fallback; local account identifier domain is not a recovery destination. Verified staged blobs in index-review-dispositions.json.'
+actions[2]['status'] = 'verified-fixed'
 actions[3]['verification'] = 'init-settings.py generates token_hex(32), exclusive private file; wsgi.py requires absolute settings path and rejects missing/short/upstream default secret before SearXNG import.'
 actions[3]['status'] = 'verified-wrapper-fixed'
-actions[4]['status'] = 'owner-follow-up'
+actions[4]['status'] = 'verified-fixed'
+actions[4]['verification'] = 'Both mailbox/service.ts copies have no upstream mailbox identity/user defaults; verified staged blob fingerprints in index-review-dispositions.json.'
 actions.extend([
-    {'priority': 'P1', 'owner': 'Prime / OpenPencil extension owner', 'path': 'platform/extensions/openpencil/source/packages/core/src/constants.ts', 'line': 489, 'status': 'remediation-required', 'action': 'Google Fonts key-shaped literal is embedded in executable source. Remove and make locally configurable; fail gracefully with catalog disabled when unset. No network validation performed; no claim that key is live/private.'},
-    {'priority': 'P1', 'owner': 'Prime / packaging owner', 'path': 'platform/control-plane/data/', 'line': None, 'status': 'remediation-required', 'action': 'Generated asset/preview PNGs appeared during tests. Root Git ignore did not match a representative file at review time. Exclude entire control-plane/data/ from Git and artifacts. Archive builder data-directory rejection helps but should not be sole protection.'},
+    {'priority': 'P1', 'owner': 'Prime / OpenPencil extension owner', 'path': 'platform/extensions/openpencil/source/packages/core/src/constants.ts', 'line': 489, 'status': 'verified-fixed', 'action': 'Google Fonts literal removed in refreshed staged blob. Current SHA-256 recorded in index-review-dispositions.json. No network validation performed.'},
+    {'priority': 'P1', 'owner': 'Prime / packaging owner', 'path': 'platform/control-plane/data/', 'line': None, 'status': 'verified-source-exclusion', 'action': 'Generated PNGs removed from index; root ignore now platform/*/data/. Refreshed immutable index scan found no runtime/data paths. Final archive review is separate.'},
 ])
 result = {'date': '2026-11-22', 'scope': 'local dashboard and platform extraction; working tree changes concurrently', 'status': 'remediation-required', 'confirmed_live_secret_count': 0, 'note': 'No live credentials tested. Test-path disposition uses reviewed test context, never only filename. Fingerprints must match before reusing these dispositions.', 'actions': actions, 'findings': items}
 Path('security/review-dispositions.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

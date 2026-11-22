@@ -13,8 +13,6 @@ services:
       ALLOWED_ORIGINS: http://localhost:8080,http://127.0.0.1:8080,http://localhost:4100
     ports:
       - '127.0.0.1:${STARLI_PLATFORM_PORT:-4100}:4100'
-      - '127.0.0.1:${STARLI_DASHBOARD_PORT:-8080}:8080'
-      - '127.0.0.1:4120:4120'
     volumes:
       - platform-data:/data
     healthcheck:
@@ -28,27 +26,31 @@ services:
       context: ../platform
       dockerfile: ../installer/platform.Dockerfile
     init: true
-    network_mode: service:platform
     command: ['npm', 'run', 'start', '-w', 'control-plane']
     environment:
       CONTROL_PLANE_HOST: 0.0.0.0
       CONTROL_PLANE_PORT: '4120'
-      CONTROL_PLANE_UPSTREAM_URL: http://127.0.0.1:4100/health
+      CONTROL_PLANE_UPSTREAM_URL: http://platform:4100/health
       CONTROL_PLANE_DB_PATH: /data/control-plane.sqlite
+    ports:
+      - '127.0.0.1:4120:4120'
     volumes:
       - control-data:/data
     profiles: ['extended']
   task-worker:
     build:
-      context: ../dashboard
-      dockerfile: ../installer/dashboard.Dockerfile
+      context: ..
+      dockerfile: installer/dashboard.Dockerfile
     init: true
-    network_mode: service:platform
     command: ['python', '-m', 'open_webui.starli_task_worker']
     environment:
       DATA_DIR: /data
       STARLI_SOURCE_DATABASE: /platform-data/starli.sqlite
-      STARLI_PLATFORM_ORIGIN: http://127.0.0.1:4100
+      STARLI_PLATFORM_ORIGIN: http://platform:4100
+      STARLI_COMPANY_PLATFORM_ORIGIN: http://platform:4100
+      STARLI_CONTROL_PLANE_ORIGIN: http://control-plane:4120
+      STARLI_PLATFORM_PUBLIC_ORIGIN: http://localhost:${STARLI_PLATFORM_PORT:-4100}
+      STARLI_CONTROL_PLANE_PUBLIC_ORIGIN: http://localhost:4120
       WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?Run installer init to generate local secrets}
     volumes:
       - dashboard-data:/data
@@ -56,17 +58,29 @@ services:
     profiles: ['extended']
   dashboard:
     build:
-      context: ../dashboard
-      dockerfile: ../installer/dashboard.Dockerfile
+      context: ..
+      dockerfile: installer/dashboard.Dockerfile
     init: true
-    network_mode: service:platform
     environment:
       DATA_DIR: /data
       WEBUI_AUTH: 'True'
-      WEBUI_URL: http://localhost:8080
-      STARLI_PLATFORM_ORIGIN: http://127.0.0.1:4100
+      STARLI_COMPANY_MESSAGING_ENABLED: '1'
+      ENABLE_SIGNUP: 'false'
+      ENABLE_PERSISTENT_CONFIG: 'false'
+      ENABLE_OPENAI_API: 'false'
+      ENABLE_OLLAMA_API: 'false'
+      OFFLINE_MODE: 'true'
+      ANONYMIZED_TELEMETRY: 'false'
+      WEBUI_URL: http://localhost:${STARLI_DASHBOARD_PORT:-8080}
+      STARLI_PLATFORM_ORIGIN: http://platform:4100
+      STARLI_COMPANY_PLATFORM_ORIGIN: http://platform:4100
+      STARLI_CONTROL_PLANE_ORIGIN: http://control-plane:4120
+      STARLI_PLATFORM_PUBLIC_ORIGIN: http://localhost:${STARLI_PLATFORM_PORT:-4100}
+      STARLI_CONTROL_PLANE_PUBLIC_ORIGIN: http://localhost:4120
       STARLI_SOURCE_DATABASE: /platform-data/starli.sqlite
       WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?Run installer init to generate local secrets}
+    ports:
+      - '127.0.0.1:${STARLI_DASHBOARD_PORT:-8080}:8080'
     volumes:
       - dashboard-data:/data
       - platform-data:/platform-data

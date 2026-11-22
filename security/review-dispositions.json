@@ -35,8 +35,8 @@
         }
       ],
       "action": "Remove upstream recovery-email fallback. Require ADMIN_RECOVERY_EMAIL or leave recovery disabled; ensure a fresh install cannot route recovery to the upstream organization.",
-      "verification": "Main platform fallback removed; Mission Control duplicate still contains ADMIN_RECOVERY_EMAIL fallback at review time.",
-      "status": "partially-fixed"
+      "verification": "Main platform and Mission Control now use empty recovery fallback; local account identifier domain is not a recovery destination. Verified staged blobs in index-review-dispositions.json.",
+      "status": "verified-fixed"
     },
     {
       "priority": "P1",
@@ -67,23 +67,24 @@
         }
       ],
       "action": "Replace production mailbox identity/user fallbacks with explicit local account configuration. Keep mail integration disabled until configured. Review duplicated mission-control defaults too.",
-      "status": "owner-follow-up"
+      "status": "verified-fixed",
+      "verification": "Both mailbox/service.ts copies have no upstream mailbox identity/user defaults; verified staged blob fingerprints in index-review-dispositions.json."
     },
     {
       "priority": "P1",
       "owner": "Prime / OpenPencil extension owner",
       "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
       "line": 489,
-      "status": "remediation-required",
-      "action": "Google Fonts key-shaped literal is embedded in executable source. Remove and make locally configurable; fail gracefully with catalog disabled when unset. No network validation performed; no claim that key is live/private."
+      "status": "verified-fixed",
+      "action": "Google Fonts literal removed in refreshed staged blob. Current SHA-256 recorded in index-review-dispositions.json. No network validation performed."
     },
     {
       "priority": "P1",
       "owner": "Prime / packaging owner",
       "path": "platform/control-plane/data/",
       "line": null,
-      "status": "remediation-required",
-      "action": "Generated asset/preview PNGs appeared during tests. Root Git ignore did not match a representative file at review time. Exclude entire control-plane/data/ from Git and artifacts. Archive builder data-directory rejection helps but should not be sole protection."
+      "status": "verified-source-exclusion",
+      "action": "Generated PNGs removed from index; root ignore now platform/*/data/. Refreshed immutable index scan found no runtime/data paths. Final archive review is separate."
     }
   ],
   "findings": [
@@ -1555,8 +1556,9 @@
     {
       "path": "platform/control-plane/test/agency.test.ts",
       "type": "email-review",
-      "sha256": "b349c939b853845148ffcf221854a3fd1ec0e921080c531d30a12998ca46e70b",
+      "sha256": "fdcf08789c4d3d60d817952236b5acd76a9d4faa8d7f480eded651254230091e",
       "lines": [
+        20,
         21,
         52,
         53,
@@ -1626,8 +1628,9 @@
     {
       "path": "platform/control-plane/test/outreach-mcp.test.ts",
       "type": "email-review",
-      "sha256": "2c57ba4ffd6ab9501b29024fe75fee0cb976b0a654bac1bdc21ca1eec85f7948",
+      "sha256": "b7b5e733be839f0b40168fe0e2db8d751b412876ab4b3587d05c67a707dc67af",
       "lines": [
+        17,
         43,
         50,
         59,
@@ -1842,10 +1845,8 @@
     {
       "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
       "type": "credential-literal-review",
-      "sha256": "7047178c2c03cbb628ab9f56f60c8a8ff4d3ae32d660b681a859acf2f4f79970",
-      "lines": [
-        489
-      ],
+      "sha256": "570586eb5339a1598e263258644481e2517a10a687aa9ea6bbbf8163b9deef8c",
+      "lines": [],
       "disposition": "remediation-required",
       "reason": "Google Fonts API key is a literal Google-key-shaped value in executable source. Require local key or disable remote font catalog; do not consume upstream quota."
     },

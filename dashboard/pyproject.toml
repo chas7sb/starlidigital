@@ -76,6 +76,9 @@ dependencies = [
     "Markdown==3.7",
     "pypandoc==1.15",
     "pandas==2.2.3",
+    # Keep the tested NumPy/Arrow ABI pair in both install entry points.
+    "numpy==1.26.4",
+    "pyarrow==21.0.0",
     "openpyxl==3.1.5",
     "pyxlsb==1.0.10",
     "xlrd==2.0.1",

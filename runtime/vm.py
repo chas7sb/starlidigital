@@ -80,8 +80,12 @@ def connect():
 def probe():
     executable = binary('qemu-system-x86_64')
     recommended = {'Windows': 'whpx', 'Linux': 'kvm', 'Darwin': 'hvf'}.get(platform.system())
+    explicit = platform.machine().lower() not in ('amd64', 'x86_64') or recommended is None
+    if explicit:
+        recommended = 'tcg'
     result = {'host': platform.system(), 'architecture': platform.machine(),
               'qemu': executable, 'recommended_accelerator': recommended,
+              'requires_explicit_accelerator_selection': explicit,
               'note': 'Accelerator listing is compile-time availability, not a successful VM boot.'}
     if executable:
         for flag, key in [('--version', 'version'), ('-accel help', 'accelerators')]:
@@ -90,6 +94,12 @@ def probe():
     return result
 
 def init(args):
+    if args.accel is None:
+        if platform.machine().lower() not in ('amd64', 'x86_64'):
+            raise RuntimeError('This launcher boots an x86_64 guest. On ARM hosts explicitly select --accel tcg; native ARM guests are not implemented.')
+        args.accel = {'Windows': 'whpx', 'Linux': 'kvm', 'Darwin': 'hvf'}.get(platform.system())
+        if not args.accel:
+            raise RuntimeError('Unknown host accelerator; explicitly choose --accel tcg')
     if (STATE / 'config.json').exists():
         raise RuntimeError('VM already configured; config and disk are retained')
     image = binary('qemu-img')
@@ -111,6 +121,7 @@ def init(args):
     except ValueError:
         iso_name = str(iso)
     save(STATE / 'config.json', {'disk': disk.name, 'iso': iso_name,
+         'instance_id': str(uuid.uuid4()),
          'memory_mb': args.memory_mb, 'cpus': args.cpus, 'accel': args.accel,
          'network': args.network, 'vnc_port': args.vnc_port})
     return {'configured': True, 'guest_installed': False, 'next': 'start, then complete Linux installation through local VNC'}
@@ -119,6 +130,8 @@ def command(config, qmp_port, name, serial_port=None):
     executable = binary('qemu-system-x86_64')
     if not executable:
         raise RuntimeError('QEMU missing; run doctor for details')
+    if config['accel'] != 'tcg' and platform.machine().lower() not in ('amd64', 'x86_64'):
+        raise RuntimeError('An x86_64 guest cannot use this hardware accelerator on an ARM host. Explicitly configure accel:tcg or use an x86_64 host.')
     if config['vnc_port'] < 5900 or config['vnc_port'] > 65535:
         raise RuntimeError('VNC port outside range 5900..65535')
     def esc(value):
@@ -132,7 +145,14 @@ def command(config, qmp_port, name, serial_port=None):
            '-vga', 'std', '-display', 'none', '-vnc', f"127.0.0.1:{config['vnc_port'] - 5900}",
            '-qmp', f'tcp:127.0.0.1:{qmp_port},server=on,wait=off',
            '-monitor', 'none',
-           '-device', 'qemu-xhci', '-device', 'usb-tablet', '-no-reboot']
+           '-device', 'qemu-xhci', '-device', 'usb-tablet',
+           '-object', 'rng-builtin,id=entropy', '-device', 'virtio-rng-pci,rng=entropy', '-no-reboot']
+    if config.get('instance_id'):
+        try:
+            identity = str(uuid.UUID(config['instance_id']))
+        except (ValueError, AttributeError, TypeError) as error:
+            raise RuntimeError('Invalid persistent VM instance_id UUID') from error
+        cmd += ['-uuid', identity]
     if serial_port:
         cmd += ['-chardev', f"socket,id=console,host=127.0.0.1,port={serial_port},server=on,wait=off,logfile={esc(STATE / 'serial.log')}", '-serial', 'chardev:console']
     else:
@@ -206,7 +226,7 @@ def main():
     sub.add_parser('doctor')
     create = sub.add_parser('init')
     create.add_argument('--iso', required=True)
-    create.add_argument('--accel', choices=['whpx', 'kvm', 'hvf', 'tcg'], default={'Windows': 'whpx', 'Linux': 'kvm', 'Darwin': 'hvf'}.get(platform.system(), 'tcg'))
+    create.add_argument('--accel', choices=['whpx', 'kvm', 'hvf', 'tcg'], help='Default WHPX/KVM/HVF on x86 hosts; ARM requires explicit tcg')
     create.add_argument('--memory-mb', type=int, default=4096)
     create.add_argument('--cpus', type=int, default=2)
     create.add_argument('--disk-gb', type=int, default=24)

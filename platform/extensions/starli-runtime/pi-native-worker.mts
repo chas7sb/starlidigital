@@ -18,7 +18,7 @@ export function withRuntimeClock(context:any,timeZone:unknown,now:Date=new Date(
  return {...context,systemPrompt:base+clock};
 }
 type Transport={send:(value:any)=>unknown;next:()=>Promise<IteratorResult<string>>;signal:AbortSignal};
-const SDK='/srv/starlidigital/mcp-workspace/codex-runtime/node_modules/@earendil-works';
+
 export function hostedConfiguration(env:NodeJS.ProcessEnv){
  if(env.STARLI_NATIVE_ACCOUNT_SELECTED==='1')throw Error('NATIVE_PI_ACCOUNT_PROVIDER_UNAVAILABLE');
  const scope=env.STARLI_BOSS_PROVIDER==='selfhosted'?'BOSS':'AGENT';
@@ -125,7 +125,7 @@ export function checkpointOutcome(status:string){
 export async function runNativeWorker(job:any,io:Transport,deps?:{Agent:any;streamSimple?:any;ModelRuntime?:any;fetch?:typeof fetch;config?:ReturnType<typeof hostedConfiguration>;now?:()=>Date}){
  if(job.remainingModelCalls!==undefined&&(!Number.isSafeInteger(job.remainingModelCalls)||job.remainingModelCalls<=0))throw Error('NATIVE_PI_MODEL_BUDGET_EXHAUSTED');
  const declaredTools=scopedNativeToolSpecs(job);
- const {Agent}=deps??await import(SDK+'/pi-agent-core/dist/index.js');
+ const {Agent}=deps??await import('@earendil-works/pi-agent-core');
  const receive=async()=>{const line=await io.next();if(line.done)throw Error('COORDINATOR_DISCONNECTED');return JSON.parse(line.value);};
  let rpcTail:Promise<unknown>=Promise.resolve();
  const rpc=<T,>(request:any,decode:(response:any)=>T):Promise<T>=>{
@@ -154,7 +154,7 @@ export async function runNativeWorker(job:any,io:Transport,deps?:{Agent:any;stre
     saveCredential:credential=>rpc({type:'account_credential_refresh',credential},response=>response?.credentialSaved===true)})
   :await (async()=>{
     const config=deps?.config??hostedConfiguration(process.env);
-    const stream=deps?.streamSimple??(await import(SDK+'/pi-ai/dist/api/openai-completions.js')).streamSimple;
+    const stream=deps?.streamSimple??(await import(new URL('./api/openai-completions.js',import.meta.resolve('@earendil-works/pi-ai')).href)).streamSimple;
     return {model:config.model,receipt:{transport:'PI_NATIVE',provider:'selfhosted',model:config.model.id},
       streamFn:(m:any,c:any,o:any)=>stream(m,c,{...o,apiKey:config.apiKey,maxTokens:8192,temperature:0})};
    })();

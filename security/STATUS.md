@@ -11,3 +11,17 @@ User chose Apache 2.0 for StarliDigital-owned code; provenance updated and root 
 Owned files: security/ and docs/provenance.md. No edits to other agents' files. No publication, customer-data APIs, production service changes or ledger changes performed.
 
 Latest transfer refresh: platform scan now covers 7,463 files including OpenPencil source. New owner actions: OpenPencil packages/core/src/constants.ts:489 contains a Google Fonts key-shaped source literal (configure locally; no validity test); generated platform/control-plane/data/ assets/previews are not matched by Git ignore yet (exclude whole directory). review-dispositions.json records seven actions with remediation verification states. All pattern candidates have a documented context/disposition; binary/oversized assets and final archive/history remain separate open gates. Original Starli code licensing choice is Apache 2.0; third-party terms preserved.
+
+## Final staged snapshot verification (supersedes open actions above)
+
+Snapshot index listing SHA-256: `0b1040b0dcb1928cfa58b5526de3ccf9aa80923b3f40fe96025ad0e848244e80`; 12,553 indexed regular source files. Index listing was unchanged throughout the immutable-blob scan. `index-audit.json` stores all blob OIDs/SHA-256s; `index-review-dispositions.json` records all 148 candidate dispositions and corrected recovery-default checks. No actionable secret patterns, no runtime/data/vendor paths, no credential-file exclusions, and no unsupported index entries found. 264 binary/oversized assets remain outside text-pattern scanning.
+
+Verified staged: OpenPencil Google Fonts key removed; Pexels key removed; main and Mission Control recovery defaults empty; mailbox upstream identity defaults removed; local search requires fresh secret. All six integration remediation manifest files match working-tree hashes and staged text after CRLF normalization. Empty `ADMIN_RECOVERY_EMAIL || ''` is intended; an earlier broad check incorrectly flagged it and was corrected. Source account-identifier domain is not a recovery destination.
+
+SearXNG youtube_noapi.py:32 uses an explicitly documented public YouTube web-client constant. Classified as upstream public-client source, not a configured user credential. Test token hits are mocked/redaction fixtures. No credentials tested over network.
+
+Private source integration push is clear from this bounded secret/data screening perspective. New staged changes require rechecking; this snapshot does not certify a future archive, Git history, exact upstream revisions, dependency-license completeness, binaries, or installation parity. Root scoped Apache license choice is recorded; third-party notices stay intact.
+
+## Publication scope clarification
+
+See source-publication-readiness.json and the final section of docs/provenance.md. No currently identified secret/customer-data or missing included-component-license finding remains in the reviewed source snapshot. Missing exact historical upstream commits and expanded notices for npm/pip packages installed separately are nonblocking follow-up work for this source publication. Retained dashboard, OpenPencil, SearXNG and recovered font notices remain mandatory; do not apply Apache 2.0 over them. Final archive/index consistency and changed-file review are concrete remaining checks. Product/native-install parity is separate from permission to publish an accurately described development source repository.

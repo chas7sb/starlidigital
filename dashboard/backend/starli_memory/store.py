@@ -1,6 +1,10 @@
 """Private per-account/per-agent Markdown memory. Canonical HEAD is the commit point."""
 from __future__ import annotations
-import dataclasses,datetime,fcntl,hashlib,json,os,re,stat,uuid
+import dataclasses,datetime,hashlib,json,os,re,stat,uuid
+if os.name != "nt":
+    import fcntl
+else:
+    from . import windows_io as _windows
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -76,7 +80,7 @@ def _replace(fd,name,data,committed_hook=None):
     try:
         _write_new(fd,temporary,data);os.replace(temporary,name,src_dir_fd=fd,dst_dir_fd=fd)
         if committed_hook:committed_hook()
-        os.fsync(fd)
+        _sync(fd)
     finally:
         try:os.unlink(temporary,dir_fd=fd)
         except FileNotFoundError:pass
@@ -88,6 +92,23 @@ def _directory(parent,name):
     info=os.fstat(fd)
     if info.st_uid!=os.geteuid() or info.st_mode&0o077:os.close(fd);raise MemoryFault("MEMORY_UNSAFE_PATH",409)
     return fd
+def _unlink(fd,name):
+    if os.name == "nt":return _windows.unlink(fd,name)
+    return os.unlink(name,dir_fd=fd)
+
+def _sync(fd):
+    if os.name != "nt":os.fsync(fd)
+    # Windows files are flushed before MoveFileExW(REPLACE_EXISTING|WRITE_THROUGH).
+
+def _free_bytes(fd):
+    if os.name == "nt":return _windows.free_bytes(fd)
+    free=os.fstatvfs(fd);return free.f_bavail*free.f_frsize
+
+if os.name == "nt":
+    _read=_windows.read
+    _write_new=_windows.write_new
+    _replace=_windows.replace
+
 class MemoryStoreFactory:
     def __init__(self,root,*,max_content_bytes=65536,history_limit=20,receipt_limit=4096,min_free_bytes=1048576,fault_hook=None):
         for value,maximum in ((max_content_bytes,1048576),(history_limit,100),(receipt_limit,16384)):
@@ -102,6 +123,10 @@ class MemoryStoreFactory:
         return _Store(self,scope,authorize)
     @contextmanager
     def _scope(self,scope):
+        if os.name == "nt":
+            with _windows.scope(self.root,scope.account_id,scope.agent_id) as directory:
+                yield directory
+            return
         # Anchor every component using no-follow dirfds; no resolve() symlink traversal.
         current=os.open("/",os.O_RDONLY|os.O_DIRECTORY)
         try:
@@ -161,8 +186,8 @@ class _Store:
         for name in os.listdir(fd):
             if re.fullmatch(document+r"-[0-9]{16}-[a-f0-9]{32}\.md",name) and name not in kept:
                 _read(fd,name,self.factory.max_content_bytes)
-                os.unlink(name,dir_fd=fd)
-        os.fsync(fd)
+                _unlink(fd,name)
+        _sync(fd)
     def _projection(self,fd,document,head,raw=None):
         projected=_read(fd,_NAMES[document],self.factory.max_content_bytes)
         known={item["contentSha256"] for item in head["history"]}|set(head.get("projectionHashes",[]))
@@ -220,8 +245,7 @@ class _Store:
                 self._auth("write");return {"version":"starli.memory.v1","document":view,"write":{"clientWriteId":client_write_id,"appliedRevision":prior["revision"],"deduplicated":True},"projectionPending":pending}
             if head["revision"]!=expected_revision:raise MemoryFault("MEMORY_REVISION_CONFLICT",409)
             if len(head["receipts"])>=self.factory.receipt_limit:raise MemoryFault("MEMORY_RECEIPT_QUOTA",429)
-            free=os.fstatvfs(fd)
-            if free.f_bavail*free.f_frsize<self.factory.min_free_bytes+len(raw)+len(json.dumps(head))*2+8192:raise MemoryFault("MEMORY_STORAGE_FULL",507)
+            if _free_bytes(fd)<self.factory.min_free_bytes+len(raw)+len(json.dumps(head))*2+8192:raise MemoryFault("MEMORY_STORAGE_FULL",507)
             if head["revision"]>=2**53-1:raise MemoryFault("MEMORY_REVISION_LIMIT",409)
             number=head["revision"]+1;ident=uuid.uuid4().hex;filename=f"{document_id}-{number:016d}-{ident}.md";committed=False
             item={"revision":number,"revisionId":ident,"contentSha256":_hash(raw),"updatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"provenance":prov,"file":filename,"deleted":operation=="delete"}
@@ -231,13 +255,13 @@ class _Store:
                 nonlocal committed
                 committed=True
             try:
-                self._hook("before_revision");_write_new(fd,filename,raw);os.fsync(fd);self._hook("after_revision")
+                self._hook("before_revision");_write_new(fd,filename,raw);_sync(fd);self._hook("after_revision")
                 self._hook("before_head");self._auth("write")
                 _replace(fd,document_id+".head.json",_pack(new),mark_committed)
                 self._hook("after_head");self._hook("before_projection");self._projection(fd,document_id,new,raw)
             except Exception:
                 if not committed:
-                    try:os.unlink(filename,dir_fd=fd);os.fsync(fd)
+                    try:_unlink(fd,filename);_sync(fd)
                     except FileNotFoundError:pass
                     raise
             try:pending=_read(fd,_NAMES[document_id],self.factory.max_content_bytes)!=raw
@@ -247,9 +271,9 @@ class _Store:
                 if old not in retained:
                     try:
                         existing=_read(fd,old["file"],self.factory.max_content_bytes)
-                        if existing is not None:os.unlink(old["file"],dir_fd=fd)
+                        if existing is not None:_unlink(fd,old["file"])
                     except Exception:pass
-            try:os.fsync(fd)
+            try:_sync(fd)
             except OSError:pending=True
             self._auth("write")
             return {"version":"starli.memory.v1","document":self._view(fd,document_id,new),"write":{"clientWriteId":client_write_id,"appliedRevision":number,"deduplicated":False},"projectionPending":pending}
