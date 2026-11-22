@@ -1,0 +1,32 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "scope": "Representative local disposable HTTP actions; no external sends/inference/publishing/payment calls",
+  "observed_at_utc": "2026-11-22T08:31:52.155771+00:00",
+  "dashboard": "http://127.0.0.1:18280",
+  "created": {},
+  "checks": [
+    {
+      "name": "owner-auth",
+      "status": "PASS",
+      "owner": "AgentX10",
+      "source": "onboarding/first_run.py",
+      "evidence": {
+        "role": "admin"
+      }
+    },
+    {
+      "name": "real-tool-catalog",
+      "status": "FAIL",
+      "owner": "AgentX2/3",
+      "source": "dashboard/backend/open_webui/routers/starli_tools.py",
+      "detail": "HTTP 502",
+      "private_receipt_range": [
+        0,
+        1
+      ],
+      "action": "Inspect private receipts and reproduce with the same disposable instance; no automatic mutation retries."
+    }
+  ],
+  "passed": 1,
+  "failed": 1
+}

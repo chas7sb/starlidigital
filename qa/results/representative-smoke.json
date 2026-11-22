@@ -1,0 +1,151 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "scope": "Ten representative local disposable authenticated HTTP feature checks; not full feature/OS/UI/VM parity",
+  "execution": "Single complete actual HTTP execution",
+  "dashboard": "http://127.0.0.1:18280",
+  "created": {
+    "crm_company": "da87fa5b-a8a3-46a8-b6de-0339cc535508",
+    "project": "prj_833e3b43f0014e74a7d9",
+    "hosted_agent": "c1ff7bb7-8a73-49db-87e3-9fc5fc56da43",
+    "video_project": "vproj-c1863827-47d2-47dd-8479-7bda7154c506",
+    "video_render": "vrnd-6479fbb1-eaff-419c-8ed5-1dabe49afc59"
+  },
+  "checks": [
+    {
+      "name": "owner-auth",
+      "status": "PASS",
+      "owner": "AgentX10",
+      "source": "onboarding/first_run.py",
+      "evidence": {
+        "role": "admin"
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "real-tool-catalog",
+      "status": "PASS",
+      "owner": "AgentX2/3",
+      "source": "dashboard/backend/open_webui/routers/starli_tools.py",
+      "evidence": {
+        "count": 69,
+        "required_present": [
+          "crm_upsert_prospect",
+          "agent_create",
+          "agent_get",
+          "video_project_create",
+          "video_project_get",
+          "video_validate",
+          "video_preview_frame",
+          "project_file_write"
+        ]
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "crm-create-search-detail",
+      "status": "PASS",
+      "owner": "AgentX2/3",
+      "source": "platform/control-plane/src/tools/crm.ts",
+      "evidence": {
+        "id": "da87fa5b-a8a3-46a8-b6de-0339cc535508",
+        "version": 1,
+        "detail_matches": true,
+        "search_matches": true
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "project-create-detail",
+      "status": "PASS",
+      "owner": "AgentX2",
+      "source": "dashboard/backend/open_webui/routers/starli_workspace.py",
+      "evidence": {
+        "id": "prj_833e3b43f0014e74a7d9",
+        "detail_matches": true
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "project-file-edit-cas",
+      "status": "PASS",
+      "owner": "AgentX2",
+      "source": "dashboard/backend/open_webui/routers/starli_workspace.py",
+      "evidence": {
+        "sha256": "b8c929f7ca8d3830a22f97de0db11869468047de79836fb49404e5b580807cd7",
+        "version": 3,
+        "stale_edit_http": 409
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "hosted-agent-create-read",
+      "status": "PASS",
+      "owner": "AgentX3",
+      "source": "platform/control-plane/src/tools/hosted-agents.ts",
+      "evidence": {
+        "id": "c1ff7bb7-8a73-49db-87e3-9fc5fc56da43",
+        "status": "DRAFT",
+        "configuration_matches": true
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "unconfigured-integrations",
+      "status": "PASS",
+      "owner": "AgentX2",
+      "source": "dashboard/backend/open_webui/routers/starli_billing.py",
+      "evidence": {
+        "wallet_available": false,
+        "wallet_null": true,
+        "paymentsEnabled": false,
+        "mail_connected": false,
+        "mail_status": "CONNECTION_REQUIRED",
+        "social_state": "CLIENT_NOT_CONFIGURED"
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "video-create-read",
+      "status": "PASS",
+      "owner": "AgentX3",
+      "source": "platform/server/src/video/service.ts",
+      "evidence": {
+        "id": "vproj-c1863827-47d2-47dd-8479-7bda7154c506",
+        "width": 240,
+        "height": 240,
+        "fps": 10,
+        "metadata_matches_spec": true,
+        "detail_received": true
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "video-validate-png",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/video/service.ts",
+      "evidence": {
+        "bytes": 3056,
+        "sha256": "33fb474d2d81224c196c999809a721f2087055fd48daaa13223a20fa393e7191",
+        "valid": true
+      },
+      "source_report": "feature-smoke.json"
+    },
+    {
+      "name": "video-mp4-render",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/video/worker.ts",
+      "evidence": {
+        "renderId": "vrnd-6479fbb1-eaff-419c-8ed5-1dabe49afc59",
+        "status": "COMPLETE",
+        "downloaded_bytes": 10850,
+        "sha256": "b522509a0fb815494626b48561eb5f87d1f6faca00492bf4f62893699201d430",
+        "mp4_ftyp": true
+      },
+      "source_report": "feature-smoke.json"
+    }
+  ],
+  "passed": 10,
+  "failed": 0
+}

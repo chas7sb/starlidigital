@@ -57,11 +57,11 @@ function dashboardEnv() {
     ENABLE_COMMUNITY_SHARING: 'false', ENABLE_VERSION_UPDATE_CHECK: 'false', OFFLINE_MODE: 'true', ANONYMIZED_TELEMETRY: 'false', STARLI_LOCAL_VM_ENABLED: '1',
     CORS_ALLOW_ORIGIN: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'};http://127.0.0.1:${process.env.STARLI_DASHBOARD_PORT || '8080'}`,
     HF_HUB_OFFLINE: '1', STARLI_COMPANY_MESSAGING_ENABLED: '1',
-    DATA_DIR: data, STARLI_NODE_BINARY: node24(), STARLI_NODE_BIN: node24(), STARLI_PYTHON_BIN: python(), STARLI_PLATFORM_ORIGIN: `http://127.0.0.1:${process.env.PORT || '4100'}`, STARLI_CONTROL_PLANE_ORIGIN: 'http://127.0.0.1:4120',
+    DATA_DIR: data, STARLI_NODE_BINARY: node24(), STARLI_NODE_BIN: node24(), STARLI_PYTHON_BIN: python(), PYTHON_BIN: process.env.STARLI_VIDEO_PYTHON || videoPython(), STARLI_PLATFORM_ORIGIN: `http://127.0.0.1:${process.env.PORT || '4100'}`, STARLI_CONTROL_PLANE_ORIGIN: 'http://127.0.0.1:4120',
     STARLI_PUBLIC_ORIGIN: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'}`, WEBUI_URL: `http://localhost:${process.env.STARLI_DASHBOARD_PORT || '8080'}`,
     STARLI_STATE_DIR: join(data, 'starli-state'), STARLI_TASK_HOME: join(data, 'tasks'),
     STARLI_SOURCE_DATABASE: join(root, 'platform/server/data/starli.sqlite'),
-    STARLI_COMPANY_DATABASE: join(data, 'company.sqlite'), STARLI_COMPANY_BOT_DATABASE: join(data, 'company-bot.sqlite'),
+    STARLI_COMPANY_DATABASE: join(data, 'company-authority.sqlite3'), STARLI_COMPANY_BOT_DATABASE: join(data, 'company-authority.sqlite3'),
     STARLI_MEMORY_ROOT: join(data, 'memory'), STARLI_RUNTIME_CODE_DIR: join(root, 'platform/extensions/starli-runtime'), STARLI_PLATFORM_SOURCE_ROOT: join(root, 'platform') };
 }
 function source(component) {

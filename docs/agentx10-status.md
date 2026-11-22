@@ -1,47 +1,68 @@
 # AgentX 10 status
 
-Updated: 2026-11-22. Ownership limited to `docs/README-draft.md`, `docs/architecture.md`, and this file.
+Updated: 2026-11-22. This is the current result; the historical section below is explicitly superseded.
 
-## First-run implementation follow-up
+## Ownership and completed work
 
-LATEST RETRY (ports18280/18281): full fresh bootstrap PASSED again with new administratorEmail policy and owner company. Windows account-MCP ACL source fix cleared prior gate. Dashboard now fails before HTTP listener on unconditional `import fcntl` in `dashboard/backend/starli_memory/store.py`; AgentX5 independently reports same remaining source blocker. No HTTP sign-in, VM bridge, or frame success is claimed from this attempt. All test service children stopped by harness. Disposable private state/logs: work/onboarding-e2e-002f46dd2c5a. No credentials emitted.
+Prime assigned docs/README-draft.md, docs/architecture.md, this status file, and subsequently onboarding/. Implemented the trusted first-owner setup/start/check flow and disposable real-service QA with same-state resume. No production service, production ledger, customer database, packaging workflow, or another agent's source directory was modified.
 
-QA harness now supports `--serve` to retain a successfully tested instance for Prime visual QA; uses18280/18281, stores credentials/processIDs/result/frame only in ignored private work state, and checks authenticated VM status+PNG without any guest input. Five helper tests pass. Setup environment now also overrides inherited STARLI_DATA_DIR/config/workspace/assets/videos with own private paths; provider Node24 resolves to an absolute executable so dashboard Node22 PATH cannot accidentally select the wrong provider runtime. Ready to rerun after fcntl source portability fix.
+## Current verified result
 
-CURRENT RESULT: dashboard Python dependencies installed. Actual disposable setup PASSED with application migrations, dashboard admin insertion, Node admin insertion, explicit private binding and fresh owner company. Initial real dashboard startup exposed Windows CP1252 banner failure; onboarding environment now sets PYTHONUTF8=1/PYTHONIOENCODING=utf-8 and exact local CORS. Retried full services: Node API started on loopback18981, dashboard failed before HTTP listening at main.py:997 -> oauth_connect.Store:52 with MCP_OAUTH_STORAGE_DENIED (Windows st_mode POSIX permission test; subsequent os.O_NOFOLLOW also needs portable source handling). AgentX5 independently recorded the same blocker. No source bypass applied. Full real sign-in/admin/customer/company HTTP checks remain pending this source fix. Test-owned services were stopped by harness. Five helper tests and syntax checks pass.
+Actual Windows runtime checks passed against the existing dashboard Python application and Node platform:
 
-VM handoff implemented: private native onboarding env explicitly sets STARLI_LOCAL_VM_ENABLED=1; check performs Bearer+same-origin read-only local-vm/status and reports no guest readiness/control inference. No VM start/stop/input was called. Provider runtime directory corrected to platform/extensions/starli-runtime, with Node24 selected. Node owner now imports administratorEmail and supplies the entered operator email through in-memory process.env.ADMIN_EMAIL; explicit ID binding remains authority. README production suffix claim removed.
+- Fresh application migrations, dashboard administrator creation, Node administrator creation through the actual Store/password functions, and private ID binding.
+- Company creation through the actual Authority model, owner membership, and actual BotRegistry schema initialization. No bot identities or grants were fabricated.
+- Both HTTP health endpoints; real owner sign-in; platform administrator access; native customer identity resolving to the expected Node owner; company listing and owner capabilities.
+- Unauthenticated platform administrator access denied with HTTP 403.
+- Authenticated SDK catalog returned 42 providers; authenticated account catalog returned 69 authorized tools without an isError result.
+- Same-origin Bearer VM status and a valid image/png frame. No VM lifecycle or guest input command was sent by this QA.
+- Controlled resume preserved the same databases and owner/company/Node IDs. Byte-content comparisons confirmed setup.json, owner.json, bindings.json and qa-credentials.json remained unchanged, preserving the session secret and browser authentication.
 
-Latest follow-up: company authority is now included. Inspected mounted `/api/v1/companies` route factory and actual inherited `Authority.create`. Added explicit company-name prompt; trusted creation of a fresh company with dashboard owner membership; authenticated list and capabilities checks. Important integration detail: mounted routers/companies.py uses DATA_DIR/company-authority.sqlite3 directly, so helper sets STARLI_COMPANY_DATABASE to that identical path rather than a different company.sqlite file. Node owner script now imports new source accountEmail policy with local.invalid domain. Source ownership remains unchanged.
+All 11 onboarding/resume regression tests passed on Windows, and Python/Node syntax checks passed. These results establish the tested core owner/catalog/VM-read boundaries. They do not establish full dashboard feature parity, successful provider inference, tool execution, or native boot on all three operating systems.
 
-Latest QA attempt after preflight improvement: qa_e2e.py fails cleanly before setup/config/database creation because all required dashboard modules are still absent in shared venv (typer, uvicorn, fastapi, sqlalchemy, alembic, passlib, bcrypt, peewee, peewee_migrate, redis, jwt, pytz, markdown, bs4, requests, pydantic). Synthetic credentials/logs remain in private ignored work only. Full HTTP test is ready to rerun once AgentX5 finishes requirements installation. No additional package installation was started by AgentX10.
+## Current retained QA instance
 
-Actual model validation PASSED: Node administrator created in disposable own database with qaowner@local.invalid; second owner bootstrap refused; actual company Authority.create/require_member/list_companies returned the fresh owner. Four helper security/state tests plus Python/Node syntax checks PASS. Full disposable qa_e2e.py attempt still stopped at missing typer in the shared Python venv before account creation; downloads/install remain owned by AgentX5. No HTTP sign-in/identity/company route success is claimed yet.
+Dashboard: http://127.0.0.1:18280/setup. Node API: http://127.0.0.1:18281.
 
-Frontend coordination: new `/setup` reuses Providers and is documented as post-CLI owner setup. Its existing conditional “Create administrator account” public-signup branch conflicts with auths.py's zero-user 503 policy; AgentX2 should replace that branch with trusted local CLI setup instructions. No dashboard source edited here. QA harness is ready: installer/.runtime/python/Scripts/python.exe onboarding/qa_e2e.py (POSIX equivalent uses bin/python). It launches isolated ports 18980/18981, keeps generated credentials only in ignored private work state, checks real sign-in/admin/customer identity/company authority and unauthenticated denial, and stops its own children.
+State remains in ignored work/onboarding-e2e-a73d69bf46c9. Synthetic credentials exist only in its private qa-credentials.json; do not emit them to chat, logs or command arguments. Current qa-processes.json records supervisor 168624 and direct children 44616/80544 (exec session 84673). Verify the current manifest and actual process identities before any future stop; PID values can become stale.
 
-Prime additionally assigned `onboarding/`. Implemented interactive first_run.py setup/start/check, actual offline dashboard-model owner creation, actual Node Store/hashPassword owner creation through stdin, private explicit admin bindings, fresh shared source database configuration, stable generated session secret, literal-loopback and redirect/proxy restrictions, and credential-free output. Native-only helper; existing services/databases untouched.
+Current qa-result.json records core_passed=true, resumed=true, owner_files_unchanged=true, provider_count=42, tool_count=69 and vm.passed=true. Previous QA results/process manifests are retained privately under history names. The source reload reused this state and did not bootstrap a new owner. The instance is retained for Prime's browser QA and AgentX8's extended checks. Do not launch a competing 182xx instance.
 
-Identity finding: no missing ordinary customer bridge: ensure_native_customer already creates nonce-checked password-disabled Node service users. Platform administrator reads require explicit STARLI_BINDINGS_PATH mapping plus both native admin roles. Public signup intentionally returns 503 on zero users, requiring trusted offline owner bootstrap. Helper creates the explicit admin mapping and now the separate company owner authority through its supported model. Bots remain outside this helper.
+## Identity, paths and privacy fixes
 
-Validation: Python compilation, Node syntax and loopback validation passed. Actual disposable offline bootstrap attempt stopped at missing Python `typer` dependency in the shared venv (dependency installation still in progress under AgentX5). No owner creation or runtime API sign-in success is claimed. Disposable partial config is under ignored work/onboarding-qa-*; actual onboarding/.local not created. Source owners need no source edits for the observed customer/admin bridge; installer owner should route fresh native onboarding through onboarding/README.md and preserve the helper's environment on launch.
+- Public signup deliberately refuses zero-user owner bootstrap. Trusted local setup uses the application's actual migrations, hashing and models before services start.
+- Ordinary native customers already have a nonce-checked, password-disabled Node service identity bridge. Platform administration additionally requires the private WebUI-ID to Node-ID mapping plus both native administrator roles. Email equality does not confer authority.
+- Node owner creation uses the source administratorEmail policy with the supplied operator email; general account identifiers use local.invalid. No production email suffix is forced by onboarding.
+- Company authority uses DATA_DIR/company-authority.sqlite3. STARLI_COMPANY_DATABASE points at that exact file, and the separate configured registry database is initialized through BotRegistry before the full workspace starts.
+- Both DATABASE_URL and the native launcher's higher-priority STARLI_DASHBOARD_DATABASE_URL are forced to the same private dashboard SQLite path. The regression test rejects accidental redirection through an ambient override.
+- STARLI_DATA_DIR, source database, config, workspace, assets, videos, company and memory paths are explicitly local to this owner state. Local company messaging is enabled because the full workspace requires its room store; no external transport credentials are implied.
+- private_write uses shared starli_private_fs.create_private_file. Private directories/files are created with protected owner-only Windows DACLs from the outset; existing broad explicit grants are rejected without repair. private_read validates files through require_private_file before reading configuration, credentials or bindings.
+- Actual Windows tests cover explicit Everyone-directory grant rejection, no secret write/no repair, exclusive creation and acceptance by the shared private-file validator.
+- Origins are literal loopback HTTP with explicit ports; checks reject redirects and environment HTTP proxies. Local CORS/origins and Python UTF-8 settings are explicit.
+- Trusted binary configuration supplies dashboard sys.executable as STARLI_PYTHON_BIN, resolved Node24 as STARLI_NODE_BIN/STARLI_NODE_BINARY, and the isolated video interpreter as PYTHON_BIN. Provider runtime code uses platform/extensions/starli-runtime.
+- Source-owner Windows ACL/memory portability and SYSTEMROOT child-environment fixes are now loaded in the retained instance. The real provider/tool catalogs passed after reload; these are not mocked catalogs.
 
-## Completed
+## Controlled resume and CI contract
 
-- Read shared Prime ledger and packaging status.
-- Inspected upstream source using read-only tools; resolved both current release symlinks directly.
-- Drafted self-hosting onboarding, feature map, architectural boundaries, source evidence, and explicit missing release gates.
-- Wrote only the three owned documentation files. No production changes, ledger writes, external publication, account mutations, or runtime tests performed.
+qa_e2e.py --resume PRIVATE_DIR --serve validates containment under ROOT/work, rejects symlink/reparse traversal, validates private config/credentials/owner/binding and database locations, refuses occupied ports and skips bootstrap. Only QA logs/result/process metadata are rotated; owner files, databases and credentials are reused.
 
-## Integration findings
+Regression tests cover outside-work and linked-directory rejection, binding mismatch, occupied-port refusal before bootstrap/spawn, and unchanged owner files during actual resumed QA.
 
-- Backend root requires Node >=24; separate existing Svelte dashboard declares Node 18.13–22.x. No shared engine version satisfies both manifests.
-- Existing dashboard includes a Python FastAPI/Open WebUI API requiring Python 3.11/3.12. Node root build targets its own `web` workspace, not this separate dashboard.
-- Node `static.ts` serves `web/dist`; do not assume that is the existing dashboard.
-- Node defaults to loopback port 4100, uses SQLite via `node:sqlite`, and accepts `DATABASE_PATH`.
-- Company dashboard calls `/api/v1/starli/*`; proxy/identity integration needs verification.
-- Dedicated Browser panel is evidence of a UI surface, not proof of requested VM lifecycle/isolation.
+The first_run setup, environment, private_read and private_write interfaces remain available for the independently owned packaging/native_boot_smoke.py workflow. AgentX10 did not start a duplicate 184xx instance or edit packaging/CI files. Windows runtime evidence here must not be described as three-OS native-boot evidence.
 
-## Validation and blockers
+## Remaining scope and limits
 
-Documentation checked against listed source files; no install/runtime/parity claims made. Packaging, license clearance, sanitized source completeness, provider configuration, full dashboard integration, three-platform verification, and VM acceptance remain release blockers for the integration owners. The draft should become the final README only after these are resolved and concrete launcher commands are available.
+Full dashboard parity remains tracked by docs/feature-parity.md and the integration owners. Provider login/inference, external communications, commercial services, complete tool execution, backup/restore/upgrade/uninstall, release provenance and distribution gates are separate from these owner-flow checks. VM status/frame does not certify guest readiness, input behavior, isolation or portability. Refer to the runtime owner's evidence for those claims.
+
+Use the root README, docs/install.md and onboarding/README.md for current install/setup/start commands. Keep the current QA server running until Prime completes the visual handoff.
+
+## Superseded historical observations
+
+The initial documentation-only inventory preceded implementation and must not be treated as current readiness. Its statements that no runtime tests had run, all integration was unverified, or no launcher existed are superseded by the results above.
+
+Earlier attempts encountered missing Python packages, CP1252 banner output, POSIX-only account-MCP permission checks, an unconditional fcntl import, disabled local messaging, an absent registry database, an ambient dashboard database override, and insufficient private-file ACL creation. Dependencies, source-owner portability fixes and the onboarding changes described above resolved those gates; no bypass or fake factory was used.
+
+The VM briefly reported stopped/503 during export/restart. Subsequent authenticated status/frame checks passed; that stopped result is historical rather than the current QA result. Earlier supervisors 16588 and 205332 were verified and retired. Their historical credentials/process records must not be used for the current service.
+
+The original backend and dashboard Node manifests declared non-overlapping versions. The installer now uses separate Node24 and Node22 runtimes plus dashboard Python, rather than assuming a single Node environment covers the full application.
+

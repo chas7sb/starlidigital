@@ -10,6 +10,12 @@ from pathlib import Path
 class PrivateStorageError(OSError):
     pass
 
+def _require_posix_metadata(info, directory, uid):
+    if (info.st_uid != uid or info.st_mode & 0o077
+            or not (stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode))
+            or (not directory and info.st_nlink != 1)):
+        raise PrivateStorageError('PRIVATE_STORAGE_OWNER_TYPE_OR_MODE_DENIED')
+
 if os.name == 'nt':
     import ctypes as C
     from ctypes import wintypes as W
@@ -156,17 +162,18 @@ if os.name == 'nt':
 else:
     def ensure_private_directory(path):
         path=Path(path);path.mkdir(parents=True,exist_ok=True,mode=0o700)
-        if path.is_symlink() or path.stat().st_mode & 0o077:
-            raise PrivateStorageError('PRIVATE_STORAGE_DIRECTORY_DENIED')
+        descriptor=os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:_require_posix_metadata(os.fstat(descriptor),True,os.geteuid())
+        finally:os.close(descriptor)
 
     def ensure_private_database(path):
         path=Path(path)
-        if not path.is_absolute() or path.is_symlink():raise PrivateStorageError('PRIVATE_STORAGE_PATH_DENIED')
+        if not path.is_absolute():raise PrivateStorageError('PRIVATE_STORAGE_PATH_DENIED')
         ensure_private_directory(path.parent)
-        fd=os.open(path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
-        try:
-            info=os.fstat(fd)
-            if info.st_nlink!=1 or info.st_mode & 0o077:raise PrivateStorageError('PRIVATE_STORAGE_FILE_DENIED')
+        # NONBLOCK ensures attacker-created FIFOs/devices cannot hang startup;
+        # fstat on the no-follow descriptor requires an owned regular file.
+        fd=os.open(path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW|os.O_NONBLOCK,0o600)
+        try:_require_posix_metadata(os.fstat(fd),False,os.geteuid())
         finally:os.close(fd)
 
 

@@ -1,7 +1,10 @@
 import importlib.util
 import json
 from pathlib import Path
+import socket
+import struct
 import tempfile
+import threading
 import unittest
 from unittest.mock import patch
 
@@ -71,5 +74,65 @@ class AdapterTests(unittest.TestCase):
             with patch.object(adapter, 'ROOT', root), patch.object(adapter.vm, 'STATE', state), patch.object(adapter.vm, 'stop', return_value={'state':'shutdown-requested'}) as stop:
                 self.assertEqual(adapter.lifecycle('stop')['state'], 'shutdown-requested')
                 stop.assert_called_once_with(False)
+
+class RFBProtocolTests(unittest.TestCase):
+    """Exercise actual loopback socket packets; never touch the real guest."""
+    def setUp(self): adapter._last.clear()
+
+    def protocol(self, expected_packets, action):
+        listener = socket.socket(); listener.bind(('127.0.0.1',0)); listener.listen(1)
+        number=listener.getsockname()[1]
+        errors=[]; observed=[]
+        def receive(sock,size):
+            data=b''
+            while len(data)<size:
+                block=sock.recv(size-len(data))
+                if not block: raise AssertionError('RFB client disconnected early')
+                data+=block
+            return data
+        def server():
+            try:
+                client,_=listener.accept()
+                with client:
+                    client.settimeout(3)
+                    client.sendall(b'RFB 003.008\n')
+                    self.assertEqual(receive(client,12),b'RFB 003.008\n')
+                    client.sendall(b'\x01\x01')
+                    self.assertEqual(receive(client,1),b'\x01')
+                    client.sendall(b'\0\0\0\0')
+                    self.assertEqual(receive(client,1),b'\x01')
+                    name=b'isolated-test-frame'
+                    client.sendall(struct.pack('!HH',800,600)+b'\0'*16+struct.pack('!I',len(name))+name)
+                    # Must come before every client's input, rather than treating
+                    # absolute coordinates as relative movement on a fresh client.
+                    self.assertEqual(receive(client,8),struct.pack('!BBHi',2,0,1,0))
+                    for size in expected_packets: observed.append(receive(client,size))
+            except Exception as error: errors.append(error)
+            finally: listener.close()
+        worker=threading.Thread(target=server,daemon=True); worker.start()
+        qmp=FakeQMP('tracked','tracked')
+        try:
+            with patch.object(adapter,'_checked_state'),patch.object(adapter.vm,'load',return_value={'vnc_port':number}),patch.object(adapter.vm,'connect',return_value=(qmp,{})):
+                action()
+        finally:
+            worker.join(5)
+            listener.close()
+        self.assertFalse(worker.is_alive(),'RFB protocol server failed to complete')
+        if errors: raise errors[0]
+        self.assertEqual(qmp.calls[0][0],'query-status')
+        return observed
+
+    def test_set_encodings_precedes_absolute_pointer_press_and_release(self):
+        observed=self.protocol([6,6],lambda:adapter.input_event('pointer',x=123,y=234,button='left'))
+        self.assertEqual([struct.unpack('!BBHH',packet) for packet in observed],[(5,1,123,234),(5,0,123,234)])
+
+    def test_uppercase_keysyms_and_shifted_punctuation_match_console(self):
+        expected=[]
+        for code,shift in [(ord('A'),True),(ord('z'),False),(ord('2'),True),(ord('/'),True),(ord(';'),True)]:
+            if shift: expected.append((4,1,0,0xffe1))
+            expected.extend([(4,1,0,code),(4,0,0,code)])
+            if shift: expected.append((4,0,0,0xffe1))
+        observed=self.protocol([8]*len(expected),lambda:adapter.input_event('text',text='Az@?:'))
+        self.assertEqual([struct.unpack('!BBHI',packet) for packet in observed],expected)
 
 if __name__ == '__main__': unittest.main()

@@ -8,10 +8,10 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const envFile = resolve(here, 'local.env');
-const args = process.argv.slice(2);
+const args = process.argv.slice(2).map(arg => ['--help', '-h'].includes(arg) ? 'help' : arg);
 const dry = args.includes('--dry-run');
-const native = args.includes('--native');
 const docker = args.includes('--docker');
+const native = args.includes('--native') || !docker;
 const flags = ['--dry-run', '--native', '--docker'];
 const action = args.find(a => !flags.includes(a)) || 'help';
 const allowed = ['help', 'doctor', 'init', 'install', 'build', 'setup', 'health', 'start', 'stop', 'status', 'logs', 'config'];
@@ -48,7 +48,7 @@ function nativeFlow() {
   const node = process.env.STARLI_NODE24 || process.execPath;
   const script = resolve(here, 'native.mjs');
   const py = resolve(here, '.runtime/python', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
-  if (action === 'help') console.log('StarliDigital native installation\nnode installer/starli.mjs install --native\nnode installer/starli.mjs setup --native\nnode installer/starli.mjs start --native\ninstall prepares separate runtimes/dependencies and builds both apps. setup prompts privately for first owner credentials. start uses that private installation.\nAlso: doctor, build, health with --native. Ctrl+C stops foreground services.\nDocker deployment: use --docker; separate owner provisioning is required.');
+  if (action === 'help') console.log('StarliDigital — native mode by default\nnode installer/starli.mjs install\nnode installer/starli.mjs setup\nnode installer/starli.mjs start\ninstall prepares separate runtimes/dependencies and builds both apps. setup prompts privately for first owner credentials. start uses that private installation.\nAlso: doctor, build, health. --native is optional. Ctrl+C stops foreground services.\nDocker deployment requires --docker; separate owner provisioning is required.');
   else if (action === 'install') {
     const embedded = resolve(here, '.runtime/node22', process.platform === 'win32' ? 'node.exe' : 'bin/node');
     if (!process.env.STARLI_NODE22 && !existsSync(embedded)) nativeCommand(node, [script, 'bootstrap-node22']);
@@ -56,16 +56,16 @@ function nativeFlow() {
     nativeCommand(node, [script, 'build', 'all']);
   } else if (['doctor', 'build', 'health'].includes(action)) nativeCommand(node, [script, action, 'all']);
   else if (['setup', 'start'].includes(action)) {
-    if (!dry && !existsSync(py)) fail('Native Python environment is missing. Run install --native first.');
-    if (action === 'start' && !dry && !existsSync(resolve(root, 'onboarding/.local/setup.json'))) fail('Native owner setup is required. Run setup --native first; it prompts for credentials privately.');
+    if (!dry && !existsSync(py)) fail('Native Python environment is missing. Run install first.');
+    if (action === 'start' && !dry && !existsSync(resolve(root, 'onboarding/.local/setup.json'))) fail('Native owner setup is required. Run setup first; it prompts for credentials privately.');
     nativeCommand(py, [resolve(root, 'onboarding/first_run.py'), action]);
-  } else fail(`${action} is not a native command. Use --native help. Native services run in the foreground; Ctrl+C stops them.`);
+  } else fail(`${action} is not a native command. Use --docker for Docker commands, or help. Native services run in the foreground; Ctrl+C stops them.`);
 }
 try {
   if (!allowed.includes(action) || args.some(a => a !== action && !flags.includes(a)) || (native && docker)) fail('Unknown or conflicting command/option. Use help.');
   if (native) nativeFlow();
   else if (action === 'help') {
-    console.log('StarliDigital\nNative: install --native, setup --native, start --native\nDocker: doctor/init/install/start/stop/status/logs/config --docker\nWithout a mode flag, Docker mode is retained for compatibility.\nAdd --dry-run to print commands. Native install builds apps; setup prompts for owner credentials. Docker mode does not provision an installation owner.\nNo command creates a computer-use VM or publishes the application.');
+    console.log('StarliDigital Docker deployment (--docker required)\nCommands: doctor/init/install/start/stop/status/logs/config --docker\nAdd --dry-run to print commands. Docker mode does not provision an installation owner.\nNative install/setup/start are the default. No command creates a computer-use VM or publishes the application.');
   } else if (action === 'init') {
     if (existsSync(envFile)) console.log('Local configuration already exists; preserved.');
     else if (dry) console.log('Would create installer/local.env with a new random dashboard session secret.');

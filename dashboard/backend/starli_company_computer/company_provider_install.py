@@ -1,4 +1,5 @@
 """Install one company vault instance for API and runtime; no personal vault lookup."""
+import starli_portable as _portable
 import hashlib,json,os,subprocess
 from pathlib import Path
 from cryptography.fernet import Fernet
@@ -14,7 +15,7 @@ class ProviderSDK:
     def call(self,operation,**values):
         env={k:os.environ[k] for k in ('PATH','LANG','LC_ALL','TZ','TMPDIR','SSL_CERT_FILE','SystemRoot','WINDIR','TEMP','TMP') if k in os.environ}
         env.update(STARLI_COMPANY_PI_SDK=self.sdk,HOME='/nonexistent')
-        result=subprocess.run([self.node,self.script],input=json.dumps({'operation':operation,**values}).encode(),stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,env=env,timeout=25)
+        result=subprocess.run([self.node,self.script],input=json.dumps({'operation':operation,**values}).encode(),stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,env=_portable.child_environment(env),timeout=25)
         if result.returncode or len(result.stdout)>8388608:raise RuntimeError('COMPANY_PROVIDER_METADATA_FAILED')
         response=json.loads(result.stdout)
         if response.get('ok') is not True:raise RuntimeError('COMPANY_PROVIDER_METADATA_FAILED')

@@ -1,0 +1,9 @@
+{
+  "operation": "catalog",
+  "added_systemroot": true,
+  "returncode": 0,
+  "error_codes": [],
+  "missing_packages": [],
+  "stdout_json_receipt": true,
+  "private_artifacts": "C:\\Users\\Administrator\\Documents\\Codex\\2026-11-22\\ii\\outputs\\starlidigital\\work\\onboarding-e2e-a73d69bf46c9\\feature-smoke-81bf1b35"
+}

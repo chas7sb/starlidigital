@@ -31,7 +31,28 @@
     "gui_pointer_and_keyboard_verified": true,
     "graceful_acpi_stop_verified": true,
     "desktop_after_restart_verified": true,
+    "clean_first_boot_machine_id_regenerated": true,
+    "clean_first_boot_random_seed_generated": true,
+    "root_password_locked": true,
+    "operator_password_locked": true,
+    "ssh_service_installed": false,
+    "current_network_profile": "none",
+    "dashboard_adapter_live_text_verified": true,
+    "dashboard_adapter_live_pointer_verified": true,
     "dashboard_agent_connected": false
   },
-  "platforms": {"windows": "boot tested", "macos": "not tested", "linux": "not tested"}
+  "clean_base_export": {
+    "relative_review_directory": "../starlidigital-vm-review",
+    "filename": "starlidigital-base.qcow2",
+    "bytes": 374865920,
+    "sha256": "63775aad7830b5a4e9a866d8964d64d439dffd6f6029671af7eb920eb6303a86",
+    "operator_reviewed": true,
+    "sanitization_automatically_guaranteed": false,
+    "offline_homes_and_identifier_audit_passed": true,
+    "source_preserved_by_export": true,
+    "provider_credentials_ever_added": false,
+    "published": false
+  },
+  "tests": {"windows_runtime_combined_passed": 31},
+  "platforms": {"windows": "WHPX desktop/browser/lifecycle tested", "macos": "not tested", "linux": "not tested"}
 }

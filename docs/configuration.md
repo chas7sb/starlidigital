@@ -107,3 +107,19 @@ Browser/OAuth settings remain strict: STARLI_PLATFORM_PUBLIC_ORIGIN defaults to 
 The database contract is explicit STARLI_SOURCE_DATABASE for the dashboard and DATABASE_PATH for Node. Native defaults align with installer/native.mjs at platform/server/data/starli.sqlite. Compose uses platform-data:/data with DATABASE_PATH=/data/starli.sqlite; dashboard and task-worker need that same volume mounted at a separate read-only path (for example /platform-data) and STARLI_SOURCE_DATABASE=/platform-data/starli.sqlite. Installer owns applying these service environment and mount entries; the backend cannot infer a database shared across isolated containers. The control plane likewise needs the shared platform database path configured by its owner.
 
 Follow-up validation: eight isolated tests pass, including Compose DNS/private IPv6 addresses, malformed endpoints, public/internal separation and native shared database resolution. Full backend compilation passes. No container services were started for these checks.
+
+## Windows private storage and persistent memory
+
+The shared backend/starli_private_fs.py provides require_private_file, ensure_private_directory, ensure_private_file/ensure_private_database, and exclusive create_private_file. Windows storage requires the current token SID as owner and a protected DACL with no access grants except current user/LocalSystem. Current user must retain full control. Reparse points and multiply linked files are rejected using opened-handle metadata. New directories/files receive a private DACL at creation. Existing broad ACLs fail closed; operators must migrate or recreate their own known-empty failed-install storage separately rather than having the app silently change it.
+
+POSIX uses current-euid, type, owner-only mode and hard-link checks on no-follow opened descriptors; nonblocking file opens reject FIFOs without hanging startup. Account-MCP and per-account provider storage both use these APIs. Provider encryption/SQLite behavior is unchanged.
+
+Windows persistent memory retains the existing canonical HEAD/CAS/history algorithm. Its IO adapter holds ancestor handles without delete sharing, uses private files, a bounded cross-process byte lock and flush-before-atomic-replace with Windows WRITE_THROUGH. POSIX retains dirfds/flock/fsync. Regression tests verify30 cross-process increments, CAS/deduplication/history, rollback, broad ACL rejection, ancestor rename blocking and revision hard-link refusal.
+
+An actual isolated native backend boot passed /health and /api/config HTTP200; unauthenticated provider and bot-directory access stayed403. The smoke server was then stopped. Offline embedding-cache warnings are separate from core readiness; live provider/VM/full feature parity is still not established by these checks.
+
+## Restricted Windows Node environments
+
+All filtered Node child launch paths use starli_portable.child_environment(). Windows Node/OpenSSL requires SYSTEMROOT even for an offline catalog; omitting it caused exit134 before JavaScript ran. The helper adds that trusted OS directory, points USERPROFILE/AppData at an isolated HOME and excludes implicit operator credentials/proxy/profile inheritance. Missing/operator-profile HOME maps to private backend child storage. Public/browser inputs cannot supply this environment. Services started before the fix need restart to reload it.
+
+Verified with real restricted Node environments:42 providers/1712 models and113 platform tools. A new-source authenticated QA backend returned42 provider items and69 account-authorized tools through real application HTTP routes. Catalog access needs no external provider credentials; authentication to the local application is still required.

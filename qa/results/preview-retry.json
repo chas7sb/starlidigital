@@ -1,0 +1,52 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "scope": "Representative local disposable HTTP actions; no external sends/inference/publishing/payment calls",
+  "observed_at_utc": "2026-11-22T08:35:41.113772+00:00",
+  "dashboard": "http://127.0.0.1:18280",
+  "created": {
+    "video_project": "vproj-f7c9798f-ca19-4af3-b1ac-b529f41296e9"
+  },
+  "checks": [
+    {
+      "name": "owner-auth",
+      "status": "PASS",
+      "owner": "AgentX10",
+      "source": "onboarding/first_run.py",
+      "evidence": {
+        "role": "admin"
+      }
+    },
+    {
+      "name": "real-tool-catalog",
+      "status": "PASS",
+      "owner": "AgentX2/3",
+      "source": "dashboard/backend/open_webui/routers/starli_tools.py",
+      "evidence": {
+        "count": 69,
+        "required_present": [
+          "crm_upsert_prospect",
+          "agent_create",
+          "agent_get",
+          "video_project_create",
+          "video_project_get",
+          "video_validate",
+          "video_preview_frame",
+          "project_file_write"
+        ]
+      }
+    },
+    {
+      "name": "video-validate-png",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/video/service.ts",
+      "evidence": {
+        "bytes": 3056,
+        "sha256": "33fb474d2d81224c196c999809a721f2087055fd48daaa13223a20fa393e7191",
+        "valid": true
+      }
+    }
+  ],
+  "passed": 3,
+  "failed": 0
+}

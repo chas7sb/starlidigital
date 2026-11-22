@@ -11,11 +11,13 @@
   "dashboardEnvironment": {
     "STARLI_RUNTIME_CODE_DIR": "absolute path to platform/extensions/starli-runtime",
     "STARLI_PLATFORM_SOURCE_ROOT": "absolute path to platform",
+    "STARLI_PLATFORM_ORIGIN": "trusted internal HTTP(S) platform origin; default http://127.0.0.1:4100",
     "STARLI_DASHBOARD_ROOT": "absolute path to dashboard (optional in this source layout)",
     "STARLI_STATE_DIR": "fresh absolute private per-instance state directory",
     "STARLI_SOURCE_DATABASE": "this instance's platform database",
     "STARLI_PYTHON_BIN": "dashboard Python executable",
-    "STARLI_NODE_BIN": "Node24 executable"
+    "STARLI_NODE_BIN": "Node24 executable",
+    "PYTHON_BIN": "trusted video Python executable forwarded to platform bridge"
   },
   "optionalOperatorConfiguration": [
     "STARLI_MANAGED_ENV_FILE (explicit private operator env file; no production fallback)",

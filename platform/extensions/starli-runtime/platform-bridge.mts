@@ -1,10 +1,13 @@
 import {tenantStore,CUSTOMER_TOOLS} from './tenant-store.ts';
+import {tenantBusinessEvents} from './tenant-business-events.ts';
 import {join} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {mkdirSync} from 'node:fs';
 const platformRoot=process.env.STARLI_PLATFORM_SOURCE_ROOT||fileURLToPath(new URL('../../',import.meta.url));
 const stateRoot=process.env.STARLI_STATE_DIR;
 if(!stateRoot)throw Error('STARLI_STATE_DIR_REQUIRED');
+const platformOrigin=new URL(process.env.STARLI_PLATFORM_ORIGIN||'http://127.0.0.1:4100');
+if(!['http:','https:'].includes(platformOrigin.protocol)||platformOrigin.username||platformOrigin.password||platformOrigin.search||platformOrigin.hash||!['','/'].includes(platformOrigin.pathname))throw Error('STARLI_PLATFORM_ORIGIN_INVALID');
 mkdirSync(stateRoot,{recursive:true,mode:0o700});
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -32,10 +35,10 @@ const events=new Events();
 const server=new McpServer({name:'starli-private-ui-bridge',version:'1'});
 const auditSink=new SqliteAuditSink(join(stateRoot,'tool-audit.sqlite'));
 const principal={id:user.id,role:'admin',scopes:['read','write','admin']};
-const config={host:'127.0.0.1',port:4120,upstreamHealthUrl:'http://127.0.0.1:4119/health',controlDbPath:':memory:',allowedOrigins:[],publicResourceUrl:process.env.CONTROL_PLANE_PUBLIC_RESOURCE_URL||'http://127.0.0.1:4120/mcp'};
+const config={host:'127.0.0.1',port:4120,upstreamHealthUrl:new URL('/health',platformOrigin).href,controlDbPath:':memory:',allowedOrigins:[],publicResourceUrl:process.env.CONTROL_PLANE_PUBLIC_RESOURCE_URL||'http://127.0.0.1:4120/mcp'};
 registerScopedDomainTools({server,principal,auditSink,store,events,workspaceRoot:process.env.STARLI_WORKSPACE_ROOT||join(stateRoot,'workspace'),
  crmServices:createCrmServices({store,events}),mailboxServices:createAgencyMailbox({store,events,...(req.customer?{accountConfig:{id:'customer-'+req.owner,email:req.customerEmail||'unconnected@invalid.local',displayName:'Customer mailbox (not connected)',imapHost:'',imapPort:993,imapSecure:true,imapUser:'',imapPassword:'',smtpConfigured:false}}:{})}),
- assetServices:new AssetServices({store,events}),videoServices:new VideoServices({store,events,assetServices:new AssetServices({store,events}),storageDir:join(stateRoot,'video')}),hostedAgentService:new HostedAgentService({store,events}),config,
+ assetServices:new AssetServices({store,events}),videoServices:new VideoServices({store,events,assetServices:new AssetServices({store,events}),storageDir:join(stateRoot,'video')}),hostedAgentService:new HostedAgentService({store,events,...(req.customer?{businessEvents:tenantBusinessEvents(backingStore,store,req.owner,events)}:{})}),config,
  healthProbe:new HttpUpstreamHealthProbe(config.upstreamHealthUrl)});
 const client=new Client({name:'starli-private-preview',version:'1'});
 const [a,b]=InMemoryTransport.createLinkedPair();await server.connect(b);await client.connect(a);

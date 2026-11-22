@@ -52,7 +52,7 @@ async def _launch_compiler(root):
     env={"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8","HOME":str(root)}
     guard_args,child_env=child_setup(env)
     spawn=asyncio.create_task(asyncio.create_subprocess_exec(NODE,"--max-old-space-size=384",*guard_args,"--import","tsx",str(runtime_code_dir()/"project-build.mts"),
-        cwd=str(runtime_code_dir()),env=child_env,stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,
+        cwd=str(runtime_code_dir()),env=_portable.child_environment(child_env),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.DEVNULL,start_new_session=True,limit=8*1024*1024))
     interrupted=False
     while True:

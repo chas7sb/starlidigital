@@ -106,6 +106,7 @@ def read(uid,ident):
 def _workspace_fault():
     return HTTPException(422,"Unsafe project filesystem state")
 def _regular(fd,name):
+    if isinstance(fd,_WindowsParent):return fd.regular(name)
     try:
         item=os.stat(name,dir_fd=fd,follow_symlinks=False)
     except FileNotFoundError:return None
@@ -113,8 +114,184 @@ def _regular(fd,name):
     return item
 def _same_file(left,right):
     return left is None and right is None or left is not None and right is not None and (left.st_dev,left.st_ino)==(right.st_dev,right.st_ino)
+
+class _WindowsParent:
+    """Held ancestor handles and root-relative NT opens prevent reparse traversal."""
+    def __init__(self,path,links):self.path=path;self.links=links
+    def child(self,name):
+        # Reject Win32 normalization aliases, alternate streams and device names.
+        if (not isinstance(name,str) or not name or name in ('.','..') or
+            any(c in name for c in '\\/:<>"|?*') or any(ord(c)<32 for c in name) or
+            name.endswith((' ','.')) or
+            re.fullmatch(r'(CON|PRN|AUX|NUL|COM[1-9ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³]|LPT[1-9ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³])',name.split('.')[0],re.I)):
+            raise _workspace_fault()
+        return self.path/name
+    @staticmethod
+    def info(handle):
+        import ctypes
+        import starli_private_fs as fs
+        from types import SimpleNamespace
+        item=fs.FileInfo()
+        if not fs.kernel.GetFileInformationByHandle(handle,ctypes.byref(item)):raise _workspace_fault()
+        return SimpleNamespace(st_dev=item.volume,st_ino=(item.indexHigh<<32)|item.indexLow,
+                               st_size=(item.sizeHigh<<32)|item.sizeLow)
+    def verify(self):
+        import starli_private_fs as fs
+        for path,handle,private in self.links:
+            other=fs._open(path,directory=True,share=3)
+            try:
+                if not _same_file(self.info(handle),self.info(other)):raise _workspace_fault()
+                if private:fs._validate_handle(other,True)
+            finally:fs.kernel.CloseHandle(other)
+    def regular(self,name):
+        import starli_private_fs as fs
+        try:handle=self.open_relative(name)
+        except OSError as error:
+            if getattr(error,"winerror",error.errno) in (2,3):return None
+            raise _workspace_fault() from None
+        try:
+            fs._validate_handle(handle,False)
+            return self.info(handle)
+        except OSError:raise _workspace_fault() from None
+        finally:fs.kernel.CloseHandle(handle)
+    def read(self,name,known):
+        if known is None:return None
+        import starli_private_fs as fs
+        import msvcrt
+        handle=None
+        try:
+            handle=self.open_relative(name,access=0x80020080,share=1)
+            fs._validate_handle(handle,False)
+            held=self.info(handle)
+            if not _same_file(known,held) or held.st_size>250000:raise _workspace_fault()
+            descriptor=msvcrt.open_osfhandle(handle,os.O_RDONLY|os.O_BINARY);handle=None
+            with os.fdopen(descriptor,'rb') as stream:data=stream.read(250001)
+            if len(data)>250000:raise _workspace_fault()
+            return data
+        except OSError:raise _workspace_fault() from None
+        finally:
+            if handle is not None:fs.kernel.CloseHandle(handle)
+    def open_relative(self,name,access=0x00020080,share=7,create=False,directory=False):
+        # NtCreateFile RootDirectory uses the held directory object itself. An
+        # ancestor changed into a junction cannot redirect this child access.
+        import ctypes as C
+        from ctypes import wintypes as W
+        import starli_private_fs as fs
+        self.child(name)
+        class Unicode(C.Structure):
+            _fields_=[('length',W.USHORT),('maximum',W.USHORT),('buffer',W.LPWSTR)]
+        class Attributes(C.Structure):
+            _fields_=[('length',W.ULONG),('root',W.HANDLE),('name',C.POINTER(Unicode)),('attributes',W.ULONG),('security',C.c_void_p),('qos',C.c_void_p)]
+        class Status(C.Structure):
+            _fields_=[('status',C.c_void_p),('information',C.c_size_t)]
+        native=C.WinDLL('ntdll');function=native.NtCreateFile
+        function.argtypes=[C.POINTER(W.HANDLE),W.DWORD,C.POINTER(Attributes),C.POINTER(Status),C.c_void_p,W.ULONG,W.ULONG,W.ULONG,W.ULONG,C.c_void_p,W.ULONG]
+        function.restype=C.c_long
+        size=len(name.encode('utf-16-le'));text=C.create_unicode_buffer(name,size//2+1)
+        unicode=Unicode(size,size+2,C.cast(text,W.LPWSTR));descriptor=None
+        if create:descriptor,_=fs._descriptor()
+        attributes=Attributes(C.sizeof(Attributes),self.links[-1][1],C.pointer(unicode),0x40|0x1000,descriptor,None)
+        handle=W.HANDLE();status=Status()
+        try:
+            code=function(C.byref(handle),access|0x100000,C.byref(attributes),C.byref(status),None,0x10 if directory else 0x80,share,2 if create else 1,0x200000|(0x1 if directory else 0x40)|0x20,None,0)
+            if code<0:
+                translate=native.RtlNtStatusToDosError;translate.argtypes=[C.c_long];translate.restype=W.ULONG
+                raise C.WinError(translate(code))
+            return handle.value
+        finally:
+            if descriptor:fs.kernel.LocalFree(descriptor)
+    def replace(self,name,raw):
+        import ctypes as C
+        from ctypes import wintypes as W
+        import starli_private_fs as fs
+        import msvcrt
+        self.child(name);temporary='.starli-save-'+uuid.uuid4().hex;handle=None
+        try:
+            self.verify();self.regular(name)
+            handle=self.open_relative(temporary,access=0x40030080,create=True)
+            fs._validate_handle(handle,False)
+            created=self.info(handle)
+            descriptor=msvcrt.open_osfhandle(handle,os.O_WRONLY|os.O_BINARY);handle=None
+            with os.fdopen(descriptor,'wb') as stream:
+                stream.write(raw);stream.flush();os.fsync(stream.fileno())
+            handle=self.open_relative(temporary,access=0x00030080)
+            fs._validate_handle(handle,False)
+            if not _same_file(created,self.info(handle)):raise _workspace_fault()
+            class Rename(C.Structure):
+                _fields_=[('replace',C.c_ubyte),('root',W.HANDLE),('length',W.DWORD),('name',W.WCHAR*(len(name.encode('utf-16-le'))//2+1))]
+            class Status(C.Structure):
+                _fields_=[('status',C.c_void_p),('information',C.c_size_t)]
+            rename=Rename();rename.replace=1;rename.root=self.links[-1][1];rename.length=len(name.encode('utf-16-le'));rename.name=name
+            native=C.WinDLL('ntdll');function=native.NtSetInformationFile
+            function.argtypes=[W.HANDLE,C.POINTER(Status),C.c_void_p,W.ULONG,C.c_int];function.restype=C.c_long
+            status=Status();code=function(handle,C.byref(status),C.byref(rename),Rename.name.offset+rename.length,10)
+            if code<0:
+                translate=native.RtlNtStatusToDosError;translate.argtypes=[C.c_long];translate.restype=W.ULONG
+                raise C.WinError(translate(code))
+            self.verify()
+            if not _same_file(created,self.regular(name)):raise _workspace_fault()
+            return created
+        except OSError:raise _workspace_fault() from None
+        finally:
+            if handle is not None:fs.kernel.CloseHandle(handle)
+            self.unlink(temporary,missing_ok=True)
+    def unlink(self,name,missing_ok=False):
+        import ctypes as C
+        from ctypes import wintypes as W
+        import starli_private_fs as fs
+        try:handle=self.open_relative(name,access=0x00030080)
+        except OSError as error:
+            if missing_ok and getattr(error,'winerror',error.errno) in (2,3):return
+            raise _workspace_fault() from None
+        try:
+            fs._validate_handle(handle,False)
+            remove=fs.kernel.SetFileInformationByHandle
+            remove.argtypes=[W.HANDLE,C.c_int,C.c_void_p,W.DWORD];remove.restype=W.BOOL
+            disposition=W.BOOL(True)
+            if not remove(handle,4,C.byref(disposition),C.sizeof(disposition)):raise C.WinError(C.get_last_error())
+        finally:fs.kernel.CloseHandle(handle)
+
+@contextmanager
+def _windows_parent(uid,ident,path):
+    import ctypes
+    import starli_private_fs as fs
+    base=Path(os.path.abspath(str(state_dir())));handles=[];links=[]
+    if not re.fullmatch(r'[A-Za-z]:\\',base.anchor):raise _workspace_fault()
+    current=Path(base.anchor)
+    parts=[*base.parts[1:],'projects',hashlib.sha256(uid.encode()).hexdigest(),ident,*PurePosixPath(path).parts[:-1]]
+    try:
+        # Pin the volume root too; all descendants are opened with OPEN_REPARSE_POINT.
+        handle=fs._open(current,directory=True,share=3);handles.append(handle);links.append((current,handle,False))
+        for index,name in enumerate(parts):
+            parent=_WindowsParent(current,links);current=parent.child(name)
+            private=index>=len(base.parts)-2
+            if private:
+                try:handle=parent.open_relative(name,directory=True,share=3,create=True)
+                except OSError as error:
+                    if getattr(error,'winerror',error.errno) not in (80,183):raise
+                    handle=parent.open_relative(name,directory=True,share=3)
+            else:handle=parent.open_relative(name,directory=True,share=3)
+            handles.append(handle)
+            info=fs.FileInfo()
+            if not fs.kernel.GetFileInformationByHandle(handle,ctypes.byref(info)) or info.attributes&0x400 or not info.attributes&0x10:raise _workspace_fault()
+            if private:fs._validate_handle(handle,True)
+            links.append((current,handle,private))
+        parent=_WindowsParent(current,links);parent.child(PurePosixPath(path).name)
+        parent.verify();yield parent
+    except OSError:raise _workspace_fault() from None
+    finally:
+        for handle in reversed(handles):fs.kernel.CloseHandle(handle)
+
+def _unlink_workspace(directory,name):
+    if isinstance(directory,_WindowsParent):
+        directory.verify();directory.regular(name);directory.unlink(name)
+    else:os.unlink(name,dir_fd=directory)
+
 @contextmanager
 def _anchored_parent(uid,ident,path):
+    if os.name=='nt':
+        with _windows_parent(uid,ident,path) as parent:yield parent,PurePosixPath(path).name,parent.verify
+        return
     # Every component is opened relative to an already-held directory; never resolve/follow links.
     base=Path(os.path.abspath(str(state_dir())));parts=[*base.parts[1:],"projects",hashlib.sha256(uid.encode()).hexdigest(),ident,*PurePosixPath(path).parts[:-1]]
     handles=[];links=[];fd=os.open("/",os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);handles.append(fd)
@@ -137,6 +314,7 @@ def _anchored_parent(uid,ident,path):
     finally:
         for handle in reversed(handles):os.close(handle)
 def _atomic_replace(fd,name,raw):
+    if isinstance(fd,_WindowsParent):return fd.replace(name,raw)
     temporary=".starli-save-"+uuid.uuid4().hex
     handle=None
     try:
@@ -150,6 +328,7 @@ def _atomic_replace(fd,name,raw):
         try:os.unlink(temporary,dir_fd=fd)
         except FileNotFoundError:pass
 def _read_regular(fd,name,known):
+    if isinstance(fd,_WindowsParent):return fd.read(name,known)
     if known is None:return None
     handle=os.open(name,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=fd)
     try:
@@ -205,9 +384,9 @@ def write(uid,ident,path,content,expected=None,*,runtime_operation=None,authoriz
                 c.rollback()
                 if replaced:
                     if previous is None:
-                        try:os.unlink(name,dir_fd=directory)
+                        try:_unlink_workspace(directory,name)
                         except FileNotFoundError:pass
-                        os.fsync(directory)
+                        if not isinstance(directory,_WindowsParent):os.fsync(directory)
                     else:_atomic_replace(directory,name,previous)
                 raise
     return {"projectId":ident,"path":path,"sha256":hashlib.sha256(content.encode()).hexdigest(),"version":p["version"],"status":"SAVED"}

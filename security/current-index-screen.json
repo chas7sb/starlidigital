@@ -2,10 +2,10 @@
   "schema": 1,
   "scope": "entire-index path checks; changed-content-only",
   "base_commit": "c2be1c5230fdf32c88f718cdb716c74d43e0c144",
-  "index_listing_sha256": "057c0c41c036b3ce976d050d191a3f266003c59e42662316423af7ac01139166",
+  "index_listing_sha256": "55e2082c9b434f8df19cb91fc61a3dae63eca3d20e67d722f722bbc3b2bebcd6",
   "index_unchanged_during_scan": true,
-  "index_entry_count": 12578,
-  "content_selected_count": 87,
+  "index_entry_count": 12584,
+  "content_selected_count": 99,
   "findings": [
     {
       "path": "onboarding/test_first_run.py",
@@ -18,20 +18,24 @@
     {
       "path": "docs/agentx7-status.md",
       "type": "encoding"
-    },
-    {
-      "path": "security/index-audit.json",
-      "type": "oversize-or-binary"
     }
   ],
   "scanned_blobs": [
     {
       "path": ".github/workflows/validate.yml",
       "mode": "100644",
-      "oid": "6fd5413d0954f945b28cd895f3471462d2e28906",
+      "oid": "f35d6549271c2c60a79f127738e47b9b659ef917",
       "stage": "0",
-      "sha256": "1d9fdfd9932a437fc55f7277853787d9f3e508858d5e1b4519c7a730a27eaebd",
-      "size": 3212
+      "sha256": "32a5be9fd701eabf19e725faf0f86fbd3e42e58e23739a0b9a64c2f34f66515e",
+      "size": 3850
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "oid": "902536c5e338b2a4402eeef727cf7f0efd33c5fd",
+      "stage": "0",
+      "sha256": "95f6dea6a58f01493df34c47cf859f67168ba3b64be28497dd2d2c293e1af597",
+      "size": 2393
     },
     {
       "path": "dashboard/backend/open_webui/routers/starli_providers.py",
@@ -106,6 +110,14 @@
       "size": 19552
     },
     {
+      "path": "dashboard/backend/starli_memory/windows_io.py",
+      "mode": "100644",
+      "oid": "365699f90c57eb12486bb70e98fd928dd8535f7f",
+      "stage": "0",
+      "sha256": "51da34f97c36f1bc0cced469bd2aab9731647ccb81d96a131fbc461228cc1f58",
+      "size": 4172
+    },
+    {
       "path": "dashboard/backend/starli_private_fs.py",
       "mode": "100644",
       "oid": "9873a2b8340bab807eb322a35c08b8621ffa099f",
@@ -120,6 +132,22 @@
       "stage": "0",
       "sha256": "41321ca08b9b1499a06dd147fbb10ef57498863c42ba83e5f1f843599bb3aa4f",
       "size": 3438
+    },
+    {
+      "path": "dashboard/backend/tests/test_windows_memory.py",
+      "mode": "100644",
+      "oid": "3c1c5d63fc988ff2057a9209e7df2c835c498971",
+      "stage": "0",
+      "sha256": "eddb46889a60d071fd08325a0155b7a5baa54bf2e45e6c343d84510225ef4445",
+      "size": 3503
+    },
+    {
+      "path": "dashboard/backend/wave_panels/workspace_app.py",
+      "mode": "100644",
+      "oid": "bd5817ecdbcad035c06c2432498941c74b8a0762",
+      "stage": "0",
+      "sha256": "241f7fbec925cbfeb3906b4f953b65a7e1dcfdfd2aa0e5f8a827c0a73f6c89c7",
+      "size": 4169
     },
     {
       "path": "dashboard/pyproject.toml",
@@ -148,18 +176,18 @@
     {
       "path": "docs/README-draft.md",
       "mode": "100644",
-      "oid": "4bbd0e13f108b811315970173f133537b0dd835c",
+      "oid": "8bf583081eeb2d82d57a66e20bdf427944e240dc",
       "stage": "0",
-      "sha256": "bece15a1b49e38b8ef1bb6e0898451e786c43a778047824774eaf33ed9668361",
-      "size": 6996
+      "sha256": "8ea07c2aee8f2d8bd6dd58e428500c6ceca234ede27a77355943895aad4ac798",
+      "size": 7042
     },
     {
       "path": "docs/agentx10-status.md",
       "mode": "100644",
-      "oid": "096a3a3b327ef8c23f14a7922f9a2f2c37168515",
+      "oid": "1484c850cbac5291cbf8aff755d07384e3aa97cf",
       "stage": "0",
-      "sha256": "9fb6cd1986bfb91ccaadf6cfb083b7090a740ed0990dbfea62e7f3788675adb8",
-      "size": 7163
+      "sha256": "c507820f344ad9a2a3d4b8c7203a09e38e071d3b0a97b2b9971f59bddfa93067",
+      "size": 8312
     },
     {
       "path": "docs/agentx2-status.md",
@@ -180,10 +208,10 @@
     {
       "path": "docs/agentx5-status.md",
       "mode": "100644",
-      "oid": "2250e710bffe26e86b2de5a63c78b8e9d5a38a86",
+      "oid": "5d5cca3cbc4eec37d1b064e70ebc18e416c647dd",
       "stage": "0",
-      "sha256": "04025d4f9d8b7f303927a079a5b409fa0134e5439076ab0e3cd3a10e700df57c",
-      "size": 12903
+      "sha256": "48cacacc4f19b9bb7f2f2485a70feff15409ff1dd076e50185d4e04e7a0d615d",
+      "size": 14992
     },
     {
       "path": "docs/agentx7-status.md",
@@ -196,18 +224,18 @@
     {
       "path": "docs/agentx9-status.md",
       "mode": "100644",
-      "oid": "7c5d38375ad8b60f0b0c65baba53fe302d96f2ab",
+      "oid": "68ec7241d95940a04316b26dcd08c5e560053bd6",
       "stage": "0",
-      "sha256": "9395f09d80666c6beb92755f6333e0e0bd68f72d39fe4d2e22b969750d0f094e",
-      "size": 14778
+      "sha256": "97c76622a1bf64c168d5fd96daf3bf2f65c517e0a06aaf11ffe59717ad7059f0",
+      "size": 16554
     },
     {
       "path": "docs/install.md",
       "mode": "100644",
-      "oid": "757086c2c379c4fee263134693c2558c72aff7b0",
+      "oid": "f2e06bc138597bf2cb1f447e3e18703c4ccae06c",
       "stage": "0",
-      "sha256": "6af2a569d781d558ab5bc3189ef264dde5c51afe2beaa1b74d194cff04ecf94e",
-      "size": 7298
+      "sha256": "15a486525ffd2bffcb7f681e92fec1613ab61128b77f2e5411bfda1349c17484",
+      "size": 8108
     },
     {
       "path": "docs/provenance.md",
@@ -220,10 +248,10 @@
     {
       "path": "docs/runtime.md",
       "mode": "100644",
-      "oid": "195f29f1b7d663ed0d477b2927680407aafd440c",
+      "oid": "84bbdff44d7142b09657fed6afaac6975fee9098",
       "stage": "0",
-      "sha256": "a5533bf7250b17bb11701ca358d9418c9e72aa535f708d482bc2275915250ab0",
-      "size": 7844
+      "sha256": "92ab4f27ef88e471a6de34167a107740d4e7e8544ae8b84af31df9fd1bbf39d5",
+      "size": 8817
     },
     {
       "path": "docs/vm-bridge-status.md",
@@ -244,18 +272,18 @@
     {
       "path": "installer/compose.yaml",
       "mode": "100644",
-      "oid": "2370e171442b23aa6cb9ff4bc05a0afb241e6fde",
+      "oid": "214d4ff2f905c0586352672ff0fe1e75d03c8bef",
       "stage": "0",
-      "sha256": "0d455f48684e45d3334489fc9d9c74512748ad2814a27fd00e5f2b221c57374a",
-      "size": 3134
+      "sha256": "5cf91ecb96d01194f6ff08700c426334f3b220bd5a5ca7ab467a38e01167f6a4",
+      "size": 3376
     },
     {
       "path": "installer/dashboard.Dockerfile",
       "mode": "100644",
-      "oid": "3aa76a19931821c95bd60754299132bcfca424ea",
+      "oid": "9a06c29aaf73a39cb3b6972ac38f6907dce02883",
       "stage": "0",
-      "sha256": "39179aac04fc7e37756980634b3338ca23e3664b9e02447a1122667b13030e5b",
-      "size": 1409
+      "sha256": "4ca7e0519ad99300019d3566d3d649fa8b18d78e7199a11aa49104c8c6d1378e",
+      "size": 1500
     },
     {
       "path": "installer/dashboard.Dockerfile.dockerignore",
@@ -268,10 +296,10 @@
     {
       "path": "installer/native.mjs",
       "mode": "100644",
-      "oid": "1984f898b1bb11f4488393d12056337dc81d2340",
+      "oid": "7131e981761d150b3c7cb48ee0c2b8deed5cfc34",
       "stage": "0",
-      "sha256": "73a927c12658c49bc0cc63cbae23dc6fc4826a17d5716e5bcd6fe53e212d181b",
-      "size": 13403
+      "sha256": "9f350d919f913f4c6ac1e5efb30f6df35bd0034805d9f70b79e4e9dbf51eccaa",
+      "size": 13399
     },
     {
       "path": "installer/platform.Dockerfile",
@@ -284,10 +312,18 @@
     {
       "path": "installer/starli.mjs",
       "mode": "100644",
-      "oid": "8df3dacdbe46dabcef7811441117342e491dfa6b",
+      "oid": "10e7af01f6b9dbcf3ec5c28be8073118a7223c55",
       "stage": "0",
-      "sha256": "87844e10573725296b72eb5670cfe4ff86dacb0d323e398e6c54a1ca27cb0cab",
-      "size": 5053
+      "sha256": "783bf2fdc80caa811ed0025947651a58ce1f96aabf86d294d832f82f5735b09d",
+      "size": 7521
+    },
+    {
+      "path": "installer/starli.ps1",
+      "mode": "100644",
+      "oid": "a3e7dc42d322ccfccaea2882fa5320cbf3a3c7cb",
+      "stage": "0",
+      "sha256": "132a9740aa251022796ea98bd49164e0394f55f36b5fcdc54660aa92320af64d",
+      "size": 393
     },
     {
       "path": "onboarding/README.md",
@@ -300,10 +336,10 @@
     {
       "path": "onboarding/first_run.py",
       "mode": "100644",
-      "oid": "a6801ec0c5d4c53a416372caa434bfd953762189",
+      "oid": "a4351b8008fd113a023096713a56e9ed1fe639d1",
       "stage": "0",
-      "sha256": "fa945988df1466c5852263c388c399a64c3d6a771d990d06f99dd7a3e03fe248",
-      "size": 13775
+      "sha256": "dcfc4e7addc68a2d74a615c6562e1516d93440366b033c5c902a0b5e2f8fe086",
+      "size": 13821
     },
     {
       "path": "onboarding/qa_e2e.py",
@@ -322,12 +358,20 @@
       "size": 3065
     },
     {
+      "path": "package.json",
+      "mode": "100644",
+      "oid": "8da992006c39488c58ede7512fcf9ae3e03bd920",
+      "stage": "0",
+      "sha256": "9e6f6baa8aad56567867f8ac4b1d12bc2e1996443573d44fbbbf5f16fd946db3",
+      "size": 819
+    },
+    {
       "path": "packaging/README.md",
       "mode": "100644",
-      "oid": "4780116d312f31e4542eff231704e8b43c7c7301",
+      "oid": "4e697b60ea3cea890a3a7a45121bc2a1d0f60281",
       "stage": "0",
-      "sha256": "f1095bc48d603c06ab3f581b11794532c2fb16cb818ce35bee6c0de0a6a61745",
-      "size": 6717
+      "sha256": "9cf9b262dfe6c54db84a9eaffda92f836ee11b6ce55d90734f9b6464a6a85db3",
+      "size": 6786
     },
     {
       "path": "packaging/backend_abi_smoke.py",
@@ -418,6 +462,14 @@
       "size": 8245
     },
     {
+      "path": "platform/extensions/STATUS.json",
+      "mode": "100644",
+      "oid": "a22f046d7c4891d92c6db2026a8840140ed905b0",
+      "stage": "0",
+      "sha256": "49aa77cfea9467038a38034fcfd6886c88f0c337f5aa3547da39681a853c03a2",
+      "size": 1109
+    },
+    {
       "path": "platform/extensions/starli-runtime/.gitignore",
       "mode": "100644",
       "oid": "9125d27a3a65e71ee766589d1eaa658e936ba724",
@@ -428,10 +480,10 @@
     {
       "path": "platform/extensions/starli-runtime/README.md",
       "mode": "100644",
-      "oid": "de4506ba11bb5c5b222395518213e7040d5e3412",
+      "oid": "0155d31daaf4e74b6ad5c8250cb61536121c8f3e",
       "stage": "0",
-      "sha256": "57ec361b9373344bbb6d843a6e32061de2bb27f5ebb96a9e5a828391fee1f09b",
-      "size": 3305
+      "sha256": "a534bdf2dbf86c0d8cc0dd2cd71cc84fcb79146401226a8e1784ba146d22851f",
+      "size": 3514
     },
     {
       "path": "platform/extensions/starli-runtime/account-driver.mts",
@@ -532,9 +584,9 @@
     {
       "path": "platform/extensions/starli-runtime/runtime-contract.json",
       "mode": "100644",
-      "oid": "10d8b220325f2ec44f0f54e2cd98abde5198dd54",
+      "oid": "a19ae6cfeeae2d1226727ce66d7a5a72d16d48c7",
       "stage": "0",
-      "sha256": "278e8fa23ad483d888fddedc6253458c47f8c1335345d6d01670f10606ba62fd",
+      "sha256": "9a41a466e634d45dbb5e883e1db2d719feaa6e33635677112d14827a187fbede",
       "size": 2531
     },
     {
@@ -636,18 +688,34 @@
     {
       "path": "runtime/tests/test_vm.py",
       "mode": "100644",
-      "oid": "67abf53155c8ac533e5261010e885c76afd52c91",
+      "oid": "09eafd59a0593a4bf44ff836e20561913b07c3e5",
       "stage": "0",
-      "sha256": "4cc5ff31dd46f62c2d1ea91e721a595a62f764c5aa89c38c89c71bfcc6ca826a",
-      "size": 3366
+      "sha256": "442c591c0e6b873d6934e1dcb8d3d74aa25cd6198531cdc8c0ebbb72db55191c",
+      "size": 3427
+    },
+    {
+      "path": "runtime/validation.json",
+      "mode": "100644",
+      "oid": "aaa009fa64f0b791b04752f4499d5254a5d5fdae",
+      "stage": "0",
+      "sha256": "22a58c942a7bc8ba1af03b08ad5b31aa4ff375f7b6412765944b3377e3330af2",
+      "size": 1447
     },
     {
       "path": "runtime/vm.py",
       "mode": "100644",
-      "oid": "ef6eec11951bbc5012929926a54f8cb3a2439378",
+      "oid": "930139c83c38b5f8bf0520e866542c6e7bffef0e",
       "stage": "0",
-      "sha256": "99cbb6c626100ab847fa4303b3a1c1569b6a3dcfe919f8661ec26123ea1265fa",
-      "size": 11440
+      "sha256": "6da4e597d3962ff726587c8cdef25a7cba69965a425fa567e15ca7e7ac7276db",
+      "size": 11733
+    },
+    {
+      "path": "security/README.md",
+      "mode": "100644",
+      "oid": "923a28727a44051908f8a13654d58feb83a4e821",
+      "stage": "0",
+      "sha256": "14590390577db70fe43610535aa820bc0dbb03c2bc83ded08c59882b4000f3c1",
+      "size": 4048
     },
     {
       "path": "security/STATUS.md",
@@ -672,6 +740,14 @@
       "stage": "0",
       "sha256": "754afa69a31a4a2f1853bc2fe6988afc2a5476cdd2e5ddf6aef03519579412b9",
       "size": 9261
+    },
+    {
+      "path": "security/current-index-screen.json",
+      "mode": "100644",
+      "oid": "a6d778e3894b07bc275ddc99741d8222be5e2f02",
+      "stage": "0",
+      "sha256": "bf5b08cf7b550c91c67fb7dbb58fb3571a9def656ef9b96a5bc93f3fb107f7d5",
+      "size": 2524320
     },
     {
       "path": "security/index-audit.json",
@@ -714,12 +790,28 @@
       "size": 3994
     },
     {
+      "path": "security/scan_index.py",
+      "mode": "100644",
+      "oid": "cda657ed38d8b8c0c2001369b78dc9a31520eb54",
+      "stage": "0",
+      "sha256": "8352d6b813c85d3d7281c5d5478102104445dcb1b82970c64dd266059703e3ca",
+      "size": 7068
+    },
+    {
       "path": "security/source-publication-readiness.json",
       "mode": "100644",
       "oid": "6664ca2bca30537aaec35881fd2591fe39136918",
       "stage": "0",
       "sha256": "ffae13828495344f710b87f7bde1bece78a2f25fbb1ca291e575c637b5a98f2a",
       "size": 2247
+    },
+    {
+      "path": "security/test_scan_index.py",
+      "mode": "100644",
+      "oid": "ecd7eee5275bc0237714993dfbea30deded92e6c",
+      "stage": "0",
+      "sha256": "368e97c1233b1e85ae8cac47a9c2a0f9219ecd4bcdac0c08ca69afe05ce49618",
+      "size": 1884
     }
   ],
   "index_entries": [
@@ -738,7 +830,7 @@
     {
       "path": ".github/workflows/validate.yml",
       "mode": "100644",
-      "oid": "6fd5413d0954f945b28cd895f3471462d2e28906",
+      "oid": "f35d6549271c2c60a79f127738e47b9b659ef917",
       "stage": "0"
     },
     {
@@ -762,7 +854,7 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "oid": "34dc521adb8e0a4e962c1566e27fc5b5296b61d6",
+      "oid": "902536c5e338b2a4402eeef727cf7f0efd33c5fd",
       "stage": "0"
     },
     {
@@ -4066,6 +4158,12 @@
       "stage": "0"
     },
     {
+      "path": "dashboard/backend/starli_memory/windows_io.py",
+      "mode": "100644",
+      "oid": "365699f90c57eb12486bb70e98fd928dd8535f7f",
+      "stage": "0"
+    },
+    {
       "path": "dashboard/backend/starli_memory/workspace_api.py",
       "mode": "100644",
       "oid": "a6577bd67cf0c5bc6a21d2bf09e14ac49a8bdb48",
@@ -4330,6 +4428,12 @@
       "stage": "0"
     },
     {
+      "path": "dashboard/backend/tests/test_windows_memory.py",
+      "mode": "100644",
+      "oid": "3c1c5d63fc988ff2057a9209e7df2c835c498971",
+      "stage": "0"
+    },
+    {
       "path": "dashboard/backend/wave_panels/agata.png",
       "mode": "100644",
       "oid": "c983a2d34e318bd1cc010ba6a8e6afa850d4d18e",
@@ -4494,7 +4598,7 @@
     {
       "path": "dashboard/backend/wave_panels/workspace_app.py",
       "mode": "100644",
-      "oid": "6b27211be1cd5cae4e9da72b9b80d93da8c10957",
+      "oid": "bd5817ecdbcad035c06c2432498941c74b8a0762",
       "stage": "0"
     },
     {
@@ -30768,13 +30872,13 @@
     {
       "path": "docs/README-draft.md",
       "mode": "100644",
-      "oid": "4bbd0e13f108b811315970173f133537b0dd835c",
+      "oid": "8bf583081eeb2d82d57a66e20bdf427944e240dc",
       "stage": "0"
     },
     {
       "path": "docs/agentx10-status.md",
       "mode": "100644",
-      "oid": "096a3a3b327ef8c23f14a7922f9a2f2c37168515",
+      "oid": "1484c850cbac5291cbf8aff755d07384e3aa97cf",
       "stage": "0"
     },
     {
@@ -30798,7 +30902,7 @@
     {
       "path": "docs/agentx5-status.md",
       "mode": "100644",
-      "oid": "2250e710bffe26e86b2de5a63c78b8e9d5a38a86",
+      "oid": "5d5cca3cbc4eec37d1b064e70ebc18e416c647dd",
       "stage": "0"
     },
     {
@@ -30816,7 +30920,7 @@
     {
       "path": "docs/agentx9-status.md",
       "mode": "100644",
-      "oid": "7c5d38375ad8b60f0b0c65baba53fe302d96f2ab",
+      "oid": "68ec7241d95940a04316b26dcd08c5e560053bd6",
       "stage": "0"
     },
     {
@@ -30846,7 +30950,7 @@
     {
       "path": "docs/install.md",
       "mode": "100644",
-      "oid": "757086c2c379c4fee263134693c2558c72aff7b0",
+      "oid": "f2e06bc138597bf2cb1f447e3e18703c4ccae06c",
       "stage": "0"
     },
     {
@@ -30876,7 +30980,7 @@
     {
       "path": "docs/runtime.md",
       "mode": "100644",
-      "oid": "195f29f1b7d663ed0d477b2927680407aafd440c",
+      "oid": "84bbdff44d7142b09657fed6afaac6975fee9098",
       "stage": "0"
     },
     {
@@ -30906,13 +31010,13 @@
     {
       "path": "installer/compose.yaml",
       "mode": "100644",
-      "oid": "2370e171442b23aa6cb9ff4bc05a0afb241e6fde",
+      "oid": "214d4ff2f905c0586352672ff0fe1e75d03c8bef",
       "stage": "0"
     },
     {
       "path": "installer/dashboard.Dockerfile",
       "mode": "100644",
-      "oid": "3aa76a19931821c95bd60754299132bcfca424ea",
+      "oid": "9a06c29aaf73a39cb3b6972ac38f6907dce02883",
       "stage": "0"
     },
     {
@@ -30924,7 +31028,7 @@
     {
       "path": "installer/native.mjs",
       "mode": "100644",
-      "oid": "1984f898b1bb11f4488393d12056337dc81d2340",
+      "oid": "7131e981761d150b3c7cb48ee0c2b8deed5cfc34",
       "stage": "0"
     },
     {
@@ -30942,13 +31046,13 @@
     {
       "path": "installer/starli.mjs",
       "mode": "100644",
-      "oid": "8df3dacdbe46dabcef7811441117342e491dfa6b",
+      "oid": "10e7af01f6b9dbcf3ec5c28be8073118a7223c55",
       "stage": "0"
     },
     {
       "path": "installer/starli.ps1",
       "mode": "100644",
-      "oid": "9c2badc7b07bf84d7d230ae9950151d9185e8e8a",
+      "oid": "a3e7dc42d322ccfccaea2882fa5320cbf3a3c7cb",
       "stage": "0"
     },
     {
@@ -30972,7 +31076,7 @@
     {
       "path": "onboarding/first_run.py",
       "mode": "100644",
-      "oid": "a6801ec0c5d4c53a416372caa434bfd953762189",
+      "oid": "a4351b8008fd113a023096713a56e9ed1fe639d1",
       "stage": "0"
     },
     {
@@ -30996,7 +31100,7 @@
     {
       "path": "package.json",
       "mode": "100644",
-      "oid": "53e40b624c145000510498798647765222facfa4",
+      "oid": "8da992006c39488c58ede7512fcf9ae3e03bd920",
       "stage": "0"
     },
     {
@@ -31008,7 +31112,7 @@
     {
       "path": "packaging/README.md",
       "mode": "100644",
-      "oid": "4780116d312f31e4542eff231704e8b43c7c7301",
+      "oid": "4e697b60ea3cea890a3a7a45121bc2a1d0f60281",
       "stage": "0"
     },
     {
@@ -31591,6 +31695,12 @@
       "path": "platform/extensions/README.md",
       "mode": "100644",
       "oid": "0c0148b56cd3e977616a306e9ae3bc686d855dcd",
+      "stage": "0"
+    },
+    {
+      "path": "platform/extensions/STATUS.json",
+      "mode": "100644",
+      "oid": "a22f046d7c4891d92c6db2026a8840140ed905b0",
       "stage": "0"
     },
     {
@@ -73662,7 +73772,7 @@
     {
       "path": "platform/extensions/starli-runtime/README.md",
       "mode": "100644",
-      "oid": "de4506ba11bb5c5b222395518213e7040d5e3412",
+      "oid": "0155d31daaf4e74b6ad5c8250cb61536121c8f3e",
       "stage": "0"
     },
     {
@@ -73818,7 +73928,7 @@
     {
       "path": "platform/extensions/starli-runtime/runtime-contract.json",
       "mode": "100644",
-      "oid": "10d8b220325f2ec44f0f54e2cd98abde5198dd54",
+      "oid": "a19ae6cfeeae2d1226727ce66d7a5a72d16d48c7",
       "stage": "0"
     },
     {
@@ -75978,25 +76088,25 @@
     {
       "path": "runtime/tests/test_vm.py",
       "mode": "100644",
-      "oid": "67abf53155c8ac533e5261010e885c76afd52c91",
+      "oid": "09eafd59a0593a4bf44ff836e20561913b07c3e5",
       "stage": "0"
     },
     {
       "path": "runtime/validation.json",
       "mode": "100644",
-      "oid": "94832e034d91d24a0cf9a4e59da0bd8c577769f8",
+      "oid": "aaa009fa64f0b791b04752f4499d5254a5d5fdae",
       "stage": "0"
     },
     {
       "path": "runtime/vm.py",
       "mode": "100644",
-      "oid": "ef6eec11951bbc5012929926a54f8cb3a2439378",
+      "oid": "930139c83c38b5f8bf0520e866542c6e7bffef0e",
       "stage": "0"
     },
     {
       "path": "security/README.md",
       "mode": "100644",
-      "oid": "212aee31a93dd9b1a257457e02f9ef57115f148b",
+      "oid": "923a28727a44051908f8a13654d58feb83a4e821",
       "stage": "0"
     },
     {
@@ -76069,6 +76179,12 @@
       "path": "security/build_dispositions.py",
       "mode": "100644",
       "oid": "3599a8890c03ff8c02305337c1b8a3716e45b1b4",
+      "stage": "0"
+    },
+    {
+      "path": "security/current-index-screen.json",
+      "mode": "100644",
+      "oid": "a6d778e3894b07bc275ddc99741d8222be5e2f02",
       "stage": "0"
     },
     {
@@ -76180,6 +76296,12 @@
       "stage": "0"
     },
     {
+      "path": "security/scan_index.py",
+      "mode": "100644",
+      "oid": "cda657ed38d8b8c0c2001369b78dc9a31520eb54",
+      "stage": "0"
+    },
+    {
       "path": "security/source-publication-readiness.json",
       "mode": "100644",
       "oid": "6664ca2bca30537aaec35881fd2591fe39136918",
@@ -76189,6 +76311,12 @@
       "path": "security/test_scan.py",
       "mode": "100644",
       "oid": "14f0f5a392cf769a73e996ec6470cb7189e28311",
+      "stage": "0"
+    },
+    {
+      "path": "security/test_scan_index.py",
+      "mode": "100644",
+      "oid": "ecd7eee5275bc0237714993dfbea30deded92e6c",
       "stage": "0"
     }
   ],

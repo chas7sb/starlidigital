@@ -8,6 +8,8 @@ The existing dashboard source is preserved rather than replaced with a mockup. S
 
 Read [installation](docs/install.md) and run `npm run doctor` to check prerequisites. For a native installation, run `npm run install:app`, `npm run setup`, then `npm start`. Setup prompts privately for the first owner and creates fresh local state. The dashboard requires its Python backend as well as its frontend. Docker Compose is an additional deployment option described in the guide.
 
+The native server runs in the foreground; stop it with Ctrl+C. Keep the extracted project in a writable, persistent directory. Node 24+, `uv`, and FFmpeg are prerequisites; the installer prepares the separate application runtimes. QEMU is an additional prerequisite for the isolated computer.
+
 Windows, macOS and Linux are installation targets. Platform validation and outstanding requirements are recorded in the installation and [VM runtime](docs/runtime.md) guides. A running application container does not establish that a computer-use VM is ready.
 
 ## Source layout

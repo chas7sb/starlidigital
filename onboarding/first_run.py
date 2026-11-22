@@ -58,25 +58,30 @@ def request(base, path, payload=None, token=None, raw=False):
         raise RuntimeError(f'{path}: HTTP {error.code}; response omitted to protect credentials') from None
 
 def private_write(path, data):
-    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-    if os.name == 'nt':
-        # Numeric current-user SID avoids localized account names. Do not rely on inherited ACLs.
-        result = subprocess.run(['whoami', '/user', '/fo', 'csv', '/nh'], capture_output=True, text=True, check=True)
-        import csv
-        sid = next(csv.reader([result.stdout.strip()]))[1]
-        subprocess.run(['icacls', str(path.parent), '/inheritance:r', '/grant:r', '*' + sid + ':(OI)(CI)F'],
-            capture_output=True, check=True)
-    descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-    with os.fdopen(descriptor, 'w', encoding='utf-8') as stream:
-        json.dump(data, stream, indent=2)
+    private_storage().create_private_file(path, json.dumps(data, indent=2).encode('utf-8'))
+
+def private_storage():
+    # Load the shared stdlib-only policy without importing application startup.
+    spec = importlib.util.spec_from_file_location('_onboarding_private_fs', ROOT / 'dashboard/backend/starli_private_fs.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+def private_read(path):
+    private_storage().require_private_file(path)
+    return json.loads(path.read_text(encoding='utf-8'))
 
 def environment(config):
     data = LOCAL / 'data'
+    node_binary = os.getenv('STARLI_NODE24') or shutil.which('node') or 'node'
+    video_python = os.getenv('STARLI_VIDEO_PYTHON') or str(ROOT / 'installer/.runtime/video-python' / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python'))
+    dashboard_database = 'sqlite:///' + (data / 'dashboard/webui.db').as_posix()
     env = dict(os.environ)
     # Explicit fresh data paths override inherited production configuration.
     env.update(WEBUI_SECRET_KEY=config['secret'], WEBUI_AUTH='true', ENABLE_SIGNUP='false', ENABLE_LOGIN_FORM='true',
         PYTHONIOENCODING='utf-8', PYTHONUTF8='1',
-        ENABLE_PERSISTENT_CONFIG='false', DATA_DIR=str(data / 'dashboard'), DATABASE_URL='sqlite:///' + (data / 'dashboard/webui.db').as_posix(),
+        ENABLE_PERSISTENT_CONFIG='false', DATA_DIR=str(data / 'dashboard'), DATABASE_URL=dashboard_database,
+        STARLI_DASHBOARD_DATABASE_URL=dashboard_database,
         STARLI_DATA_DIR=str(data / 'dashboard'), STARLI_CONFIG_DIR=str(LOCAL / 'config'),
         STARLI_WORKSPACE_ROOT=str(data / 'workspace'), ASSET_STORAGE_DIR=str(data / 'assets'), VIDEO_STORAGE_DIR=str(data / 'videos'),
         DATABASE_PATH=str(data / 'platform.sqlite'), STARLI_SOURCE_DATABASE=str(data / 'platform.sqlite'),
@@ -87,7 +92,7 @@ def environment(config):
         STARLI_COMPANY_MESSAGING_ENABLED='1',
         STARLI_TASK_HOME=str(data / 'tasks'), STARLI_MEMORY_ROOT=str(data / 'memory'),
         STARLI_PLATFORM_SOURCE_ROOT=str(ROOT / 'platform'), STARLI_RUNTIME_CODE_DIR=str(ROOT / 'platform/extensions/starli-runtime'),
-        STARLI_NODE_BINARY=os.getenv('STARLI_NODE24') or shutil.which('node') or 'node',
+        STARLI_NODE_BINARY=node_binary, STARLI_NODE_BIN=node_binary, STARLI_PYTHON_BIN=sys.executable, PYTHON_BIN=video_python,
         STARLI_PLATFORM_ORIGIN=config['platform'], PUBLIC_API_URL=config['platform'],
         WEBUI_URL=config['dashboard'], PUBLIC_APP_URL=config['dashboard'], STARLI_PUBLIC_ORIGIN=config['dashboard'],
         CORS_ALLOW_ORIGIN=config['dashboard'], STARLI_ALLOWED_ORIGINS=config['dashboard'],
@@ -164,15 +169,18 @@ def setup(args):
         raise RuntimeError('Dashboard owner creation failed; partial setup preserved')
     private_write(LOCAL / 'bindings.json', {'memberships': {user.id: {'v2UserId': node_id}}})
     from open_webui.company_authority.company_rbac import Authority
+    from starli_memory.registry import BotRegistry
     authority = Authority(env['STARLI_COMPANY_DATABASE'])
     try:
         company_id = authority.create(user.id, company_name, name)
         if authority.require_member(user.id, company_id)['role'] != 'owner':
             raise RuntimeError('Company owner membership not established')
+        registry = BotRegistry(env['STARLI_COMPANY_BOT_DATABASE'], authority.require_member)
+        registry.db.close()
     finally:
         authority.db.close()
     private_write(LOCAL / 'owner.json', {'dashboard_id': user.id, 'node_id': node_id, 'company_id': company_id})
-    print('Created fresh local owner accounts, explicit administrator binding and owner company. Runtime login not yet checked.')
+    print('Created fresh local owner accounts, administrator binding, owner company and native bot registry. Runtime login not yet checked.')
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -182,7 +190,9 @@ def main():
     args = parser.parse_args()
     if args.action == 'setup':
         return setup(args)
-    config = json.loads(CONFIG.read_text(encoding='utf-8'))
+    config = private_read(CONFIG)
+    private_storage().require_private_file(LOCAL / 'bindings.json')
+    private_storage().require_private_file(LOCAL / 'owner.json')
     origin(config['dashboard']); origin(config['platform'])
     if args.action == 'start':
         return subprocess.call([os.getenv('STARLI_NODE24', 'node'), str(ROOT / 'installer/native.mjs'), 'start', 'all'], env=environment(config), cwd=ROOT)
@@ -209,7 +219,7 @@ def main():
         if result.get('services', {}).get('sourceDatabase') != 'read-only connected':
             raise RuntimeError('Platform administrator bridge not confirmed')
         print('Dashboard sign-in and explicit platform administrator bridge verified')
-        owner = json.loads((LOCAL / 'owner.json').read_text())
+        owner = private_read(LOCAL / 'owner.json')
         companies = request(config['dashboard'], '/api/v1/companies', token=token)
         if not any(row[0] == owner['company_id'] and row[2] == 'owner' for row in companies):
             raise RuntimeError('Fresh company is absent from authenticated company list')

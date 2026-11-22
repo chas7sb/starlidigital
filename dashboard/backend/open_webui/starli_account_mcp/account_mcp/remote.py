@@ -84,7 +84,7 @@ class NodeRemoteAdapter:
   authorize()
   job=json.dumps({"configuration":{k:configuration.get(k)for k in ("url","transport","credential")},"request":request},separators=(",",":"))
   if len(job.encode())>100000:raise Fault("MCP_ARGUMENT_LIMIT",413)
-  spawn=asyncio.create_task(self.launcher.launch((NODE,"--max-old-space-size=128",str(self.service_path)),cwd=str(self.service_path.parent),env={"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8"},limits={"memoryBytes":268435456,"cpuSeconds":10,"wallSeconds":25,"openFiles":64,"processes":16,"stdoutBytes":1500000}))
+  spawn=asyncio.create_task(self.launcher.launch((NODE,"--max-old-space-size=128",str(self.service_path)),cwd=str(self.service_path.parent),env=_portable.child_environment({"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8"}),limits={"memoryBytes":268435456,"cpuSeconds":10,"wallSeconds":25,"openFiles":64,"processes":16,"stdoutBytes":1500000}))
   cancelled=False
   while not spawn.done():
    try:await asyncio.shield(spawn)

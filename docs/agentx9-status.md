@@ -99,3 +99,29 @@ URGENT AgentX4/Prime fixture portability note: runtime/tests/test_vm.py::test_de
 Final local follow-up checks:29 runtime tests PASSED in Python3.11 (protocol/image/console/adapter/router),7 Windows private-storage tests PASSED (actualDACL/filesystem),5 onboarding tests PASSED. CI adds these exact portable suites on Windows/macOS/Linux, with only FastAPI0.115.7/httpx0.28.1/Pydantic2.10.6 beyond stdlib. Runtime test fixture x86assumption remains flagged above for AgentX4/Prime before ARMmacOS hosted run. No tests skipped or removed by AgentX9.
 
 CURRENT HANDOFF: packaging+CI fixes and4freshABI-compatible hash locks ready to restage/private-push. Local verified dashboard output is complete in shared dashboard/build. First remote run45000883339 failed as diagnosed; NO later remote run exists at last check. New hostedOS results are required to close cross-platform validation. Prime owns staging/push; AgentX9 made no index or publication changes.
+
+## Final frontend refresh requested by Prime
+
+Refreshed current shared src/scripts/config into existing isolated scratch. package.json and package-lock.json are byte-identical to installed inputs, so no dependency reinstall. ONE final Node22 production build is running with6144MB heap and existing Pyodide cache. Includes ManageOllama createModelTag fix and latest LocalComputer stopped-instance handling. Critical source hashes saved in AgentX9 own scratch work/final-frontend-inputs.json. Will verify current source hash match and copied output before handoff.
+
+Hosted CI update: run45001750216 at commit18fcffe11cc6f20b64462efcbe6cba6fb42337bb completed SUCCESS (verified via gh run list). This supersedes the earlier first-run failure and closes the hosted validation gate for that exact commit, not later working-tree changes. Final local frontend refresh build still running; no repeat dependency installation.
+
+Final frontend production build PASSED exit0 after ONE refresh/build, Vite4m4s. Undefined-createModelTag warnings are now0, confirming the source fix is in the compilation. Latest LocalComputer input hash:c496a97bd25e389f28a5a1a87c96fb150723e4cfd8ed5324c2cc60bbcc65b5ed. All492src/scripts file hashes matched current shared source before output synchronization. Verified copy/sync currently in progress; handoff completion will follow.
+
+Hosted run45001750216 verified ALL9JOBS SUCCESS: packaging on Windows/macOS/Linux, platform build+tests on all3OS, dashboard build on all3OS. Commit18fcffe11cc6f20b64462efcbe6cba6fb42337bb. This is factual portable CI evidence, not a claim of hosted guest desktop/VM parity.
+
+## FINAL FRONTEND HANDOFF COMPLETE
+
+ONE final production build succeeded on Node22 using existing dependencies+Pyodide cache. All492current shared src/scripts files matched the compiled snapshot. Verified output synchronized to shared ignored dashboard/build:4399files,268122884bytes;54updated files;52obsolete generated assets backed up in AgentX9 own scratch then removed from served output. Every source/output file hash checked. No stale generated assets remain. ManageOllama undefinedcreateModelTag warning is absent; latestLocalComputer stopped-instance handling is included. AgentX5/Prime can serve the refreshed build now. No backend source rebuild is needed for later backend-only changes.
+
+Final hosted validation evidence remains9/9SUCCESS on run45001750216,commit18fcffe11cc6f20b64462efcbe6cba6fb42337bb. Later root owner/ACL changes need validation at their own final commit. No Git index, push, publication or production service changes by AgentX9.
+
+## OpenPencil bounded validation started
+
+Own packaging extension helper/tests/contract; no OpenPencil source mutations. Copied actual restored v0.16.0+Starli patch to own work/openpencil. Manifest requires bun@1.4.2 and bun.lock,38workspaces, root build = build:packages + lint + vitebuild. Gateway runtime is separate npm-locked @open-pencil/mcp0.16.0, has Basic/Bearer/session auth and loopback listeners; state/documents are fresh scratch only. Installing official Bun1.4.2 in own scratch with SHA256ce4c17497b2f29712a99d3d53f028de28cd42e3bacb8589599e7f000e49b6405 from officialGitHub release asset digest. No global installer or host PATH changes.
+
+OpenPencil frozen install PASSED:2009packages in234.73s, source package.json and bun.lock byte-identical. First upstream build reached package builders but exposed local bootstrap gap: official ZIP provides bun.exe only, while package scripts invoke bunx. Added a scratch-only bunx alias of the exact reviewed binary in helper cache (no source/global change), matching the official installer's entry-point contract. Retrying actual root build with that fix.
+
+OpenPencil root build is actively building workspace artifacts after scratch bunx alias fix; scene-graph/fig/etc package builds pass and core builder is running. Frozen Bun install completed with2009packages. package.json SHA256044e2027a74ebfef5c1d58a916b1092e5a87156a7e563588f8cccb441d145978 and bun.lock SHA256d835f86f4bde73573ed37daa66cb36d8acba4efe08f36ecc158a697f7f49560c unchanged. Six helper contract tests pass. Actual web build + auth smoke still pending; no source mutations or feature-ready claim.
+
+Scratch-copy correction: initial generic state-directory exclusion also omitted authored packages/core/src/editor/state (UI source, not runtime data), causing the first real core build import errors. This was AgentX9 scratch filtering, NOT a missing upstream/source issue. Refreshed the source-only scratch copy with only node_modules/dist/.git/Python-cache exclusions, preserving all authored state/data directories. Shared source remains untouched. Retrying build with complete source; no false integration blocker assigned.

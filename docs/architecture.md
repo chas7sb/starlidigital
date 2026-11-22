@@ -1,5 +1,7 @@
 # Architecture and extraction boundaries
 
+This document records the initial upstream source baseline. It is not the current readiness report: subsequent extraction changes and passing Windows owner/authentication/company/provider/tool/VM-read checks are summarized in [AgentX10 status](agentx10-status.md). Use the [root README](../README.md), [installation guide](install.md) and [feature parity matrix](feature-parity.md) for current runtime commands and acceptance status. Requirements described as unverified in this baseline must be read against those later results.
+
 Evidence inspected on 2026-11-22 through read-only StarliDigital source tools and bounded server reads. These observations describe upstream source; they do not certify the assembled local extraction.
 
 ## Source roots

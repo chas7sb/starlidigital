@@ -1,0 +1,84 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "scope": "Representative local disposable HTTP actions; no external sends/inference/publishing/payment calls",
+  "dashboard": "http://127.0.0.1:18280",
+  "created": {
+    "crm_company": "f97e3e1d-acb9-4861-89f6-84b5f0d4a45d",
+    "hosted_agent": "0c703755-2dad-49b4-b433-5e70dca65ac3",
+    "video_project": "vproj-55eae0f0-e13c-4612-87c3-35339b00de01",
+    "video_render": "vrnd-edaf3343-7e37-4c7d-897b-b8784bf3071f"
+  },
+  "checks": [
+    {
+      "name": "node-owner-auth",
+      "status": "PASS",
+      "owner": "AgentX10",
+      "source": "onboarding/platform-owner.mjs",
+      "evidence": {
+        "node_role": "ADMIN",
+        "dashboard_role": "admin"
+      }
+    },
+    {
+      "name": "node-crm-create-read-dashboard",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/schema.ts and domain GraphQL resolvers",
+      "evidence": {
+        "id": "f97e3e1d-acb9-4861-89f6-84b5f0d4a45d",
+        "version": 1,
+        "node_and_dashboard_readback": true
+      }
+    },
+    {
+      "name": "node-agent-create-read",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/schema.ts and domain GraphQL resolvers",
+      "evidence": {
+        "id": "0c703755-2dad-49b4-b433-5e70dca65ac3",
+        "status": "DRAFT",
+        "configuration_readback": true
+      }
+    },
+    {
+      "name": "node-video-create-read",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/schema.ts and domain GraphQL resolvers",
+      "evidence": {
+        "id": "vproj-55eae0f0-e13c-4612-87c3-35339b00de01",
+        "title": "QA-eb82091813 Node video",
+        "width": 1080,
+        "height": 1920,
+        "duration": 0.3
+      }
+    },
+    {
+      "name": "node-video-validate-png",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/schema.ts and domain GraphQL resolvers",
+      "evidence": {
+        "bytes": 3056,
+        "sha256": "33fb474d2d81224c196c999809a721f2087055fd48daaa13223a20fa393e7191",
+        "png_signature": true
+      }
+    },
+    {
+      "name": "node-video-mp4",
+      "status": "PASS",
+      "owner": "AgentX3/5",
+      "source": "platform/server/src/schema.ts and domain GraphQL resolvers",
+      "evidence": {
+        "render_id": "vrnd-edaf3343-7e37-4c7d-897b-b8784bf3071f",
+        "status": "COMPLETE",
+        "bytes": 10850,
+        "sha256": "b522509a0fb815494626b48561eb5f87d1f6faca00492bf4f62893699201d430",
+        "mp4_ftyp": true
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0
+}

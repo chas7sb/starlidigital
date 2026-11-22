@@ -1316,20 +1316,29 @@
     },
     {
       "name": "http:/",
-      "status": "FAIL",
-      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+      "status": "PASS",
+      "detail": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8"
+      }
     },
     {
       "name": "http:/auth",
-      "status": "FAIL",
-      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+      "status": "PASS",
+      "detail": {
+        "status": 200,
+        "content_type": "text/html; charset=utf-8"
+      }
     },
     {
       "name": "http:/api/config",
-      "status": "FAIL",
-      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+      "status": "PASS",
+      "detail": {
+        "status": 200,
+        "content_type": "application/json"
+      }
     }
   ],
-  "passed": 195,
-  "failed": 3
+  "passed": 198,
+  "failed": 0
 }

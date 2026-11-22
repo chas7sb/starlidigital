@@ -6,6 +6,8 @@ from pathlib import Path
 import sqlite3
 import subprocess
 import tempfile
+import stat
+from types import SimpleNamespace
 import unittest
 
 spec=importlib.util.spec_from_file_location('private_fs_under_test',Path(__file__).parents[1]/'starli_private_fs.py')
@@ -16,6 +18,19 @@ class PrivateStorageTests(unittest.TestCase):
         self.temporary=tempfile.TemporaryDirectory()
         self.base=Path(self.temporary.name).resolve()
     def tearDown(self):self.temporary.cleanup()
+
+    def test_posix_metadata_rejects_foreign_owner_and_special_file(self):
+        for mode,owner,directory in [(stat.S_IFDIR|0o700,200,True),(stat.S_IFREG|0o600,200,False),
+                                     (stat.S_IFIFO|0o600,100,False),(stat.S_IFREG|0o700,100,True)]:
+            info=SimpleNamespace(st_mode=mode,st_uid=owner,st_nlink=1)
+            with self.assertRaises(OSError):fs._require_posix_metadata(info,directory,100)
+        fs._require_posix_metadata(SimpleNamespace(st_mode=stat.S_IFREG|0o600,st_uid=100,st_nlink=1),False,100)
+
+    @unittest.skipUnless(hasattr(os,'mkfifo'),'POSIX FIFO filesystem check')
+    def test_actual_fifo_is_rejected_before_sqlite(self):
+        directory=self.base/'private';fs.ensure_private_directory(directory)
+        fifo=directory/'database';os.mkfifo(fifo,0o600)
+        with self.assertRaises(OSError):fs.ensure_private_database(fifo)
 
     def test_current_user_private_storage_accepts_sqlite(self):
         database=self.base/'private/accounts.sqlite'

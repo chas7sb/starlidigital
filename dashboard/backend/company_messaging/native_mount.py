@@ -150,4 +150,26 @@ def install_from_environment(app):
     require(DATABASE_URL.startswith('sqlite:///'),503,'COMPANY_NATIVE_SQLITE_REQUIRED')
     from open_webui.config import DATA_DIR
     company=os.getenv('STARLI_COMPANY_DATABASE') or str(Path(DATA_DIR)/'company-authority.sqlite3')
-    return install(app,DATABASE_URL[len('sqlite:///'):],authority_database=company,registry_database=os.getenv('STARLI_COMPANY_BOT_DATABASE') or company)
+    registry=os.getenv('STARLI_COMPANY_BOT_DATABASE') or company
+    # Fresh local installs start with EMPTY authority/registry schemas. Existing
+    # files and external mappings are never replaced, populated or adopted.
+    # Creating a schema grants no membership, bots or computer enrollment.
+    data_root=Path(DATA_DIR).resolve()
+    from open_webui.company_authority import Authority
+    from starli_memory.registry import BotRegistry
+    for candidate,kind in ((Path(company),'authority'),(Path(registry),'registry')):
+        require(candidate.is_absolute() and not candidate.is_symlink(),503,'EXISTING_DATABASE_MAPPING_REQUIRED')
+        if not candidate.exists():
+            require(candidate.parent.resolve().is_relative_to(data_root),503,'EXISTING_DATABASE_MAPPING_REQUIRED')
+            candidate.parent.mkdir(parents=True,exist_ok=True)
+            # Exclusive creation prevents following a link or replacing state.
+            try:descriptor=os.open(candidate,os.O_CREAT|os.O_EXCL|os.O_RDWR,0o600)
+            except FileExistsError:require(False,503,'EXISTING_DATABASE_MAPPING_REQUIRED')
+            else:os.close(descriptor)
+            if kind=='authority':store=Authority(str(candidate))
+            else:store=BotRegistry(str(candidate),lambda *args,**kwargs:False)
+            store.db.close()
+        elif kind=='registry' and Path(company)==candidate:
+            # Shared authority/registry layout needs both empty schemas.
+            store=BotRegistry(str(candidate),lambda *args,**kwargs:False);store.db.close()
+    return install(app,DATABASE_URL[len('sqlite:///'):],authority_database=company,registry_database=registry)

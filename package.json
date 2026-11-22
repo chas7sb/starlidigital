@@ -6,7 +6,7 @@
   "description": "Self-hosted StarliDigital dashboard, platform and isolated computer runtime",
   "type": "module",
   "bin": { "starlidigital": "installer/starli.mjs" },
-  "engines": { "node": ">=22" },
+  "engines": { "node": ">=24" },
   "scripts": {
     "starli": "node installer/starli.mjs",
     "native": "node installer/native.mjs",

@@ -65,7 +65,7 @@ async def tool(user,name,args,operation_key=None):
     code=runtime_code_dir()
     from open_webui.routers.starli_subprocess import child_setup,check_child_guard
     guard_args,child_env=child_setup({"PATH":os.environ.get("PATH", ""),"LANG":"C.UTF-8","STARLI_PLATFORM_SOURCE_ROOT":os.getenv("STARLI_PLATFORM_SOURCE_ROOT",_portable.platform_root()),"STARLI_SOURCE_DATABASE":source_database()})
-    process=await asyncio.create_subprocess_exec(_portable.node_binary(),*guard_args,"--import",str(code/"node_modules/tsx/dist/loader.mjs"),str(code/"intelligence-bridge.mts"),cwd=str(code),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,env=child_env)
+    process=await asyncio.create_subprocess_exec(_portable.node_binary(),*guard_args,"--import",str(code/"node_modules/tsx/dist/loader.mjs"),str(code/"intelligence-bridge.mts"),cwd=str(code),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,env=_portable.child_environment(child_env))
     try:
         output,_=await asyncio.wait_for(process.communicate(encoded),25)
         check_child_guard(process,child_env)

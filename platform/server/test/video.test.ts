@@ -34,6 +34,23 @@ test('SSRF Protection: blocks loopback, private, link-local, and metadata IPs', 
   assert.equal(isForbiddenIP('93.184.216.34'), false);
 });
 
+test('custom canvas metadata matches the persisted render spec and rejects invalid dimensions',t=>{
+ const store=new Store(':memory:');t.after(()=>store.close());const events=new Events();
+ const service=new VideoServices({store,events,assetServices:new AssetServices({store,events})});
+ const actor={id:'canvas-owner',role:'USER'};
+ const project=service.createProject(actor,{title:'Custom canvas',format:'CUSTOM',spec:{canvas:{width:240,height:240,fps:10},scenes:[{duration:0.3,layers:[]}]}});
+ assert.deepEqual([project.width,project.height,project.fps],[240,240,10]);
+ assert.deepEqual(service.getProject(project.id,actor)?.spec.canvas,{width:240,height:240,fps:10});
+ const updated=service.patchSpec(project.id,{canvas:{width:480,fps:20}},actor);
+ assert.deepEqual([updated.width,updated.height,updated.fps],[480,240,20]);
+ assert.deepEqual(updated.spec.canvas,{width:480,height:240,fps:20});
+ for(const canvas of [{width:0},{height:4000},{fps:0},{width:'240'},{fps:Infinity}]){
+  assert.throws(()=>service.createProject(actor,{title:'Invalid',spec:{canvas,scenes:[]}}),/Invalid canvas/);
+  assert.throws(()=>service.patchSpec(project.id,{canvas},actor),/Invalid canvas/);
+ }
+ assert.equal(service.getProject(project.id,actor)?.width,480);
+});
+
 test('Video Project Lifecycle & Multi-Tenancy Enforcement', () => {
   const store = new Store(':memory:');
   const events = new Events();

@@ -73,11 +73,19 @@ def environment(uid):
     try:ensure_private_directory(home)
     except OSError:raise HTTPException(503,"Provider home unavailable") from None
     # Do not inherit operator API keys, cloud credentials, proxies or Pi auth files.
-    return {"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8","HOME":str(home)}
+    env={"PATH":os.environ.get("PATH",os.defpath),"LANG":"C.UTF-8","HOME":str(home)}
+    if os.name == 'nt':
+        # Windows Node/OpenSSL needs the OS directory for its CSPRNG. Do not
+        # inherit USERPROFILE/AppData or any operator cloud/auth environment.
+        system_root=os.environ.get('SYSTEMROOT') or os.environ.get('WINDIR')
+        if not system_root:raise HTTPException(503,"Windows provider runtime requires SYSTEMROOT")
+        env['SYSTEMROOT']=system_root
+        env['USERPROFILE']=str(home)
+    return env
 
 async def process(uid):
     return await asyncio.create_subprocess_exec(NODE,"--import","tsx",str(runtime_code_dir()/"provider-runtime.mts"),
-        cwd=str(runtime_code_dir()),env=environment(uid),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,limit=8*1024*1024)
+        cwd=str(runtime_code_dir()),env=_portable.child_environment(environment(uid)),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,limit=8*1024*1024)
 
 async def run(uid,payload,timeout=45):
     proc=await process(uid)

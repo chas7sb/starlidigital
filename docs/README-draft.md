@@ -1,65 +1,62 @@
-# StarliDigital dashboard extraction — self-hosting draft
+# StarliDigital owner-flow and feature notes
 
-This project is extracting the existing StarliDigital application dashboard, without its marketing pages. It is not yet a validated portable release. Source presence, a working upstream deployment, and a working fresh installation are separate milestones.
+This supplemental draft summarizes AgentX10's verified owner flow. Use the [root README](../README.md) and [installation guide](install.md) as the authoritative entry points; this file does not replace their current commands or certify a completed release.
 
-## Current installation status
+## Install and first owner
 
-Windows, macOS, and Linux installation are requested targets. No platform is certified by this document. Use the release packaging instructions only after the source, lockfiles, configuration, and launch scripts have been integrated and tested. Do not copy an upstream database, environment file, session store, uploaded customer files, or credentials into a fresh installation.
+The root README currently directs native users to run:
 
-The inspected backend manifest requires Node.js 24 or later. The separate dashboard manifest declares Node.js 18.13–22.x. These ranges do not overlap: use separate build environments until the integration owner verifies a common supported version or updates the dashboard tooling. The dashboard Python manifest requires Python 3.11 or 3.12. A Node-only installation does not establish full dashboard parity.
+```text
+npm run doctor
+npm run install:app
+npm run setup
+npm start
+```
 
-## Onboarding sequence
+Follow the [installation guide](install.md) for prerequisites, build steps, runtime downloads, platform differences and Docker options. The existing dashboard needs its Python backend as well as its frontend. The installer separates Node24 for the platform/provider runtime from Node22 for dashboard frontend tooling, and isolates dashboard and video Python environments.
 
-An implementation is now available in `onboarding/README.md`: trusted local first-owner and company setup, fresh private state, native start, and actual authenticated checks. Run it with the installed dashboard Python after dependency installation completes. Then use the dashboard `/setup` page to configure a provider/model. Actual disposable first-owner/company creation and migrations have passed. Full HTTP integration currently reaches a Windows-incompatible `fcntl` import in the memory store during dashboard startup; the earlier account-MCP ACL gate has been fixed. Helper tests do not override source gates. The public signup endpoint intentionally refuses zero-user bootstrap.
+[First-run details](../onboarding/README.md) describe trusted local owner/company provisioning and setup/start/check commands. Setup prompts privately, creates fresh local state and a stable session secret, and establishes an explicit dashboard-to-platform administrator binding. Public signup cannot bootstrap a zero-user installation. After owner provisioning, use /setup to sign in, connect an account provider and select a model.
 
-1. Obtain a complete sanitized source archive with its dependency lockfiles and required upstream notices. Confirm the archive includes the dashboard and its Python API, not only the older `web` workspace.
-2. Follow the integrated packaging instructions to install dependencies and build each runtime. Upstream commands below are evidence for maintainers, not a tested installation recipe.
-3. Configure a new writable application data directory and fresh secrets. Set local service URLs and allowed origins; replace upstream domains and host paths through the integrated configuration layer.
-4. Bootstrap a new administrator using the documented local mechanism. The inspected Node entry point supports `ADMIN_USERNAME` and `ADMIN_PASSWORD`; its password minimum is 14 characters and its username validation allows 3–30 lowercase letters, digits, dots, underscores, and hyphens, starting with a letter or digit. This does not establish dashboard/Python identity synchronization.
-5. Start the application through the release launcher. Verify the Node API health endpoint and dashboard sign-in separately, then exercise a new local record through the dashboard.
-6. Configure optional providers individually with your own credentials. Validate one local workflow before enabling workers that can send messages, create billable resources, or publish content.
-7. Configure the isolated computer-use VM through its own lifecycle instructions. A visible Browser panel alone does not prove an isolated VM exists.
+Never copy upstream production databases, environments, credentials, sessions or customer files into a fresh installation. Bring your own provider accounts; catalog availability alone does not establish a working provider connection.
 
-## Upstream command evidence
+## Verified Windows owner flow
 
-The inspected platform root provides `npm run build`, `npm test`, `npm run start`, `npm run check`, and `npm run backup`. Its build covers `server`, `cli`, `device`, and `web`; `control-plane` is a workspace but is not included in that root build chain. The server build runs TypeScript checking (`tsc --noEmit`) and start runs `tsx src/index.ts`.
+Actual disposable runtime checks passed for migrations and fresh dashboard/Node administrators, private identity binding, owner company membership, registry initialization, both HTTP health endpoints, dashboard sign-in, platform administration, customer identity, company listing and owner capabilities. Unauthenticated admin access was denied.
 
-The separate dashboard provides `npm run build` (Pyodide preparation followed by Vite), `npm run check`, and `npm run test:frontend`. Its `dev` command binds Vite with `--host`; choose the integrated launcher's local binding policy before using it on a network. Dependency download and Pyodide preparation may require network access.
+After controlled source reload, the same state returned 42 providers and 69 authorized tools through real authenticated application routes. VM status and a valid PNG frame passed with Bearer authentication and same-origin requests. No provider inference, tool execution, external send or guest control was issued in these checks.
 
-## Dashboard feature map
+Same-state resume preserved the owner/company/Node IDs, databases, credentials and session secret. Eleven onboarding/resume tests passed on Windows, including ambient database override protection, fail-closed explicit broad-ACL rejection, private file creation and resume path/port safeguards. See [AgentX10 status](agentx10-status.md) for exact evidence and the retained private QA handoff.
 
-The following surfaces exist in inspected source. Their complete local behavior remains subject to extraction and integration testing.
+This is core owner/catalog/VM-read evidence, not full feature parity or three-OS native-boot certification.
 
-| Area | Source evidence | Local readiness |
+## Feature map and evidence boundaries
+
+Use the current [feature parity matrix](feature-parity.md) for detailed acceptance status. These application surfaces exist in source; a route or panel alone does not establish complete behavior.
+
+| Area | Evidence from this owner-flow work | Remaining acceptance boundary |
 | --- | --- | --- |
-| Chat and conversations | Main app, conversation route, bot chat route, shared conversation route | Not verified |
-| Workspace | Models, knowledge, prompts, tools, function creation routes | Not verified |
-| Administration | Users, settings, functions, evaluations routes | Not verified |
-| Channels and playground | Channel route, playground, completions, notes | Not verified |
-| Company | Dedicated Company panel, overview and native-capabilities API calls | Not verified |
-| CRM | Dedicated CRM panel | Not verified |
-| Projects, proposals, hosted agents, videos, activity | Collection panel dispatch in `/starli/[section]` | Not verified |
-| Mailbox and social | Dedicated Mailbox and Social panels | Provider setup and local behavior not verified |
-| Billing, approvals, tools | Dedicated panels | Provider setup and local behavior not verified |
-| Browser | Dedicated Browser panel | VM isolation and lifecycle not verified |
-| Subagents | `agents` section redirects to chat | Chat integration not verified |
+| Authentication and administration | Fresh owner login, role checks and private platform binding passed | Complete administration/evaluation workflows remain with feature owners |
+| Company | Actual company creation, owner listing and capabilities passed | Complete company resource and member workflows remain separate |
+| Providers and tools | Real authenticated catalogs returned 42 providers and 69 tools | Provider login/inference and tool execution require their own checks |
+| Computer | Authenticated installation-owner VM status/PNG frame passed | Guest lifecycle, input, isolation, persistence and portability use runtime evidence |
+| Chat, conversations and subagents | Existing dashboard/chat source retained | Model-backed chat and complete agent workflows are not established here |
+| Workspace, knowledge, models and prompts | Existing source/routes retained | End-to-end workspace acceptance is tracked in feature parity |
+| CRM, projects, proposals, hosted agents, videos and activity | Existing operational panels retained | Consult each owner's runtime validation; not certified by owner-flow smoke |
+| Mailbox, social, billing and channels | Existing operational surfaces retained | External account configuration and communications/commercial workflows remain separate |
 
-Marketing pages are outside the extraction scope. Operational website generation, projects, and proposals are application features and should not be removed merely because their outputs can be public.
+Marketing pages are excluded. Operational website generation, projects and proposals remain application features even when their outputs can be public.
 
-## Data and configuration
+## State and configuration
 
-The Node store uses SQLite through `node:sqlite`, with WAL mode, and accepts `DATABASE_PATH`. Its default is `server/data/starli.sqlite` relative to the source module. It stores application records, users, sessions, and reset tokens. The Node HTTP listener defaults to `127.0.0.1:4100`; `/health` checks a database query and `/graphql` serves the schema. Dashboard/Python storage is a separate concern and must be documented by its extraction owner.
+The platform uses SQLite through node:sqlite. The owner flow sets explicit private paths for the dashboard database, platform database, authority/registry stores, memory, assets and workspace. DATABASE_URL and STARLI_DASHBOARD_DATABASE_URL resolve to the same generated private dashboard SQLite database, preventing an ambient launcher override from redirecting state.
 
-Keep backups of all integrated data volumes and generated assets using the release's verified backup procedure. The existence of an upstream `backup` script is not proof that it captures every dashboard service or restores successfully.
+Configuration, bindings and credentials are created and checked through the shared private-storage policy. Existing broad Windows ACLs are refused without repair; new files receive protected owner-only ACLs at creation. The explicit ID binding and both administrator roles confer platform authority; matching email addresses do not.
 
-## Known release blockers
+Back up the session secret, binding, owner metadata, all application databases and generated assets using the project's verified procedure. The existence of a backup script alone is not evidence of a complete successful restore.
 
-- Complete sanitized source and license/provenance review are not established here.
-- Dashboard/Python and Node authentication, proxy routing, configuration, storage, and startup must be integrated.
-- Runtime version conflict must be resolved or supported through separate environments.
-- Optional integrations need explicit enabled/disabled behavior and fresh credentials; no upstream account access is bundled.
-- Windows/macOS/Linux install, restart, upgrade, backup/restore, and uninstall need clean-machine verification.
-- Computer-use VM creation, start/stop/reset, display/input, persistence, and host isolation need end-to-end verification.
-- Full dashboard parity has not passed acceptance testing.
+## Separate release gates
 
-See `architecture.md` for the source boundaries and evidence scope.
+Complete feature parity, external-provider execution, three-platform native boot, VM acceptance, backup/restore/upgrade/uninstall, provenance/license review and distribution readiness are separately owned gates. Check their current guides and results instead of interpreting this owner-flow smoke as certification.
+
+See [architecture](architecture.md), [configuration](configuration.md), [installation](install.md), [runtime](runtime.md) and [feature parity](feature-parity.md). Historical initial-inventory blockers in earlier drafts are superseded where the current status records passing runtime checks.
+

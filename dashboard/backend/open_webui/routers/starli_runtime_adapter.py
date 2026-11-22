@@ -432,7 +432,7 @@ async def run(task,user,worker_id=None,lease_token=None):
         task['nativePreview']=native_preview
         save(task)
         process=await asyncio.create_subprocess_exec(_portable.node_binary(),'--import',str(runtime_code_dir()/'node_modules/tsx/dist/loader.mjs'),str(RUNNER),
-            cwd=str(ROOT),env=env,stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE,limit=4*1024*1024)
+            cwd=str(ROOT),env=_portable.child_environment(env),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE,limit=4*1024*1024)
         stderr_capture=asyncio.create_task(worker_diagnostics.drain(getattr(process,'stderr',None)))
         _ACTIVE[task['taskId']]['process']=process
         from open_webui.routers.starli_execution_context import agent_scope,platform_enabled

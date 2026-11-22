@@ -1,0 +1,20 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "read_only": true,
+  "checks": [
+    {
+      "origin": "http://127.0.0.1:18280",
+      "http": 200,
+      "tool_count": 69,
+      "isError": false,
+      "missing_required": []
+    },
+    {
+      "origin": "http://127.0.0.1:18282",
+      "http": 200,
+      "tool_count": 69,
+      "isError": false,
+      "missing_required": []
+    }
+  ]
+}

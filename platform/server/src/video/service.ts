@@ -30,6 +30,15 @@ const REPO_ROOT = path.resolve(__dirname, '../../..');
 const execFileAsync = promisify(execFile);
 let videoSubprocesses = 0;
 
+function validatedCanvas(input:any,fallback:{width:number;height:number;fps:number}){
+ const result={width:input?.width??fallback.width,height:input?.height??fallback.height,fps:input?.fps??fallback.fps};
+ for(const key of ['width','height','fps'] as const){
+  const min=key==='fps'?10:240,max=key==='fps'?60:3840;
+  if(!Number.isInteger(result[key])||result[key]<min||result[key]>max)throw new Error(`Invalid canvas.${key}: expected an integer from ${min} to ${max}`);
+ }
+ return result;
+}
+
 export class VideoServices {
   private store: Store;
   public readonly events: Events;
@@ -237,6 +246,8 @@ export class VideoServices {
       voiceovers: [],
     };
 
+    const canvas = validatedCanvas(defaultSpec.canvas, {width,height,fps:30});
+    defaultSpec.canvas = {...defaultSpec.canvas,...canvas};
     resolveVideoSpecAssets(this.store, defaultSpec, actor);
     const duration = defaultSpec.scenes.reduce((acc: number, s: any) => acc + (Number(s.duration) || 0), 0);
     const now = new Date().toISOString();
@@ -250,9 +261,9 @@ export class VideoServices {
       purpose: input.purpose,
       status: 'DRAFT',
       format,
-      width,
-      height,
-      fps: 30,
+      width: canvas.width,
+      height: canvas.height,
+      fps: canvas.fps,
       duration,
       spec: defaultSpec,
       brandProfileId: brand?.id,
@@ -290,11 +301,10 @@ export class VideoServices {
       throw new Error(`Video specification must contain at least one scene`);
     }
 
+    const {width,height,fps} = validatedCanvas(spec.canvas, project);
+    spec = {...spec,canvas:{...spec.canvas,width,height,fps}};
     resolveVideoSpecAssets(this.store, spec, actor);
     const duration = spec.scenes.reduce((acc: number, s: any) => acc + (Number(s.duration) || 0), 0);
-    const width = Number(spec.canvas?.width) || project.width;
-    const height = Number(spec.canvas?.height) || project.height;
-    const fps = Number(spec.canvas?.fps) || project.fps;
 
     const updated: VideoProjectRecord = {
       ...project,

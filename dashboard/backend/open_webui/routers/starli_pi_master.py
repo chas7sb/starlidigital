@@ -301,7 +301,7 @@ async def _legacy_tool(user, op, args, key, *, runtime_call_id=None):
             try:
                 proc=await asyncio.create_subprocess_exec(*commands[task],cwd=str(_portable.DASHBOARD),
                     stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.STDOUT,
-                    env={k:v for k,v in os.environ.items() if k in ("PATH","HOME","LANG","VIRTUAL_ENV")})
+                    env=_portable.child_environment({k:v for k,v in os.environ.items() if k in ("PATH","HOME","LANG","VIRTUAL_ENV")}))
                 try:
                     out,_=await asyncio.wait_for(proc.communicate(),timeout=120)
                 except asyncio.TimeoutError:
@@ -536,7 +536,7 @@ def _scoped_read_only_tool(op,args):
     # Closed server-reviewed read allowlist. Unknown/MCP operations are effects.
     if op in {"capabilities","starlis.list","platform.schema"}:return True
     if op!="platform.call" or not isinstance(args,dict):return False
-    return args.get("tool") in {"memory_read","memory_search","memory_history","web_search","web_fetch","project_list","project_files","project_file_read","starli_source_read","starli_source_list","starli_status","platform_capabilities","platform_overview","api_overview","projects_list","project_get"}
+    return args.get("tool") in {"local_vm_status","local_vm_screenshot","memory_read","memory_search","memory_history","web_search","web_fetch","project_list","project_files","project_file_read","starli_source_read","starli_source_list","starli_status","platform_capabilities","platform_overview","api_overview","projects_list","project_get"}
 
 def _trusted_user_timezone(user):
     from zoneinfo import ZoneInfo,ZoneInfoNotFoundError
@@ -564,7 +564,7 @@ async def _launch_primary_worker(env):
     from open_webui.routers.starli_subprocess import child_setup
     guard_args,child_env=child_setup(env)
     process=await asyncio.create_subprocess_exec(
-        NODE,*guard_args,"--import","tsx",WORKER,cwd=CWD,env=child_env,
+        NODE,*guard_args,"--import","tsx",WORKER,cwd=CWD,env=_portable.child_environment(child_env),
         stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,limit=2097152)
     return process,child_env

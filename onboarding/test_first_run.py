@@ -23,24 +23,52 @@ class FirstRunTests(unittest.TestCase):
             helper.NoRedirect().redirect_request(None, None, 302, None, None, 'https://example.com')
 
     def test_state_and_trusted_header_overrides(self):
-        with patch.dict(helper.os.environ, {'DATABASE_PATH': '/production', 'STARLI_DATA_DIR': '/production-data', 'ADMIN_PASSWORD': 'must-not-inherit',
+        with patch.dict(helper.os.environ, {'DATABASE_PATH': '/production', 'STARLI_DATA_DIR': '/production-data',
+                'STARLI_DASHBOARD_DATABASE_URL': 'sqlite:///unrelated.sqlite', 'ADMIN_PASSWORD': 'must-not-inherit',
                 'WEBUI_AUTH_TRUSTED_EMAIL_HEADER': 'x-admin'}):
             env = helper.environment({'secret': 'test', 'platform': 'http://127.0.0.1:4100', 'dashboard': 'http://127.0.0.1:8080'})
         self.assertEqual(env['DATABASE_PATH'], env['STARLI_SOURCE_DATABASE'])
         self.assertEqual(env['DATA_DIR'], env['STARLI_DATA_DIR'])
+        self.assertEqual(env['DATABASE_URL'], env['STARLI_DASHBOARD_DATABASE_URL'])
+        self.assertNotEqual(env['STARLI_DASHBOARD_DATABASE_URL'], 'sqlite:///unrelated.sqlite')
         self.assertNotEqual(env['DATABASE_PATH'], '/production')
         self.assertNotIn('ADMIN_PASSWORD', env)
         self.assertNotIn('WEBUI_AUTH_TRUSTED_EMAIL_HEADER', env)
         self.assertEqual(env['WEBUI_AUTH'], 'true')
         self.assertEqual(env['STARLI_LOCAL_VM_ENABLED'], '1')
+        self.assertEqual(env['STARLI_NODE_BIN'], env['STARLI_NODE_BINARY'])
+        self.assertEqual(env['STARLI_PYTHON_BIN'], helper.sys.executable)
+        self.assertIn('video-python', env['PYTHON_BIN'])
 
     def test_existing_private_config_never_overwritten(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / 'private.json'
+            path = Path(directory) / 'private/private.json'
             helper.private_write(path, {'keep': True})
             with self.assertRaises(FileExistsError):
                 helper.private_write(path, {'keep': False})
             self.assertIn('true', path.read_text())
+
+    def test_broad_explicit_directory_grant_rejected_without_repair(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'private'
+            helper.private_storage().ensure_private_directory(target)
+            if helper.os.name == 'nt':
+                result = helper.subprocess.run(['icacls', str(target), '/grant', '*S-1-1-0:(OI)(CI)R'], capture_output=True)
+                self.assertEqual(result.returncode, 0)
+            else:
+                target.chmod(0o755)
+            with self.assertRaises(OSError):
+                helper.private_write(target / 'setup.json', {'secret': 'must-not-write'})
+            self.assertFalse((target / 'setup.json').exists())
+            with self.assertRaises(OSError):
+                helper.private_storage().ensure_private_directory(target)
+
+    def test_private_file_accepted_by_shared_policy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'private/setup.json'
+            helper.private_write(target, {'safe': True})
+            helper.private_storage().require_private_file(target)
+            self.assertEqual(helper.private_read(target), {'safe': True})
 
     def test_missing_dependencies_fail_before_private_state(self):
         with tempfile.TemporaryDirectory() as directory:

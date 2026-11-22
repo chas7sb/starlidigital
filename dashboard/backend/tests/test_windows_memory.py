@@ -40,6 +40,22 @@ class WindowsMemoryTests(unittest.TestCase):
     def test_broad_root_is_rejected(self):
         self.root.mkdir()
         with self.assertRaises(MemoryFault):self.store.read('memory')
+    def test_scope_holds_ancestor_against_rename(self):
+        ancestor=self.root.parent
+        moved=ancestor.with_name(ancestor.name+'-moved')
+        try:
+            with self.factory._scope(self.scope):
+                with self.assertRaises(OSError):ancestor.rename(moved)
+        finally:
+            if moved.exists():moved.rename(ancestor)
+
+    def test_hardlinked_revision_is_rejected(self):
+        self.store.write('memory','one',0,'one',Provenance('user','owner'))
+        revision=next(self.root.rglob('memory-*.md'))
+        os.link(revision,revision.with_name('unexpected-hardlink'))
+        with self.assertRaises(MemoryFault) as failure:self.store.read('memory')
+        self.assertEqual(failure.exception.code,'MEMORY_UNSAFE_PATH')
+
     def test_three_processes_preserve_thirty_updates(self):
         self.store.write('memory','0',0,'initial',Provenance('user','owner'))
         script='''

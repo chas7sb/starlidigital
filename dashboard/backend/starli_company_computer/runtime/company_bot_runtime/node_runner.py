@@ -1,3 +1,4 @@
+import starli_portable as _portable
 import asyncio,hashlib,json,os
 from pathlib import Path
 
@@ -159,7 +160,7 @@ class NodeRunner:
             environment = {k: os.environ[k] for k in ('PATH', 'LANG', 'LC_ALL', 'TZ', 'TMPDIR', 'SSL_CERT_FILE') if k in os.environ}
             environment.update(self.child_environment)
         environment['STARLI_COMPANY_TURN_MILLIS'] = str(max(1, self.timeout_seconds - 5) * 1000)
-        process=await asyncio.create_subprocess_exec(self.node,self.worker,self.profile,env=environment,stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,limit=262144)
+        process=await asyncio.create_subprocess_exec(self.node,self.worker,self.profile,env=_portable.child_environment(environment),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,limit=262144)
         async def send(value):
             process.stdin.write((json.dumps(value,allow_nan=False)+'\n').encode());await process.stdin.drain()
         try:

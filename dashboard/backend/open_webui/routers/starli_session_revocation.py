@@ -233,7 +233,7 @@ async def _rpc(owner,requested_at):
         from open_webui.routers.starli_subprocess import child_setup,check_child_guard
         guard_args,child_env=child_setup({"PATH":os.environ.get("PATH", ""),"LANG":"C.UTF-8","STARLI_PLATFORM_SOURCE_ROOT":os.getenv("STARLI_PLATFORM_SOURCE_ROOT",_portable.platform_root()),"STARLI_SOURCE_DATABASE":source_database()})
         process=await asyncio.create_subprocess_exec(_portable.node_binary(),*guard_args,"--import",str(code/"node_modules/tsx/dist/loader.mjs"),str(script),cwd=str(code),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,
-            env=child_env)
+            env=_portable.child_environment(child_env))
         async def communicate():
             process.stdin.write(payload);await process.stdin.drain();process.stdin.close()
             output=bytearray()

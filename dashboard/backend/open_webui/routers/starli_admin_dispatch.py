@@ -154,6 +154,14 @@ class AdminDispatcher:
    from open_webui.routers.starli_pi_master import _tool
    local=callable(_tool)
   if local and Path(self.root).is_dir():result.extend(json.loads(json.dumps(SOURCE_SCHEMAS)))
+  # These exact installation-owner tools have independent VM/private-binding
+  # readiness and never use the generic remote MCP bridge or customer fallback.
+  from open_webui.routers import starli_local_vm_tools
+  from open_webui.routers.starli_execution_context import agent_scope
+  try:
+   with agent_scope(scope.agent_id,scope.chat_id):result.extend(starli_local_vm_tools.catalog(fresh))
+  except HTTPException as error:
+   if error.status_code not in (403,503):raise
   # Local source authority is the native administrator grant, independent of CRM membership.
   try:
    catalog=await self.bridge(fresh,scope,'catalog')
@@ -195,6 +203,15 @@ class AdminDispatcher:
   if selected is None:denied('ADMIN_TOOL_UNAVAILABLE',409)
   if not isinstance(args,dict) or not Draft7Validator(selected['inputSchema']).is_valid(args):denied('ADMIN_ARGUMENTS_INVALID',400)
   fresh=self.fresh(user,scope,authorize)
+  from open_webui.routers import starli_local_vm_tools
+  if tool in starli_local_vm_tools.NAMES:
+   from open_webui.routers.starli_execution_context import agent_scope
+   identity=[scope.owner_native_id,scope.agent_id,scope.run_id,call_id,tool]
+   operation_key=hashlib.sha256(json.dumps(identity,separators=(',',':')).encode()).hexdigest()
+   with agent_scope(scope.agent_id,scope.chat_id):
+    result=await starli_local_vm_tools.tool(fresh,tool,args,operation_key)
+   self.fresh(user,scope,authorize)
+   return result
   if tool in LOCAL:
    if not callable(local_execute):denied('ADMIN_LOCAL_EXECUTOR_UNAVAILABLE',409)
    snapshot=SourceSnapshot(self.root,tool,args)

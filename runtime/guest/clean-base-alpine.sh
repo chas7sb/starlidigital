@@ -67,3 +67,4 @@ rm -f /var/tmp/starlidigital-zero
 sync
 rm -f /root/clean-base.sh /root/transfer.b64
 echo 'Clean-base preparation finished. Shut down gracefully and review before export.'
+echo 'Active shells can recreate history. Perform a final offline filesystem audit before export.'

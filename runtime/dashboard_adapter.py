@@ -152,6 +152,9 @@ def _vnc():
             width, height = struct.unpack('!HH', header[:4])
             if not 1 <= width <= 8192 or not 1 <= height <= 8192:
                 raise Unavailable('Guest framebuffer exceeds bounds')
+            # QEMU establishes this client's absolute pointer mode during the
+            # normal SetEncodings handshake, before processing pointer events.
+            sock.sendall(struct.pack('!BBHi', 2, 0, 1, 0))
             yield sock, width, height
 
 def _key(sock, code, down):
@@ -165,13 +168,24 @@ KEYS = {'Enter': 0xff0d, 'Tab': 0xff09, 'Escape': 0xff1b, 'Backspace': 0xff08,
 def input_event(kind, **payload):
     with operation('input', .1):
         with _vnc() as (sock, width, height):
-            if kind == 'pointer':
+            if kind == 'scroll':
+                x, y, direction, steps = payload.get('x'), payload.get('y'), payload.get('direction'), payload.get('steps', 3)
+                if (type(x) is not int or type(y) is not int or not 0 <= x < width or not 0 <= y < height
+                        or direction not in ('up','down') or type(steps) is not int or not 1 <= steps <= 10):
+                    raise ValueError('Invalid bounded guest scroll')
+                for _ in range(steps):
+                    sock.sendall(struct.pack('!BBHH', 5, 8 if direction == 'up' else 16, x, y))
+                    sock.sendall(struct.pack('!BBHH', 5, 0, x, y))
+                    time.sleep(.03)
+            elif kind == 'pointer':
                 x, y, button = payload.get('x'), payload.get('y'), payload.get('button', 'left')
                 if (type(x) is not int or type(y) is not int or not 0 <= x < width or not 0 <= y < height
                         or button not in ('left', 'right')):
                     raise ValueError('Pointer outside guest framebuffer')
                 sock.sendall(struct.pack('!BBHH', 5, 1 if button == 'left' else 4, x, y))
+                time.sleep(.05)
                 sock.sendall(struct.pack('!BBHH', 5, 0, x, y))
+                time.sleep(.05)
             elif kind == 'key':
                 key = payload.get('key')
                 if key not in KEYS:
@@ -185,7 +199,9 @@ def input_event(kind, **payload):
                 shifted, base = '~!@#$%^&*()_+{}|:"<>?', '`1234567890-=[]\\;\',./'
                 for char in text:
                     shift = char.isupper() or char in shifted
-                    char = base[shifted.index(char)] if char in shifted else char.lower() if shift else char
+                    # RFB keysyms preserve uppercase alphanumeric symbols even
+                    # when Shift is also sent, matching console.py's semantics.
+                    char = base[shifted.index(char)] if char in shifted else char
                     if shift: _key(sock, 0xffe1, True)
                     _key(sock, ord(char), True)
                     _key(sock, ord(char), False)

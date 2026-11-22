@@ -113,3 +113,30 @@ def company_platform_url(path=""):
 
 def control_plane_public_url(path=""):
     return origin(os.environ.get("STARLI_CONTROL_PLANE_PUBLIC_ORIGIN") or "http://127.0.0.1:4120") + path
+
+
+def child_environment(values):
+    """Add only required Windows OS state to an already-filtered child env.
+
+    No API keys, proxies or operator auth profiles are inherited here. Callers
+    remain responsible for the explicit capability variables they already pass.
+    """
+    env=dict(values) if values is not None else {k:os.environ[k] for k in ('PATH','LANG') if k in os.environ}
+    if os.name != 'nt':return env
+    system_root=os.environ.get('SYSTEMROOT') or os.environ.get('WINDIR')
+    if not system_root:raise ValueError('STARLI_CHILD_SYSTEMROOT_REQUIRED')
+    env['SYSTEMROOT']=system_root
+    declared=env.get('HOME')
+    operator_profiles={str(Path(value).resolve()).casefold() for value in
+                       (os.environ.get('USERPROFILE'),os.environ.get('HOME')) if value}
+    if not declared or str(Path(declared).resolve()).casefold() in operator_profiles:
+        declared=data_file('child-homes/default')
+    home=Path(declared).expanduser().resolve()
+    from starli_private_fs import ensure_private_directory
+    ensure_private_directory(home)
+    env['HOME']=str(home)
+    env['USERPROFILE']=str(home)
+    env['APPDATA']=str(home/'AppData/Roaming')
+    env['LOCALAPPDATA']=str(home/'AppData/Local')
+    env.pop('HOMEDRIVE',None);env.pop('HOMEPATH',None)
+    return env

@@ -11,6 +11,9 @@ router=APIRouter()
 LOCAL_TOOLS=frozenset('project_manage website_generate crm_upsert_prospect crm_add_activity outreach_create_draft agent_create agent_update agent_configure agent_add_knowledge video_project_create video_project_apply_spec video_project_patch_spec video_validate video_preview_frame video_render_start video_voiceover_create brand_profile_create video_asset_upload video_asset_import'.split())
 READ_TOOLS=frozenset('brand_profile_get video_render_status agency_overview agent_get agent_list_conversations agent_list_customer_leads assets_list audit_recent_actions client_workspace_get company_signals crm_get_prospect crm_list_opportunities crm_search_prospects inbox_read inbox_search interaction_list lead_score outreach_get_limits outreach_get_thread pipeline_get platform_capabilities platform_overview project_get project_verify_live projects_list prospect_research starli_status suppression_check task_agent_approval_get task_agent_logs task_agent_result task_agent_status video_output_get video_project_get video_project_list video_validate website_get_structure api_overview'.split())
 async def _bridge(user,operation,tool=None,args=None,approved=False,*,require_admin=False):
+ from open_webui.routers import starli_local_vm_tools
+ if operation!='catalog' and starli_local_vm_tools.schema(tool):
+  return await starli_local_vm_tools.tool(user,tool,args or {})
  from open_webui.routers.starli_execution_context import platform_enabled
  unrestricted=platform_enabled(user)
  if require_admin and not unrestricted:raise HTTPException(403,"ADMIN_PLATFORM_GRANT_REQUIRED")
@@ -20,14 +23,14 @@ async def _bridge(user,operation,tool=None,args=None,approved=False,*,require_ad
  else:uid,binding=principal(user)
  if operation!='catalog' and tool not in READ_TOOLS|LOCAL_TOOLS and not approved and not unrestricted:raise HTTPException(403,'This tool needs a scoped write integration and approval; execution is not enabled here')
  payload={'owner':binding['v2UserId'],'operation':operation,'tool':tool,'args':args or {},'customer':not unrestricted,'customerEmail':getattr(user,'email',None)}
- child_env={k:v for k,v in os.environ.items() if k in ('PATH','HOME','LANG','OPENAI_API_KEY','STARLI_PLATFORM_SOURCE_ROOT','STARLI_SOURCE_DATABASE','STARLI_STATE_DIR','STARLI_RUNTIME_CODE_DIR')}
+ child_env={k:v for k,v in os.environ.items() if k in ('PATH','HOME','LANG','OPENAI_API_KEY','STARLI_PLATFORM_SOURCE_ROOT','STARLI_SOURCE_DATABASE','STARLI_STATE_DIR','STARLI_RUNTIME_CODE_DIR','STARLI_PLATFORM_ORIGIN','STARLI_WORKSPACE_ROOT','PYTHON_BIN')}
  guard_args=[]
  if require_admin:
   from open_webui.routers.starli_subprocess import child_setup
   guard_args,child_env=child_setup(child_env)
  process=await asyncio.create_subprocess_exec(_portable.node_binary(),*guard_args,'--import','tsx',str(runtime_code_dir()/'platform-bridge.mts'),
  cwd=str(runtime_code_dir()),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL,
- env=child_env,start_new_session=require_admin)
+ env=_portable.child_environment(child_env),start_new_session=require_admin)
  try:
   out,_=await asyncio.wait_for(process.communicate((json.dumps(payload)+'\n').encode()),45)
   if len(out)>1000000:raise HTTPException(502,'Tool response exceeds preview limit')
@@ -42,6 +45,9 @@ async def _bridge(user,operation,tool=None,args=None,approved=False,*,require_ad
   elif process.returncode is None:process.kill();await process.wait()
 
 async def bridge(user,operation,tool=None,args=None,approved=False,operation_key=None):
+ from open_webui.routers import starli_local_vm_tools
+ if operation!='catalog' and starli_local_vm_tools.schema(tool):
+  return await starli_local_vm_tools.tool(user,tool,args or {},operation_key)
  uid,_=principal(user)
  from open_webui.routers import starli_customer_actions,starli_mail
  for module in (starli_customer_actions,starli_mail):
@@ -73,6 +79,9 @@ async def catalog(user=Depends(get_verified_user)):
  from open_webui.routers.starli_mail import TOOL_SCHEMAS as MAIL_SCHEMAS
  TOOL_SCHEMAS=[*TOOL_SCHEMAS,*SOCIAL_SCHEMAS,*BUILD_SCHEMAS,*ACTION_SCHEMAS,*MAIL_SCHEMAS]
  result.setdefault('tools',[]).extend(TOOL_SCHEMAS)
+ if unrestricted:
+  from open_webui.routers import starli_local_vm_tools
+  result['tools'].extend(starli_local_vm_tools.catalog(user))
  result['fullAccess']=unrestricted
  for tool in result.get('tools',[]):
   tool['previewExecutable']=unrestricted or tool.get('name') in READ_TOOLS|LOCAL_TOOLS or tool.get('name') in {t['name'] for t in TOOL_SCHEMAS}

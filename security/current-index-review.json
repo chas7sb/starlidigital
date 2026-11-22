@@ -1,0 +1,27 @@
+{
+  "scope": "changed staged blobs relative to immutable base plus entire-index path checks",
+  "base_commit": "c2be1c5230fdf32c88f718cdb716c74d43e0c144",
+  "index_entry_count": 12584,
+  "content_selected_count": 99,
+  "index_listing_sha256": "55e2082c9b434f8df19cb91fc61a3dae63eca3d20e67d722f722bbc3b2bebcd6",
+  "index_unchanged_during_scan": true,
+  "index_still_matches_at_review": true,
+  "actionable_findings": [],
+  "candidate_dispositions": [
+    {
+      "path": "onboarding/test_first_run.py",
+      "line": 17,
+      "type": "credential-url",
+      "oid": "b547bab30484b21e10c22a92a715bead1f565ac9",
+      "disposition": "synthetic URL validation fixture",
+      "reason": "Current staged OID and line match the reviewed URL-rejection assertion."
+    }
+  ],
+  "skipped_file_reviews": [
+    {
+      "path": "docs/agentx7-status.md",
+      "review": "cp1252 status prose independently screened; no secret-pattern hits."
+    }
+  ],
+  "not_claimed": "No clearance for unchanged content from this delta run; no runtime/product parity or credential network validity testing."
+}

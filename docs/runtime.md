@@ -46,7 +46,7 @@ Windows PowerShell example:
 
 There are no host directory mounts, shared clipboard, USB passthrough, raw host disks, privileged containers, or bridged adapters. The guest disk is a project-local qcow2 file. VNC, QMP, and the serial console listen only on loopback. These local control interfaces have no authentication: other processes/users with local socket access can control the guest. Protect the project state and use a dedicated host account when local users are untrusted; never port-forward these control interfaces publicly.
 
-The default network is `none`. `init --network nat` deliberately enables QEMU user networking with outbound connectivity and no host port forwards. NAT is not an egress firewall: the guest may reach host/LAN services and Internet destinations. A future untrusted browsing production deployment needs an explicit network allowlist/proxy and policy enforcement. The application must not treat this development VM as a hardened multi-tenant sandbox.
+The default network is `none`. `init --network nat` deliberately enables QEMU user networking with outbound connectivity and no host port forwards. NAT is not an egress firewall: the guest may reach host/LAN services and Internet destinations, including host control surfaces that must be protected from untrusted guests. NAT was used only for trusted provisioning here; the current QA VM and image import default are offline. A future untrusted browsing deployment needs protected egress and explicit host-service isolation before enabling Internet access. The application must not treat this development VM as a hardened multi-tenant sandbox.
 
 ## Validation on 2026-11-22
 
@@ -65,6 +65,16 @@ python -m unittest discover -s runtime/tests -v
 ```
 
 Launcher/console tests cover the explicit accelerator/no-sharing boundary, loopback VNC/QMP arguments, invalid VNC ports, ARM explicit-emulation requirement, persistent UUID, asynchronous QMP response matching, uppercase input regression, and pointer bounds. Additional image/dashboard tests are owned by their integration modules. No cross-platform boot certification is implied.
+
+## Clean base review
+
+The review base was built from the verified official Alpine ISO in this session. No customer files, provider credentials, API tokens, host credentials, or account bindings were supplied to the guest. The only browser tests used local HTML data URLs. `guest/clean-base-alpine.sh` stops graphical/user processes, removes both legacy and XDG Firefox profiles/cache, histories and provisioning logs, locks root, resets IDs/seeds, and zeros free filesystem blocks. Its missing-ID service test generated a new valid machine ID; OpenRC enables that service before D-Bus/LightDM, with seedrng on boot. New QEMU starts provide virtio entropy.
+
+A live root shell recreated a 531-byte history file after cleanup. The final review therefore booted the verified rescue ISO with networking disabled, mounted the installed disk offline, overwrote and removed that history, and checked the filesystem again. Only the intended Openbox autostart and `.xsession` files remained under root/operator homes; machine IDs, random seed, SSH service, browser profiles, history and credential/token-named home files were absent. Root/operator password fields were locked. The installed filesystem was synced/unmounted and the rescue guest powered off before export. This is an operator review of a newly built guest, not an automated guarantee that arbitrary personal images are sanitized.
+
+The base uses upstream Alpine packages. Observed primary package license metadata: Linux `GPL-2.0-only`, Openbox `GPL-2.0-or-later`, Firefox `GPL-3.0-only AND LGPL-2.1-only AND LGPL-3.0-only AND MPL-2.0`. Preserve applicable package/source/redistribution notices when preparing a public release. The review export is local; no public distribution was performed. See `vm-image.md` for the separate stopped-image export/import mechanism and its explicit operator attestation.
+
+The completed review export is in the sibling `starlidigital-vm-review` directory: `starlidigital-base.qcow2`, its SHA256 file, and `manifest.json`. The image is 374,865,920 bytes (357.5 MiB), SHA256 `63775aad7830b5a4e9a866d8964d64d439dffd6f6029671af7eb920eb6303a86`. The exporter checked image consistency and verified the source disk remained unchanged. The original mutable guest was then restarted offline: boot logs confirmed fresh seed and machine-ID generation before D-Bus, and the operator terminal confirmed `/etc/machine-id` exists. Locked operator graphical autologin and Firefox returned successfully. Live corrected dashboard-adapter text and pointer delivery also passed. Authenticated dashboard end-to-end QA is handled separately. All 31 combined runtime/image/bridge tests passed on this Windows host.
 
 ## Upstream references
 

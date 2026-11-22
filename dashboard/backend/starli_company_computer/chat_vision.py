@@ -1,4 +1,5 @@
 """Current-source native Drive images to private Pi IPC; no remote image URLs."""
+import starli_portable as _portable
 import asyncio,base64,contextvars,io,json,types
 from pathlib import Path
 
@@ -87,7 +88,7 @@ class Vision:
   # Unwrap only our runner facade; retain the production worker environment.
   environment=getattr(runner,'child_environment',None)
   if not environment:return row
-  process=await asyncio.create_subprocess_exec(runner.node,str(Path(__file__).with_name('vision-capability.mts')),env=environment,stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL)
+  process=await asyncio.create_subprocess_exec(runner.node,str(Path(__file__).with_name('vision-capability.mts')),env=_portable.child_environment(environment),stdin=asyncio.subprocess.PIPE,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.DEVNULL)
   try:
    stdout,_=await asyncio.wait_for(process.communicate((json.dumps(selected)+'\n').encode()),12)
    if process.returncode==0 and len(stdout)<4096:

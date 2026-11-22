@@ -1,0 +1,47 @@
+name: Native fresh-owner API boot
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-boot:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2025, ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      CYPRESS_INSTALL_BINARY: '0'
+      ONNXRUNTIME_NODE_INSTALL_CUDA: skip
+      ANONYMIZED_TELEMETRY: 'false'
+      DO_NOT_TRACK: 'true'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Install pinned environment resolver
+        run: python -m pip install --disable-pip-version-check uv==0.11.19
+      - name: Verify backend target lock freshness
+        run: python packaging/check_backend_locks.py
+      - name: Install locked platform dependencies
+        run: npm ci --prefix platform --no-audit --no-fund
+      - name: Install locked native provider runtime dependencies
+        run: npm ci --prefix platform/extensions/starli-runtime --no-audit --no-fund
+      - name: Install hash-locked Python and run actual first-owner API boot
+        run: python packaging/native_boot_smoke.py --install --output work/native-boot-result.json
+      - name: Upload only sanitized native boot result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-boot-${{ matrix.os }}
+          path: work/native-boot-result.json
+          if-no-files-found: warn
+          retention-days: 7

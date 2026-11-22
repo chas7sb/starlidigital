@@ -7,12 +7,12 @@ These entry points deploy the extracted application. A computer-use VM has its o
 Install Node 24 or later with npm, `uv` and `ffmpeg` on PATH. The launcher uses Node24 for the platform/provider runtime, Node22 for the dashboard frontend, Python3.11 for the dashboard and a separate video Python environment. Run these commands from the repository root:
 
 ```text
-node installer/starli.mjs install --native
-node installer/starli.mjs setup --native
-node installer/starli.mjs start --native
+node installer/starli.mjs install
+node installer/starli.mjs setup
+node installer/starli.mjs start
 ```
 
-`install` bootstraps checksum-verified Node22 if needed, installs dependencies and builds both apps. `setup` invokes the existing trusted interactive owner-provisioning helper; passwords are prompted privately. `start` requires that setup and launches its private installation in the foreground. Setup/start are not successful until they actually complete; Ctrl+C stops the services. Native Windows startup validation is still being completed; see status below. PowerShell equivalents use `./installer/starli.ps1 install -Native` and corresponding setup/start commands. POSIX uses `sh installer/starli.sh install --native`.
+`install` bootstraps checksum-verified Node22 if needed, installs dependencies and builds both apps. `setup` invokes the existing trusted interactive owner-provisioning helper; passwords are prompted privately. `start` requires that setup and launches its private installation in the foreground. Setup/start are not successful until they actually complete; Ctrl+C stops the services. Native Windows startup validation is still being completed; see status below. PowerShell equivalents use `./installer/starli.ps1 install` and corresponding setup/start commands. POSIX uses `sh installer/starli.sh install`.
 
 Advanced component commands are available separately:
 
@@ -39,17 +39,17 @@ For the first real installation owner, use the trusted interactive flow in `onbo
 Requires Node 18+ for the portable launcher, Docker with a running Linux-container engine, and Compose v2 supporting `up --wait`. Windows/macOS can use Docker Desktop; Linux can use Docker Engine and its Compose plugin. Application images isolate the conflicting Node requirements.
 
 ```text
-node installer/starli.mjs doctor
-node installer/starli.mjs init
-node installer/starli.mjs config
-node installer/starli.mjs install
-node installer/starli.mjs start
-node installer/starli.mjs status
-node installer/starli.mjs logs
-node installer/starli.mjs stop
+node installer/starli.mjs doctor --docker
+node installer/starli.mjs init --docker
+node installer/starli.mjs config --docker
+node installer/starli.mjs install --docker
+node installer/starli.mjs start --docker
+node installer/starli.mjs status --docker
+node installer/starli.mjs logs --docker
+node installer/starli.mjs stop --docker
 ```
 
-PowerShell wrapper: `./installer/starli.ps1 install`. POSIX wrapper: `sh installer/starli.sh install`. All launcher commands accept `--dry-run` (`-DryRun` with PowerShell). Paths resolve relative to the launcher, regardless of the caller's working directory. `init` creates a fresh random dashboard session secret in ignored `installer/local.env`; existing configuration is preserved. On Windows, this file inherits the directory ACL. Keep it private. `config` validates without printing interpolated secrets.
+PowerShell wrapper: `./installer/starli.ps1 install -Docker`. POSIX wrapper: `sh installer/starli.sh install --docker`. All launcher commands accept `--dry-run` (`-DryRun` with PowerShell). Paths resolve relative to the launcher, regardless of the caller's working directory. `init` creates a fresh random dashboard session secret in ignored `installer/local.env`; existing configuration is preserved. On Windows, this file inherits the directory ACL. Keep it private. `config` validates without printing interpolated secrets.
 
 `install` builds images and fails on a missing source/lockfile or failed upstream build. `start` starts the two core app services and waits up to 300 seconds for their health checks. Health checks establish HTTP readiness only. Ports bind to loopback by default. Internal API URLs use Compose service names; browser/public origins use host loopback URLs. The dashboard shares fresh platform database state with write access because its existing identity bridge provisions service identities there. Change the two port variables in `installer/local.env` and corresponding origin settings together. `stop` removes containers and networks while retaining data volumes. No launcher command deletes volumes, production services or user files.
 
@@ -63,4 +63,4 @@ The dashboard Dockerfile builds its Svelte frontend with Node22, installs the re
 
 ## Current validation limits
 
-See `docs/agentx5-status.md` for observed results. The current Windows platform install/build and HTTP health pass. Dashboard Python dependency installation passes, but Windows private-storage ACL handling and runtime dependency compatibility exposed further startup gates; consult current status before expecting dashboard readiness. The Svelte frontend has a separate build gate. Each native host and Docker image must be validated independently; a Compose syntax check cannot establish a working Docker engine.
+See `docs/agentx5-status.md` for observed results. Windows platform install/build/HTTP health, both Python dependency environments and eight real video tests pass. The packaging owner supplied a successful Svelte build. Windows storage/locking and dependency import fixes are integrated; complete dashboard auth/company/VM startup is being validated through trusted onboarding. Advanced raw startup with empty company databases is not a substitute for setup. Compose fresh-owner provisioning is not implemented; use the native owner flow for that installation. Each native host and Docker image must be validated independently; Compose syntax validation cannot establish a working engine.

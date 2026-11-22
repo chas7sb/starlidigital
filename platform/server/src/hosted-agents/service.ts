@@ -61,12 +61,13 @@ export interface HostedAgentServiceOptions {
   router?: OpenRouterModelRouter;
   toolRegistry?: ToolRegistry;
   turnTimeoutMs?: number;
+  businessEvents?: Pick<BusinessEventService, 'append' | 'notifyCommitted'>;
 }
 
 export class HostedAgentService {
   public readonly visitors: VisitorSessions;
   private store: Store;
-  private businessEvents: BusinessEventService;
+  private businessEvents: Pick<BusinessEventService, 'append' | 'notifyCommitted'>;
   private events?: Events;
   private clock: () => number;
   private router: OpenRouterModelRouter;
@@ -76,7 +77,7 @@ export class HostedAgentService {
 
   constructor(options: HostedAgentServiceOptions) {
     this.store = options.store;
-    this.businessEvents = new BusinessEventService(this.store, options.events);
+    this.businessEvents = options.businessEvents || new BusinessEventService(this.store, options.events);
     this.turnTimeoutMs = Number.isFinite(options.turnTimeoutMs) && options.turnTimeoutMs! > 0 ? Math.min(options.turnTimeoutMs!, 90000) : 90000;
     this.visitors = new VisitorSessions(options.store, options.events, (id, token) => {
       const conversation = this.store.get(COLLECTIONS.CONVERSATIONS, id);

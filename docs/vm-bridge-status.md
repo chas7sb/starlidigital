@@ -15,11 +15,17 @@ The fixed runtime/dashboard_adapter.py imports the checked-in VM implementation 
 
 ## Validation
 
-- Seven adapter tests passed: fixed frame target/rate limit, tracking identity rejection and canonical UUID acceptance, disk containment, lock preservation, bounded input and graceful stop.
+- Nine adapter tests passed: fixed frame target/rate limit, tracking identity rejection and canonical UUID acceptance, disk containment, lock preservation, bounded input, graceful stop and two actual loopback RFB protocol tests.
 - Six real FastAPI tests passed: missing Bearer, foreign Origin, unbound/revoked admin denial, disabled console, strict body/arbitrary-action rejection, no-store frame and sanitized errors. Session verification is injected at its dependency boundary; private binding and SQLite role checks use the real principal.
 - Actual local tracked VM status returned running with WHPX, and its QMP capture returned a PNG (4,287 bytes at observation). This only establishes a real VM frame, not desktop/browser readiness.
 - Backend files compile under Python. Live guest input/start/stop were not issued by this bridge while AgentX4 provisions the guest. AgentX4 owns desktop readiness and persistence evidence.
 - Frontend build and live authenticated HTTP checks require integration owners. AgentX9 must include LocalComputer.svelte plus updated SetupPanel.svelte. AgentX5/10 should explicitly supply STARLI_LOCAL_VM_ENABLED=1 only for a native installation with the local runtime; a Docker backend does not automatically get host QEMU access.
+
+## Guest input correction
+
+AgentX4's real-browser verification found that uppercase RFB keysyms must stay uppercase even when Shift is sent, and a fresh RFB client must send SetEncodings after ServerInit before absolute pointer events. The dashboard adapter now matches the corrected console.py behavior without editing that console. Pointer press/release also has the same short delivery interval.
+
+Two protocol tests run a real local socket server and assert the complete RFB handshake, including SetEncodings before input, followed by exact absolute click coordinates and uppercase/shifted-punctuation packets for `Az@?:`. These tests establish packet semantics only. The real guest is stopped for clean-base export; this bridge has not sent live input after the correction. Authenticated dashboard-to-guest verification remains pending restart/readiness coordination with AgentX4 and QA.
 
 Tests:
 python -m unittest discover -s runtime/tests -p test_dashboard_adapter.py -v

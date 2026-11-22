@@ -106,9 +106,11 @@ The first hosted matrix exposed missing video-engine Python/FFmpeg prerequisites
 Linux's optional ONNX CUDA download failure, and a macOS frontend heap limit.
 The workflow now installs the pinned video requirements in its separate platform
 job, installs FFmpeg, selects that Python explicitly, retains CPU ONNX inference,
-and gives frontend compilation a 6144 MB heap. The next hosted execution must
-validate these fixes. Upstream Svelte warnings remain, including an undefined
-createModelTag in ManageOllama; successful bundling does not establish that feature.
+and gives frontend compilation a 6144 MB heap. Hosted run 45001750216 at commit 18fcffe11cc6f20b64462efcbe6cba6fb42337bb
+passed all nine jobs across Windows, macOS and Linux. The final refreshed local
+frontend also builds after the ManageOllama createModelTag fix and latest VM
+console changes; its prior undefined-variable warning is gone. Other upstream
+Svelte warnings remain. Later source changes require their own validation.
 
 Backend NumPy 1.26.4 and PyArrow 21.0.0 are pinned in both dependency entry points.
 PyArrow 26's undeclared runtime NumPy >=2 requirement caused a real startup import

@@ -4,6 +4,7 @@ from fastapi import HTTPException
 NATIVE_TOOLS=('capabilities','starlis.list','platform.schema','platform.call')
 PROJECT_TOOLS=('project_create','project_list','project_files','project_file_read','project_file_write','project_check','project_build','project_preview')
 ADMIN_TOOLS=('starli_source_read','starli_source_list','starli_status','platform_capabilities','platform_overview','api_overview','projects_list','project_get','crm_upsert_prospect','crm_add_activity','outreach_create_draft')
+ADMIN_TOOLS += ('local_vm_status','local_vm_screenshot','local_vm_click','local_vm_type','local_vm_key','local_vm_scroll')
 LIMITS={'maxModelTurns':120,'maxToolAttempts':120,'maxWallclockSeconds':3600,'maxProjectsPerRun':1,'maxFileBytes':65536,'maxProjectBytes':2000000,'maxFiles':200,'buildTimeoutSeconds':45}
 @dataclass(frozen=True)
 class AdminScope:
