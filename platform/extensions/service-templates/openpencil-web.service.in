@@ -1,0 +1,16 @@
+[Unit]
+Description=StarliDigital local OpenPencil web gateway
+After=network.target openpencil-mcp.service
+
+[Service]
+User=@USER@
+WorkingDirectory=@EXTENSIONS_ROOT@/openpencil/runtime
+EnvironmentFile=@PRIVATE_ENV@
+ExecStart=@NODE@ server.mjs
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

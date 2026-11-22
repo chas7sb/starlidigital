@@ -1,0 +1,164 @@
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -29,8 +29,9 @@
+ const automationRoute = localAutomationRoute(host)
+ 
+ export default defineConfig(async ({ command }) => {
+-  await Promise.all([ensureBrandAssets(['web']), ensureDemoDocument()])
++  await ensureBrandAssets(['web'])
+   return {
++    base: '/openpencil/',
+     resolve: {
+       alias: createOpenPencilAliases(__dirname)
+     },
+@@ -52,7 +53,6 @@
+       Components({ resolvers: [IconsResolver({ prefix: 'icon', customCollections: ['ai'] })] }),
+       openPencilAutomationPlugin(command, host),
+       vue(),
+-      openPencilPwaPlugin()
+     ],
+     clearScreen: false,
+     build: {
+--- a/src/router.ts
++++ b/src/router.ts
+@@ -3,7 +3,7 @@
+ import WorkspaceView from './views/WorkspaceView.vue'
+ 
+ const router = createRouter({
+-  history: createWebHistory(),
++  history: createWebHistory(import.meta.env.BASE_URL),
+   routes: [
+     { path: '/', component: WorkspaceView },
+     { path: '/storage', redirect: '/' },
+--- a/src/boot.ts
++++ b/src/boot.ts
+@@ -40,10 +40,4 @@
+     console.error(error)
+   }
+ 
+-  if (!IS_TAURI) {
+-    void import('virtual:pwa-register').then(({ registerSW }) => {
+-      registerSW({ immediate: true })
+-      return undefined
+-    })
+-  }
+ }
+--- a/src/app/automation/bridge/server.ts
++++ b/src/app/automation/bridge/server.ts
+@@ -36,7 +36,7 @@
+ export function connectAutomation(
+   getStore: () => EditorStore,
+   authToken: string | null = null,
+-  automationURL = __OPENPENCIL_LOCAL_AUTOMATION_URL__
++  automationURL = `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}${import.meta.env.BASE_URL}_automation`
+ ) {
+   const token = authToken ?? randomHex(32)
+   let ws: WebSocket | null = null
+--- a/src/app/automation/mcp/runtime.ts
++++ b/src/app/automation/mcp/runtime.ts
+@@ -208,7 +208,7 @@
+ 
+ /** The local server runs with the desktop app, and in development with the dev server. */
+ export function localMCPAvailable(): boolean {
+-  return import.meta.env.DEV || isTauri()
++  return true
+ }
+ 
+ const appMCPRuntime = createMCPRuntimeService({
+--- a/src/app/automation/mcp/spawn.ts
++++ b/src/app/automation/mcp/spawn.ts
+@@ -48,9 +48,7 @@
+   managed: boolean
+ }
+ 
+-const DEV_AUTOMATION_HTTP_URL = import.meta.env.DEV
+-  ? __OPENPENCIL_LOCAL_AUTOMATION_HTTP_URL__
+-  : `http://127.0.0.1:${AUTOMATION_HTTP_PORT}`
++const DEV_AUTOMATION_HTTP_URL = `${import.meta.env.BASE_URL}_automation`
+ export function getMCPServerURL(): string {
+   return `${DEV_AUTOMATION_HTTP_URL}/mcp`
+ }
+@@ -353,6 +351,7 @@
+ }
+ 
+ export async function getAutomationAuthToken(): Promise<string | null> {
++  if (!isTauri()) return 'gateway-session'
+   if (runtimeAutomationAuthToken) return runtimeAutomationAuthToken
+   const health = await readAutomationHealth()
+   if (!health) {
+@@ -443,6 +442,13 @@
+ async function startMCPIfNeeded(timing: MCPStartupTiming): Promise<AutomationServerHandle | null> {
+   runtimeAutomationStartupError = null
+   runtimeAutomationStartupFailure = null
++  if (!isTauri()) {
++    const health = await readAutomationHealth()
++    if (!health) return null
++    assertCompatibleMCPVersion(health)
++    runtimeAutomationAuthToken = 'gateway-session'
++    return { disconnect: noop, authToken: 'gateway-session', managed: false }
++  }
+   if (import.meta.env.DEV) return configureDevMCP()
+   if (!isTauri()) return null
+ 
+--- a/src/app/document/io/browser.ts
++++ b/src/app/document/io/browser.ts
+@@ -72,6 +72,10 @@
+ }
+ 
+ export function resolveBrowserFileURL(path: string): URL {
++  const documentRoot = '/srv/starlidigital/mcp-workspace/openpencil/documents/'
++  if (path.startsWith(documentRoot)) {
++    return new URL(`${import.meta.env.BASE_URL}documents/${encodeURIComponent(path.slice(documentRoot.length))}`, window.location.origin)
++  }
+   const url = new URL(path, window.location.href)
+   url.hash = ''
+   return url
+--- a/src/app/document/io/write.ts
++++ b/src/app/document/io/write.ts
+@@ -50,6 +50,23 @@
+ 
+       const filePath = getFilePath()
+       const fileHandle = getFileHandle()
++      if (filePath && !isTauri()) {
++        const root = '/srv/starlidigital/mcp-workspace/openpencil/documents/'
++        const prefix = `${import.meta.env.BASE_URL}documents/`
++        const target = filePath.startsWith(root)
++          ? new URL(`${prefix}${encodeURIComponent(filePath.slice(root.length))}`, window.location.origin)
++          : new URL(filePath, window.location.href)
++        if (target.origin !== window.location.origin || !target.pathname.startsWith(prefix)) {
++          throw new Error('Server saves are limited to the OpenPencil documents folder')
++        }
++        const response = await fetch(target, {
++          method: 'PUT',
++          headers: { 'Content-Type': 'application/octet-stream' },
++          body: new Uint8Array(data)
++        })
++        if (!response.ok) throw new Error(`Server save failed (${response.status})`)
++        return await finishWrite(version)
++      }
+       if (filePath && isTauri()) {
+         const { writeFile: tauriWrite } = await import('@tauri-apps/plugin-fs')
+         await tauriWrite(filePath, data)
+
+--- a/packages/core/src/canvaskit.ts
++++ b/packages/core/src/canvaskit.ts
+@@ -17,7 +17,7 @@
+       const ckPath = import.meta.resolve('canvaskit-wasm')
+       return decodeURIComponent(new URL(file, ckPath).pathname)
+     }
+-    const base = 'env' in import.meta ? import.meta.env.BASE_URL : '/'
++    const base = import.meta.env.BASE_URL
+     const prefix = base === '/' ? '' : base.replace(/\/$/, '')
+     return `${prefix}/${file}`
+   }
+
+--- a/src/app/document/io/web-link.ts
++++ b/src/app/document/io/web-link.ts
+@@
+-  open: (url) => openBrowserFileFromURL(url, { credentials: 'omit', redirect: 'error' })
++  open: (url) => openBrowserFileFromURL(url, {
++    credentials: url.origin === window.location.origin &&
++      url.pathname.startsWith(`${import.meta.env.BASE_URL}documents/`)
++      ? 'same-origin' : 'omit',
++    redirect: 'error'
++  })

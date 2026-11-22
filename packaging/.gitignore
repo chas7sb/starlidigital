@@ -1,0 +1,3 @@
+__pycache__/
+locks/*-resolve.log
+locks/*.pending

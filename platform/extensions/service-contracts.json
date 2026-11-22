@@ -1,0 +1,57 @@
+{
+  "schema": "starlidigital.extensions.services.v1",
+  "status": "source-extracted-not-integration-tested",
+  "services": {
+    "computer-broker": {
+      "cwd": "computer-broker",
+      "command": ["node", "production-broker.mjs"],
+      "runtime": "node>=24 inside Linux runtime",
+      "port": 18446,
+      "requiredEnvironment": ["STARLI_COMPANY_ID", "STARLI_COMPUTER_STATE"],
+      "optionalEnvironment": ["STARLI_NATIVE_PORT"],
+      "requiredPrivateFiles": ["private/config.json", "private/transport.key", "private/host-verification.json", "private/reply-private.pem"],
+      "prerequisites": ["Fresh company/computer signed enrollment", "Native dashboard backend on allowed local port8190 or18447"],
+      "portableReady": false
+    },
+    "openpencil-web": {
+      "cwd": "openpencil/runtime",
+      "command": ["node", "server.mjs"],
+      "port": 17601,
+      "bind": "127.0.0.1",
+      "healthPath": "/_health",
+      "requiredPrivateFiles": ["../state/config.json"],
+      "prerequisites": ["npm ci in runtime", "Fresh init-state.mjs configuration", "Rebuilt frontend in ../site", "openpencil-mcp"],
+      "portableReady": false
+    },
+    "openpencil-mcp": {
+      "cwd": "openpencil/runtime",
+      "command": ["node", "start-mcp.mjs"],
+      "port": 17600,
+      "optionalEnvironment": ["OPENPENCIL_MCP_PORT", "OPENPENCIL_MCP_CORS_ORIGIN"],
+      "requiredPrivateFiles": ["../state/config.json"],
+      "portableReady": false
+    },
+    "mission-control": {
+      "cwd": "mission-control",
+      "command": ["node", "--import", "tsx", "server/src/mission-control/preview-entrypoint.ts"],
+      "port": 4141,
+      "bind": "127.0.0.1",
+      "healthPath": "/healthz",
+      "requiredEnvironment": ["STATE_DIRECTORY", "MC_PREVIEW_AUTH_DATABASE", "MC_PREVIEW_EXTENSION_ORIGIN"],
+      "optionalEnvironment": ["MC_PREVIEW_PORT", "MC_PREVIEW_OPERATOR_ORIGIN", "MC_PREVIEW_PATH_PREFIX"],
+      "prerequisites": ["Fresh private Linux state directory", "Compatible freshly initialized auth database", "Node dependencies installed"],
+      "portableReady": false
+    },
+    "search": {
+      "cwd": "search",
+      "command": ["python", "-m", "gunicorn", "--config", "gunicorn.conf.py", "wsgi:application"],
+      "port": 8888,
+      "bind": "127.0.0.1",
+      "healthPath": "/healthz",
+      "requiredEnvironment": ["SEARXNG_SETTINGS_PATH"],
+      "optionalEnvironment": ["SEARXNG_SECRET"],
+      "prerequisites": ["Linux Python environment", "Install source requirements and package", "Private settings enabling json format and fresh secret"],
+      "portableReady": false
+    }
+  }
+}

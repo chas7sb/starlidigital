@@ -1,0 +1,133 @@
+{
+  "source": "/srv/starlidigital/webui-releases/native-company-mcp-always-v33-20261119/scripts/starli-runtime",
+  "dependencySource": "/srv/starlidigital/mcp-workspace/codex-runtime",
+  "files": [
+    {
+      "path": "account-driver.mts",
+      "sha256": "c9ced28beb69e706041331f7a74593df86ad981e89cb0f8e9712be62a7a041d1",
+      "bytes": 6195
+    },
+    {
+      "path": "model-fetch-deadline.mts",
+      "sha256": "017730849e20c73bc407997d4a4e5af00c9096d5f7c817f316fb08d70bdc411c",
+      "bytes": 1823
+    },
+    {
+      "path": "personal-memory-context.mts",
+      "sha256": "234a575745aa69e02525dc0b99b710e6533a7317ceaa426d89d57b91876be70b",
+      "bytes": 1348
+    },
+    {
+      "path": "pi-client.ts",
+      "sha256": "0623e7ae75eb621d9de892c83a2fac5220959378682bf290befd3a88717d04e9",
+      "bytes": 17747
+    },
+    {
+      "path": "pi-decision.test.ts",
+      "sha256": "fbdefde7b04916772912c14b1a9b392a706b131105fd771fe738abc50aa8b67b",
+      "bytes": 913
+    },
+    {
+      "path": "pi-decision.ts",
+      "sha256": "e9c85cb0794de1113b6b0cc5e0e19fd16dd33fd8450b680b9bfdac9d82f36e34",
+      "bytes": 1002
+    },
+    {
+      "path": "pi-live-agent.mts",
+      "sha256": "7278fc499e8cd82ebb823ad9c02170e65de3131c84b2e9000e4e6a50c73026d1",
+      "bytes": 11238
+    },
+    {
+      "path": "pi-native-worker.mts",
+      "sha256": "06723611bbdcc7d95b53aab54c3811aacc758baca5bc2946077c6936250a41a2",
+      "bytes": 23421
+    },
+    {
+      "path": "pi-prompt.test.mts",
+      "sha256": "da420fb855d7038abb8c86cc16e58ff47466d6d03cc666733e4f18169dcbec9e",
+      "bytes": 696
+    },
+    {
+      "path": "pi-prompt.ts",
+      "sha256": "fa76e34604662f157428bb2d70c0d2d9367ddd55f7f344220b94510c68092399",
+      "bytes": 4977
+    },
+    {
+      "path": "pi-worker.mts",
+      "sha256": "ff49653e8a8736d499447e83d63b7df42ce7a68873704f47da6ebab84cfbf5af",
+      "bytes": 15214
+    },
+    {
+      "path": "platform-bridge.mts",
+      "sha256": "5d01f666a1857bdd1bce717dc6a1212588e188d438c749e0e331da26d8de2ee3",
+      "bytes": 4142
+    },
+    {
+      "path": "project-build.mts",
+      "sha256": "a6ade7d1b94a8ed11603fe331517c75cb2e97f4ed3978ec858c94d0f9d03a6c1",
+      "bytes": 26639
+    },
+    {
+      "path": "project-build.test.ts",
+      "sha256": "4e27e7d5aed79444d9ca7ac6a0dcf4d0fb68c8e549075a8e40976c5cb0e53479",
+      "bytes": 2701
+    },
+    {
+      "path": "provider-infer.py",
+      "sha256": "dbf6406d24577587895cef58a11750e6f4364caf7d6966dec7cae4b4b8ee9900",
+      "bytes": 6464
+    },
+    {
+      "path": "provider-runtime.mts",
+      "sha256": "9fe0806946dc1cbc2d5bfe9aa301d7d8668788a0aecf01b63b7394c37f12564a",
+      "bytes": 9860
+    },
+    {
+      "path": "provider-runtime.test.ts",
+      "sha256": "c743769636f442f26dd0b02c8116952c9da63047e683b3c8274ca1505e262bf8",
+      "bytes": 6402
+    },
+    {
+      "path": "register-native.py",
+      "sha256": "b7c5b13f9e6d57738adb8b75645e33a1196c3c0364154ed6f89014f1efbcc7ce",
+      "bytes": 3338
+    },
+    {
+      "path": "starli-message.mts",
+      "sha256": "13707a4f8527604746e69cd407d4c377b08232fac5f4f01cd04971ee41ebcda5",
+      "bytes": 1091
+    },
+    {
+      "path": "starli-pi-pipe.py",
+      "sha256": "e468a63f3e9200c7be4249dafc92a2a692e87220651b861f93c933c297bd7856",
+      "bytes": 1649
+    },
+    {
+      "path": "tenant-store.integration.test.ts",
+      "sha256": "d969c6f2835b7e96260ebdbe23bdc7aac6f218ff69618f747f715249675f11f0",
+      "bytes": 4057
+    },
+    {
+      "path": "tenant-store.ts",
+      "sha256": "935da05e88bb34b0d0acc034b08993e9ef722a3e14dc736ab81e7d1a3ee242b0",
+      "bytes": 2745
+    },
+    {
+      "path": "dependency-provenance/package.json",
+      "sha256": "c3da4b65bf48979653aa2a138e7848ffd5a75843b2f773efeb9256bc64d4244c",
+      "bytes": 76
+    },
+    {
+      "path": "dependency-provenance/package-lock.json",
+      "sha256": "b7ecbd22a47267c6160a64e286beb16ed8b1870352e44106297f8c29283053d4",
+      "bytes": 58231
+    },
+    {
+      "path": "dependency-provenance/pi-package.json",
+      "sha256": "990aac3caff17b717294fa792b4e3f60b991d274d9f4ab6977d6aa42aa43c95e",
+      "bytes": 3935
+    }
+  ],
+  "rejected": [],
+  "excluded": "No auth files, credential stores, state, logs, caches, or dependency trees copied."
+}

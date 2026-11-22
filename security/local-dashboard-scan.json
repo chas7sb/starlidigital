@@ -1,0 +1,582 @@
+{
+  "schema": 1,
+  "scope": "working-tree-only; dependencies and VCS history excluded",
+  "counts": {
+    "files": 4983,
+    "text_scanned": 4935,
+    "oversize": 9,
+    "binary": 39
+  },
+  "license_notice_paths": [
+    "LICENSE"
+  ],
+  "manifest_paths": [
+    "package-lock.json",
+    "package.json",
+    "pyproject.toml",
+    "backend/requirements.txt"
+  ],
+  "findings": [
+    {
+      "path": "README.md",
+      "type": "email-review"
+    },
+    {
+      "path": "pyproject.toml",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/constants.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/google_pse.json",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/static/apple-touch-icon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-96x96.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.ico",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/logo.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/splash-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/splash.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-192x192.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-512x512.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Bold.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Italic.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Regular.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/Twemoji.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/swagger-ui/favicon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/swagger-ui/swagger-ui-bundle.js",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_customer_boundary.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_customer_registration.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_execution_authorization.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_safe_http.py",
+      "type": "credential-url"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_safe_http.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_safe_http.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_browser.py",
+      "type": "credential-url"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_browser.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_native_capabilities.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_pi_cancellation.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_platform_adapter.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_resources.py",
+      "type": "credential-url"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_resources.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_auths.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_auths.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_users.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/test/util/mock_user.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/starli_automations/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/tests/test_company_smtp.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_portable_configuration.py",
+      "type": "credential-url"
+    },
+    {
+      "path": "backend/tests/test_portable_configuration.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_actions.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_data.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_identity.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_runtime.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_mail.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/tests/test_starli_mail.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/tests/test_starli_result_status.py",
+      "type": "provider-token"
+    },
+    {
+      "path": "backend/wave_panels/agata.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/wave_panels/fixture.mjs",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/wave_panels/studio-delivery.mjs",
+      "type": "email-review"
+    },
+    {
+      "path": "src/lib/components/admin/Settings/WebSearch.svelte",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/components/starli-preview/StarliMailSettings.svelte",
+      "type": "email-review"
+    },
+    {
+      "path": "src/lib/components/starli-preview/StarliMailboxPanel.svelte",
+      "type": "email-review"
+    },
+    {
+      "path": "src/lib/i18n/locales/ar/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ar-BH/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/bg-BG/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/bn-BD/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/bo-TB/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ca-ES/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ceb-PH/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/cs-CZ/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/da-DK/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/de-DE/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/dg-DG/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/el-GR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/en-GB/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/en-US/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/es-ES/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/et-EE/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/eu-ES/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/fa-IR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/fi-FI/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/fr-CA/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/fr-FR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/gl-ES/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/he-IL/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/hi-IN/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/hr-HR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/hu-HU/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/id-ID/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ie-GA/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/it-IT/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ja-JP/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ka-GE/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ko-KR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/lt-LT/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ms-MY/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/nb-NO/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/nl-NL/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/pa-IN/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/pl-PL/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/pt-BR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/pt-PT/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ro-RO/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ru-RU/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/sk-SK/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/sr-RS/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/sv-SE/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/th-TH/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/tk-TW/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/tr-TR/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/uk-UA/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/ur-PK/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/vi-VN/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/zh-CN/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "src/lib/i18n/locales/zh-TW/translation.json",
+      "type": "credential-url"
+    },
+    {
+      "path": "static/doge.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/favicon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/user.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/fonts/Archivo-Variable.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/fonts/InstrumentSerif-Italic.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/fonts/InstrumentSerif-Regular.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/fonts/Inter-Variable.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/fonts/Mona-Sans.woff2",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/images/adam.jpg",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/images/earth.jpg",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/assets/images/galaxy.jpg",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "static/assets/images/space.jpg",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/audio/greeting.mp3",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/audio/notification.mp3",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/apple-touch-icon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/favicon-96x96.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/favicon-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/favicon.ico",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/favicon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/logo.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/splash-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/splash.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/web-app-manifest-192x192.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "static/static/web-app-manifest-512x512.png",
+      "type": "binary-unscanned-review"
+    }
+  ],
+  "status": "review-required"
+}

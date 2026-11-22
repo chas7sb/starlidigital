@@ -1,0 +1,158 @@
+.agent-proposal-container {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090a0f 70%);
+  color: #f8fafc;
+  font-family: inherit;
+  padding: 40px 20px 80px;
+}
+
+.agent-proposal-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.agent-proposal-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-proposal-badge {
+  display: inline-block;
+  align-self: center;
+  padding: 6px 14px;
+  background: rgba(147, 51, 234, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.agent-proposal-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.agent-proposal-summary {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #94a3b8;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.agent-proposal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .agent-proposal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.agent-proposal-card {
+  background: rgba(18, 20, 29, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.agent-proposal-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-proposal-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.agent-proposal-feature-check {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.agent-proposal-pricing {
+  margin-top: 10px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  border: 1px dashed rgba(168, 85, 247, 0.3);
+}
+
+.agent-proposal-price-val {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.agent-proposal-price-period {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.agent-proposal-interactive-pane {
+  background: rgba(18, 20, 29, 0.85);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 12px 40px rgba(147, 51, 234, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-proposal-demo-bar {
+  padding: 12px 18px;
+  background: rgba(15, 17, 26, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.agent-proposal-live-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.agent-proposal-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #090a0f;
+}

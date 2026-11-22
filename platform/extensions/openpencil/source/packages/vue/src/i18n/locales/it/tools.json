@@ -1,0 +1,15 @@
+{
+  "move": "Sposta",
+  "frame": "Cornice",
+  "section": "Sezione",
+  "rectangle": "Rettangolo",
+  "ellipse": "Ellisse",
+  "line": "Linea",
+  "polygon": "Poligono",
+  "star": "Stella",
+  "pen": "Penna",
+  "pencil": "Matita",
+  "text": "Testo",
+  "hand": "Mano",
+  "comment": "Commento"
+}

@@ -1,0 +1,12 @@
+export { createPage, createShape, createSlice } from './create/basic'
+export { createSlot, getBehaviour, setBehaviour } from './create/behaviours'
+export {
+  combineAsVariants,
+  createComponent,
+  createInstance,
+  exposeInstanceSwap
+} from './create/components'
+export { fetchIconsTool, insertIcon, searchIconsTool } from './create/icons'
+export { render } from './create/render'
+export { importSVG } from './create/svg'
+export { createVector } from './create/vector'

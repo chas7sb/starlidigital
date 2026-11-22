@@ -1,0 +1,891 @@
+.agent-demo-world {
+  --ha-text: #f0f7fc;
+  --ha-muted: #9bb6cc;
+  --ha-accent: #58c0fc;
+  --ha-green: #22c55e;
+  --ha-red: #ffb5ad;
+  --ha-red-bg: #3d1d26aa;
+  --ha-green-bg: #153f3480;
+  --ha-panel: #0d2235;
+  --ha-line: rgba(140, 205, 255, 0.22);
+  min-height: 100svh;
+  position: relative;
+  isolation: isolate;
+  background: #060b11;
+  color: #f4f8fc;
+  overflow-x: hidden;
+}
+
+/* Site header sticky & translucent in demo world */
+.agent-demo-world .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+  height: 80px;
+  padding: 0 4.5%;
+  border-bottom: 1px solid rgba(184, 216, 238, 0.12);
+  background: linear-gradient(180deg, rgba(6, 12, 19, 0.88) 0%, rgba(6, 12, 19, 0.4) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Cosmic planet and space background */
+.agent-demo-space-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.agent-demo-backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right 30%;
+  opacity: 0.85;
+}
+
+.agent-demo-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 11, 17, 0.5) 0%, rgba(6, 11, 17, 0.15) 45%, rgba(6, 11, 17, 0.95) 100%),
+    linear-gradient(90deg, rgba(6, 11, 17, 0.75) 0%, rgba(6, 11, 17, 0.12) 65%, rgba(6, 11, 17, 0.35) 100%);
+}
+
+.agent-demo-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+.agent-demo-orb-1 {
+  top: 18%;
+  left: 10%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(56, 140, 220, 0.16) 0%, rgba(20, 60, 110, 0.04) 55%, transparent 70%);
+}
+
+.agent-demo-orb-2 {
+  top: 36%;
+  right: 12%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(80, 180, 255, 0.14) 0%, rgba(30, 90, 150, 0.03) 55%, transparent 70%);
+}
+
+/* Main Container */
+.agent-demo-main {
+  width: min(1080px, 90%);
+  margin: 0 auto;
+  padding: 135px 0 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.agent-demo-intro {
+  text-align: center;
+  margin: 0 auto 36px;
+  max-width: 780px;
+}
+
+.agent-demo-intro .home-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  font-weight: 650;
+  color: #c4e0f5;
+  background: rgba(18, 38, 60, 0.45);
+  border: 1px solid rgba(140, 205, 255, 0.22);
+  padding: 7px 18px;
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+}
+
+.agent-demo-intro .home-eyebrow .online-dot {
+  width: 6px;
+  height: 6px;
+  background: #34d399;
+  box-shadow: 0 0 10px #34d399;
+}
+
+.agent-demo-intro h1 {
+  font-size: clamp(34px, 3.8vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -2px;
+  font-weight: 500;
+  margin: 0 0 16px;
+  color: #f4f8fc;
+}
+
+.agent-demo-intro h1 span {
+  background: linear-gradient(115deg, #ffffff 15%, #b5e0fa 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.agent-demo-break {
+  display: none;
+}
+
+.agent-demo-lead {
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: #b8cde0;
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Stage Framing */
+.agent-demo-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.agent-demo-status {
+  width: min(860px, 100%);
+  height: 560px;
+  border: 1px solid rgba(160, 215, 255, 0.3);
+  background: rgba(12, 28, 44, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  color: #d6edff;
+}
+
+.agent-demo-status h2 {
+  font-size: 24px;
+  font-weight: 550;
+  margin: 16px 0 8px;
+  color: #ffffff;
+}
+
+.agent-demo-status p {
+  font-size: 13px;
+  color: #b2c9da;
+  max-width: 440px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.agent-demo-status button {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 25px;
+  background: #ffffff;
+  color: #0c2132;
+  font-weight: 550;
+  font-size: 12px;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(160, 215, 255, 0.35);
+}
+
+/* Glass Chat Card — EXACT match to reference image */
+.ha-glass.ha-chat-widget {
+  width: min(860px, 100%);
+  min-height: 540px;
+  max-height: 780px;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(140deg, rgba(8, 22, 36, 0.78) 0%, rgba(12, 30, 48, 0.68) 55%, rgba(16, 38, 60, 0.74) 100%);
+  border: 1px solid rgba(140, 205, 255, 0.3);
+  border-radius: 28px;
+  box-shadow:
+    0 30px 80px -15px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(60, 160, 255, 0.16),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 0 24px rgba(100, 180, 255, 0.05);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  color: #edf5fc;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card Header */
+.ha-glass .ha-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px 20px;
+  background: linear-gradient(180deg, rgba(16, 36, 58, 0.45) 0%, rgba(10, 25, 42, 0.2) 100%);
+  border-bottom: 1px solid rgba(140, 205, 255, 0.14);
+  flex-shrink: 0;
+}
+
+.ha-glass .ha-chat-agent-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.ha-glass .ha-chat-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 120%, rgba(55, 125, 185, 0.6), rgba(12, 28, 48, 0.9));
+  border: 1.5px solid rgba(165, 225, 255, 0.55);
+  box-shadow:
+    0 0 20px rgba(85, 190, 255, 0.35),
+    inset 0 0 14px rgba(85, 190, 255, 0.22);
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.ha-glass .ha-chat-avatar svg {
+  color: #ffffff;
+  filter: drop-shadow(0 0 6px rgba(160, 225, 255, 0.5));
+}
+
+.ha-glass .ha-chat-header-names {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ha-glass .ha-chat-header-names strong {
+  font-size: 19px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ha-glass .ha-chat-header-names small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #9bb6cb;
+  line-height: 1.6;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.ha-tag-status {
+  color: #9bb6cb;
+}
+
+.ha-sep-dot {
+  color: rgba(140, 205, 255, 0.45);
+  font-size: 11px;
+  margin: 0 1px;
+}
+
+.ha-tag-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #cbe3f5;
+}
+
+.ha-online-light {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e, 0 0 4px #4ade80;
+  display: inline-block;
+}
+
+.ha-header-credit {
+  color: #9bb6cb;
+}
+
+/* Header Action Buttons */
+.ha-glass-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.ha-glass-tools button {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(18, 38, 58, 0.45);
+  border: 1px solid rgba(140, 205, 255, 0.22);
+  color: #c4dff5;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(8px);
+}
+
+.ha-glass-tools button:hover {
+  background: rgba(32, 65, 98, 0.7);
+  border-color: rgba(170, 230, 255, 0.5);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(80, 180, 255, 0.25);
+}
+
+.ha-glass-tools button:disabled {
+  opacity: 0.4;
+  cursor: wait;
+}
+
+/* Info Banner */
+.ha-glass-info {
+  background: rgba(12, 28, 44, 0.85);
+  border-bottom: 1px solid rgba(140, 205, 255, 0.16);
+  padding: 13px 28px;
+  color: #c5dff2;
+  font-size: 12px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+/* Message Viewport */
+.ha-glass .ha-chat-messages {
+  flex: 1;
+  min-height: 0;
+  padding: 26px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 205, 255, 0.25) transparent;
+}
+
+.ha-glass .ha-msg-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+}
+
+.ha-glass .ha-row-user {
+  justify-content: flex-end;
+}
+
+/* Starli Sparkle Badge next to assistant message */
+.ha-message-star {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 45%, rgba(35, 75, 115, 0.9) 0%, rgba(10, 24, 40, 0.95) 75%);
+  border: 1px solid rgba(140, 210, 255, 0.38);
+  box-shadow:
+    0 0 16px rgba(70, 170, 255, 0.3),
+    inset 0 0 10px rgba(140, 210, 255, 0.22);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ha-star-svg {
+  color: #ffffff;
+  filter: drop-shadow(0 0 6px rgba(180, 230, 255, 0.9));
+}
+
+/* Message Bubble */
+.ha-glass .ha-msg-bubble {
+  font-size: 14.5px;
+  line-height: 1.68;
+  max-width: 82%;
+  padding: 18px 22px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.ha-glass .ha-msg-assistant {
+  background: rgba(16, 32, 50, 0.72);
+  border: 1px solid rgba(140, 195, 240, 0.24);
+  color: #edf5fc;
+}
+
+.ha-msg-paragraph {
+  margin: 0;
+}
+
+.ha-msg-paragraph + .ha-msg-paragraph {
+  margin-top: 12px;
+}
+
+.ha-glass .ha-msg-user {
+  background: linear-gradient(135deg, rgba(32, 70, 108, 0.88) 0%, rgba(20, 50, 80, 0.88) 100%);
+  border: 1px solid rgba(150, 215, 255, 0.36);
+  color: #ffffff;
+  border-bottom-right-radius: 6px;
+  white-space: pre-wrap;
+}
+
+.ha-glass .ha-chat-messages > .ha-msg-assistant {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 58px;
+}
+
+/* Quick Action Suggestion Chips */
+.ha-glass .ha-quick-prompts {
+  display: flex;
+  gap: 10px;
+  margin-left: 58px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ha-glass .ha-quick-prompts button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: rgba(18, 38, 60, 0.55);
+  border: 1px solid rgba(140, 205, 255, 0.28);
+  color: #e2f1fc;
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  line-height: 1;
+}
+
+.ha-glass .ha-quick-prompts button svg {
+  color: #c4e5fc;
+  flex-shrink: 0;
+}
+
+.ha-glass .ha-quick-prompts button:hover:not(:disabled) {
+  background: rgba(30, 65, 95, 0.8);
+  border-color: rgba(170, 230, 255, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(80, 180, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.ha-glass .ha-quick-prompts button:disabled {
+  opacity: 0.45;
+  cursor: wait;
+}
+
+/* Input Footer */
+.ha-glass .ha-chat-footer {
+  padding: 18px 28px 20px;
+  background: linear-gradient(0deg, rgba(8, 20, 32, 0.65) 0%, transparent 100%);
+  border: 0;
+  flex-shrink: 0;
+}
+
+.ha-glass .ha-chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 6px 18px;
+  border-radius: 22px;
+  background: rgba(16, 36, 56, 0.5);
+  border: 1px solid rgba(140, 205, 255, 0.25);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 14px rgba(80, 180, 255, 0.08);
+  backdrop-filter: blur(14px);
+  transition: all 0.2s ease;
+}
+
+.ha-glass .ha-chat-input-row:focus-within {
+  border-color: rgba(170, 230, 255, 0.55);
+  box-shadow: 0 0 18px rgba(80, 180, 255, 0.22);
+}
+
+.ha-glass .ha-chat-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #f0f7fc;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.ha-glass .ha-chat-input::placeholder {
+  color: #9ab3c9;
+  opacity: 1;
+}
+
+.ha-glass .ha-chat-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(235, 246, 255, 0.95);
+  color: #0a1f30;
+  border: 1px solid #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(120, 200, 255, 0.35);
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+  padding: 0;
+}
+
+.ha-glass .ha-chat-send-btn:hover:not(:disabled) {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 22px rgba(140, 215, 255, 0.55);
+}
+
+.ha-glass .ha-chat-send-btn:disabled {
+  opacity: 0.35;
+  background: rgba(160, 190, 215, 0.25);
+  color: #8ba5be;
+  border-color: rgba(160, 210, 255, 0.15);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.ha-glass .ha-chat-disclaimer {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: #8ea8bc;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Fullscreen / Expanded Mode */
+.ha-glass-expanded.ha-chat-widget {
+  position: fixed;
+  inset: 90px max(24px, calc((100vw - 1200px) / 2)) 30px;
+  width: auto;
+  height: auto;
+  max-height: none;
+  z-index: 50;
+  background: linear-gradient(135deg, rgba(8, 20, 34, 0.95) 0%, rgba(14, 32, 50, 0.92) 100%);
+  box-shadow:
+    0 0 0 100vmax rgba(2, 8, 16, 0.85),
+    0 0 45px rgba(80, 180, 255, 0.3);
+}
+
+/* Under-stage Trust & CTA Bar */
+.agent-demo-under {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 24px;
+  font-size: 11px;
+  color: #a5c0d5;
+  width: min(860px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agent-demo-trust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #b0cbe0;
+  line-height: 1.5;
+}
+
+.agent-demo-trust svg {
+  color: #58c0fc;
+  flex-shrink: 0;
+}
+
+.agent-demo-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.agent-demo-actions .pill-button {
+  font-size: 11px;
+  padding: 10px 18px;
+  min-height: 38px;
+  gap: 10px;
+}
+
+/* Benefit Cards in Starli Brand */
+.agent-demo-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 70px 0 40px;
+}
+
+.agent-demo-benefit {
+  padding: 26px 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(21, 38, 55, 0.55) 0%, rgba(9, 19, 29, 0.65) 100%);
+  border: 1px solid rgba(188, 219, 239, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.agent-demo-benefit-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: radial-gradient(circle at bottom, rgba(104, 196, 255, 0.45), rgba(14, 33, 50, 0.85));
+  border: 1px solid rgba(179, 222, 251, 0.4);
+  display: grid;
+  place-items: center;
+  color: #edf8ff;
+  margin-bottom: 18px;
+  box-shadow: 0 0 16px rgba(100, 180, 255, 0.2);
+}
+
+.agent-demo-benefit h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f2f7fc;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.agent-demo-benefit p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #baccdb;
+  margin: 0;
+}
+
+/* Pre-footer Call to Action */
+.agent-demo-cta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 36px 40px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(16, 36, 56, 0.7) 0%, rgba(8, 20, 32, 0.85) 100%);
+  border: 1px solid rgba(140, 205, 255, 0.25);
+  margin: 30px 0 80px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.agent-demo-cta-copy h2 {
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 500;
+  color: #f4f8fc;
+  margin: 10px 0 8px;
+  letter-spacing: -0.8px;
+}
+
+.agent-demo-cta-copy p {
+  font-size: 13px;
+  color: #b2c8d8;
+  margin: 0;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.agent-demo-cta-btns {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .agent-demo-main {
+    width: 90%;
+    padding-top: 115px;
+  }
+  .ha-glass.ha-chat-widget {
+    height: 600px;
+  }
+  .agent-demo-intro h1 {
+    font-size: 38px;
+  }
+  .agent-demo-under {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .agent-demo-benefits {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .agent-demo-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+  }
+  .ha-glass-expanded.ha-chat-widget {
+    inset: 85px 14px 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .agent-demo-main {
+    width: 92%;
+    padding-top: 100px;
+  }
+  .agent-demo-intro {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  .agent-demo-intro .home-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
+  .agent-demo-intro h1 {
+    font-size: 32px;
+    letter-spacing: -1.2px;
+  }
+  .agent-demo-break {
+    display: block;
+  }
+  .ha-glass.ha-chat-widget {
+    height: min(620px, 80svh);
+    min-height: 480px;
+    border-radius: 22px;
+  }
+  .ha-glass .ha-chat-header {
+    padding: 16px 16px 14px;
+    gap: 12px;
+  }
+  .ha-glass .ha-chat-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+  .ha-glass .ha-chat-avatar svg {
+    width: 24px;
+    height: 24px;
+  }
+  .ha-glass .ha-chat-header-names strong {
+    font-size: 15px;
+  }
+  .ha-glass .ha-chat-header-names small {
+    font-size: 10px;
+    gap: 4px;
+  }
+  .ha-header-credit {
+    display: none;
+  }
+  .ha-glass-tools {
+    gap: 6px;
+  }
+  .ha-glass-tools button {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+  .ha-glass-tools button svg {
+    width: 14px;
+    height: 14px;
+  }
+  .ha-glass .ha-chat-messages {
+    padding: 18px 16px;
+    gap: 12px;
+  }
+  .ha-message-star {
+    width: 32px;
+    height: 32px;
+  }
+  .ha-message-star svg {
+    width: 16px;
+    height: 16px;
+  }
+  .ha-glass .ha-msg-bubble {
+    font-size: 13px;
+    padding: 14px 16px;
+    max-width: calc(100% - 46px);
+    border-radius: 16px;
+  }
+  .ha-glass .ha-msg-user {
+    max-width: 90%;
+  }
+  .ha-glass .ha-quick-prompts {
+    margin-left: 46px;
+    gap: 7px;
+  }
+  .ha-glass .ha-quick-prompts button {
+    font-size: 11px;
+    padding: 8px 13px;
+    gap: 6px;
+  }
+  .ha-glass .ha-quick-prompts button svg {
+    width: 14px;
+    height: 14px;
+  }
+  .ha-glass .ha-chat-footer {
+    padding: 14px 14px 12px;
+  }
+  .ha-glass .ha-chat-input-row {
+    padding: 4px 6px 4px 14px;
+  }
+  .ha-glass .ha-chat-input {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  .ha-glass .ha-chat-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .ha-glass-expanded.ha-chat-widget {
+    inset: 80px 10px 10px;
+  }
+  .agent-demo-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .agent-demo-actions .pill-button {
+    width: 100%;
+    justify-content: center;
+  }
+  .agent-demo-cta-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+  .agent-demo-cta-btns .pill-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ha-glass *,
+  .agent-demo-world * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

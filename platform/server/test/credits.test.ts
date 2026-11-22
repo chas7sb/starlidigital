@@ -1,0 +1,38 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{mkdtempSync,rmSync}from'node:fs';import{tmpdir}from'node:os';import{join,resolve as resolvePath,sep,basename}from'node:path';import{Worker}from'node:worker_threads';
+import{Store}from'../src/store.js';import{ensureCredits,creditsWallet,grantCredits,reserveCredits,settleCredits,releaseCredits,revokeCredits,creditLedger,releaseInterruptedCredits}from'../src/credits.js';
+const grant=(store:Store,amount=100,key='grant')=>grantCredits(store,{ownerId:'u',amount,key,reason:'Pachet achitat'});
+test('credits use explicit grants, immutable ledger and owner-bound idempotency',()=>{const store=new Store(':memory:');try{
+ assert.equal(creditsWallet(store,'u').available,0);grant(store);grant(store);assert.equal(creditsWallet(store,'u').available,100);assert.equal(creditLedger(store,'u').length,1);
+ assert.throws(()=>grant(store,101),/idempotent/);assert.throws(()=>grantCredits(store,{ownerId:'other',amount:100,key:'grant',reason:'Pachet achitat'}),/idempotent/);
+ assert.throws(()=>store.db.exec("UPDATE credit_ledger SET amount=0"),/immutable/);assert.throws(()=>store.db.exec('DELETE FROM credit_ledger'),/immutable/);
+ assert.equal(creditLedger(store,'other').length,0);
+ }finally{store.close();}});
+test('reservation, settlement and release do not double-charge or change terminal states',()=>{const store=new Store(':memory:');try{
+ grant(store);const input={ownerId:'u',amount:40,key:'build',action:'BUILD',projectId:'p'};reserveCredits(store,input);reserveCredits(store,input);assert.deepEqual([creditsWallet(store,'u').available,creditsWallet(store,'u').reserved],[60,40]);
+ assert.throws(()=>reserveCredits(store,{...input,amount:41}),/idempotent/);settleCredits(store,'build');settleCredits(store,'build');assert.equal(creditsWallet(store,'u').totalSpent,40);assert.equal(creditsWallet(store,'u').reserved,0);assert.throws(()=>releaseCredits(store,'build'),/deja consumate/);
+ reserveCredits(store,{...input,key:'retry',amount:20});releaseCredits(store,'retry');releaseCredits(store,'retry');assert.equal(creditsWallet(store,'u').available,60);assert.throws(()=>settleCredits(store,'retry'),/eliberată/);
+ assert.deepEqual(creditLedger(store,'u').map(x=>x.kind).sort(),['GRANT','RELEASE','RESERVE','RESERVE','SETTLE'].sort());
+ }finally{store.close();}});
+test('insufficient credit failure rolls back operation key and nested grants obey outer rollback',()=>{const store=new Store(':memory:');try{
+ ensureCredits(store);assert.throws(()=>reserveCredits(store,{ownerId:'u',amount:40,key:'build',action:'BUILD'}),/suficiente/);grant(store);reserveCredits(store,{ownerId:'u',amount:40,key:'build',action:'BUILD'});assert.equal(creditsWallet(store,'u').available,60);
+ store.db.exec('BEGIN IMMEDIATE');grant(store,10,'nested');store.db.exec('ROLLBACK');assert.equal(creditsWallet(store,'u').available,60);assert.equal(creditLedger(store,'u').some(e=>e.key==='nested'),false);grant(store,10,'nested');assert.equal(creditsWallet(store,'u').available,70);
+ store.db.exec('BEGIN IMMEDIATE');assert.throws(()=>reserveCredits(store,{ownerId:'u',amount:1000,key:'bad-nested',action:'BUILD'}),/suficiente/);grant(store,5,'after-failure');store.db.exec('COMMIT');assert.equal(creditsWallet(store,'u').available,75);
+ }finally{store.close();}});
+test('refunds never create negative balances and consumed credit debt blocks further reservations',()=>{const store=new Store(':memory:');try{
+ grant(store);reserveCredits(store,{ownerId:'u',amount:80,key:'build',action:'BUILD'});settleCredits(store,'build');revokeCredits(store,{ownerId:'u',amount:100,key:'refund',reason:'Rambursare Stripe'});revokeCredits(store,{ownerId:'u',amount:100,key:'refund',reason:'Rambursare Stripe'});
+ assert.deepEqual([creditsWallet(store,'u').available,creditsWallet(store,'u').debt],[0,80]);assert.throws(()=>reserveCredits(store,{ownerId:'u',amount:1,key:'blocked',action:'BUILD'}),/regularizat/);grant(store,100,'repay');assert.deepEqual([creditsWallet(store,'u').available,creditsWallet(store,'u').debt],[20,0]);
+ reserveCredits(store,{ownerId:'u',amount:20,key:'held',action:'BUILD'});revokeCredits(store,{ownerId:'u',amount:20,key:'refund-held',reason:'Rambursare'});releaseCredits(store,'held');assert.deepEqual([creditsWallet(store,'u').available,creditsWallet(store,'u').reserved,creditsWallet(store,'u').debt],[0,0,0]);
+ }finally{store.close();}});
+test('amounts must be safe positive integers and metadata does not alter wallets on failure',()=>{const store=new Store(':memory:');try{
+ for(const value of [0,-1,0.1,NaN,Infinity,Number.MAX_SAFE_INTEGER])assert.throws(()=>grant(store,value));
+ assert.throws(()=>grantCredits(store,{ownerId:'u',amount:10,key:'meta',reason:'Credit',metadata:{value:'x'.repeat(9000)}}),/prea mari/);assert.equal(creditsWallet(store,'u').available,0);
+ grant(store,10,'valid');assert.throws(()=>reserveCredits(store,{ownerId:'u',amount:1,key:'valid',action:'BUILD'}),/idempotent/);
+ }finally{store.close();}});
+test('two SQLite connections cannot overspend a shared wallet',async()=>{
+ const directory=mkdtempSync(join(process.cwd(),'starli-credits-')),path=join(directory,'credits.sqlite');
+ const moduleUrl=new URL('../src/credits.ts',import.meta.url).href,storeUrl=new URL('../src/store.ts',import.meta.url).href;
+ async function operation(mode:string,key=''):Promise<any>{return await new Promise((resolve,reject)=>{const worker=new Worker(`const{parentPort,workerData}=require('node:worker_threads');(async()=>{const{Store}=await import(workerData.storeUrl);const{reserveCredits,grantCredits,creditsWallet,creditLedger}=await import(workerData.moduleUrl);const store=new Store(workerData.path);try{let data;if(workerData.mode==='init')grantCredits(store,{ownerId:'u',amount:100,key:'fund',reason:'Credit'});else if(workerData.mode==='spend')reserveCredits(store,{ownerId:'u',amount:70,key:workerData.key,action:'BUILD'});else data={wallet:creditsWallet(store,'u'),entries:creditLedger(store,'u')};parentPort.postMessage({ok:true,data});}catch(e){parentPort.postMessage({ok:false,error:e.message});}finally{store.close();}})().catch(e=>{throw e;});`,{eval:true,execArgv:['--import','tsx'],workerData:{path,key,mode,moduleUrl,storeUrl}});let result:any;worker.once('message',message=>{result=message;});worker.once('error',reject);worker.once('exit',code=>{if(code===0&&result)resolve(result);else reject(new Error('Credit worker failed'));});});}
+ try{assert.equal((await operation('init')).ok,true);const results=await Promise.all([operation('spend','a'),operation('spend','b')]);assert.equal(results.filter(r=>r.ok).length,1);assert.match(results.find(r=>!r.ok)?.error||'',/suficiente/);const read=await operation('read');assert.equal(read.ok,true);assert.deepEqual([read.data.wallet.available,read.data.wallet.reserved],[30,70]);assert.equal(read.data.entries.filter((e:any)=>e.kind==='RESERVE').length,1);}finally{assert.ok(resolvePath(directory).startsWith(resolvePath(process.cwd())+sep)&&basename(directory).startsWith('starli-credits-'));rmSync(directory,{recursive:true,force:true,maxRetries:5,retryDelay:100});}
+});
+
+test('exclusive startup recovery releases interrupted work once and records the reason',()=>{const store=new Store(':memory:');try{grant(store);reserveCredits(store,{ownerId:'u',amount:50,key:'interrupted',action:'BUILD'});assert.equal(releaseInterruptedCredits(store),1);assert.equal(releaseInterruptedCredits(store),0);assert.equal(creditsWallet(store,'u').available,100);assert.equal(creditsWallet(store,'u').reserved,0);assert.match(creditLedger(store,'u')[0].reason,/repornirea/);}finally{store.close();}});

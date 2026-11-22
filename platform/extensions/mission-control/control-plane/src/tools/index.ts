@@ -1,0 +1,53 @@
+import {registerCompanyTools} from './company.js';
+import {registerMissionControlTools} from './mission-control.js';
+import {registerBrowserBridgeTools} from './browser-bridge.js';
+import type { ToolContext } from './common.js';
+import { registerPlatformTools } from './platform.js';
+import { registerApiTools } from './api.js';
+import { registerProjectTools } from './projects.js';
+import { registerWebsiteTools } from './website.js';
+import { registerFileTools } from './files.js';
+import { registerGitTools } from './git.js';
+import { registerDeployTools } from './deploy.js';
+import { registerHttpTools } from './http.js';
+import { registerServerTools } from './server.js';
+import { registerDatabaseTools } from './database.js';
+import { registerConfigTools } from './config.js';
+import { registerStarliTools } from './starli.js';
+import { registerAssetTools } from './assets.js';
+import { registerCrmTools } from './crm.js';
+import { registerOutreachTools } from './outreach.js';
+import { registerAuditTools } from './audit.js';
+import { registerAgencyTools } from './agency.js';
+import {registerHostedAgentTools} from './hosted-agents.js';
+import { registerVideoTools } from './video.js';
+import { registerDeviceCapabilityTools } from './device-capabilities.js';
+
+export * from './common.js';
+export * from './security.js';
+
+export function registerAllControlPlaneTools(ctx: ToolContext) {
+  registerMissionControlTools(ctx);
+  registerBrowserBridgeTools(ctx);
+  registerPlatformTools(ctx);
+  registerCompanyTools(ctx);
+  registerApiTools(ctx);
+  registerProjectTools(ctx);
+  registerWebsiteTools(ctx);
+  registerFileTools(ctx);
+  registerGitTools(ctx);
+  registerDeployTools(ctx);
+  registerHttpTools(ctx);
+  registerServerTools(ctx);
+  registerDatabaseTools(ctx);
+  registerConfigTools(ctx);
+  registerStarliTools(ctx);
+  registerAssetTools(ctx);
+  registerCrmTools(ctx);
+  registerOutreachTools(ctx);
+  registerAuditTools(ctx);
+  registerAgencyTools(ctx);
+  registerHostedAgentTools(ctx);
+  registerVideoTools(ctx);
+  registerDeviceCapabilityTools(ctx);
+}

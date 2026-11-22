@@ -1,0 +1,453 @@
+import type { Canvas } from 'canvaskit-wasm'
+
+import type { SceneGraph } from '@open-pencil/scene-graph'
+import { computeDescendantVisualBounds } from '@open-pencil/scene-graph/geometry'
+
+import { needsImagePreviews } from '#core/canvas/images/previews'
+import type { RenderOverlays, SkiaRenderer } from '#core/canvas/renderer'
+import { playIslandRoots } from '#core/editor/play/islands'
+import type { EditorState } from '#core/editor/types'
+import { emitNavigationTrace } from '#core/profiler'
+
+import { drawChromePass, drawLabelPass, drawOverlayPass } from './overlay-pass'
+import { renderSceneBacking, updateSceneBackingPreviewState } from './retained-backing'
+import { hasTransientPreviews, renderPageWithPreviews } from './transient-previews'
+
+export function renderSceneToCanvas(
+  r: Pick<SkiaRenderer, 'worldViewport' | 'viewportImageRendering' | 'renderNode'>,
+  canvas: Canvas,
+  graph: SceneGraph,
+  pageId: string
+): void {
+  const prevViewport = r.worldViewport
+  const previewMode = r.viewportImageRendering
+  r.viewportImageRendering = false
+  r.worldViewport = { x: -1e9, y: -1e9, w: 2e9, h: 2e9 }
+  try {
+    const pageNode = graph.getNode(pageId)
+    if (pageNode) {
+      for (const childId of pageNode.childIds) r.renderNode(canvas, graph, childId, {})
+    }
+  } finally {
+    r.worldViewport = prevViewport
+    r.viewportImageRendering = previewMode
+  }
+}
+
+export type RenderLayer = 'full' | 'scene' | 'overlays'
+
+export function renderFromEditorState(
+  r: SkiaRenderer,
+  state: EditorState,
+  graph: SceneGraph,
+  textEditor: unknown,
+  viewportWidth: number,
+  viewportHeight: number,
+  showRulers = true,
+  dpr = 1,
+  layer: RenderLayer = 'full',
+  interactive = false
+): void {
+  const previewMode = r.imagePreviews.enabled && needsImagePreviews(graph)
+  if (
+    r.imageMemoryGraph !== graph ||
+    r.viewportImageRendering !== previewMode ||
+    (previewMode && r.imageMemoryPage !== state.currentPageId)
+  ) {
+    r.invalidateAllPictures()
+    r.imageCache.clear()
+    // Previews of another document hold its encoded images, which a document without
+    // previews would otherwise keep alive.
+    if (r.imageMemoryGraph !== graph) r.imagePreviews.release()
+    r.imageMemoryGraph = graph
+    r.imageMemoryPage = state.currentPageId
+  }
+  r.viewportImageRendering = previewMode
+  r.dpr = dpr
+  r.panX = state.panX
+  r.panY = state.panY
+  r.zoom = state.zoom
+  r.viewportWidth = viewportWidth
+  r.viewportHeight = viewportHeight
+  r.showRulers = showRulers
+  r.pageColor = state.pageColor
+  r.rulerTheme = state.rulerTheme ?? null
+  r.setSelectionTheme(state.selectionTheme)
+  r.pageId = state.currentPageId
+  r.navigationPhase = state.navigation.phase
+  r.navigationGeneration = state.navigation.generation
+  // A previewing canvas shows the design as it runs: no selection, hover, or edit chrome.
+  const previewing = state.play !== null
+  render(
+    r,
+    graph,
+    previewing ? new Set<string>() : state.selectedIds,
+    {
+      playing: previewing,
+      playIslands: previewing ? new Set(playIslandRoots(graph, state.currentPageId)) : undefined,
+      hoveredNodeId: previewing ? null : state.hoveredNodeId,
+      showPixelGrid: !previewing && state.showPixelGrid !== false,
+      gradientEdit: state.gradientEdit,
+      transforming: state.transforming,
+      measurementMode: state.measurementMode,
+      enteredContainerId: state.enteredContainerId,
+      editingTextId: state.editingTextId,
+      textEditor: textEditor as RenderOverlays['textEditor'],
+      marquee: state.marquee,
+      snapGuides: state.snapGuides,
+      guides: state.guides,
+      rotationPreview: state.rotationPreview,
+      dropTargetId: state.dropTargetId,
+      layoutInsertIndicator: state.layoutInsertIndicator,
+      penState: state.penState
+        ? ({
+            ...state.penState,
+            cursorX: state.penCursorX ?? undefined,
+            cursorY: state.penCursorY ?? undefined
+          } as RenderOverlays['penState'])
+        : null,
+      pencilState: state.pencilState,
+      nodeEditState: state.nodeEditState ?? null,
+      presenceCursors: state.presenceCursors,
+      designIssues: state.designIssues,
+      codeFocusNodeId: state.codeFocusNodeId,
+      autoLayoutHover: state.autoLayoutHover,
+      shapeHandleHover: state.shapeHandleHover
+    },
+    // Recorded pictures follow what the canvas draws, not every document change.
+    state.canvasVersion,
+    layer,
+    interactive
+  )
+}
+
+function sceneContentDependsOnOverlay(overlays: RenderOverlays): boolean {
+  return (
+    overlays.rotationPreview != null || overlays.nodeEditState != null || overlays.playing === true
+  )
+}
+
+function scenePictureMissReason(
+  r: SkiaRenderer,
+  graph: SceneGraph,
+  overlays: RenderOverlays,
+  sceneVersion: number,
+  hasPositionPreview: boolean
+): string {
+  if (hasPositionPreview) return 'position-preview'
+  if (hasTransientPreviews(r, graph)) return 'transient-preview'
+  if (sceneContentDependsOnOverlay(overlays)) return 'volatile-overlay'
+  if (!r.scenePicture) return 'missing-picture'
+  if (graph.positionPreviewVersion !== r.scenePicturePositionPreviewVersion)
+    return 'position-preview-version'
+  if (sceneVersion !== r.scenePictureVersion) return 'scene-version'
+  if (r.fontGeneration !== r.scenePictureFontGeneration) return 'font-generation'
+  if (r.pageId !== r.scenePicturePageId) return 'page'
+  return 'unknown'
+}
+
+function canUseScenePicture(
+  r: SkiaRenderer,
+  graph: SceneGraph,
+  sceneVersion: number,
+  requiresUncachedSceneRender: boolean
+): boolean {
+  return (
+    !requiresUncachedSceneRender &&
+    !!r.scenePicture &&
+    graph.positionPreviewVersion === r.scenePicturePositionPreviewVersion &&
+    sceneVersion === r.scenePictureVersion &&
+    r.fontGeneration === r.scenePictureFontGeneration &&
+    r.pageId === r.scenePicturePageId
+  )
+}
+
+function getSceneRenderPolicy(
+  r: SkiaRenderer,
+  graph: SceneGraph,
+  overlays: RenderOverlays,
+  sceneVersion: number,
+  interactive: boolean
+) {
+  const hasPositionPreview =
+    graph.positionPreviewVersion !== r.scenePicturePositionPreviewVersion &&
+    sceneVersion === r.scenePictureVersion
+  const requiresUncachedSceneRender =
+    r.viewportImageRendering ||
+    interactive ||
+    hasPositionPreview ||
+    sceneContentDependsOnOverlay(overlays) ||
+    hasTransientPreviews(r, graph)
+  return {
+    requiresUncachedSceneRender,
+    canUsePicture: canUseScenePicture(r, graph, sceneVersion, requiresUncachedSceneRender),
+    cacheMissReason: interactive
+      ? 'active-edit'
+      : scenePictureMissReason(r, graph, overlays, sceneVersion, hasPositionPreview)
+  }
+}
+
+const now = typeof performance !== 'undefined' ? () => performance.now() : () => 0
+
+function measure<T>(fn: () => T): { value: T; duration: number } {
+  const start = now()
+  const value = fn()
+  return { value, duration: now() - start }
+}
+
+/** Labels, editing overlays, and rulers; a previewing canvas keeps only the rulers' chrome pass. */
+function drawAboveScene(
+  r: SkiaRenderer,
+  canvas: Canvas,
+  graph: SceneGraph,
+  selectedIds: Set<string>,
+  overlays: RenderOverlays,
+  sceneVersion: number
+): void {
+  canvas.save()
+  canvas.scale(r.dpr, r.dpr)
+  r.labelCache.update(graph, r.pageId, sceneVersion, graph.positionPreviewVersion)
+  if (!overlays.playing) drawLabelPass(r, canvas, graph, selectedIds, overlays)
+  canvas.restore()
+
+  canvas.save()
+  canvas.scale(r.dpr, r.dpr)
+  if (!overlays.playing) drawOverlayPass(r, canvas, graph, selectedIds, overlays)
+  drawChromePass(r, canvas, graph, selectedIds, overlays)
+  canvas.restore()
+}
+
+export function render(
+  r: SkiaRenderer,
+  graph: SceneGraph,
+  selectedIds: Set<string>,
+  overlays: RenderOverlays = {},
+  sceneVersion = -1,
+  layer: RenderLayer = 'full',
+  interactive = false
+): void {
+  emitNavigationTrace('render:start', {
+    layer,
+    sceneVersion,
+    panX: r.panX,
+    panY: r.panY,
+    zoom: r.zoom
+  })
+  r.syncFontGeneration()
+  const p = r.profiler
+  p.beginFrame()
+  p.setScenePictureDrawTime(0)
+  p.setScenePictureRecordTime(0)
+  p.setFlushTime(0)
+
+  graph.clearAbsPosCache()
+
+  const canvas = r.surface.getCanvas()
+  if (layer === 'overlays') {
+    canvas.clear(r.ck.Color4f(0, 0, 0, 0))
+  } else {
+    canvas.clear(r.ck.Color4f(r.pageColor.r, r.pageColor.g, r.pageColor.b, 1))
+  }
+
+  r.worldViewport = {
+    x: -r.panX / r.zoom,
+    y: -r.panY / r.zoom,
+    w: r.viewportWidth / r.zoom,
+    h: r.viewportHeight / r.zoom
+  }
+  updateSceneBackingPreviewState(r, layer)
+
+  const { requiresUncachedSceneRender, canUsePicture, cacheMissReason } = getSceneRenderPolicy(
+    r,
+    graph,
+    overlays,
+    sceneVersion,
+    interactive
+  )
+
+  if (layer !== 'overlays') {
+    if (requiresUncachedSceneRender) {
+      r.sceneBackingNeedsCrispRender = false
+      r.tiledScenePending = false
+    }
+    canvas.save()
+    canvas.scale(r.dpr, r.dpr)
+
+    p.beginPhase('render:scene')
+    let renderedScene = false
+    if (layer === 'scene' && !requiresUncachedSceneRender && r.tiledSceneEnabled) {
+      const backingPresented = renderSceneBacking(r, canvas, graph, sceneVersion)
+      if (!backingPresented) {
+        canvas.save()
+        canvas.translate(r.panX, r.panY)
+        canvas.scale(r.zoom, r.zoom)
+        renderSceneContent(
+          r,
+          canvas,
+          graph,
+          overlays,
+          sceneVersion,
+          canUsePicture,
+          cacheMissReason,
+          requiresUncachedSceneRender
+        )
+        canvas.restore()
+      }
+      const tiled = r.tiledScene.renderFrame(r, canvas, graph, sceneVersion, r.navigationGeneration)
+      r.tiledScenePending = tiled.pending
+      r.tiledSceneCovered = tiled.covered
+      renderedScene = true
+      p.setScenePictureMode('hit', tiled.covered ? 'tiled' : 'tiled-fallback')
+    }
+    if (!renderedScene && layer === 'scene' && !requiresUncachedSceneRender) {
+      const presentation = renderSceneBacking(r, canvas, graph, sceneVersion)
+      if (presentation) {
+        renderedScene = true
+        p.setScenePictureMode('hit', presentation)
+      }
+    }
+    if (!renderedScene) {
+      canvas.translate(r.panX, r.panY)
+      canvas.scale(r.zoom, r.zoom)
+      renderSceneContent(
+        r,
+        canvas,
+        graph,
+        overlays,
+        sceneVersion,
+        canUsePicture,
+        cacheMissReason,
+        requiresUncachedSceneRender
+      )
+    }
+    p.endPhase('render:scene')
+
+    canvas.restore()
+  }
+
+  if (layer !== 'scene') drawAboveScene(r, canvas, graph, selectedIds, overlays, sceneVersion)
+
+  p.beginPhase('render:flush')
+  const { duration: flushDuration } = measure(() => r.surface.flush())
+  p.setFlushTime(flushDuration)
+  p.endPhase('render:flush')
+
+  p.setNodeCounts(r._nodeCount, r._culledCount)
+  p.endFrame()
+  emitNavigationTrace('render:end', {
+    layer,
+    sceneVersion,
+    panX: r.panX,
+    panY: r.panY,
+    zoom: r.zoom,
+    flushMs: flushDuration,
+    nodes: r._nodeCount,
+    culledNodes: r._culledCount,
+    backingCrisp: !r.sceneBackingNeedsCrispRender
+  })
+}
+
+function renderSceneContent(
+  r: SkiaRenderer,
+  canvas: Canvas,
+  graph: SceneGraph,
+  overlays: RenderOverlays,
+  sceneVersion: number,
+  canUsePicture: boolean,
+  cacheMissReason: string,
+  requiresUncachedSceneRender: boolean
+): void {
+  const p = r.profiler
+  if (canUsePicture) {
+    p.setScenePictureMode('hit')
+    p.beginPhase('render:drawPicture')
+    if (r.scenePicture) {
+      const picture = r.scenePicture
+      const { duration } = measure(() => canvas.drawPicture(picture))
+      p.setScenePictureDrawTime(duration)
+    }
+    p.endPhase('render:drawPicture')
+  } else if (requiresUncachedSceneRender) {
+    p.setScenePictureMode('volatile', cacheMissReason)
+    r._nodeCount = 0
+    r._culledCount = 0
+    p.beginPhase('render:volatile')
+    renderPageChildren(r, canvas, graph, overlays)
+    p.endPhase('render:volatile')
+  } else {
+    p.setScenePictureMode('record', cacheMissReason)
+    r._nodeCount = 0
+    r._culledCount = 0
+    p.beginPhase('render:recordPicture')
+    const { duration } = measure(() => recordScenePicture(r, canvas, graph, sceneVersion))
+    p.setScenePictureRecordTime(duration)
+    p.endPhase('render:recordPicture')
+  }
+}
+
+function renderPageChildren(
+  r: SkiaRenderer,
+  canvas: Canvas,
+  graph: SceneGraph,
+  overlays: RenderOverlays
+): void {
+  if (renderPageWithPreviews(r, canvas, graph, overlays)) return
+  const pageNode = graph.getNode(r.pageId ?? graph.rootId)
+  if (!pageNode) return
+  for (const childId of pageNode.childIds) {
+    r.renderNode(canvas, graph, childId, overlays)
+  }
+}
+
+function recordScenePicture(
+  r: SkiaRenderer,
+  canvas: Canvas,
+  graph: SceneGraph,
+  sceneVersion: number
+): void {
+  r.scenePicture?.delete()
+  r.scenePicture = null
+  const prevViewport = r.worldViewport
+  r.worldViewport = { x: -1e6, y: -1e6, w: 2e6, h: 2e6 }
+  const recorder = new r.ck.PictureRecorder()
+  try {
+    const pageNode = graph.getNode(r.pageId ?? graph.rootId)
+    const sceneContentBounds = pageNode
+      ? computeDescendantVisualBounds(
+          pageNode.childIds,
+          (id) => graph.getNode(id),
+          (id) => graph.getAbsolutePosition(id)
+        )
+      : null
+    const sceneBounds = sceneContentBounds
+      ? {
+          x: sceneContentBounds.minX,
+          y: sceneContentBounds.minY,
+          width: sceneContentBounds.maxX - sceneContentBounds.minX,
+          height: sceneContentBounds.maxY - sceneContentBounds.minY
+        }
+      : { x: 0, y: 0, width: 1, height: 1 }
+    const padding = 1024
+    const bounds = r.ck.LTRBRect(
+      sceneBounds.x - padding,
+      sceneBounds.y - padding,
+      sceneBounds.x + sceneBounds.width + padding,
+      sceneBounds.y + sceneBounds.height + padding
+    )
+    const recCanvas = recorder.beginRecording(bounds)
+    if (pageNode) {
+      for (const childId of pageNode.childIds) {
+        r.renderNode(recCanvas, graph, childId, {})
+      }
+    }
+    r.scenePicture = recorder.finishRecordingAsPicture()
+    r.scenePictureVersion = sceneVersion
+    r.scenePictureFontGeneration = r.fontGeneration
+    r.scenePicturePositionPreviewVersion = graph.positionPreviewVersion
+    r.scenePicturePageId = r.pageId
+    canvas.drawPicture(r.scenePicture)
+  } finally {
+    recorder.delete()
+    r.worldViewport = prevViewport
+  }
+}

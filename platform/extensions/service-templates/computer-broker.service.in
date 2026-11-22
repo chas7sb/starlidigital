@@ -1,0 +1,17 @@
+[Unit]
+Description=StarliDigital enrolled company computer broker
+After=network.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@EXTENSIONS_ROOT@/computer-broker
+EnvironmentFile=@PRIVATE_ENV@
+Environment=STARLI_COMPUTER_STATE=@PRIVATE_STATE@/computer
+ExecStart=@NODE@ production-broker.mjs
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

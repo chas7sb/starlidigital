@@ -1,0 +1,51 @@
+import type { ToolContext } from './common.js';
+import { registerPlatformTools } from './platform.js';
+import { registerApiTools } from './api.js';
+import { registerProjectTools } from './projects.js';
+import { registerWebsiteTools } from './website.js';
+import { registerFileTools } from './files.js';
+import { registerGitTools } from './git.js';
+import { registerDeployTools } from './deploy.js';
+import { registerHttpTools } from './http.js';
+import { registerServerTools } from './server.js';
+import { registerDatabaseTools } from './database.js';
+import { registerConfigTools } from './config.js';
+import { registerStarliTools } from './starli.js';
+import { registerStarliInferenceTools } from './starli-inference.js';
+import { registerAssetTools } from './assets.js';
+import { registerCrmTools } from './crm.js';
+import { registerOutreachTools } from './outreach.js';
+import { registerAuditTools } from './audit.js';
+import { registerAgencyTools } from './agency.js';
+import {registerHostedAgentTools} from './hosted-agents.js';
+import { registerVideoTools } from './video.js';
+import { registerBrowserBridgeTools } from './browser-bridge.js';
+import { registerOneTimeAgentTools } from './one-time-agents.js';
+
+export * from './common.js';
+export * from './security.js';
+
+export function registerAllControlPlaneTools(ctx: ToolContext) {
+  registerPlatformTools(ctx);
+  registerApiTools(ctx);
+  registerProjectTools(ctx);
+  registerWebsiteTools(ctx);
+  registerFileTools(ctx);
+  registerGitTools(ctx);
+  registerDeployTools(ctx);
+  registerHttpTools(ctx);
+  registerServerTools(ctx);
+  registerDatabaseTools(ctx);
+  registerConfigTools(ctx);
+  registerStarliTools(ctx);
+  registerStarliInferenceTools(ctx);
+  registerAssetTools(ctx);
+  registerCrmTools(ctx);
+  registerOutreachTools(ctx);
+  registerAuditTools(ctx);
+  registerAgencyTools(ctx);
+  registerHostedAgentTools(ctx);
+  registerVideoTools(ctx);
+  registerBrowserBridgeTools(ctx);
+  registerOneTimeAgentTools(ctx);
+}

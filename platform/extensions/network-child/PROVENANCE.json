@@ -1,0 +1,83 @@
+{
+  "origin": "/opt/starlidigital/network-child/releases/v1",
+  "transport": "SCP strict host verification",
+  "observedDate": "2026-11-22",
+  "files": [
+    {
+      "path": "boundary_probe.c",
+      "sha256": "d5562a75c32fd2d0db43e09cebe42d772cce8478ab3a53fbab2b7720960e1c5b"
+    },
+    {
+      "path": "broker.py",
+      "sha256": "3894c9a667d2ab05b8138e88c583861b9af67f32bd6ba8e46db02d7dae875cdd"
+    },
+    {
+      "path": "build_manifest.py",
+      "sha256": "bc5b2d82d952e7474595d454db587de1bb26cd247f5454b4b6ace66ed90dd53b"
+    },
+    {
+      "path": "cleanup.py",
+      "sha256": "a5208e6acdd9a298d006d90a4f39220438652ef9708c9f97339f4d30648a7015"
+    },
+    {
+      "path": "client.py",
+      "sha256": "47c3104a94839361ee5ae863e99715dd206b426f82ee5ab00772a717c269e916"
+    },
+    {
+      "path": "install_reviewed.py",
+      "sha256": "6195cd060a7bc70274b2c05db38585ad21bfb6f97107c75daab2a8c1c6894eb9"
+    },
+    {
+      "path": "kernel_probe.py",
+      "sha256": "4133e25f713b3c975eee6efd5736214f7944ae47d76de86fd7846eaa0b6a4257"
+    },
+    {
+      "path": "network.nft",
+      "sha256": "ba9dddcdb66391d019fad870f6894d76b10fb4d612aa4c64c9881ec6aec87df5"
+    },
+    {
+      "path": "profile_setup.py",
+      "sha256": "c5ebacbdb1e80938f56dc7d38083ea6fceb0f36f9c1fb947f8dfa7ce34142951"
+    },
+    {
+      "path": "REVIEW-CONTRACT.md",
+      "sha256": "de8b5ff88d8689a0af9c8d538110e8dd2def2f30b8a3f327956ff6b97fcf75f8"
+    },
+    {
+      "path": "signal_probe.py",
+      "sha256": "81462a7b02d879cf6a670d3160877e1e24d9b1c2dba0ba0f5962e656ce9b8ef4"
+    },
+    {
+      "path": "starli-network-child.service",
+      "sha256": "0d9d69ef5069d95f12fc2cfa53ea61d5a2698db377f2cd242ac8b735cb1a6e2d"
+    },
+    {
+      "path": "test_install_pins.py",
+      "sha256": "1ec2ab89b3d3795884f38484b4e3806bb43d625055bd71aca51d3587c45fafa5"
+    },
+    {
+      "path": "test_protocol.py",
+      "sha256": "49e7b98cccd701a510a9a838b5de5960c01deea7550bbe0fd87d5fe6a825c77d"
+    },
+    {
+      "path": "worker.py",
+      "sha256": "17dfbc8188de13e12c4759b038bec5bed8838990fca33ee05498a2545e56912d"
+    }
+  ],
+  "license": "No LICENSE found in release or searched ancestors; redistribution authorization remains to be established.",
+  "localChanges": [
+    "network.nft: removed production public IP; installer adds every guest global IPv4 interface to denied set",
+    "install_reviewed.py: removed production IP exception",
+    "test_protocol.py: fixed stale argv using client.PROFILES",
+    "Added disabled templates, guest preflight, review bundle generator and integration README"
+  ],
+  "validation": {
+    "reviewBundleFilesVerified": 9,
+    "reviewManifestSha256": "370ab25976eab47bd1d1a5d8eba16bc2f200245d33ba3e78c2063b6f7f6fccfe",
+    "jsonValid": true,
+    "pythonFilesParsed": 13,
+    "originalTransferHashesMatched": 15,
+    "linuxKernelTestsRun": false,
+    "windowsPreflight": "Failed closed as expected"
+  }
+}

@@ -1,0 +1,39 @@
+import type {Store} from '../store.js';
+import type {Events} from '../events.js';
+import {CreativeProjectService} from '../creative-projects/service.js';
+import {AssetServices} from '../assets/service.js';
+import {VideoServices} from '../video/service.js';
+import {VideoDirectorService} from '../video-director/service.js';
+import {StarliConversationService} from '../starli-conversation/service.js';
+import {renderNextPreviewHtml} from '../preview-renderer.js';
+import type {SourceFile} from '../next-template.js';
+
+const KEY='machinery-content-demo-v1';
+const sitePreviewId=(tenant:string)=>`machinery-demo-site-preview:${tenant}`;
+const safeTenant=(value:string)=>{const v=String(value||'').trim();if(!/^[A-Za-z0-9_.:-]{1,160}$/.test(v))throw new Error('Invalid tenant identity.');return v;};
+const websiteFiles=():SourceFile[]=>[
+ {path:'app/page.tsx',content:`export default function Page(){return <main><nav><strong>Northstar Studio Demo</strong><a href="#launch">Launch</a></nav><section className="hero"><span>SYNTHETIC DEMO BUSINESS</span><h1>Launch a clearer digital presence.</h1><p>A deterministic preview-only landing page created by Starli's existing website machinery.</p><a className="cta" href="#launch">Explore the launch</a></section><section id="launch"><h2>What Starli prepared</h2><div className="grid"><article><h3>Landing page</h3><p>Preview-only website artifact.</p></article><article><h3>Launch video</h3><p>Storyboard and adaptive video projects prepared without publishing.</p></article><article><h3>Conversation results</h3><p>Evidence-backed cards point to the created artifacts.</p></article></div></section></main>}`},
+ {path:'app/globals.css',content:`*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f7f6f2;color:#161616}main{max-width:1120px;margin:auto;padding:32px}nav{display:flex;justify-content:space-between;align-items:center}nav a,.cta{color:inherit}.hero{padding:110px 0 80px}.hero span{font-size:12px;letter-spacing:.16em}.hero h1{font-size:clamp(48px,8vw,96px);line-height:.95;max-width:900px;margin:18px 0}.hero p{max-width:620px;font-size:20px;line-height:1.5}.cta{display:inline-block;margin-top:24px;padding:14px 18px;border:1px solid #222;border-radius:999px;text-decoration:none}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid article{padding:22px;border:1px solid #ccc;border-radius:18px}@media(max-width:720px){main{padding:20px}.hero{padding:70px 0}.grid{grid-template-columns:1fr}}`}
+];
+export interface MachineryContentDemoSnapshot{tenantId:string;projectId:string;websiteArtifactId:string;videoArtifactId:string;websitePreview:{id:string;html:string;status:'PREVIEW_ONLY'};video:{planId:string;runId:string;status:'READY';previewUrls:string[];renderStarted:false};conversationId:string;conversationMessages:number;externalSideEffects:false;}
+export class MachineryContentDemoService{
+ private creative:CreativeProjectService;private assets:AssetServices;private video:VideoServices;private director:VideoDirectorService;private conversation:StarliConversationService;
+ constructor(private store:Store,private events:Events,storageDir?:string){this.creative=new CreativeProjectService(store,events);this.assets=new AssetServices({store,events});this.video=new VideoServices({store,events,assetServices:this.assets,storageDir});this.director=new VideoDirectorService({store,events,videoServices:this.video});this.conversation=new StarliConversationService(store,events);}
+ async run(tenantId:string):Promise<MachineryContentDemoSnapshot>{
+  const tenant=safeTenant(tenantId),ctx={tenantId:tenant,ownerId:tenant},actor={id:tenant,role:'USER'},conversationActor={userId:tenant,workspaceTenantId:tenant};
+  const project=this.creative.createProject(ctx,{title:'Northstar Studio Demo Launch',goal:'Synthetic preview-only launch: prepare a landing page and short social video without deployment or publishing.',status:'ACTIVE',idempotencyKey:`${KEY}:project`});
+  const sitePreview=renderNextPreviewHtml(websiteFiles(),{title:'Northstar Studio Demo',description:'Synthetic Starli machinery demo preview.'});
+  const previewId=sitePreviewId(tenant);this.store.put('machinery-demo-content-previews',{id:previewId,tenantId:tenant,projectId:project.id,status:'PREVIEW_ONLY',html:sitePreview},tenant);
+  const website=await this.creative.createArtifact(ctx,project.id,{kind:'WEBSITE',name:'Launch landing page',status:'READY',metadata:{demoOnly:true,previewStatus:'PREVIEW_ONLY',previewRef:previewId},provenance:{kind:'SYNTHETIC_DEMO',source:'machinery-content-demo'},idempotencyKey:`${KEY}:website`});
+  const videoArtifact=await this.creative.createArtifact(ctx,project.id,{kind:'VIDEO',name:'Launch social video',status:'DRAFT',metadata:{demoOnly:true,renderStatus:'NOT_STARTED'},provenance:{kind:'SYNTHETIC_DEMO',source:'machinery-content-demo'},idempotencyKey:`${KEY}:video`});
+  const plan=this.director.createPlan(actor,{title:'Northstar launch video',objective:'Introduce the synthetic launch clearly and invite viewers to explore the landing page.',audience:'Prospective customers',product:'Northstar Studio Demo',cta:'Explore the launch',platformTargets:['TIKTOK','INSTAGRAM_REELS','YOUTUBE_SHORTS'],durationTarget:15,tone:'clear optimistic',style:'clean editorial',language:'en',voiceover:false,sourceArtifactIds:[]});
+  const prepared=await this.director.prepareRun(actor,plan);const previewed=await this.director.generatePreviews(actor,prepared.runId,.5);const run=this.director.getRun(actor,previewed.runId)!;
+  const session=this.conversation.createConversation(conversationActor,{idempotencyKey:`${KEY}:conversation`,title:'Run the machinery — content demo'});
+  const customer=this.conversation.submitCustomerMessage(conversationActor,session.id,{idempotencyKey:`${KEY}:customer`,content:'Create a launch website and short social video for the synthetic Northstar Studio demo. Preview only; do not deploy or publish.'});
+  const latest=this.conversation.getConversation(conversationActor,session.id);
+  const refs=[{kind:'ARTIFACT' as const,id:website.id,projectId:project.id},{kind:'ARTIFACT' as const,id:videoArtifact.id,projectId:project.id}];
+  this.conversation.appendAssistantResponse(conversationActor,session.id,latest.revision,{idempotencyKey:`${KEY}:assistant`,content:'The preview-only launch package is prepared. The landing page preview and Video Director storyboard/projects are ready. No deployment, render execution, or social publishing has occurred.',references:refs,cards:[{id:'demo-site-card',kind:'ARTIFACT',title:'Landing page preview ready',body:'A deterministic sandboxed website preview was generated. It is not deployed.',references:[refs[0]],actions:[{id:'open-demo-site',kind:'OPEN_ARTIFACT',label:'Open website artifact',reference:refs[0]}]},{id:'demo-video-card',kind:'ARTIFACT',title:'Video storyboard and previews ready',body:`Video Director prepared ${run.projects.length} adaptive project${run.projects.length===1?'':'s'} and verified preview frame references. Full render has not started.`,references:[refs[1]],actions:[{id:'open-demo-video',kind:'OPEN_ARTIFACT',label:'Open video artifact',reference:refs[1]}]},{id:'demo-safety-card',kind:'NOTICE',title:'External actions remain off',body:'No production deploy, provider send, social publish, or full render execution was performed.',references:[],actions:[]}],taskState:'ACTIVE'});
+  const replay=this.conversation.replay(conversationActor,session.id,{limit:20});
+  return{tenantId:tenant,projectId:project.id,websiteArtifactId:website.id,videoArtifactId:videoArtifact.id,websitePreview:{id:previewId,html:sitePreview,status:'PREVIEW_ONLY'},video:{planId:plan.id,runId:run.id,status:'READY',previewUrls:run.projects.map(x=>x.previewUrl).filter((x):x is string=>!!x),renderStarted:false},conversationId:session.id,conversationMessages:replay.messages.length,externalSideEffects:false};
+ }
+}

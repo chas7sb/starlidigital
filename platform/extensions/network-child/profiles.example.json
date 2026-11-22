@@ -1,0 +1,14 @@
+{
+  "search-v1": {
+    "node": "/usr/bin/node",
+    "entry": "/opt/starlidigital/search-gateway/releases/research-v2-r1/gateway/research-cli-v2.mjs",
+    "readPaths": [],
+    "pins": {}
+  },
+  "mcp-v1": {
+    "node": "/opt/starlidigital/account-mcp-node/releases/node-v24.19.0/bin/node",
+    "entry": "/opt/starlidigital/account-mcp/releases/profile-v1/remote/service.mjs",
+    "readPaths": [],
+    "pins": {}
+  }
+}

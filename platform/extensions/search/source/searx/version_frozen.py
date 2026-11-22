@@ -1,0 +1,5 @@
+VERSION_STRING = "2026.11.12+de722ab1b"
+VERSION_TAG = "2026.11.12+de722ab1b"
+DOCKER_TAG = "2026.11.12-de722ab1b"
+GIT_URL = "https://github.com/searxng/searxng"
+GIT_BRANCH = "de722ab1bc957fd2e648bc2404b9155db69c617f"

@@ -1,0 +1,2973 @@
+{
+  "source": "/srv/starlidigital/webui-releases/native-company-mcp-always-v33-20261119",
+  "files": [
+    {
+      "path": "backend/bot-templates.v1.json",
+      "bytes": 6863,
+      "sha256": "b8e04bdd8f8038d80f0bf2e6e1604dc7b7f2ccb4284ae982318603940b9a28b6"
+    },
+    {
+      "path": "backend/company_messaging/__init__.py",
+      "bytes": 88,
+      "sha256": "22eb38e068330adda8f67d7ba0be4508f352991703886194a83c93ce7b5ba88b"
+    },
+    {
+      "path": "backend/company_messaging/authority.py",
+      "bytes": 4009,
+      "sha256": "7da7bd8d50de99aff6533f8aa69673b14f2ec7c83921219936a5438e31973a33"
+    },
+    {
+      "path": "backend/company_messaging/channel_management.py",
+      "bytes": 6750,
+      "sha256": "b74421856ede1b05205ad9b614abb191c339493e74e6009dfe6a511628e4df6b"
+    },
+    {
+      "path": "backend/company_messaging/context.py",
+      "bytes": 1995,
+      "sha256": "8187e9bdf24b83c5a5f56cde8431db41c832229b5a43870c1ca052948e10a4ea"
+    },
+    {
+      "path": "backend/company_messaging/http.py",
+      "bytes": 12517,
+      "sha256": "25c54ef95adbdf10974baad6322610981686e1732d02c0bd3d30551aa7ea1796"
+    },
+    {
+      "path": "backend/company_messaging/internal_send.py",
+      "bytes": 9334,
+      "sha256": "41c36eb57608522c7e3730482b7070262b0815ddf64db08a0d7e99b7a8ccb05d"
+    },
+    {
+      "path": "backend/company_messaging/links.py",
+      "bytes": 5106,
+      "sha256": "5361e6c97e3a0f0dd62d730720e35e4f40ea2770295e5869b629afb8dfb2bef6"
+    },
+    {
+      "path": "backend/company_messaging/native_authority.py",
+      "bytes": 3869,
+      "sha256": "5788ea677439d3f90b63d5cc3ba4e55fc0ef6f7ad19733a0ff3f17d6fe437b76"
+    },
+    {
+      "path": "backend/company_messaging/native_capabilities.py",
+      "bytes": 1411,
+      "sha256": "e1ef9f296db43a6db4f5136a0a43472436dbe0d534f269a3c4f401480d870c2d"
+    },
+    {
+      "path": "backend/company_messaging/native_dispatch.py",
+      "bytes": 9235,
+      "sha256": "9730856f790d6595328e6cc41140f604bac34590e9d63de72d5599311ee811af"
+    },
+    {
+      "path": "backend/company_messaging/native_guards.py",
+      "bytes": 1837,
+      "sha256": "cbbfa9457e6969b9bb050331a085b7c50cf90196edc12ebf725bf5c9382e5abd"
+    },
+    {
+      "path": "backend/company_messaging/native_mount.py",
+      "bytes": 9325,
+      "sha256": "215a09a0d4c3504f9ebb2fa5869f3a8a8aec09e17ddf7a3090900b79f7b48cd1"
+    },
+    {
+      "path": "backend/company_messaging/native_reply.py",
+      "bytes": 3202,
+      "sha256": "07dd36d6aced36d2bab85694a53c8362cf4d451a714a8acd76f5fb632bc83ae4"
+    },
+    {
+      "path": "backend/company_messaging/notifications.py",
+      "bytes": 4586,
+      "sha256": "7660f7e5b97101ab5528fb47b0c015c7faa1061ddb48026dc278512482990c7f"
+    },
+    {
+      "path": "backend/company_messaging/store.py",
+      "bytes": 33236,
+      "sha256": "668dadfa8d15cb377dbc458e2184013f8c96df500b2149519b51588477bdd878"
+    },
+    {
+      "path": "backend/company_messaging/token_policy.py",
+      "bytes": 1634,
+      "sha256": "6f792ab2dde33481cb70084e1aeba6400a63aeb89204962c906dc16b0d7f1d75"
+    },
+    {
+      "path": "backend/company_messaging/work_sessions.py",
+      "bytes": 9968,
+      "sha256": "6767be41db636c6a7fa19e3cb9049eedd7aa2af07bb12006ff2bdd23a0e96892"
+    },
+    {
+      "path": "backend/dev.sh",
+      "bytes": 111,
+      "sha256": "b9e6c6e999ee43754bb3ac2f083a79ce77aee92f66fc64a168e657dd3d49ddca"
+    },
+    {
+      "path": "backend/enterprise_browser/__init__.py",
+      "bytes": 86,
+      "sha256": "551eef688124350d7276a9d120a9602ee1f16e93ee8bf608da00a69b33020449"
+    },
+    {
+      "path": "backend/enterprise_browser/company_tools_mount.py",
+      "bytes": 3975,
+      "sha256": "2de65e5c6286c446afc4a317ace8e777e49f469fd4c3e824d042fddf7c0b8085"
+    },
+    {
+      "path": "backend/enterprise_browser/core.py",
+      "bytes": 7700,
+      "sha256": "7fbac39517ee28d570283c406dfa01930c668ee7ede8aa6ab226c2a49e650f4d"
+    },
+    {
+      "path": "backend/enterprise_browser/driver.py",
+      "bytes": 4426,
+      "sha256": "dab8a54da2d34e6b852ce8fc27f15c98a0ff60c727dd499be0f20aff11d42e44"
+    },
+    {
+      "path": "backend/enterprise_browser/install.py",
+      "bytes": 1038,
+      "sha256": "0acf414f64b6a278010f7df89b722013cfbeba474267cae8d2491fae97c6a782"
+    },
+    {
+      "path": "backend/enterprise_browser/native.py",
+      "bytes": 5802,
+      "sha256": "dcb7aa2ab63c51f30ebe60077005bbccd58f73e58c595afad0c245a9f559a1d4"
+    },
+    {
+      "path": "backend/enterprise_browser/routes.py",
+      "bytes": 2999,
+      "sha256": "8d926e76f75cdc224b360b8efd993ebad3d514e778471ac1fc71148bd3f83a6f"
+    },
+    {
+      "path": "backend/enterprise_browser/runtime.py",
+      "bytes": 6926,
+      "sha256": "990b74d70b171c191747f652990e1b195293ec40d2bd4fcc298ea12519f19e2c"
+    },
+    {
+      "path": "backend/enterprise_messaging.py",
+      "bytes": 14490,
+      "sha256": "1831703b9afa38bb8a51d330d365770a8beb9015094f83414fca237c60722f0c"
+    },
+    {
+      "path": "backend/open_webui/__init__.py",
+      "bytes": 2830,
+      "sha256": "1c693268f3109e227091f788703c4235383a77944e7c9510677527d9d585e829"
+    },
+    {
+      "path": "backend/open_webui/alembic.ini",
+      "bytes": 3493,
+      "sha256": "a9925e2d8aa44a8cb43e51508302d790b147629d4f04c0abacaf8c92c9c8e420"
+    },
+    {
+      "path": "backend/open_webui/company_authority/__init__.py",
+      "bytes": 56,
+      "sha256": "c64757215248277d0639045e1b580475581ea3058689876b2b6b5a24d247d89d"
+    },
+    {
+      "path": "backend/open_webui/company_authority/company_authority_base.py",
+      "bytes": 5826,
+      "sha256": "7189624e5718c8ed3dd11a8038153e0b25183ed7daebe5240552cf9a755a559d"
+    },
+    {
+      "path": "backend/open_webui/company_authority/company_rbac.py",
+      "bytes": 9249,
+      "sha256": "73ed78401572531ac136bf488515004deefc181023870dc303a1e0ecb9d52f22"
+    },
+    {
+      "path": "backend/open_webui/company_authority/company_routes.py",
+      "bytes": 4946,
+      "sha256": "8b8be3d970fc94f4a9a8114765dd40071df18f0c0318b47dd2515752bdf398e2"
+    },
+    {
+      "path": "backend/open_webui/company_authority/pilot_onboarding.py",
+      "bytes": 3478,
+      "sha256": "8fa24fb695ba8e7a2ed25700e92f40e94cbd0702224145cf705af776d8617d7a"
+    },
+    {
+      "path": "backend/open_webui/company_authority/pilot_routes.py",
+      "bytes": 3523,
+      "sha256": "ad6e6a0a5331196d6be62acfdcabf47418d5ee9835fb437fba473a0d3463145d"
+    },
+    {
+      "path": "backend/open_webui/company_authority/pilot_switch.py",
+      "bytes": 1699,
+      "sha256": "26494c91cba167b3975931ffc84674fba62d49b78230cb808c76d476b11a694f"
+    },
+    {
+      "path": "backend/open_webui/company_drive/__init__.py",
+      "bytes": 42,
+      "sha256": "00ba588069913fba3595b16cc6d1111dd37304f86d4d35653a9bdb067e9be3fc"
+    },
+    {
+      "path": "backend/open_webui/company_drive/assembly.py",
+      "bytes": 933,
+      "sha256": "c6bc8feaa9f9c245c1f8e3e087afdc0dfad09ba5b25f99c69900f38bc863f06a"
+    },
+    {
+      "path": "backend/open_webui/company_drive/channel_attachments.py",
+      "bytes": 5427,
+      "sha256": "919168e55ae5663d3a79b5aca3a35fd5b6cc73bc3b275e35d38df328631b39ee"
+    },
+    {
+      "path": "backend/open_webui/company_drive/drive.py",
+      "bytes": 16630,
+      "sha256": "5fbf62d3de91e300c805d65724869c588ea613c10446195b8186b3cdefc0b06d"
+    },
+    {
+      "path": "backend/open_webui/company_drive/drive_http.py",
+      "bytes": 6932,
+      "sha256": "ebc3854d8e735fb0622505c23132e3b29f5eace789d9f62f195ffc8b345ccf75"
+    },
+    {
+      "path": "backend/open_webui/company_drive/native_channels.py",
+      "bytes": 6206,
+      "sha256": "a868219d605869493adc559c696c7c90706ede4fa07dec746b6f057c73613a8c"
+    },
+    {
+      "path": "backend/open_webui/company_drive/native_mount.py",
+      "bytes": 2064,
+      "sha256": "5e3255b097cf8a8736ce1e60e5c6655a20a83a351ea37f705941ac157ad47f97"
+    },
+    {
+      "path": "backend/open_webui/company_drive/project_registry.py",
+      "bytes": 3013,
+      "sha256": "33ab21c2bc30e9b4f44b2f54c4a543b2bc23f54171e7acecd3e2f4e776fd3626"
+    },
+    {
+      "path": "backend/open_webui/company_drive/quota.py",
+      "bytes": 9203,
+      "sha256": "cd68fa82edc99a060795dcbef097887bcb7f2fe9b6280501a69e00f8f68e1e28"
+    },
+    {
+      "path": "backend/open_webui/company_drive/resources.py",
+      "bytes": 7847,
+      "sha256": "ede54f6147120f1389741b3c8c6019ea42b5bf2f8a19a1b8a87aa053fcb96399"
+    },
+    {
+      "path": "backend/open_webui/config.py",
+      "bytes": 82077,
+      "sha256": "e86c2da3487ddf9d9ee9fe5bafc81f5e96d8bc8a800a5632e3387bec6e57d694"
+    },
+    {
+      "path": "backend/open_webui/constants.py",
+      "bytes": 6143,
+      "sha256": "1cf3e0d2e98a18c969b7c240ed0dd4d5080d85ae0ffeff40460ee868c0e9e141"
+    },
+    {
+      "path": "backend/open_webui/env.py",
+      "bytes": 14760,
+      "sha256": "2b5b140962b290c1e2e14cdf33d412b1bab6f1665d3d3b18dc8831207a32173d"
+    },
+    {
+      "path": "backend/open_webui/functions.py",
+      "bytes": 11153,
+      "sha256": "2115127f9a7b9227375275662151f86e340a5d05538e2154d137d88aaa285770"
+    },
+    {
+      "path": "backend/open_webui/internal/db.py",
+      "bytes": 3395,
+      "sha256": "46473d35037791b76631769542d8350ca167b0c8d0ae95550917f228f2097aa6"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/001_initial_schema.py",
+      "bytes": 8273,
+      "sha256": "be316d5ff0e32b057a13cb956a48463cff312881c960517f4702019f6d6e5752"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/002_add_local_sharing.py",
+      "bytes": 1857,
+      "sha256": "60658c13d106ddcdaa6b457bd047f88650188ae2b69ca18e6da16b8a074ea74d"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/003_add_auth_api_key.py",
+      "bytes": 1855,
+      "sha256": "f669a573353cc7f1098be6d88ef9d584656a73a3e7a91f15d871b5fe9d3951c7"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/004_add_archived.py",
+      "bytes": 1821,
+      "sha256": "bccba08e46e0b958738e93ea51c444f90ef5292ecadc24dfc5c95d9801209c53"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/005_add_updated_at.py",
+      "bytes": 5259,
+      "sha256": "91b200ce91be3152b2197c51ef72c637849747f247b5be0bb362e8ea72e3892d"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/006_migrate_timestamps_and_charfields.py",
+      "bytes": 3811,
+      "sha256": "b22d1c82dfdc329a301847ebfe7d20c8ffc21083568ad46f3c9d723841941d55"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/007_add_user_last_active_at.py",
+      "bytes": 3342,
+      "sha256": "6ba3b00917835b2a4cf17e4918fc5367be48d4de271b1cc0ef762bfce90540de"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/008_add_memory.py",
+      "bytes": 2057,
+      "sha256": "1da94a6b69ae75d8192bfa75ff634326e2f634ee40e784683ec71be94583c3e7"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/009_add_models.py",
+      "bytes": 2156,
+      "sha256": "c3de149fcc5924cb8a92851742c942f3044c2ca10d97c0d2f142413873f904a8"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/010_migrate_modelfiles_to_models.py",
+      "bytes": 4714,
+      "sha256": "3d13daf58ed984ab5c6abc96c27113ee5ed278da8b6fc5cd632a41565b4f41ea"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/011_add_user_settings.py",
+      "bytes": 1895,
+      "sha256": "f9d4a590a7302da588e58d8460d40fae154be6a5273ca53fcb8e15a7babd7799"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/012_add_tools.py",
+      "bytes": 2137,
+      "sha256": "2bc762c0bdd879211ad03775bc555c35213e825006a5e3a913e02ae313d32864"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/013_add_user_info.py",
+      "bytes": 1883,
+      "sha256": "8c299a284abf56a3ba2c643f57a68eb5b942ebe570ac1e2ee24409923167ea4d"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/014_add_files.py",
+      "bytes": 2022,
+      "sha256": "5c696a4863f183480c04e020862f99c81363e869651cdcdb6b46faf7b45afced"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/015_add_functions.py",
+      "bytes": 2148,
+      "sha256": "2884a9959b0461cc966c416dea95e51e991bab9786ed068352c7d9794ccb308b"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/016_add_valves_and_is_active.py",
+      "bytes": 2050,
+      "sha256": "366a156c4b65897631ed1039b76a06712256b1a4cbde57918664ed0b88dcdd4e"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/017_add_user_oauth_sub.py",
+      "bytes": 1849,
+      "sha256": "3021208cff24ade89294e73f38c5b1a75a35ffaae7a3cbcb49af619d8ebd6026"
+    },
+    {
+      "path": "backend/open_webui/internal/migrations/018_add_function_is_global.py",
+      "bytes": 1855,
+      "sha256": "804e814b59b228b66b2d30c55b3407e6c18c712901582c2d4301eeb906ca2a6e"
+    },
+    {
+      "path": "backend/open_webui/internal/wrappers.py",
+      "bytes": 2052,
+      "sha256": "ff2caa19325a27987ba28396f35e6c6651f689444cb8dec1fac6c8f9c0d3255f"
+    },
+    {
+      "path": "backend/open_webui/main.py",
+      "bytes": 56881,
+      "sha256": "0420108af324f9e2d8b0a3dccafa0800907dd3f855f9cba41c8122a398a26c49"
+    },
+    {
+      "path": "backend/open_webui/migrations/env.py",
+      "bytes": 2287,
+      "sha256": "1c5d4ff0672eabddc3f3f8182dc3eb037086f6f8036dfd4f1657e7ed73c8a8e1"
+    },
+    {
+      "path": "backend/open_webui/migrations/script.py.mako",
+      "bytes": 665,
+      "sha256": "b09857fec3fbf78d24588ead8887c91aafb04659bac41f7d70a41ce6f53facaa"
+    },
+    {
+      "path": "backend/open_webui/migrations/util.py",
+      "bytes": 309,
+      "sha256": "6cbb2b257fb24a992f6874debafbad53c755079126612e8340fa10e70fe6464a"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/1af9b942657b_migrate_tags.py",
+      "bytes": 5299,
+      "sha256": "f08afa301b278014a1edb1d7c53acb3ee551ce589860bcaafe9eaa59aaf93495"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/242a2047eae0_update_chat_table.py",
+      "bytes": 3357,
+      "sha256": "57d103fb58b77d7beed4c669f3317778ae6abab0fc470b963127c05c1a71be2e"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/3781e22d8b01_update_message_table.py",
+      "bytes": 1987,
+      "sha256": "f65a2e1dea335128add156864ea5bd7041fde7f128080f5eb76766f5ce555756"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/3ab32c4b8f59_update_tags.py",
+      "bytes": 3034,
+      "sha256": "390966f6f8fb200d927468484a3d1b2cf5a947fdc77883ec923b68993df7b8e4"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/4ace53fd72c8_update_folder_table_datetime.py",
+      "bytes": 2239,
+      "sha256": "4b3682b4506bdef0cb723f7df73d58da6c0d2733682565ae3e4cd0a798ca2aeb"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/57c599a3cb57_add_channel_table.py",
+      "bytes": 1429,
+      "sha256": "8c4c6ac1670da2f372ddb4a1975c121cc6fa7e5fd49879a4518fbf2e537fcebe"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/6a39f3d8e55c_add_knowledge_table.py",
+      "bytes": 2442,
+      "sha256": "901c675d61ef3c416f7e315b675171e9139f587fe1890ff5867787505fd2374f"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/7826ab40b532_update_file_table.py",
+      "bytes": 445,
+      "sha256": "ad6f9b8ed439fd2e83ded77befdc8512d7deb47b55f0c6ca512f4652926fa674"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/7e5b5dc7342b_init.py",
+      "bytes": 8191,
+      "sha256": "78aaf71247d71bfb9f0ca1e1fc53255f0ef3bdf56b3485dec0fe36802a2572fa"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/922e7a387820_add_group_table.py",
+      "bytes": 2362,
+      "sha256": "9a8a02aba5deb787963d0da872c22d0d31774958c537894ee5bb09061c772165"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/af906e964978_add_feedback_table.py",
+      "bytes": 1552,
+      "sha256": "b1f56d9fe7bb1aad1e1686cb87f8ffef715ca23babf9440710489a7800aeceb2"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/c0fbf31ca0db_update_file_table.py",
+      "bytes": 930,
+      "sha256": "9a094b82ab3b8337718dad812d116c8d552fabdcbc37658fc8d51521ae00257a"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/c29facfe716b_update_file_table_path.py",
+      "bytes": 2518,
+      "sha256": "51fb621dac2e60a011f6759e766012384c2a57bab9193d5603d09687cd26b440"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/c69f45358db4_add_folder_table.py",
+      "bytes": 1271,
+      "sha256": "fc135a02043980ca5798a8416043e00a20abb3834244d781e1778629f9b75729"
+    },
+    {
+      "path": "backend/open_webui/migrations/versions/ca81bd47c050_add_config_table.py",
+      "bytes": 1005,
+      "sha256": "88e82367d8c148f7fcc90aeeaf8ccd777d9c0c4a7ad9b7bfade011dc5a7fc90a"
+    },
+    {
+      "path": "backend/open_webui/models/auths.py",
+      "bytes": 6519,
+      "sha256": "0279abd52e6ad07314c913700e8756479e5b13dd9f6f2b53e260ef05dfa11303"
+    },
+    {
+      "path": "backend/open_webui/models/channels.py",
+      "bytes": 3913,
+      "sha256": "543bd5eed679cf9d782cbdd35cea973086b709f56889a107eccc3c5d27f5b27c"
+    },
+    {
+      "path": "backend/open_webui/models/chats.py",
+      "bytes": 33704,
+      "sha256": "368040bd10eca8665f9f996290ae34ab90d28082098b4b73e049ba73704a2ec7"
+    },
+    {
+      "path": "backend/open_webui/models/feedbacks.py",
+      "bytes": 7744,
+      "sha256": "a623678281aab2b31b08123a96d5cbf2e3476cb37b5a9e580214cedffc1049ce"
+    },
+    {
+      "path": "backend/open_webui/models/files.py",
+      "bytes": 6657,
+      "sha256": "0dc93c0ea941289afd161938778cafdcbe3c160e907ebc513a1d73f4f286fdec"
+    },
+    {
+      "path": "backend/open_webui/models/folders.py",
+      "bytes": 8454,
+      "sha256": "079639c558f1e71a85f4bc7119a103fa397e7f0921c8e1330beb624a22514db4"
+    },
+    {
+      "path": "backend/open_webui/models/functions.py",
+      "bytes": 8496,
+      "sha256": "31803ba64b4077e82095d4f969dc39a83b5057713d680beb14d3d69a88bf83de"
+    },
+    {
+      "path": "backend/open_webui/models/groups.py",
+      "bytes": 5754,
+      "sha256": "86dd536ce84dfd9297a9c09d24eb13c01836323152e7ad9c9ae577f43f4b4459"
+    },
+    {
+      "path": "backend/open_webui/models/knowledge.py",
+      "bytes": 6598,
+      "sha256": "50ba6e0b39b859196f5a9fd84fb59205563d5636061ab4b12ddd3188870c3c7c"
+    },
+    {
+      "path": "backend/open_webui/models/memories.py",
+      "bytes": 3990,
+      "sha256": "023a9ac407b5536c6f64a01829fc20253084570cae0c6faaeeb1bf7790cb6817"
+    },
+    {
+      "path": "backend/open_webui/models/messages.py",
+      "bytes": 8981,
+      "sha256": "3ed130fae3cb17e6930f4ba0aae4f47b7d42db660ebf1cc347f126af9a64cc68"
+    },
+    {
+      "path": "backend/open_webui/models/models.py",
+      "bytes": 7878,
+      "sha256": "e3eb8bb2d039dd27f7f282c9dde8e5d6ea3e3cee798409502a68c46564415bca"
+    },
+    {
+      "path": "backend/open_webui/models/prompts.py",
+      "bytes": 4719,
+      "sha256": "0de42087e3b352d2e7527770e5ecb2c3df00f9ecf33b995aa06c29ff83b88b78"
+    },
+    {
+      "path": "backend/open_webui/models/tags.py",
+      "bytes": 3146,
+      "sha256": "98201d23eecc11c722f8276abbd8aaa6c90cc756c6aee78b46d5b03fab92f264"
+    },
+    {
+      "path": "backend/open_webui/models/tools.py",
+      "bytes": 7877,
+      "sha256": "544cb5a67a0b662cc657de4511e5d17848f9bea3364c9a08167d6d925b4ad1a6"
+    },
+    {
+      "path": "backend/open_webui/models/users.py",
+      "bytes": 10565,
+      "sha256": "7ad105dc80a0cfb9088a7f0ca685897f04ed0fcc8f9879ebc5550ca65380ddb9"
+    },
+    {
+      "path": "backend/open_webui/retrieval/loaders/main.py",
+      "bytes": 9135,
+      "sha256": "9be9219244efcc0021aae671beecbd63b63c872d0acc4f1701bfdf60b5c6d860"
+    },
+    {
+      "path": "backend/open_webui/retrieval/loaders/mistral.py",
+      "bytes": 9037,
+      "sha256": "43d8919eb26093e22baade8b8ab68ffc153301c9ac27a7d5bdd34b78dfe828da"
+    },
+    {
+      "path": "backend/open_webui/retrieval/loaders/tavily.py",
+      "bytes": 4048,
+      "sha256": "2eb988aaf1167cc5abda1a8e194ffce32ce56a727519eeb09fa6b8edb0634216"
+    },
+    {
+      "path": "backend/open_webui/retrieval/loaders/youtube.py",
+      "bytes": 3553,
+      "sha256": "e45696ec213e8a92f550760e09ecc17fb4db00f4852445a03fd5e7909ee87676"
+    },
+    {
+      "path": "backend/open_webui/retrieval/models/colbert.py",
+      "bytes": 3404,
+      "sha256": "12368be797a6374bf2d4c8319de99fe0e35c970665e255125cbf5fc600f88c85"
+    },
+    {
+      "path": "backend/open_webui/retrieval/utils.py",
+      "bytes": 26858,
+      "sha256": "e3dece36dc30eaf864653894b152e93e539a9a000070f977e3655718d4f031da"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/connector.py",
+      "bytes": 879,
+      "sha256": "d76ad2e73265903a99a581987e7bd272962363bafbe7f634f3fe58b273a845d8"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/chroma.py",
+      "bytes": 6966,
+      "sha256": "397b066eac1b84cd1cef8929bc767f2466287fe8cd4dc2a15816421a5831acb8"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/elasticsearch.py",
+      "bytes": 10204,
+      "sha256": "f9be448743d5015237f6d85eb0164736051c64230fa19671e1618d770bf5907c"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/milvus.py",
+      "bytes": 10628,
+      "sha256": "985a2f7048e260194d531c2e17139e6ffe89800506c63a7988622da649b4ea24"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/opensearch.py",
+      "bytes": 8848,
+      "sha256": "5129b6e1f3b4d9ced11d8ec874eaa8d7d447379356192d1bd92de1095669a83e"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/pgvector.py",
+      "bytes": 14647,
+      "sha256": "a6ae4c416b55ae78341382e7f79fa185d522d2193eca59e07d9491b7f6c27bad"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/dbs/qdrant.py",
+      "bytes": 7307,
+      "sha256": "cea01690dc832542626d6fd9b5941152deaf4e4e3d333e7ac919321d7381fe7d"
+    },
+    {
+      "path": "backend/open_webui/retrieval/vector/main.py",
+      "bytes": 404,
+      "sha256": "d450438c72fc2ca36262e4d0c0fd0befdc1054d83f0b3a7da06912598fbc6aba"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/bing.py",
+      "bytes": 2118,
+      "sha256": "5cce5182f62a97f723207cf73197f7ad9cc61226b64d22576c9017cdae2ac5c6"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/bocha.py",
+      "bytes": 2235,
+      "sha256": "fcc63ca363d7f983ba7a00403ad9dd5a94bbe427b7cd9ccd9ac43027a811167a"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/brave.py",
+      "bytes": 1278,
+      "sha256": "ace77e9aa0f51373b9549a7d4ff83c0b6a76f7e5728900672085e00b692edfc3"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/duckduckgo.py",
+      "bytes": 1477,
+      "sha256": "fa6e1fe5f36201a204241b0c32cfb9e9a01b8a94698d703caa03ca74edd31fd7"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/exa.py",
+      "bytes": 2042,
+      "sha256": "bef9d16988fed91c66d4c59bf5779594e033226a7feabe85d9c388e3c47fa282"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/google_pse.py",
+      "bytes": 2488,
+      "sha256": "972f2ef3f0cae7d61e20f0f23fbf695cd97fb2a2b4e27245b1ed27c9a8c4c356"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/jina_search.py",
+      "bytes": 1309,
+      "sha256": "4427a11e2c30f4f2b7b0f274ac56424b03770ddbd5b4748a60dd4f1034fbf8d2"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/kagi.py",
+      "bytes": 1413,
+      "sha256": "631c19f49fc675a434c15138898e093b128bda36f98b9ab2405dfc3c83c22246"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/main.py",
+      "bytes": 672,
+      "sha256": "4099d9f4ac67f27aacd4b09f01126fd0eb024ea1ff25cc40aff059a7c299c57c"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/mojeek.py",
+      "bytes": 1231,
+      "sha256": "190f241209600b9f11162dbcb2ddf4cd5af9bd376853bd2b0a70bb28a18ed52c"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/perplexity.py",
+      "bytes": 2646,
+      "sha256": "d6fecea9b9c71e456ad3177a5be5aacc6e8df15ecd2a7a6e62b1e7c220a260f5"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/searchapi.py",
+      "bytes": 1351,
+      "sha256": "e042e357ee9e197e11481bdf2efa90fb8671e4482387f2699b8734b5beb016d5"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/searxng.py",
+      "bytes": 3295,
+      "sha256": "51fcaf149e9895b6959c13dc521e5d0c38ea9abf46dea489213980b2674a2b51"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/serpapi.py",
+      "bytes": 1333,
+      "sha256": "feac0640ea025e136ba4bc1ffde14bae4fcd66ea24491a044d683e15319490b8"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/serper.py",
+      "bytes": 1291,
+      "sha256": "756853769e286c2d0846e25241de4e1cd65b50bb6d4c25ec56e4d0aec9323b71"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/serply.py",
+      "bytes": 2031,
+      "sha256": "b440255b90725079e7be7715215c7bcc25a12b440014bf8a18f73d95a2c93eee"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/serpstack.py",
+      "bytes": 1436,
+      "sha256": "02d5e1d2a77505eebaba2c977872b7228e495335699c27528aa6b36b08f56e4c"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/sougou.py",
+      "bytes": 1996,
+      "sha256": "e992be102e0d3b94ee23261ad822526d3320f623216f5978e463a837f6a8fb32"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/tavily.py",
+      "bytes": 1143,
+      "sha256": "cd921ecb5e3304adeb89a3da22a3ec23f2bed0a91641f102f9206bef864df36a"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/bing.json",
+      "bytes": 3672,
+      "sha256": "cd17fa498e131f5dba233448973d02d7e57dd1c055a2421f7ff2d7ea4e872cb1"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/brave.json",
+      "bytes": 61454,
+      "sha256": "4f6e45ce070c69fe998a0acd54dcc82f651c89aa928ecb1797558ad98a51ed59"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/google_pse.json",
+      "bytes": 23155,
+      "sha256": "f3e844b115b280aa0f99f218df6637f3f9e6423db99ded2efe5cea438e4d0b44"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/searchapi.json",
+      "bytes": 53301,
+      "sha256": "f5b8fcf6736b1290e379f331729cf076faf073b74aa6f9a359cec39a5af73e4c"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/searxng.json",
+      "bytes": 19880,
+      "sha256": "9ba3260116b17381138dd24219666983625baa2c52068b70635edca7f188a7a2"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/serper.json",
+      "bytes": 7035,
+      "sha256": "57370bde8e93ef1a60d08a805ead3336ae031491147f12e07176be0fb8aa9b06"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/serply.json",
+      "bytes": 6820,
+      "sha256": "edb2911660a8989c5975a882c0c38f12fd43a0cf13e752bf2a9264252d999c1f"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/serpstack.json",
+      "bytes": 10843,
+      "sha256": "ae835dc0b6e47a2f0d6b91f3eba62bc393d4565b0e8e69e01d6893fe398c7182"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/utils.py",
+      "bytes": 25091,
+      "sha256": "8464013cc96eb70bbd84693172c925d559d1611d23945a77824147a12e5bcc85"
+    },
+    {
+      "path": "backend/open_webui/routers/audio.py",
+      "bytes": 35772,
+      "sha256": "caf12ae4f7974508a05aca0e7f3c5a940f33aa09f0ffbb64c64bf915cd3f00e4"
+    },
+    {
+      "path": "backend/open_webui/routers/auths.py",
+      "bytes": 34780,
+      "sha256": "bdc52927ee230f88966b1ca0ada4a46ad9a1ad79b2054cbc9bd437126a202f3b"
+    },
+    {
+      "path": "backend/open_webui/routers/channels.py",
+      "bytes": 22626,
+      "sha256": "e695db8af2abcb2cd622317fbf05b4bf9d136b282725165a38228af1160ce605"
+    },
+    {
+      "path": "backend/open_webui/routers/chats.py",
+      "bytes": 23825,
+      "sha256": "0e526ec93ed88d0f7aaa7b5e7a508dd1e8edee01abe2c4cf99c845d5246b1927"
+    },
+    {
+      "path": "backend/open_webui/routers/companies.py",
+      "bytes": 366,
+      "sha256": "852834b954a45ea559d1a93c13bed7890870510ef42e92cd8a7108b3d2043b27"
+    },
+    {
+      "path": "backend/open_webui/routers/company_drive.py",
+      "bytes": 760,
+      "sha256": "7cd3360c66fd19a7703f1ef2eca7a44a8ef575533d96417049b7e475b50aab5e"
+    },
+    {
+      "path": "backend/open_webui/routers/company_pilot.py",
+      "bytes": 497,
+      "sha256": "4241305a6673edac4a35c15753b8553dc9a6a0f3a3b339098429f8ed3c81bd62"
+    },
+    {
+      "path": "backend/open_webui/routers/configs.py",
+      "bytes": 11692,
+      "sha256": "171effd235e403cc2d49c2e9624edf4a7e98285d4d3efeb8319ac8772dc6ccaf"
+    },
+    {
+      "path": "backend/open_webui/routers/customer_company.py",
+      "bytes": 12504,
+      "sha256": "ab81aff2ac7e428480e6f227d815b808e2f7757ee657ebf0ee860893a0e1f841"
+    },
+    {
+      "path": "backend/open_webui/routers/customer_http.py",
+      "bytes": 23592,
+      "sha256": "b0622c91b4b012a746e8e473d53d62f7d18e16b1e20d66f6e95018269580bcdd"
+    },
+    {
+      "path": "backend/open_webui/routers/customer_native.py",
+      "bytes": 12343,
+      "sha256": "9329b0545b72715707cccbc62f70237880db0b821a129c5199cc4b14de458a62"
+    },
+    {
+      "path": "backend/open_webui/routers/customer_session.py",
+      "bytes": 949,
+      "sha256": "82b4963f1b8e68dbe9c80cddbcd3876237de3144c4de4083fde3280786f61e1f"
+    },
+    {
+      "path": "backend/open_webui/routers/customer_store.py",
+      "bytes": 13802,
+      "sha256": "18ad330dfe919880a9a2587529bd49eba8cde9b106fa46ab2c65e2260e61565a"
+    },
+    {
+      "path": "backend/open_webui/routers/evaluations.py",
+      "bytes": 5816,
+      "sha256": "64378a23ca4cb4ef6acffbe8889dfb754ac5590b3aa84c147c148f8fafe28d5d"
+    },
+    {
+      "path": "backend/open_webui/routers/files.py",
+      "bytes": 17491,
+      "sha256": "60ebeca90683b57ddd1ca38a84287f2cbdb90c83740995dd7b7fb076d09a0e96"
+    },
+    {
+      "path": "backend/open_webui/routers/folders.py",
+      "bytes": 8050,
+      "sha256": "f44ac80437993b5e779f360b5f6677acf3bf8de89ff2c8c83b0c35c8d5fcd3d3"
+    },
+    {
+      "path": "backend/open_webui/routers/functions.py",
+      "bytes": 13061,
+      "sha256": "dce393eb89d66ebbf3b8d8e805856c52620ae40e60604ca851ce6eb371bb033f"
+    },
+    {
+      "path": "backend/open_webui/routers/groups.py",
+      "bytes": 3685,
+      "sha256": "6b92bccf714020cdf06f665f99d8fee0715c8661c2d8c1247a0bcbca2e1b34f8"
+    },
+    {
+      "path": "backend/open_webui/routers/images.py",
+      "bytes": 24763,
+      "sha256": "337322d4c7632dba5dcf4696129eb92251028816e4caf68209165b096e2b0e2f"
+    },
+    {
+      "path": "backend/open_webui/routers/knowledge.py",
+      "bytes": 23731,
+      "sha256": "b0c39d66725379394486d811276655fe01b8100493a47fef9fa7a4d2da4e8346"
+    },
+    {
+      "path": "backend/open_webui/routers/memories.py",
+      "bytes": 5679,
+      "sha256": "0f8ee93fa7d973ce432c6c4d38a3855b3385d32948a2e627612a5048aaa9190c"
+    },
+    {
+      "path": "backend/open_webui/routers/models.py",
+      "bytes": 5547,
+      "sha256": "4eb8f0a6b886055e2e0a6bac7a074f9c3bd5e7d530ffebf1beb076c2a9b315c7"
+    },
+    {
+      "path": "backend/open_webui/routers/ollama.py",
+      "bytes": 52458,
+      "sha256": "d85ad9428bb44ca389f4c7277766ac96dfef430130e490b45789fad7331cfa6d"
+    },
+    {
+      "path": "backend/open_webui/routers/openai.py",
+      "bytes": 29223,
+      "sha256": "9d9b9a2bc957e2614e79c996595948f5bfbe1bfb255ceb4448a2955d4fcfb7c9"
+    },
+    {
+      "path": "backend/open_webui/routers/pipelines.py",
+      "bytes": 14120,
+      "sha256": "1a4ccfc65522d658a63a4f3a0c03dbae8288234b854cb03f1771c74727c67c7c"
+    },
+    {
+      "path": "backend/open_webui/routers/prompts.py",
+      "bytes": 5165,
+      "sha256": "d625c6a8420f507292d14afcca0324ab5545c5ca056d50a5f13a60fd1321c12f"
+    },
+    {
+      "path": "backend/open_webui/routers/retrieval.py",
+      "bytes": 71352,
+      "sha256": "eaa4ebe146448e6fbce70427a3350d25fcb4980bc71aed0a7121bf30a56d1f45"
+    },
+    {
+      "path": "backend/open_webui/routers/starli.py",
+      "bytes": 3154,
+      "sha256": "f91887ff561764fa3ebcd9aaef6ebdb67ff75c84ea07db3d35f7a4f3f03f80e1"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_access.py",
+      "bytes": 1622,
+      "sha256": "f2802cfd291fd2dada6adc1eb6e0c3e14813fa8e5b9d4a8b1655d7dabf80ecec"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_admin_dispatch.py",
+      "bytes": 15064,
+      "sha256": "dd6af178f9c165513d4fa60deec12b5980cdeb743d7ce06ea34610121c8eea76"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_admin_policy.py",
+      "bytes": 3063,
+      "sha256": "e74b616ccd85f9bd4e84114a96717b4a12e9cbf85561c29093c3a8467fe180aa"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_approvals.py",
+      "bytes": 4396,
+      "sha256": "f39b88a3e43372b41c2a1bcbbafab96feb92fb0f258f373ec6826245b3a42f85"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_billing.py",
+      "bytes": 2340,
+      "sha256": "939a2d3e3fb12541bb68bf9c68f1b368e5b29548d4d130a563704448f51ff8c0"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_browser.py",
+      "bytes": 13814,
+      "sha256": "e0c0679e6e7214b4601450ac845497286db68df8c8691cd80d68358cbdacef44"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_capabilities.json",
+      "bytes": 29011,
+      "sha256": "41ccc13f3f09722ae25d50c457319b361dfbff83d276b87c123fdb7db9615d7a"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_chat_stream.py",
+      "bytes": 31281,
+      "sha256": "cdf8695d6d7cc759340018daf69f5807b539f83f795947a41fb883c5eac4d812"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_chat_sync.py",
+      "bytes": 34128,
+      "sha256": "df55a88d8206c61681feb4e88406a3178e483fbb3ea6a45325812add79bd2376"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_chat_turns.py",
+      "bytes": 7113,
+      "sha256": "4fd9091429b1ab530e883520c3938f25ac15605fe8b136693c1dcb8dd5febe84"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_customer_actions.py",
+      "bytes": 17365,
+      "sha256": "c578492ed45908f7ff557e75ef2447427cb1146efdc85a205e7fb14430f12799"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_customer_api.py",
+      "bytes": 1797,
+      "sha256": "14c9205aec9b6ff20ea3d9f4f7a182bfc425a1fcdbed0312a131e03d630e4d1a"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_customer_context.py",
+      "bytes": 5417,
+      "sha256": "0cb406d4de349d723910970d241c78de846df51806c6196fa0403fa6255ab885"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_customer_data.py",
+      "bytes": 3892,
+      "sha256": "d3af3004980e988e59b60a49cccc144ebfc9a2fab48a81d9b8c23f76ccec7633"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_customer_identity.py",
+      "bytes": 9068,
+      "sha256": "835534d992078f75cc692a499271a34501a7849bc97e951d20a3929b484c8dd1"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_delivery.py",
+      "bytes": 11696,
+      "sha256": "f82115e4b68f6fd56af140b5ee8b0bc5e94cebb55a3958b621d68929b581c58c"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_execution_context.py",
+      "bytes": 2103,
+      "sha256": "e0a5f2c2bac42b98b611ef6bfb2bec99c34bac5be566b84e615b9ce8a3dbe2ba"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_geo_tools.py",
+      "bytes": 2811,
+      "sha256": "ab61920faf4cc958073b5b3ae6dfa32c11061e61b952d3c5b7287aed3f4aca47"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_guest_provider.py",
+      "bytes": 5160,
+      "sha256": "ae4892325d3705aa8f2be44423a478cc93ce5eca6289c93684791320451de05a"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_intelligence.py",
+      "bytes": 9327,
+      "sha256": "514ae24944d9d8d5f618ede664b502b1e8807538858cb2bd66eaeab4c4d7c1d8"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_mail.py",
+      "bytes": 29496,
+      "sha256": "a235dd9a69108ac662d1ee1d81a606d4e8824efdd6cd04ea115226cca2fe96e1"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_native_capabilities.py",
+      "bytes": 3600,
+      "sha256": "e95c4e0b9a609eb9cedc265027479af9ae4999920eede120c4eece57ebbe7dc4"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_native_tools.py",
+      "bytes": 5282,
+      "sha256": "8cce3bbf320d7e07317c13d5ef79b8bde5da87c42acb1cb87c40f338cb50ac1f"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_network_bootstrap.py",
+      "bytes": 4075,
+      "sha256": "40585d46fd270154396035b056075876c17e04562988a1ab03019489eaf9eb93"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_personal_provider.py",
+      "bytes": 1694,
+      "sha256": "c6fe375ddb5cfff5357e7769c7cc3abb5f22fd07d9534db31f8ceceec393674b"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "bytes": 77834,
+      "sha256": "a41ad80f9ffbebafc4b86f05756097be7d385aa3ce0e5b8aa2e937953b7b6c3f"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_platform.py",
+      "bytes": 5600,
+      "sha256": "b71bf53b44c69de479b5819bb83cc87b9da0c419f0e0a184b7f6acf4ef77ae9f"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_preview_adapter.py",
+      "bytes": 1545,
+      "sha256": "842ce3ec55c941bd84896254b690ab9af2401148f821e2516dde2f5fd2ebfe8a"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_preview_events.py",
+      "bytes": 7381,
+      "sha256": "e3a3fb26fc0f37c22f12f354d109dbe9941ddcf8821fabaebaf711bd9d6ad57b"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_project_build.py",
+      "bytes": 11357,
+      "sha256": "ed0ab6f1d9181fc397877acb3cf437a755fc0b48f9349f50f6b3f761a6fc69ba"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_project_policy.py",
+      "bytes": 12976,
+      "sha256": "e11a1f26f12ae491a7751680ec9523dc1149dc48a4e359e29495a7585ab3752b"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_project_runtime.py",
+      "bytes": 15735,
+      "sha256": "dfcad3fb9e87ee9b477e043e6e42cae871f4dc196bf613bd108d5e7100933900"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_providers.py",
+      "bytes": 17151,
+      "sha256": "0adb0d84656cd3726d79aa3ad6007b56cbdbffcbf3d62a34ab13a931a46f4e6f"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_public.py",
+      "bytes": 18883,
+      "sha256": "c04d7285d2821191e8d7e16748bd5f27bfbe5dd4dc1d58d7940107f2da408940"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_public_activity.py",
+      "bytes": 35670,
+      "sha256": "cd17b848f47cc7083ef04e1bbd8007df473102b39f1d1d13eef1ff9ee5bb6ea9"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_registrations.py",
+      "bytes": 14050,
+      "sha256": "5058c3b8cdd4c6b194db17726956964036b0dae3bf9cf57afa17efb3a1978eff"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_resources.py",
+      "bytes": 3019,
+      "sha256": "15a9d006aaa3eb5758c0bb6d6f3e060e12aa50f038db219169976df884cbd60e"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_result_status.py",
+      "bytes": 4489,
+      "sha256": "286565d0d2d6389d49928888ecdf7191fdd2c750a73e2b0a4575c41d47a0433c"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_runs.py",
+      "bytes": 11436,
+      "sha256": "f36d9f338bf0300fe7e1138f87a89dd9de887fb4e01c051a19614019958da604"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_runtime.py",
+      "bytes": 6411,
+      "sha256": "d5fb5b4d5aafecae34de6cbaf09b012cbaef73a4d570c8e29d836b2aeab80430"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_runtime_adapter.py",
+      "bytes": 60504,
+      "sha256": "33d5649e5551b7b0f4ce5a7393e9ec89fcb66439a145179f4de927e4416b9a52"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_search.py",
+      "bytes": 6488,
+      "sha256": "bf9afd8200451ca4f95d44399b8ab91a534ad677e3915f532772adaea023e76e"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_session_fence.py",
+      "bytes": 5917,
+      "sha256": "6d7aeb19376c767e5cfaefbf740d921c6331b9a7a6dd2d89e0af911a052c6972"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_session_revocation.py",
+      "bytes": 17890,
+      "sha256": "294504028cd6b5e986047c01a77587e28da403a5d948be015ae4767f6d64fcbf"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_social.py",
+      "bytes": 18185,
+      "sha256": "30076fb92ae849aac519e8d16ff34f41800f0ec6750448b45ea2d48b1c684fdb"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_state.py",
+      "bytes": 857,
+      "sha256": "a3e44929e81c45c87386e89e5569262ead829ea121d6a3508757474d19f2200b"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_subprocess.py",
+      "bytes": 3892,
+      "sha256": "02b9d87c069240d3205f802c3c600262cfb7c9ad20b8b5ab2fe52f8f3d909b3d"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_tool_presentation.py",
+      "bytes": 2193,
+      "sha256": "f5b51c72b905fa651d16d571016599db38e967fa5e209a1a5e9c31e8d228259d"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_tool_receipts.py",
+      "bytes": 2217,
+      "sha256": "6c5895b181211cb565ea0a062fc72bb1da8b4f0aa39bf79a062dcde3edf059b1"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_tool_trace.py",
+      "bytes": 1817,
+      "sha256": "5e115f2a8d5f2159a931aefabd7dc9daca18ef93407691b8507ba50a4158de67"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_tools.py",
+      "bytes": 7115,
+      "sha256": "7f3174a13ddd16861a77e27b1db2ae1d4510ca7755910572cec4c83b8344111f"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_v3_native.py",
+      "bytes": 56309,
+      "sha256": "d43b353554da88ca91a4ad98cfa2caa6b977dd367faa903284bc973431bd34f3"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_worker_diagnostics.py",
+      "bytes": 5778,
+      "sha256": "48c6c8fa267b6e42413f1878f9d50cbda4f8ffc1efad84b2f6e46c21ea5b7d32"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_worker_leases.py",
+      "bytes": 4511,
+      "sha256": "3ee50e23fceae45d4bb2f9718d9e21912bf0459d5164a567b00134f703854056"
+    },
+    {
+      "path": "backend/open_webui/routers/starli_workspace.py",
+      "bytes": 21855,
+      "sha256": "8c78d66cba403aa187343158bf8e5020666589bc064e09d56a025b9bd0759b6c"
+    },
+    {
+      "path": "backend/open_webui/routers/tasks.py",
+      "bytes": 23672,
+      "sha256": "d1ec728170f86d7b9fd4069b0fe34b7c99dc436363f69d70abfd45a59bb10847"
+    },
+    {
+      "path": "backend/open_webui/routers/tools.py",
+      "bytes": 14740,
+      "sha256": "259dbc6a29dde69e44de6820d6a7031f1ebdeaa0cb85bd6ef883055c59d3b27d"
+    },
+    {
+      "path": "backend/open_webui/routers/users.py",
+      "bytes": 9730,
+      "sha256": "d3eecb2a2167c7cac03e3a3123846211dda4cb56a8420181cffc78fc595c5bc7"
+    },
+    {
+      "path": "backend/open_webui/routers/utils.py",
+      "bytes": 4019,
+      "sha256": "8ed8099d50e7e451d514d46260fbe6a1f2673ff8b572a75b28554fffd53bb351"
+    },
+    {
+      "path": "backend/open_webui/socket/main.py",
+      "bytes": 14531,
+      "sha256": "c62cbdf5114e8a732fed4c39f422224c96395113953f06ceaf559a8261db8473"
+    },
+    {
+      "path": "backend/open_webui/socket/utils.py",
+      "bytes": 2748,
+      "sha256": "0f62d102f7df31a51059d661d4a9ea2b632587e675e9f886214263dd5a39f4f0"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/api.py",
+      "bytes": 5736,
+      "sha256": "8341ceeec429b0052adc50da7703dd52c2308654db7bbfc02f809223e0215bb1"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/bootstrap.py",
+      "bytes": 1305,
+      "sha256": "b6d200b027d85338d15656c61e72074f7205db3d7dc9102284ab73d4cfa345da"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/firstparty_mcp.py",
+      "bytes": 8928,
+      "sha256": "c7dc03393e31e5640f0aa68ddf7a39d22a3fac26c156fe64608a99fc16ce42b2"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/invocation.py",
+      "bytes": 3574,
+      "sha256": "63ff4da563ef55866cdaa2dbc1b188f899768693d9b9b1f5845792103e746035"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/native.py",
+      "bytes": 2686,
+      "sha256": "7aff5d47c7f04c981a0567d93f97e29770582657041e3b294f15646db6ecd859"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_connect.py",
+      "bytes": 11126,
+      "sha256": "76ebf5959e25ac9e9d3bf8d13756d295a37e54fae75c820e5f3a4f9ccf9aa138"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_development.py",
+      "bytes": 11530,
+      "sha256": "1541fbcd5fef0c50ce317a30f095d06295313587420ce93bc5da7b26c905fb19"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_external.py",
+      "bytes": 28520,
+      "sha256": "bbb86fe53bc4b396c3e4056aa7c0d1fddda56a882186406cd58012d1748ba5c0"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/registry.py",
+      "bytes": 10628,
+      "sha256": "a0dee09a3a4b079025964907c9590183d2a34f598d8299ec0e989b0dfb989e20"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/remote.py",
+      "bytes": 6547,
+      "sha256": "a782436ce375373fcac2c80aff706c5a99a456275e549e2078d95047a44dc342"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/runtime.py",
+      "bytes": 7498,
+      "sha256": "a76c663267008aab2ebb492534021c89587d537f7f7c3dfebf1896496741b23c"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/remote/adapter.mjs",
+      "bytes": 6302,
+      "sha256": "e2d23338ea2a436907b369a7d2728d194c0886773b7516971280064faaba9f42"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/remote/service.mjs",
+      "bytes": 990,
+      "sha256": "dbb4a370baa2ec83edc66d5d9c0d7af58637bf5d650e5391da65f0e249b3b735"
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/scoped-web/policy.mjs",
+      "bytes": 9261,
+      "sha256": "5533d6707f7de3a27e595e533cbb8c8665d2a74c25b725d01a447cbed437097b"
+    },
+    {
+      "path": "backend/open_webui/starli_task_worker.py",
+      "bytes": 576,
+      "sha256": "e504de5c59870f0a12280df94aced66bdc75b36b640abad5085784031470b5f3"
+    },
+    {
+      "path": "backend/open_webui/static/apple-touch-icon.png",
+      "bytes": 5346,
+      "sha256": "b8f9cb3572fa22ced0db48127aaa293bbd2ef90b966dab2990be839987ba07df"
+    },
+    {
+      "path": "backend/open_webui/static/assets/pdf-style.css",
+      "bytes": 5902,
+      "sha256": "0379266f7b5498820d03f7f12f641e6dfa99042f8392139c63a5eb198ba86c6f"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-96x96.png",
+      "bytes": 2925,
+      "sha256": "cc0f517e7f308a64fdd74eb2ec9f907f7f253c0e10a52a8e06a84eb111b416d2"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-dark.png",
+      "bytes": 1707,
+      "sha256": "f3b8086f7abdf59084ff45b55d76508f317e9bee7e81e87373069dff1a673788"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.ico",
+      "bytes": 6391,
+      "sha256": "86fd0c40f0e5dc217c98f3f63d7fb3fea49717b8974fef7576360c5b358cf81b"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.png",
+      "bytes": 1788,
+      "sha256": "85984da6b5de45d4a03ab4485e282d42605227c67077a348c7c3e21f03b73ae0"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.svg",
+      "bytes": 310,
+      "sha256": "d6885a4e870a3ee6e2c2d8bda5847c1b1c1c41baefe4edb7737a329e26985e04"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Bold.ttf",
+      "bytes": 582604,
+      "sha256": "cf382cad35e731fc4f13b1bf068c5085cd17bee2141014cc94919c140529488d"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Italic.ttf",
+      "bytes": 597000,
+      "sha256": "380a500e3dda76d955dadc77053227cc61149814737dc9f7d973d09415ad851f"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Regular.ttf",
+      "bytes": 582748,
+      "sha256": "3be6b371cef19ed6add589bd106444ab74c9793bc812d3159298b73d00ee011c"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Variable.ttf",
+      "bytes": 2490816,
+      "sha256": "74df1f61ab9d4bfaa961c65f8dc991deaae2885b0a6a6d6a60ed23980b3c8554"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Regular.ttf",
+      "bytes": 5732824,
+      "sha256": "fb3df01b4182734d021d79ec5bac17903bb681e926a059c59ed81a373d612241"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Variable.ttf",
+      "bytes": 9586480,
+      "sha256": "33119a596d1bfae91165585c90c6e9752cf2c9120b45c18388fb81724b3ec64b"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Regular.ttf",
+      "bytes": 6192764,
+      "sha256": "9db318b65ee9c575a43e7efd273dbdd1afef26e467eea3e1073a50e1a6595f6d"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Variable.ttf",
+      "bytes": 10361060,
+      "sha256": "2d2267a83d089cb1a517a4f901676d05d283346e650d1b1845d601cbd696a98e"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Regular.ttf",
+      "bytes": 10560616,
+      "sha256": "5cf8b2a0576d5680284ab03a7a8219499d59bbe981a79bb3dc0031f251c39736"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Variable.ttf",
+      "bytes": 17805476,
+      "sha256": "2e68d43ae2c504f4e302a9cf522ecc3f06ef66d724cade58bbe13a3a4af70512"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/Twemoji.ttf",
+      "bytes": 1496648,
+      "sha256": "c196846223cc229dd9d3df6b377b12faa5a4516393933b227ee5211a6cd9438a"
+    },
+    {
+      "path": "backend/open_webui/static/loader.js",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/open_webui/static/logo.png",
+      "bytes": 15655,
+      "sha256": "de1aa42a93c70a3e2d0e3d9c057aa6b9d88d12b3e59ce68ae24ea9732bcbf419"
+    },
+    {
+      "path": "backend/open_webui/static/splash-dark.png",
+      "bytes": 9322,
+      "sha256": "edbb8cc88bba130c54bc72fa3883ef05afe2163674fd9eb1091eaeb21c0523d0"
+    },
+    {
+      "path": "backend/open_webui/static/splash.png",
+      "bytes": 9846,
+      "sha256": "02debaea69fe41b445807b8d18a85a6c03d7b0e411e9e1945f7d1cf1eb81d4c7"
+    },
+    {
+      "path": "backend/open_webui/static/starlidigital-mark.svg",
+      "bytes": 310,
+      "sha256": "d6885a4e870a3ee6e2c2d8bda5847c1b1c1c41baefe4edb7737a329e26985e04"
+    },
+    {
+      "path": "backend/open_webui/static/starlidigital-wordmark-dark.svg",
+      "bytes": 485,
+      "sha256": "e13c40ed7e54f4c49fb8068212c9478053e5d451ad252a76d7366af8d123a12d"
+    },
+    {
+      "path": "backend/open_webui/static/starlidigital-wordmark.svg",
+      "bytes": 485,
+      "sha256": "52a025b601e097e965e6c7f67337c2a429e2276889dde6c5b00a6f07496c7478"
+    },
+    {
+      "path": "backend/open_webui/static/swagger-ui/favicon.png",
+      "bytes": 5043,
+      "sha256": "d16f72cf5a2773eba499cc7f3db1923c6f5f73de990f739e3a05806aafec15b7"
+    },
+    {
+      "path": "backend/open_webui/static/swagger-ui/swagger-ui-bundle.js",
+      "bytes": 2239137,
+      "sha256": "d144bca2e3d0541ffe8cd5d1855f8d4c635d3a3698662b9432b2e284e1ceb71a"
+    },
+    {
+      "path": "backend/open_webui/static/swagger-ui/swagger-ui.css",
+      "bytes": 179354,
+      "sha256": "61c866fca0fb8f81f04904a1d00c1c305fbb465782dbbd3d039ad01198cebd3c"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-192x192.png",
+      "bytes": 3490,
+      "sha256": "92f8593be2505d8da1d33189b9c69abc5c1bb61998e183cc00a9842690eb2375"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-512x512.png",
+      "bytes": 10472,
+      "sha256": "9b182351e54936b56781d28a35588b352dce573c552cb6613a3eb12612a8e686"
+    },
+    {
+      "path": "backend/open_webui/storage/provider.py",
+      "bytes": 13315,
+      "sha256": "d9956b876f498757ffb7a2ff81a232d94a4d0099558a593eda652d1a3a8b28a0"
+    },
+    {
+      "path": "backend/open_webui/tasks.py",
+      "bytes": 1534,
+      "sha256": "929543fd171a02bfa6dc8447ef768b9fdf72fa9a5e42b392064485bf3b95960e"
+    },
+    {
+      "path": "backend/open_webui/test/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_auths.py",
+      "bytes": 7271,
+      "sha256": "b6ae90515af1e6c89643429303e73a6e75234d4704423b5f049149cae5f09943"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_chats.py",
+      "bytes": 8855,
+      "sha256": "c81e5dd44b0501f87d8f7b859b649d8f2ce66d0d4aba7d026ac5956ac9082567"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_models.py",
+      "bytes": 2129,
+      "sha256": "cdf528bdb03d7d2aa2747f58556ea6f2b0059dae20a201b444e3c22ff394e340"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_prompts.py",
+      "bytes": 3399,
+      "sha256": "1ad596a2f06326a89a68b8644da0b4702738bb1a51fb1274122a6686421878da"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_users.py",
+      "bytes": 5717,
+      "sha256": "b6398730167b4b733f7d193baba0804934413f97cdf7d631b39abe680ea2ef2b"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/storage/test_provider.py",
+      "bytes": 18927,
+      "sha256": "1a778a16fa3c79d9d5156437a7db2247cd7b672c58df2c810aeb28db710e70bc"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_admin_boundary.py",
+      "bytes": 2805,
+      "sha256": "ea763ef3975179ffb570318dd5362e24ce1e22ce20ce921925ee0cabef13e532"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_customer_boundary.py",
+      "bytes": 8813,
+      "sha256": "91ad44a2aa1835f4a53f56fe73bd3e16160f1647af17cac66942d5a8bb1f8498"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_customer_pi.py",
+      "bytes": 8238,
+      "sha256": "02423b1778d9b14809a6b9d1f478ef6dafd2d991e85d5ab8a767767e561cb43c"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_customer_registration.py",
+      "bytes": 4546,
+      "sha256": "0564971414275fc801dbb183b518c04442a2124e8974ea3f0b937907ff6010e8"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_execution_authorization.py",
+      "bytes": 15639,
+      "sha256": "0e4ac505fe213c931091a4fb88f98871b3a3a76a1e6ad4ed5d7de7aba96380c1"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_object_authorization.py",
+      "bytes": 10684,
+      "sha256": "ddaadf708863c1f461b5c3b96e99ab9db2afba217b9aec411b6e485142e67d17"
+    },
+    {
+      "path": "backend/open_webui/test/test_native_safe_http.py",
+      "bytes": 8458,
+      "sha256": "3a463759ba47fc92dfca3d1424d1e087f9d8d6eeb61580797bb60ddb0962df33"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_access.py",
+      "bytes": 2178,
+      "sha256": "b78b62f380e9396d5b23d962f631e61aeeb39e6151b470985ed884279f6a1259"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_approvals.py",
+      "bytes": 2842,
+      "sha256": "d657692ce02e50dbb5af3ab817f2d5a0693b2ece61bd8f5fa0d16331edd0e383"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_billing.py",
+      "bytes": 6763,
+      "sha256": "f7a0e0e55a62480b13b2a42f5837f44cb61c6fb70159f34b015dd120df730789"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_browser.py",
+      "bytes": 3111,
+      "sha256": "a587fabc5c2eff9e4c499e8413d7bad6b4d2a9c54321cd93d4125b4196586e54"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_native_capabilities.py",
+      "bytes": 1996,
+      "sha256": "0801307e999bfef7f10ebfcc1709eb191ee4089ac1fda4c8fd5669f62f4ba74e"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_pi_cancellation.py",
+      "bytes": 4371,
+      "sha256": "4cf19e9d7dec57331a7e8ba84d24738078e8f86f615cd37bd657fb070ddca3bc"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_pi_master.py",
+      "bytes": 2920,
+      "sha256": "466c7cd0a63e95decf9258d13a50ccc0f5f35f2ec6b2e2f8f0c532589fc4a64e"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_platform_adapter.py",
+      "bytes": 4118,
+      "sha256": "706af6ee534a9a516e485da09733da56b38a0e9fbc8e8e4a4ef02193b8814a0e"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_provider_transport.py",
+      "bytes": 5374,
+      "sha256": "a929d731ffaecfd025a539db0e506b082d1c16de4f58ca5721988e0a29323455"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_public.py",
+      "bytes": 4583,
+      "sha256": "ced0e9ea2fbc7fc84fa17be3715748999fbaa63596ac6f648b162f6337077d06"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_public_concurrency.py",
+      "bytes": 6569,
+      "sha256": "a174ea43eccd34d989e10725cb9922158b0d252b21787704c71f8b322f401dc0"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_release_regressions.py",
+      "bytes": 4552,
+      "sha256": "789118f89c821f2386621b91df576fb9890df0a6fe04bc07e1d018c341ea4dac"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_resources.py",
+      "bytes": 5676,
+      "sha256": "080eadaa5dcdbd9de9e20ddd623fdd41a84b40a1ad8876fe3049e7ec4e8ab211"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_runtime.py",
+      "bytes": 4509,
+      "sha256": "5391ef0fc2250a2255f34b02c71fd5541721c3110a649ebc03738db4a1bed669"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_runtime_v2_checkpoints.py",
+      "bytes": 7860,
+      "sha256": "b393527b706bc53cae3bc8c40c83436ef2e8e1626b4f92720fd426e4c82da07d"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_tool_receipts.py",
+      "bytes": 3678,
+      "sha256": "5bc2cc5a637e0c59ecbc74227c44387cfe540e139bc7c39bfa7a73447e28ae72"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_worker_leases.py",
+      "bytes": 2298,
+      "sha256": "04decb47fb185b4e51bb8ca351aed0534654464bb9a2d9428e914b92a291e256"
+    },
+    {
+      "path": "backend/open_webui/test/util/abstract_integration_test.py",
+      "bytes": 4674,
+      "sha256": "7802187a8b755915b4a6aaf2965ed8699ae4c5a6b97a73fe2c3105f6d6c22eed"
+    },
+    {
+      "path": "backend/open_webui/test/util/mock_user.py",
+      "bytes": 1139,
+      "sha256": "5272bad615a27f1bfda51a30681492c7f2db81f5dbbbdfeb697e5e109e85f0d0"
+    },
+    {
+      "path": "backend/open_webui/utils/access_control.py",
+      "bytes": 5346,
+      "sha256": "85b331aa5b2c945f4dc5a8b1461f17d071b17c288a5b7d2eb7647eae22f6bc73"
+    },
+    {
+      "path": "backend/open_webui/utils/audit.py",
+      "bytes": 8148,
+      "sha256": "43b4d4b9e443d0390cadf849732c1e67bda27be674881cc3c058f9f7010ad393"
+    },
+    {
+      "path": "backend/open_webui/utils/auth.py",
+      "bytes": 7689,
+      "sha256": "abf358d42f52867915fdc85b3ffebe6ad8bae0149dce0357549921d46d0ebc6d"
+    },
+    {
+      "path": "backend/open_webui/utils/chat.py",
+      "bytes": 15815,
+      "sha256": "5a085646fa0331f1fb4ec8d8c7b89bd8644bd953541001383f4387d353ee7a25"
+    },
+    {
+      "path": "backend/open_webui/utils/code_interpreter.py",
+      "bytes": 7470,
+      "sha256": "9f2075619dc732a42c6d9e33f31694e8adec2d4ede1c60dc38726163997cddb5"
+    },
+    {
+      "path": "backend/open_webui/utils/customer_boundary.py",
+      "bytes": 2632,
+      "sha256": "979833abb24205f242d95939bd7e76c789d9698a77f25b39d1aae6841a55d981"
+    },
+    {
+      "path": "backend/open_webui/utils/filter.py",
+      "bytes": 3860,
+      "sha256": "9c10ccde6bdbfb02c0fa83eb341620adececccfbed962c5766402129ed2f7588"
+    },
+    {
+      "path": "backend/open_webui/utils/images/comfyui.py",
+      "bytes": 6670,
+      "sha256": "28beb5932fd35ffa2d5b09987d89ce6306fd4e6e0de05441e298b52742137b60"
+    },
+    {
+      "path": "backend/open_webui/utils/logger.py",
+      "bytes": 4911,
+      "sha256": "226010bd75a9c677872dbe0f4f97c2423615caa9d9eb138fd5ff9cfd67664529"
+    },
+    {
+      "path": "backend/open_webui/utils/middleware.py",
+      "bytes": 94704,
+      "sha256": "7762c2ab7e04b7c3bec638f10815f64ed627f096d8ecfc22464620ae8b94ec68"
+    },
+    {
+      "path": "backend/open_webui/utils/misc.py",
+      "bytes": 13798,
+      "sha256": "4ce2ca671a8c68d7c9bc4e2b66a20a2ae1da18b7391cc90885bfdbe5cc35c9e4"
+    },
+    {
+      "path": "backend/open_webui/utils/models.py",
+      "bytes": 8585,
+      "sha256": "b4fbdeeb455beb60133cb9eb7ad82a7dea15ac3f01aea6a5c1c091858cbaf109"
+    },
+    {
+      "path": "backend/open_webui/utils/native_authorization.py",
+      "bytes": 6314,
+      "sha256": "8a4936495233c5ddea4cee4f5563b15237624259a8af20b9464b0202ce74f5fc"
+    },
+    {
+      "path": "backend/open_webui/utils/native_object_authorization.py",
+      "bytes": 1265,
+      "sha256": "f98f8723f04d53eeb65ad4bcfd2072a2b4a26937009a5ca9d653be4f909aa43a"
+    },
+    {
+      "path": "backend/open_webui/utils/oauth.py",
+      "bytes": 17877,
+      "sha256": "da31fbebe3ccebfdae42ba6dfca084fba5445793f45f710058dc6525876dc043"
+    },
+    {
+      "path": "backend/open_webui/utils/payload.py",
+      "bytes": 9533,
+      "sha256": "fc6cdc9b0eeb957d0d880965fb6b0c872fd8cb862088a2dcf3b6eec5762562af"
+    },
+    {
+      "path": "backend/open_webui/utils/pdf_generator.py",
+      "bytes": 5055,
+      "sha256": "0abffb1e5743e4f179d518d5e468ecd8d4eb3d45af049c20442224839387b18e"
+    },
+    {
+      "path": "backend/open_webui/utils/plugin.py",
+      "bytes": 6185,
+      "sha256": "7a493fd67a167fa7c4975fff6c6b10f7ec661859c55f6b9db26ef564a914d698"
+    },
+    {
+      "path": "backend/open_webui/utils/redis.py",
+      "bytes": 2066,
+      "sha256": "f507dc5517c9fe4d637f791b1d780cfda7a3ba088f5084b5bc1a009c801ad9b2"
+    },
+    {
+      "path": "backend/open_webui/utils/response.py",
+      "bytes": 4262,
+      "sha256": "c18420077d113b23fae27eb51e5732491aa1d400248592d87879c062946e9495"
+    },
+    {
+      "path": "backend/open_webui/utils/safe_avatar.py",
+      "bytes": 1795,
+      "sha256": "b248624fae0165534721627c8a1edbe09c77ae378f148169567bb01aed1e219e"
+    },
+    {
+      "path": "backend/open_webui/utils/safe_http.py",
+      "bytes": 6792,
+      "sha256": "2dc6c6537f160287c730c995977c85f78faeb0fbd0366f0fcf1d12a8290181de"
+    },
+    {
+      "path": "backend/open_webui/utils/security_headers.py",
+      "bytes": 4581,
+      "sha256": "309fc0a67aa7e00340a21c2e2351d611e4d90dcf1fd3e772899a686e4aae67f5"
+    },
+    {
+      "path": "backend/open_webui/utils/task.py",
+      "bytes": 11081,
+      "sha256": "9b908df1d351db533a02a9060ecb0fd2374cc6f0489f413a393f9ec6a6b9085c"
+    },
+    {
+      "path": "backend/open_webui/utils/telemetry/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/open_webui/utils/telemetry/constants.py",
+      "bytes": 623,
+      "sha256": "d64c5b9c2b9f311bd527aa520966fd2413a5b9477399cdb69e60a620d3fc46bc"
+    },
+    {
+      "path": "backend/open_webui/utils/telemetry/exporters.py",
+      "bytes": 987,
+      "sha256": "d7c2d823af879813f53de8d51b0f8027dbbd81b46838c07c8c19022084e9d411"
+    },
+    {
+      "path": "backend/open_webui/utils/telemetry/instrumentors.py",
+      "bytes": 6076,
+      "sha256": "25d19f7e2689f9b7b55941c088e019323a78384d738a123ce0d56299247edb8b"
+    },
+    {
+      "path": "backend/open_webui/utils/telemetry/setup.py",
+      "bytes": 952,
+      "sha256": "6d0c63b9ee340e4776a65f792a2b0cc23a5677f4469426e579a391ff29f5ff57"
+    },
+    {
+      "path": "backend/open_webui/utils/tools.py",
+      "bytes": 21063,
+      "sha256": "7d56057c7ecfdc9190af78915123bac8bc8c33d7d7ed350f32644820562ee0ca"
+    },
+    {
+      "path": "backend/open_webui/utils/webhook.py",
+      "bytes": 2021,
+      "sha256": "d451c69bf4f50dae779dc0f325e073da49bd92ed93f071edb905f5ccb439838a"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "bytes": 2355,
+      "sha256": "930e16bf62b78e22bb647a969aed0c6dc03d22b748af1b42fad24940ff6d8bc5"
+    },
+    {
+      "path": "backend/starli_agent_schedule_engine.py",
+      "bytes": 12397,
+      "sha256": "5e687bf31a9dee4d8446a9fa976f86ebf9b321ff6c8ff83a0b953c77055f460b"
+    },
+    {
+      "path": "backend/starli_agent_triggers/__init__.py",
+      "bytes": 56,
+      "sha256": "34ea71a4803b4d51c9d7630016694eda960b0bd12b7b62c9045524368d93b0b6"
+    },
+    {
+      "path": "backend/starli_agent_triggers/core.py",
+      "bytes": 12742,
+      "sha256": "0fa3ed7e843352ce159dd8cc3a0fcb0fa2de9879eaba56b8d935a7cff4b693ad"
+    },
+    {
+      "path": "backend/starli_agent_triggers/mcp-tools.json",
+      "bytes": 256909,
+      "sha256": "d9c2b13c94e88beb1b36b2de98a01c62b7f73ca632d7eb0a08209f6c84ac6c67"
+    },
+    {
+      "path": "backend/starli_agent_triggers/native.py",
+      "bytes": 4686,
+      "sha256": "78159e3924bc8174d7d72720b04f02d3840382497dd4bf68986bb2c3cc073ecf"
+    },
+    {
+      "path": "backend/starli_agent_triggers/production.py",
+      "bytes": 2841,
+      "sha256": "2d930dbc16f7d9abfa2b596a2e969077835c60a8d1d4663391fb03a50b871008"
+    },
+    {
+      "path": "backend/starli_agent_wake/__init__.py",
+      "bytes": 65,
+      "sha256": "007253a29f2d0f835df94cf4bffe6b365e5204d8cbeca39b89dd2db9e8c85acc"
+    },
+    {
+      "path": "backend/starli_agent_wake/core.py",
+      "bytes": 11773,
+      "sha256": "956935be1bfaf0e3014107ff2d64691c3e9664b438d20bf4009b23636404ade0"
+    },
+    {
+      "path": "backend/starli_agent_wake/patch.py",
+      "bytes": 2541,
+      "sha256": "c0205dffb37eadc4a65491a028c45cdedeaeac2d65b3736a579a989209a252d1"
+    },
+    {
+      "path": "backend/starli_agent_wake/principal.py",
+      "bytes": 929,
+      "sha256": "04096b3d610902af15b5cce33fc9436ebca4b70afab08207e8f093ad0f3e95e7"
+    },
+    {
+      "path": "backend/starli_agent_wake/production.py",
+      "bytes": 2316,
+      "sha256": "e97a93baf39e2b1814b75322459ec9aa36c114359ee4386c36b84f3ff22624c1"
+    },
+    {
+      "path": "backend/starli_automations/__init__.py",
+      "bytes": 56,
+      "sha256": "397099bf7ce30b077594fe4683cf42035dcecd5a7dce39434b9474d412ef2640"
+    },
+    {
+      "path": "backend/starli_automations/access_logs.py",
+      "bytes": 1024,
+      "sha256": "7c37a936a8ea824a23f567552be72482ca2a2dbb73f0bbade9fd95e0daa3452e"
+    },
+    {
+      "path": "backend/starli_automations/business_config.py",
+      "bytes": 5933,
+      "sha256": "b989d2d19360c884395ac05e7d98309065b4958e66ae51313bf207f583e7694f"
+    },
+    {
+      "path": "backend/starli_automations/code_steps.py",
+      "bytes": 1818,
+      "sha256": "aab741ecf3ae7d2351af629c4d25f89c73c6591f13680cd0235d7d68086fbe24"
+    },
+    {
+      "path": "backend/starli_automations/common.py",
+      "bytes": 1736,
+      "sha256": "1d4a2708ab59c286239461460dc56b2f3b36a11aec7e351142de7fcb4ba1871c"
+    },
+    {
+      "path": "backend/starli_automations/connections.py",
+      "bytes": 26052,
+      "sha256": "7da0ee49bf76a193a3e1a706f5564f7417dec2b4b757274ae55a6d2e0ba9a97f"
+    },
+    {
+      "path": "backend/starli_automations/feedback.py",
+      "bytes": 13505,
+      "sha256": "413a66fd90ab009790f7ebec701241f21844f1403dc299f827f156ffe7a00dc1"
+    },
+    {
+      "path": "backend/starli_automations/gateway.py",
+      "bytes": 54568,
+      "sha256": "7cda5ba5ddc2a09291d6a40215e10c49c2003c3b03680056c35e1c27edc4f9ed"
+    },
+    {
+      "path": "backend/starli_automations/http.py",
+      "bytes": 12985,
+      "sha256": "9604acf88892a09601a9d6a76e78c6453615ce6b2a09f691a998eeacb44e3fe3"
+    },
+    {
+      "path": "backend/starli_automations/n8n.py",
+      "bytes": 7967,
+      "sha256": "c8ce7bf8344ba4df32b74e63a31a7714040cc797c5086831910dfdf21078546e"
+    },
+    {
+      "path": "backend/starli_automations/native.py",
+      "bytes": 10662,
+      "sha256": "cdf827a21267220b388a0738e2c84827ae352ecb4f518b012727292e0528d695"
+    },
+    {
+      "path": "backend/starli_automations/notifications.py",
+      "bytes": 2625,
+      "sha256": "db5a291f0deed6f95930d4a255bc6c9a12e572e8d6edde5d7ba4803885305d5f"
+    },
+    {
+      "path": "backend/starli_automations/oauth_http.py",
+      "bytes": 5397,
+      "sha256": "70c3f1ba535ab1a439c7330d66735f3c5030081535c341a4b4980a4a6a89953c"
+    },
+    {
+      "path": "backend/starli_automations/production.py",
+      "bytes": 4900,
+      "sha256": "e49aa3ba95860c9c1e59d0cfa4dc4d48465f84a14d4837027a00b4adffbc2ae0"
+    },
+    {
+      "path": "backend/starli_automations/providers.py",
+      "bytes": 12589,
+      "sha256": "6309aab2d9fc08158fa7067c4a58b19ec1f1d674c06ebb84f93409ed5a30bd9b"
+    },
+    {
+      "path": "backend/starli_automations/registry.py",
+      "bytes": 10642,
+      "sha256": "992154e0bb2f7a11b22f28150b518d380b37ac1a12f2b720f5df9811fd82ab0c"
+    },
+    {
+      "path": "backend/starli_automations/schema.sql",
+      "bytes": 7766,
+      "sha256": "a7f20e5d88b8ca0353c6de8dcf08c343634d184fd896ce92f837ce230cfd292c"
+    },
+    {
+      "path": "backend/starli_automations/shopify_orders.py",
+      "bytes": 19314,
+      "sha256": "e20a18623284a021ba5328f64ad8531d8ecaab6ee6e4ac5b52f9dcf2b101fb7b"
+    },
+    {
+      "path": "backend/starli_automations/slack.py",
+      "bytes": 3100,
+      "sha256": "f5e260869052339e2a46f6c0fed21c4e8d52c711a1f3dcaed56adede12f2bad7"
+    },
+    {
+      "path": "backend/starli_automations/webhooks.py",
+      "bytes": 2418,
+      "sha256": "f65b9c53c28c28e41f3cb10c28e7487dde5159a3124c5383fef92c13cab50a77"
+    },
+    {
+      "path": "backend/starli_automations/worker.py",
+      "bytes": 6573,
+      "sha256": "89859ae40d27d1e6c2085a3739887ec35379f629bccd98566cfbfc1d3fa5a626"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/__init__.py",
+      "bytes": 56,
+      "sha256": "397099bf7ce30b077594fe4683cf42035dcecd5a7dce39434b9474d412ef2640"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/access_logs.py",
+      "bytes": 797,
+      "sha256": "fdc7904aca00666e86533e494cf62492f49f2ac9992b4823e22354d69981b84f"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/business_config.py",
+      "bytes": 5817,
+      "sha256": "dd8f01f17ada5a6fb275ba1efcf2cccf9b12c59121f07b41671123b13c7783f2"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/code_steps.py",
+      "bytes": 1818,
+      "sha256": "aab741ecf3ae7d2351af629c4d25f89c73c6591f13680cd0235d7d68086fbe24"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/common.py",
+      "bytes": 1736,
+      "sha256": "1d4a2708ab59c286239461460dc56b2f3b36a11aec7e351142de7fcb4ba1871c"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/connections.py",
+      "bytes": 25312,
+      "sha256": "3c190b48bb8f3a4ef8b8377d7f0077120b4932b979465badd5febed9520e9683"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/feedback.py",
+      "bytes": 13027,
+      "sha256": "4c7c23363f3b0f255abf3dd8ee9cb1c110a0ad220cdd9029f9b468558d88a7d7"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/gateway.py",
+      "bytes": 48097,
+      "sha256": "98df706ebad3ef6232de10ae8b90eba048accab74040fecd3c488695bcf3eae7"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/http.py",
+      "bytes": 12419,
+      "sha256": "575c63f11a5ce25215cb51d3954cfc60e50ef5d2f206cb546cc95b16a37a7b25"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/n8n.py",
+      "bytes": 7967,
+      "sha256": "c8ce7bf8344ba4df32b74e63a31a7714040cc797c5086831910dfdf21078546e"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/native.py",
+      "bytes": 9905,
+      "sha256": "48b813e88dd113867a56e1ff8135350114e473713db47d2a2bf031e87fa149ce"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/notifications.py",
+      "bytes": 2625,
+      "sha256": "db5a291f0deed6f95930d4a255bc6c9a12e572e8d6edde5d7ba4803885305d5f"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/oauth_http.py",
+      "bytes": 5397,
+      "sha256": "70c3f1ba535ab1a439c7330d66735f3c5030081535c341a4b4980a4a6a89953c"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/production.py",
+      "bytes": 4804,
+      "sha256": "7c96c6c4e5701c95f86afe1af764bac002a3d2ac894c79f3c935c1b99a61c4d7"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/providers.py",
+      "bytes": 12558,
+      "sha256": "a59260862a33fda5322fa0bf9c3f7dcdf1c2d37325c44858d439f90375ed3225"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/registry.py",
+      "bytes": 9651,
+      "sha256": "919aae895a08c31b261e7f019fb81bba865be0a68122aede74613693943f3393"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/schema.sql",
+      "bytes": 6908,
+      "sha256": "4082fb4550de44b2bf16a9f1081b064fd6c1c50afa8e7b6200bb7274e9bf6320"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/slack.py",
+      "bytes": 3100,
+      "sha256": "f5e260869052339e2a46f6c0fed21c4e8d52c711a1f3dcaed56adede12f2bad7"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/webhooks.py",
+      "bytes": 2418,
+      "sha256": "f65b9c53c28c28e41f3cb10c28e7487dde5159a3124c5383fef92c13cab50a77"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/worker.py",
+      "bytes": 6573,
+      "sha256": "89859ae40d27d1e6c2085a3739887ec35379f629bccd98566cfbfc1d3fa5a626"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/__init__.py",
+      "bytes": 56,
+      "sha256": "397099bf7ce30b077594fe4683cf42035dcecd5a7dce39434b9474d412ef2640"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/code_steps.py",
+      "bytes": 1818,
+      "sha256": "aab741ecf3ae7d2351af629c4d25f89c73c6591f13680cd0235d7d68086fbe24"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/common.py",
+      "bytes": 1736,
+      "sha256": "1d4a2708ab59c286239461460dc56b2f3b36a11aec7e351142de7fcb4ba1871c"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/connections.py",
+      "bytes": 16521,
+      "sha256": "4bed17d1b5b6780482b563baa4e4c33870a5be7ffe9ccf574a3504797eae8a28"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/feedback.py",
+      "bytes": 10698,
+      "sha256": "e498461ec008c70f124527465262e95dafae756706a69c81d40fef05dbdee46a"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/gateway.py",
+      "bytes": 46527,
+      "sha256": "45531fb5f29b8839625948dc902cb94608f673338b96f2dfe001609579579e81"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/http.py",
+      "bytes": 8576,
+      "sha256": "e399c523814a4c7b58c5834d6aedf41757fabe377b721eff810b6140bd2a0d0d"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/n8n.py",
+      "bytes": 7967,
+      "sha256": "c8ce7bf8344ba4df32b74e63a31a7714040cc797c5086831910dfdf21078546e"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/native.py",
+      "bytes": 7469,
+      "sha256": "439284491b0c57157764a6148084a12f3b9d5da1ee5f29a3b7d8a34d8d4dacc5"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/notifications.py",
+      "bytes": 2625,
+      "sha256": "db5a291f0deed6f95930d4a255bc6c9a12e572e8d6edde5d7ba4803885305d5f"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/oauth_http.py",
+      "bytes": 4568,
+      "sha256": "b9d5fc3efa12f9f21377f293032fac4d8850967e7b9a572f3d878004d805198f"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/production.py",
+      "bytes": 4124,
+      "sha256": "5ab5f53de49cedb28e21604f37a4d05b84ca90fedf397457f9200c4b03bf0625"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/providers.py",
+      "bytes": 10286,
+      "sha256": "360342774489ec4479f12c545892c71d437ec2d1fedb29524e1e9f776ad89609"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/registry.py",
+      "bytes": 7798,
+      "sha256": "36be6f3be4e617c7f18b9f87aa1594be34703afd0fa35c4537caf9e0a342f089"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/schema.sql",
+      "bytes": 6164,
+      "sha256": "e4fbfd3eaed0f1f825d5979851c1895164943aaf94d996e2adfcffdc8d958f59"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/slack.py",
+      "bytes": 3100,
+      "sha256": "f5e260869052339e2a46f6c0fed21c4e8d52c711a1f3dcaed56adede12f2bad7"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/webhooks.py",
+      "bytes": 2418,
+      "sha256": "f65b9c53c28c28e41f3cb10c28e7487dde5159a3124c5383fef92c13cab50a77"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/worker.py",
+      "bytes": 6573,
+      "sha256": "89859ae40d27d1e6c2085a3739887ec35379f629bccd98566cfbfc1d3fa5a626"
+    },
+    {
+      "path": "backend/starli_company_computer/app_previews.py",
+      "bytes": 2510,
+      "sha256": "4b1090f8a4f3248adc9493467ae030168c3b41772f76ad46d5530a6e68363c0e"
+    },
+    {
+      "path": "backend/starli_company_computer/bridge.py",
+      "bytes": 3971,
+      "sha256": "2788bcb2cf6ecbe0e8f4fb5f85df2931e027394665310d652559b2dde3fd4201"
+    },
+    {
+      "path": "backend/starli_company_computer/chat_vision.py",
+      "bytes": 10235,
+      "sha256": "0a0a869d699be32dea460b453992d89b3d0c07e4dd032096f28e849012eb57f7"
+    },
+    {
+      "path": "backend/starli_company_computer/company_compute.py",
+      "bytes": 18896,
+      "sha256": "c6c50d27e7881c950c6eb9789d5074c071dbffd0ee7ee43b3bd658d883c15bdf"
+    },
+    {
+      "path": "backend/starli_company_computer/company_frame_relay/__init__.py",
+      "bytes": 177,
+      "sha256": "8da4d811b4b249ca5f860d3f65a9d8411c62f6c981836ef462843139c477228a"
+    },
+    {
+      "path": "backend/starli_company_computer/company_frame_relay/relay.py",
+      "bytes": 16783,
+      "sha256": "78442e8cfece186f0ad4f4b4ba156f57570561a15e79ecb81323ad7e8a2c55b1"
+    },
+    {
+      "path": "backend/starli_company_computer/company_frame_relay/routes.py",
+      "bytes": 13085,
+      "sha256": "9fdb5c229f0895a8c8ac493013771fe985ba832fefca5c4f5e6f4f5301c5eeaa"
+    },
+    {
+      "path": "backend/starli_company_computer/company_personal_reference.py",
+      "bytes": 13918,
+      "sha256": "81ea629fb72d9bd3dfdd2f7e137f4cb698d836a9748dd43619b421297d0414ef"
+    },
+    {
+      "path": "backend/starli_company_computer/company_provider_images.py",
+      "bytes": 29492,
+      "sha256": "55269a58a387f8f7c5722017c592a5fb344bcea51593649bb0fb9d7c0d15f58d"
+    },
+    {
+      "path": "backend/starli_company_computer/company_provider_install.py",
+      "bytes": 3449,
+      "sha256": "1f418a0e4e8eef53fe811ea5c92cb907d7d78ca202b6c5af2b6586ee41289e16"
+    },
+    {
+      "path": "backend/starli_company_computer/composition.py",
+      "bytes": 1864,
+      "sha256": "82789be3d2c5b6c2793fe9bb7a550e3760d0a1eda0280bd8019c87c36fd27adb"
+    },
+    {
+      "path": "backend/starli_company_computer/computer_runtime.py",
+      "bytes": 10031,
+      "sha256": "7e06555f45667a4384d588f68d5c622ed41bc1bba0f8ba63af7af51965446b21"
+    },
+    {
+      "path": "backend/starli_company_computer/platform_jobs.py",
+      "bytes": 10107,
+      "sha256": "307a96e1f6336f119fab3ac8f4ad804c83517f63e24add95afa8612d342956e0"
+    },
+    {
+      "path": "backend/starli_company_computer/production_factory.py",
+      "bytes": 3366,
+      "sha256": "d5067cd3fd312bda9067f06d2945177a58e441e49d23706b234cc1f9fac53088"
+    },
+    {
+      "path": "backend/starli_company_computer/production_hosted.py",
+      "bytes": 1588,
+      "sha256": "6fec31cb480e1c991857eb42ccc69146b09971c561aca7849231034028cc6072"
+    },
+    {
+      "path": "backend/starli_company_computer/production_mount.py",
+      "bytes": 10263,
+      "sha256": "973f11af860800ace1d82676a1527d50f304cfc2e3fc5a3a571bb1f866fcb3e4"
+    },
+    {
+      "path": "backend/starli_company_computer/production_publisher.py",
+      "bytes": 4013,
+      "sha256": "b15bb4a09833c5600e8af2900a3870b311b04114e06327cc0b5d9e7df1fa60ac"
+    },
+    {
+      "path": "backend/starli_company_computer/production_relay.py",
+      "bytes": 3664,
+      "sha256": "2e4127646216c2027744a2b8667a1d05b014eba347c037e28bf87e5269f335f6"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/__init__.py",
+      "bytes": 104,
+      "sha256": "040211b879b5aae014c8602ccf66b833e6bc4c30e67a81b56467dd98b757ae2b"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/company_provider_api.py",
+      "bytes": 4595,
+      "sha256": "1e62eb7fa64a7eee5a19dd56c745a97a37e898929cd9610db52b1d6c74bd3ef4"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/company_providers.py",
+      "bytes": 20212,
+      "sha256": "ae223c4d03a853558391e3df50e992373c096be7a305403080f34f7a5981fc84"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/core.py",
+      "bytes": 18234,
+      "sha256": "b64308b9961da3aa6e83e6b6c8c2f79694faae7d8173ea4f3172b16bc6575ed1"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/node_runner.py",
+      "bytes": 7285,
+      "sha256": "3a8ad2b8a153f348eaec6e7edc53b074e7e7384ad2ecc7848f80336abad2185b"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/router.py",
+      "bytes": 4728,
+      "sha256": "07f9bbd74a8a409c2b857d2758930a8a8cdf7fbb565b0179eae00910e002994b"
+    },
+    {
+      "path": "backend/starli_company_computer/transport.py",
+      "bytes": 9945,
+      "sha256": "35693ec3c8e15b87ec3102cf9357f3566d1c08fa96243a3b50a626b80e4b46d6"
+    },
+    {
+      "path": "backend/starli_company_computer/viewer.py",
+      "bytes": 3344,
+      "sha256": "c64936865b7badf27385aed521797c4d44d65fc186481c389df6a9708386a039"
+    },
+    {
+      "path": "backend/starli_company_n8n/__init__.py",
+      "bytes": 68,
+      "sha256": "f64d93e902345df1e2a63cb9021876a67d005dda35c7748d578984b28607fa50"
+    },
+    {
+      "path": "backend/starli_company_n8n/_workspace_actions.py",
+      "bytes": 9154,
+      "sha256": "48ffea006262ecc5d6238af82a638dd45100a2bc743994e2f31bdb53e6dc3cfc"
+    },
+    {
+      "path": "backend/starli_company_n8n/connector-catalog.json",
+      "bytes": 651093,
+      "sha256": "0e25bc944c993439a59786a61d195c43883d32a2d1d6f6cf109f5eca43f06642"
+    },
+    {
+      "path": "backend/starli_company_n8n/feedback.py",
+      "bytes": 1940,
+      "sha256": "03617efd91169d508138eb6630e48a6e9a435d648faf5f098620c209d2e58398"
+    },
+    {
+      "path": "backend/starli_company_n8n/gateway.py",
+      "bytes": 10924,
+      "sha256": "b65d8f59bcfb0675dbf95de4753ab46695db968fed82bc95b256a273b6ea5fc7"
+    },
+    {
+      "path": "backend/starli_company_n8n/mcp-tools.json",
+      "bytes": 256909,
+      "sha256": "d9c2b13c94e88beb1b36b2de98a01c62b7f73ca632d7eb0a08209f6c84ac6c67"
+    },
+    {
+      "path": "backend/starli_company_n8n/native.py",
+      "bytes": 6510,
+      "sha256": "f8543a61d9bdda94a37cd4018fffa3cc49ee72895e028acf1eb3748a7cffb522"
+    },
+    {
+      "path": "backend/starli_company_n8n/production.py",
+      "bytes": 1465,
+      "sha256": "5d1f8b3aa063da7b6bc8307713c66e794b6cad28bb2606b9ca486eb96e4a958d"
+    },
+    {
+      "path": "backend/starli_company_n8n/workspace_bindings.py",
+      "bytes": 13206,
+      "sha256": "0e24efb6beb030a76c96378b5aaf7d25cd70a41bda0ef0d0421ad35759faa217"
+    },
+    {
+      "path": "backend/starli_company_social/__init__.py",
+      "bytes": 160,
+      "sha256": "f0cae505d7b7caa35b8e8769057c1ff28d1c9a0d429c43bdfa261f88e8fe906b"
+    },
+    {
+      "path": "backend/starli_company_social/core.py",
+      "bytes": 40707,
+      "sha256": "861cb07cb2532b29adb66af9d67404083b2a16e46ee535279e40c37186687ca4"
+    },
+    {
+      "path": "backend/starli_company_social/http.py",
+      "bytes": 6161,
+      "sha256": "46d03efa40d775b1956d191d222dd90ab836a7aa93bdedb9ce78bfa7e956f453"
+    },
+    {
+      "path": "backend/starli_company_social/legacy.py",
+      "bytes": 13399,
+      "sha256": "f44c7b6d1653570c8f72d56377e16975892b4dfab8552b7522c82c7dcdf51c26"
+    },
+    {
+      "path": "backend/starli_company_social/posts.py",
+      "bytes": 12084,
+      "sha256": "491c133c7e4147d40100acf067d8f7fd874e8d1d53eabc845140dd3afc8d54e8"
+    },
+    {
+      "path": "backend/starli_company_social/production.py",
+      "bytes": 4370,
+      "sha256": "261195164c109aa9f2a1beefd1a9d4fd04afa0137cc666ddbf987e6a50876a92"
+    },
+    {
+      "path": "backend/starli_company_tools/__init__.py",
+      "bytes": 1291,
+      "sha256": "a1b2e401a0735cecaa1e21918c3c03e6f1fb3255b8136f214ef9276390bdcfab"
+    },
+    {
+      "path": "backend/starli_company_tools/action_grounding.py",
+      "bytes": 6994,
+      "sha256": "e78bdba335b39b0d822de7a5f0526883c92895006c7e5b71948f5970ce9968d8"
+    },
+    {
+      "path": "backend/starli_company_tools/bot_outreach.py",
+      "bytes": 15274,
+      "sha256": "20293a9838052cbd1e3b63b2caa1ba18b722da7867a4ab4f412a94f2344188ca"
+    },
+    {
+      "path": "backend/starli_company_tools/company_channels.py",
+      "bytes": 10172,
+      "sha256": "a8d7a9e1084b02d95e68f58bcf37362cd451e699edc6558a8f54553350c78be0"
+    },
+    {
+      "path": "backend/starli_company_tools/company_roster.py",
+      "bytes": 4556,
+      "sha256": "e94f17efa5391ba073849a226446ed942f7ccb76896876370fd5847d906bf518"
+    },
+    {
+      "path": "backend/starli_company_tools/core.py",
+      "bytes": 3847,
+      "sha256": "4f3e057acbeee80e0e2d6ff8cce505f4049386ec013607070bedb7f05ed0a969"
+    },
+    {
+      "path": "backend/starli_company_tools/domains.py",
+      "bytes": 9981,
+      "sha256": "2c9be009b342d3be884fbc6744c03028d737b9c7e1c7d597e53b21b6056383d2"
+    },
+    {
+      "path": "backend/starli_company_tools/existing.py",
+      "bytes": 2429,
+      "sha256": "7cb282a115481e025b775e32cd83f27181b3f3f4ffebe6d754ef756f58676fff"
+    },
+    {
+      "path": "backend/starli_company_tools/mcp.py",
+      "bytes": 15259,
+      "sha256": "a31ce7d96b3d3e3cc777d5309946f3687f67bb2952431481e0dba77e29b749f2"
+    },
+    {
+      "path": "backend/starli_company_tools/mcp_always.py",
+      "bytes": 19982,
+      "sha256": "4eee6742d2d5cdec541ad16afbe059e28165f29339b463592a41a095d1646466"
+    },
+    {
+      "path": "backend/starli_company_tools/router.py",
+      "bytes": 5382,
+      "sha256": "fb61268305360b0fc5dda69e2238b1a73a1346cdee89719c08b5c0230b31c252"
+    },
+    {
+      "path": "backend/starli_company_tools/runtime.py",
+      "bytes": 5263,
+      "sha256": "c99de9e9636222a735049ab2d68e59e50ad77f153e960019cdff7e2177250a39"
+    },
+    {
+      "path": "backend/starli_company_tools/self_discovery.py",
+      "bytes": 6737,
+      "sha256": "cf824816a5768caf418296699f42c92efc3e52520b47f105a08a39722df10fe7"
+    },
+    {
+      "path": "backend/starli_connector_execution/__init__.py",
+      "bytes": 63,
+      "sha256": "ab6d24d12fb50feb1bf4087789eadc71b9d4808f032666a584d8a65b64436f70"
+    },
+    {
+      "path": "backend/starli_connector_execution/compiler.py",
+      "bytes": 10868,
+      "sha256": "a01d164fa13cf02de89d58f9962a6fed9b2d62134b5423fb32074c30d431002a"
+    },
+    {
+      "path": "backend/starli_connector_execution/executor.py",
+      "bytes": 4923,
+      "sha256": "9fe315a68d9359a747c675807670c7fbd902c0d2d98e64bf08114b7c0f98fd20"
+    },
+    {
+      "path": "backend/starli_connector_execution/worker_gate.py",
+      "bytes": 1628,
+      "sha256": "b1b0c282083d0cc86adfa2c192c208c8422fd8b46d1181c7f33dfe0b2784c3b2"
+    },
+    {
+      "path": "backend/starli_engine_connections/__init__.py",
+      "bytes": 60,
+      "sha256": "efeb2dfb28ca1a9f56170915907a914be7830284887aa3e7752e13f89d7fe44e"
+    },
+    {
+      "path": "backend/starli_engine_connections/core.py",
+      "bytes": 10313,
+      "sha256": "cb11a5ffa310f1c590ad1bf442a0a07be9c43bac5a2aa8b8a3ed526ffcaf5637"
+    },
+    {
+      "path": "backend/starli_engine_connections/engine.py",
+      "bytes": 659,
+      "sha256": "2864f78a5ca1d009c12ddbf106b6b57cb36646631dbd907fe8781c7a690cc373"
+    },
+    {
+      "path": "backend/starli_engine_connections/installed-types.json",
+      "bytes": 400556,
+      "sha256": "70aa01b5376f63a54c6462d334c003bf44584a382a93facb9296480c543b7107"
+    },
+    {
+      "path": "backend/starli_engine_connections/native.py",
+      "bytes": 4619,
+      "sha256": "a9e64380b121db4c120c6b37044c3ac2d3122bfe7cb8bf8b7213911801a5d889"
+    },
+    {
+      "path": "backend/starli_engine_connections/production.py",
+      "bytes": 2943,
+      "sha256": "a6cd97463d9d9cb629fd60b84e35256d7f92f76382cc01ccc9def26b457289a8"
+    },
+    {
+      "path": "backend/starli_engine_connections/schema.py",
+      "bytes": 6365,
+      "sha256": "b20cd3f040699221bad5e7585b63505a5fbb86309d048888a7c5b1538fdf5524"
+    },
+    {
+      "path": "backend/starli_engine_connections/smtp.py",
+      "bytes": 84627,
+      "sha256": "ec3ba5005eea37da0d2ee28b9f1b5a39ebb291bba20a06bd5e596010726305ba"
+    },
+    {
+      "path": "backend/starli_engine_connections/smtp_http.py",
+      "bytes": 13437,
+      "sha256": "c64c84a5efbabc863440f66841e5acaa75cb15e7a9439e385a2a82059a2e2fc3"
+    },
+    {
+      "path": "backend/starli_integration_catalog/__init__.py",
+      "bytes": 28,
+      "sha256": "ea662ad121dd4b7efeadbf4d397a9619f74c395509d9484ee1b11e1ee8d1621c"
+    },
+    {
+      "path": "backend/starli_integration_catalog/catalog.json",
+      "bytes": 651093,
+      "sha256": "0e25bc944c993439a59786a61d195c43883d32a2d1d6f6cf109f5eca43f06642"
+    },
+    {
+      "path": "backend/starli_integration_catalog/native.py",
+      "bytes": 6744,
+      "sha256": "94a277b1ec41085abbf69911cd75084973d572093f9b8606fc1b7a53bcf05400"
+    },
+    {
+      "path": "backend/starli_memory/__init__.py",
+      "bytes": 66,
+      "sha256": "3c147f30107548c515253dd3b3576d38bb88a563ddc2810cb8f484a9eb47b382"
+    },
+    {
+      "path": "backend/starli_memory/agent_creation.py",
+      "bytes": 6018,
+      "sha256": "0f4ba1b239ab22b3a84d7c3eae97565e8f093e88c3b5a9b59a9d329a0348e91c"
+    },
+    {
+      "path": "backend/starli_memory/agent_profile_runtime.py",
+      "bytes": 1571,
+      "sha256": "3b5b4667dc4aaa508a4091eeb6059a6883e1ce08ea40cd5fe0759b241baf8870"
+    },
+    {
+      "path": "backend/starli_memory/agent_profiles.py",
+      "bytes": 6792,
+      "sha256": "534c043bb6ff4c3c78b80bab099cd8b99cf3ee5b6780cf2d77b044115124262d"
+    },
+    {
+      "path": "backend/starli_memory/api.py",
+      "bytes": 9751,
+      "sha256": "f37f0b4cc8a436cb536c82c9ad471e23f7c36f088e2f104c184b6736ab3a1dc8"
+    },
+    {
+      "path": "backend/starli_memory/audience.py",
+      "bytes": 5195,
+      "sha256": "f700daf7bdde45a1da7d711deafda42630c3e6e3d5596e5fd21891cb301971cf"
+    },
+    {
+      "path": "backend/starli_memory/avatar_tokens.py",
+      "bytes": 1705,
+      "sha256": "0f6f4beca99b87278b554b0d60c8893fab1709817e52f88d72b1dc161a039ff6"
+    },
+    {
+      "path": "backend/starli_memory/bot_role_assignments.py",
+      "bytes": 2190,
+      "sha256": "709d9df607a004803b826f6bf3cebb4cbb7ad69be73ff80e80a51728a67f7814"
+    },
+    {
+      "path": "backend/starli_memory/company_avatars.py",
+      "bytes": 6806,
+      "sha256": "026e1a221540a41f0a4c79764be330b26bf501e65b0aad19e6a465f447f34a2e"
+    },
+    {
+      "path": "backend/starli_memory/company_install.py",
+      "bytes": 2522,
+      "sha256": "2c810cffce2571ffe58d55fe3bffb83b77f6b490664dde5558a2f7c39c716f40"
+    },
+    {
+      "path": "backend/starli_memory/context.py",
+      "bytes": 2418,
+      "sha256": "6f103dfca138b42986b007ea91320fd460d39c9b3b56e0e6e75bb8415c3319ab"
+    },
+    {
+      "path": "backend/starli_memory/directory.py",
+      "bytes": 8071,
+      "sha256": "40c82f58eef0b59b161bbf975afc1b061d69d0491dabccbceb895906a89b635a"
+    },
+    {
+      "path": "backend/starli_memory/directory_mount.py",
+      "bytes": 4104,
+      "sha256": "4192336d34c9e83160a47ce5d2d69e0818f3da83e598eca54921a999d346a94d"
+    },
+    {
+      "path": "backend/starli_memory/install_agent_profiles.py",
+      "bytes": 1834,
+      "sha256": "a1a12999d4892d2dd02e5faa262c62859db70a2e7e5774667bd600c9baf2586e"
+    },
+    {
+      "path": "backend/starli_memory/native_directory.py",
+      "bytes": 3893,
+      "sha256": "caf6850d5af2c2000c3f753642356dfb25ed9c36c7883a51a39043823afe3b2b"
+    },
+    {
+      "path": "backend/starli_memory/native_registration.py",
+      "bytes": 2341,
+      "sha256": "b34e6f49b294a1137b2ef7a64aaf767f2ca6cf1786142611fb098b6aaa2a5215"
+    },
+    {
+      "path": "backend/starli_memory/personal_runtime.py",
+      "bytes": 3937,
+      "sha256": "8fa03f7efb3246ed6a8e93b06d75a967110f575e5a1a108eb6995c872d291f6c"
+    },
+    {
+      "path": "backend/starli_memory/registry.py",
+      "bytes": 5352,
+      "sha256": "f7896ea0566280c89e861df39cdcea4976b18bfdf59ee20da05398ff580cd1c5"
+    },
+    {
+      "path": "backend/starli_memory/runtime_integration.py",
+      "bytes": 6982,
+      "sha256": "a96e28a97c2aa348e758b64ca2bb37cde1bbbe550f3d0239020d93472a76eeb6"
+    },
+    {
+      "path": "backend/starli_memory/runtime_tools.py",
+      "bytes": 5492,
+      "sha256": "8e79f2f1a79bd126d2b081198640383469fa4ceabc851df1728e355b568c6d77"
+    },
+    {
+      "path": "backend/starli_memory/store.py",
+      "bytes": 19168,
+      "sha256": "4153bb507e3e061a67bb7ddcb225900366cd21d51c8216b8b88a48bf8c064f20"
+    },
+    {
+      "path": "backend/starli_memory/workspace_api.py",
+      "bytes": 10430,
+      "sha256": "819356f76aa7455e37db087088b237d57cc617a23fa97e611673caf381672c94"
+    },
+    {
+      "path": "backend/starli_memory/workspace_mount.py",
+      "bytes": 4277,
+      "sha256": "b15db7d6c0848d090420d69ec80535745bb43537453b3e020f10a7745d9a46f7"
+    },
+    {
+      "path": "backend/starli_n8n_mcp/__init__.py",
+      "bytes": 43,
+      "sha256": "226b03d59730e83f03281f9948cc88ccf88d0d51ed319bee4504e48233dd2294"
+    },
+    {
+      "path": "backend/starli_n8n_mcp/client.py",
+      "bytes": 10576,
+      "sha256": "5f3efe94fddc4cca2ca206004700d84c03705fe80af1700cb8766e3fa942ad96"
+    },
+    {
+      "path": "backend/starli_n8n_mcp/compiler.py",
+      "bytes": 9436,
+      "sha256": "9a7cc6c4ec940010afe7d88ce69c5c44e130d56be982f008ed8bb79548470744"
+    },
+    {
+      "path": "backend/starli_n8n_mcp/lifecycle.py",
+      "bytes": 8296,
+      "sha256": "2fe1e7f6fcfb189533621a08684b58a4dbc99ef30cd322b7a5c686135062a31c"
+    },
+    {
+      "path": "backend/starli_n8n_mcp/ownership.py",
+      "bytes": 133,
+      "sha256": "1583b0c41148e266b08209b34748076619149896c5560b72207b662ab6d77492"
+    },
+    {
+      "path": "backend/starli_priority_gateway/__init__.py",
+      "bytes": 8714,
+      "sha256": "13dad542ec9a4ca75e1f80f6ae2adce7afccd6672599c07a3e090ad4dbc5ac5a"
+    },
+    {
+      "path": "backend/starli_priority_gateway/bounded.py",
+      "bytes": 10185,
+      "sha256": "ca57a0bfed4e930018fe80bbe215f5a4598c9fa79cc1feb93de157ba8c984726"
+    },
+    {
+      "path": "backend/starli_priority_gateway/company.py",
+      "bytes": 11204,
+      "sha256": "6ca22775ccd5e6ade539c5677fdd4d74790977f607f962cd8d66ecc16a8c94a2"
+    },
+    {
+      "path": "backend/starli_priority_gateway/policy.py",
+      "bytes": 3684,
+      "sha256": "7b0fc5e6e415a5b637031b415e02d29f76bcaeb6ba2a87c8d5c46329b4e77363"
+    },
+    {
+      "path": "backend/starli_priority_gateway/results.py",
+      "bytes": 3031,
+      "sha256": "b6f07cd09e3e6fe02fd9cce311e007660f8d149ecc1651aeec9ccce11b9a2f61"
+    },
+    {
+      "path": "backend/starli_priority_gateway/reuse.py",
+      "bytes": 3968,
+      "sha256": "04609766491bcd0226364e4069b42f4b04fb24fc837fe119b5a42385ebeae26a"
+    },
+    {
+      "path": "backend/starli_priority_gateway/shape.py",
+      "bytes": 2736,
+      "sha256": "cd6cffa1d03187485ae9f82c2c4515081583a444c326e0c790b0a964460fbfaf"
+    },
+    {
+      "path": "backend/starli_priority_gateway/universal.py",
+      "bytes": 23441,
+      "sha256": "cffaf155cbb6718983dbfb3555f39bc69a655eb0282e0c1c1325b26b4b3ea98a"
+    },
+    {
+      "path": "backend/starli_workflow_tools/__init__.py",
+      "bytes": 150,
+      "sha256": "a2241ab71d4ca200f92a862f81f091124cd87fae35a1c2d6321caeeb16ae7831"
+    },
+    {
+      "path": "backend/starli_workflow_tools/data.py",
+      "bytes": 9466,
+      "sha256": "2a4c8ac85288726950e1f6c71202497884fdbee351743154586129b946b82b1d"
+    },
+    {
+      "path": "backend/starli_workflow_tools/drive.py",
+      "bytes": 1970,
+      "sha256": "04517c864b73b74e6a7ba4fa481191edd349b23096b36f0bdc407204c6402f69"
+    },
+    {
+      "path": "backend/starli_workflow_tools/kernel.py",
+      "bytes": 15944,
+      "sha256": "c5df3cc6208ac28aa458cc77ce097815fe4d50b28c194fd9775b43ceb02bcf5e"
+    },
+    {
+      "path": "backend/starli_workflow_tools/native.py",
+      "bytes": 2212,
+      "sha256": "fbddb77e3a8f9c5f1b420027ea19b314b46780eca739d5413d42e0d33e83147a"
+    },
+    {
+      "path": "backend/starli_workflow_tools/production.py",
+      "bytes": 2602,
+      "sha256": "db06e070319e770039f0aac7a4ce42f518dc7e4b8f3fe411f108cc789f3f8f08"
+    },
+    {
+      "path": "backend/start.sh",
+      "bytes": 2529,
+      "sha256": "4f4fe992b49dba64ff7396240c353e4d63c0f2dd047e3c7f63d32f4daf8644ec"
+    },
+    {
+      "path": "backend/start_windows.bat",
+      "bytes": 1787,
+      "sha256": "49897c9a082fca9c109aaa1bff3e27c6b6620922746302a6d6138bc44b002873"
+    },
+    {
+      "path": "backend/tests/test_company_smtp.py",
+      "bytes": 50976,
+      "sha256": "21a7e1e80cfdb7f6a9de56bdc66a1365202680af887e6a47f38aab0950b61b7d"
+    },
+    {
+      "path": "backend/tests/test_starli_avatar_preferences.py",
+      "bytes": 1892,
+      "sha256": "e2bf358c5ea65307036cc6e9562394b1f656470c20548c731bd1faeb27e58a2e"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_actions.py",
+      "bytes": 4632,
+      "sha256": "773c1085092ef923f738661987f18cbef1a277a978b8114a896b77494f29bf9c"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_data.py",
+      "bytes": 2001,
+      "sha256": "66457d71ee61de227dfa399ce913cddf66f620733ed6b4864d46327388f2c61f"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_identity.py",
+      "bytes": 6484,
+      "sha256": "eff95afddede8f52f960f01e3948eae70025ed91dadcd31455f068826cad4ca4"
+    },
+    {
+      "path": "backend/tests/test_starli_customer_runtime.py",
+      "bytes": 20961,
+      "sha256": "513a2f6c79228d570a0095f2b767fd532b14752a5a2bb6e688ed7ddb20f80866"
+    },
+    {
+      "path": "backend/tests/test_starli_guest_projects.py",
+      "bytes": 11466,
+      "sha256": "6e06312ebaee9486b301edb789ab50b9c5c0b931b30c5db1a6c16069dc500cd0"
+    },
+    {
+      "path": "backend/tests/test_starli_guest_provider.py",
+      "bytes": 5383,
+      "sha256": "d41f1f6f9f8db9b3d2c3e23fad98a39b76f2b63fc8250ef7b8e00bb8f8fac3fe"
+    },
+    {
+      "path": "backend/tests/test_starli_live_activity.py",
+      "bytes": 13686,
+      "sha256": "eb47bf603f9c438b774cdb44fbaca9454abe9aeda4dc325072dedebb6db119f2"
+    },
+    {
+      "path": "backend/tests/test_starli_mail.py",
+      "bytes": 9198,
+      "sha256": "df29e46a36d1dc17acc10300d6b2b0ce0043b3fc6dfdb096773bf36e8bd6581b"
+    },
+    {
+      "path": "backend/tests/test_starli_message_routing.py",
+      "bytes": 2782,
+      "sha256": "99ded12fced41c7385c21afcb2a9fb43ec163c2c82317fb4eba839621f23a14f"
+    },
+    {
+      "path": "backend/tests/test_starli_preview.py",
+      "bytes": 3106,
+      "sha256": "9c1679b7146c5db6f9d57fbe78410cc8d04ed61b951e4473129208becc7df8dd"
+    },
+    {
+      "path": "backend/tests/test_starli_preview_events.py",
+      "bytes": 5654,
+      "sha256": "634788cc08d2843c4ff11304c517cd9cb58e5eec5d8836f989ef969bb32cb3d1"
+    },
+    {
+      "path": "backend/tests/test_starli_project_build.py",
+      "bytes": 3979,
+      "sha256": "b063eea1534216e3d828c9f806bbaaddd4dc0e6e8ed8157489f6b51286fe2553"
+    },
+    {
+      "path": "backend/tests/test_starli_providers.py",
+      "bytes": 4544,
+      "sha256": "1158f4c121fb5706bfaa3d170b52309e739eaa512c908658b5e1feec53706e7d"
+    },
+    {
+      "path": "backend/tests/test_starli_result_status.py",
+      "bytes": 7496,
+      "sha256": "28ad6505f15db7c528f092fbc285adafb447afc01e552dd44f5fc1d621d14d56"
+    },
+    {
+      "path": "backend/tests/test_starli_social.py",
+      "bytes": 6260,
+      "sha256": "fdfa1fe25271ca3d4c9b447405474348611fe456263c45e13cd1dd494a25409b"
+    },
+    {
+      "path": "backend/wave_panels/agata.png",
+      "bytes": 16485,
+      "sha256": "8252a5acb76e1bc03eeeb0e7b6307738e77c98fc4f918a95f35702c7178906b9"
+    },
+    {
+      "path": "backend/wave_panels/company_authority.py",
+      "bytes": 52,
+      "sha256": "2dbbeb7d92e848691f3b6718c264d90130e0c736eb824af5950faeba76897c88"
+    },
+    {
+      "path": "backend/wave_panels/company_email_install.py",
+      "bytes": 1400,
+      "sha256": "4304c3d05372267e1d9e403a30b0c9739805c68d776accc15f9861f21895e6e8"
+    },
+    {
+      "path": "backend/wave_panels/controlled-mail.mjs",
+      "bytes": 5064,
+      "sha256": "f5a93cd54c2a89c798d0ea6c7a4ff50316f9052fa555b24367da9b53c2a6ac6f"
+    },
+    {
+      "path": "backend/wave_panels/controlled_routes.py",
+      "bytes": 1789,
+      "sha256": "1fd33c96770d5a758fe576cd7f5dd9066e05ac458b771fae188d3e53ed1dd64f"
+    },
+    {
+      "path": "backend/wave_panels/drive.py",
+      "bytes": 61,
+      "sha256": "54f07e1d30fa3a0178598af160b3ef624482aa9724348fb9fbbd80d2cb22785d"
+    },
+    {
+      "path": "backend/wave_panels/email-local-acceptance.test.mjs",
+      "bytes": 5466,
+      "sha256": "2126bd066173170846d4ed8fa6b50f2d6df0a3ad14ed083c8492ceb3bd06afef"
+    },
+    {
+      "path": "backend/wave_panels/email_native_adapter.py",
+      "bytes": 1146,
+      "sha256": "0b9a580211d5a4ef93023c10d14652345148ef33d7766a006b2b243b3daaf63a"
+    },
+    {
+      "path": "backend/wave_panels/email_runtime.py",
+      "bytes": 9037,
+      "sha256": "f35c129b636c790e93f3795abfcf3025f97a15e2cd8368cbd16d109f0009adb1"
+    },
+    {
+      "path": "backend/wave_panels/email_service.py",
+      "bytes": 2026,
+      "sha256": "60ef3938ffd5ceaee88bb1eee4382516e6c7ffce7347db4637d7dd5b9117a316"
+    },
+    {
+      "path": "backend/wave_panels/email_socket_client.py",
+      "bytes": 4789,
+      "sha256": "31bea5cbccd8de5ab7bd62fea4806670a7f2b9460516c520bebc0cc0f9dc285b"
+    },
+    {
+      "path": "backend/wave_panels/fixture.mjs",
+      "bytes": 1785,
+      "sha256": "d93112481305756666d04386a4c91e647bd9824df503d18df1192468bf126b9a"
+    },
+    {
+      "path": "backend/wave_panels/invoke.mjs",
+      "bytes": 818,
+      "sha256": "ab9d7778a71518d6b68254905817d16fd60c63ecb66a99f2c68e551cf069aa10"
+    },
+    {
+      "path": "backend/wave_panels/mail-store.mjs",
+      "bytes": 1022,
+      "sha256": "a225b7362c89840b720fc7a6bfe6a7a8c899f50abeaa62c42037cd79c5353931"
+    },
+    {
+      "path": "backend/wave_panels/mailbox-adapter.mjs",
+      "bytes": 1580,
+      "sha256": "fb4d76e12c22a34693f8af095da0204f0e4278bc6f67287d724d0ad7005a1604"
+    },
+    {
+      "path": "backend/wave_panels/native-draft.mjs",
+      "bytes": 2108,
+      "sha256": "59eaf94ea894a4c0e0f8a6a24f35249b2bf3654bac615c64cafa581207232f45"
+    },
+    {
+      "path": "backend/wave_panels/native-email-receipt.mjs",
+      "bytes": 2226,
+      "sha256": "d6d56af34f9a702ef617dcad702a6d4dcc35be2c72ebe5424fb371c726a0b76d"
+    },
+    {
+      "path": "backend/wave_panels/native_install.py",
+      "bytes": 6645,
+      "sha256": "beb6027f1043f97c350b620d5373c505bb0bc51a50ef250f7b9704aef943abd5"
+    },
+    {
+      "path": "backend/wave_panels/panel_api.py",
+      "bytes": 6483,
+      "sha256": "88f7e13d736519d60e717e6ddcc2cec0031f63332fc44645712e9b14b80eec62"
+    },
+    {
+      "path": "backend/wave_panels/panel_tools.py",
+      "bytes": 3495,
+      "sha256": "dbae389c4e6ab1f15e15419dd4e5d475da07c786ee6fc8a64118714a6cddd6c0"
+    },
+    {
+      "path": "backend/wave_panels/product-domain.py",
+      "bytes": 1456,
+      "sha256": "13f676eef6d4ccd1f77dcf6c3cb75716c7a62536345c1eb00c2d9b7f31b40d08"
+    },
+    {
+      "path": "backend/wave_panels/product-worker.mjs",
+      "bytes": 3741,
+      "sha256": "7f8dfccd1a21466ac0fe4a82b1281642a4bcfd21c8adf4b5cad03016108b540c"
+    },
+    {
+      "path": "backend/wave_panels/product_router.py",
+      "bytes": 3701,
+      "sha256": "ded54a42723bf4a12ecf912a47e3ffc84a40be6a6eb468d7a1917c4f3a4778e4"
+    },
+    {
+      "path": "backend/wave_panels/sheets.py",
+      "bytes": 16989,
+      "sha256": "0f118e29678482317800752c41d010b9f825f35b905a3dd19392324fe5a1d3c6"
+    },
+    {
+      "path": "backend/wave_panels/studio-delivery.mjs",
+      "bytes": 17567,
+      "sha256": "4721302b7f3941cf74256027b10c886d52c073d27a495249560ecf8051296b22"
+    },
+    {
+      "path": "backend/wave_panels/studio.mjs",
+      "bytes": 13945,
+      "sha256": "f59d7e0430459e0da0b2ef2b2fab0c62fb4b236a416b1d33c85699316ae40f37"
+    },
+    {
+      "path": "backend/wave_panels/test_email_router.py",
+      "bytes": 1484,
+      "sha256": "ff22ead1215b038cf1dd89d8a0d8d63e5b9b4e07e84b6a86ffac16df9b48d7ab"
+    },
+    {
+      "path": "backend/wave_panels/workspace_app.py",
+      "bytes": 3151,
+      "sha256": "a4e5930d9b7f02b8ef03a7d546fc51ea34831aea3e71f0e0bbe16ad761fdf630"
+    },
+    {
+      "path": "backend/workspace_entry.py",
+      "bytes": 126,
+      "sha256": "784cf626ed9abba0b8bb54b068f84ec08af329ca894f1f8460b6366de86069f0"
+    },
+    {
+      "path": "search-gateway/gateway/research-cli.mjs",
+      "bytes": 763,
+      "sha256": "9b48db0e04d149be74ae95798f533b1820f880210ca5397158284b73210de71d"
+    },
+    {
+      "path": "search-gateway/gateway/research.mjs",
+      "bytes": 7676,
+      "sha256": "bb6f4a0d8f3a456132efd53a52df675ff3068faa72ad034f1ce0bdb18db917f3"
+    },
+    {
+      "path": "search-gateway/gateway/research_gateway.py",
+      "bytes": 8434,
+      "sha256": "9e9f2416a0d86cbf940e840fda45a4629bfe1db46529c29954e8e07ba7b26c1d"
+    },
+    {
+      "path": "search-gateway/gateway/tool-schemas.v1.json",
+      "bytes": 1834,
+      "sha256": "24eae9d17d1f2c776a029fa97d8360d22f9b168ca37f514f7f071cf62bfe27a3"
+    }
+  ],
+  "excludedParts": [
+    ".cache",
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "cache",
+    "data",
+    "dist",
+    "logs",
+    "node_modules",
+    "uploads",
+    "venv"
+  ],
+  "allowedExtensions": [
+    ".bat",
+    ".cfg",
+    ".css",
+    ".html",
+    ".ico",
+    ".ini",
+    ".js",
+    ".json",
+    ".mako",
+    ".map",
+    ".md",
+    ".mjs",
+    ".otf",
+    ".png",
+    ".py",
+    ".sh",
+    ".sql",
+    ".svelte",
+    ".svg",
+    ".toml",
+    ".ts",
+    ".ttf",
+    ".txt",
+    ".woff",
+    ".woff2",
+    ".yaml",
+    ".yml"
+  ]
+}

@@ -1,0 +1,4 @@
+private/
+*.local.yml
+__pycache__/
+.venv/

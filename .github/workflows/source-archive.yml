@@ -1,0 +1,33 @@
+name: Prepare reviewed source archive
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Archive version (letters, numbers, dots, underscores, hyphens)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s packaging -p "test_*.py" -v
+      - run: python packaging/check_backend_locks.py
+      - name: Assemble source only
+        env:
+          ARCHIVE_VERSION: ${{ inputs.version }}
+        run: python packaging/source_archive.py --version "$ARCHIVE_VERSION"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: reviewed-source
+          path: work/release/*
+          if-no-files-found: error
+          retention-days: 7

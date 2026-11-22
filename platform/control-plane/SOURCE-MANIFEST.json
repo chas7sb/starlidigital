@@ -1,0 +1,271 @@
+{
+  "source": "/srv/starlidigital/releases/20261109-luna-openwebui-writes/control-plane",
+  "archiveSha256": "bcd59a71d4adfd68f3e36635126e9a4e90ec98cb135e3609f1d0821b7a8253d5",
+  "files": [
+    {
+      "path": "package-lock.json",
+      "bytes": 59640,
+      "sha256": "84f96959c872b2828866efb5e2b57922a537fcb8a64161e4ac9d4b76c2d06d03"
+    },
+    {
+      "path": "package.json",
+      "bytes": 487,
+      "sha256": "67e33a74cf9ad74b88e37ecd4ccac3aeafa0d63273658205e851b39fccd2cbbe"
+    },
+    {
+      "path": "src/audit.ts",
+      "bytes": 2538,
+      "sha256": "ac5fc64a6a2712c41e95dba99d531f9b29d7770f2436f01254c4371d648983dd"
+    },
+    {
+      "path": "src/auth.ts",
+      "bytes": 5235,
+      "sha256": "eb6b08c3a819816b2a6605ccbf131c952c168bad7e8e2d87d9ac192ee03abd14"
+    },
+    {
+      "path": "src/browser-bridge.ts",
+      "bytes": 8544,
+      "sha256": "264499eca7123902d16465efb1df5ceea08803656efa17285064d6ddc37f952d"
+    },
+    {
+      "path": "src/domain-tools.ts",
+      "bytes": 2248,
+      "sha256": "a2fe3dbecb831c3ae1c9737091895f55ddf5e1b0e433f2053c70f84eca9b5756"
+    },
+    {
+      "path": "src/health.ts",
+      "bytes": 2265,
+      "sha256": "f9d8439a65380d61f37f2c3b0499e21eb43506500fe56042145838cf606e5675"
+    },
+    {
+      "path": "src/index.ts",
+      "bytes": 6525,
+      "sha256": "3feeda950dc9377ab9600df2a3caf5c0f37ea955befb071cac2a8154696c6bfc"
+    },
+    {
+      "path": "src/mission-control-mcp.ts",
+      "bytes": 3210,
+      "sha256": "7446c223ae62c7d6a62bed2540e1fa8c55dde53aee75cc18a9680f465bb80939"
+    },
+    {
+      "path": "src/outreach-guard.ts",
+      "bytes": 12091,
+      "sha256": "d665fe14f4ea0946b4cd8566981965ef9f121a8f7e36866b61446626266607cf"
+    },
+    {
+      "path": "src/public-http.ts",
+      "bytes": 3816,
+      "sha256": "5a29aafb90d1307b945989121a5f3eefef8152ef93781df5185f1107bb781a5a"
+    },
+    {
+      "path": "src/sanitize.ts",
+      "bytes": 818,
+      "sha256": "92e0a201b4fd212603f0fdd13ed0513771ce791c82ff4b1ac06ef1959e851a22"
+    },
+    {
+      "path": "src/server.ts",
+      "bytes": 9805,
+      "sha256": "a04639762c6b434b853fac5e15336ae3842217ee1e7316044ca9920850fd450f"
+    },
+    {
+      "path": "src/tools/agency.ts",
+      "bytes": 15095,
+      "sha256": "47977feb37b63e88a96aa98be8fd291357bc7eb00ae8549395f23c70d0da6fc3"
+    },
+    {
+      "path": "src/tools/api.ts",
+      "bytes": 9153,
+      "sha256": "89c9e1e2227615e92a9934b13db4409fa3b24c945489f3b0b938a0bdf3c37269"
+    },
+    {
+      "path": "src/tools/assets.ts",
+      "bytes": 4299,
+      "sha256": "a569b587991a021aaa2643ecdf5c66e79656b8f502ce479ae21d6f5cf742e1e8"
+    },
+    {
+      "path": "src/tools/audit.ts",
+      "bytes": 2680,
+      "sha256": "6d4568ae2bdebb233a851062f1b4cad39b9c8837b24bf7b953e75fdbec1c18dd"
+    },
+    {
+      "path": "src/tools/browser-bridge.ts",
+      "bytes": 5501,
+      "sha256": "c3ff1877eb1847cc8ec6bfbe57fee69305df168c8b0491b0036488c49710c494"
+    },
+    {
+      "path": "src/tools/common.ts",
+      "bytes": 2556,
+      "sha256": "7cf70baac30f018b20dfd2c88ec8c62cd615ff769a92410bd34d6df574980d4c"
+    },
+    {
+      "path": "src/tools/config.ts",
+      "bytes": 7993,
+      "sha256": "fc63ba3312ed05a99f65fcb64c30f1358ac4f86ae73675f08f524675181119a3"
+    },
+    {
+      "path": "src/tools/crm.ts",
+      "bytes": 22743,
+      "sha256": "9900edaa15f513ccd80de83ebef5536a160a970d44b79c55393625254e54a3b4"
+    },
+    {
+      "path": "src/tools/database.ts",
+      "bytes": 6560,
+      "sha256": "3d6e835a18c432de3eb98d29ec59076c51a93c23a1924079aa82173d71993e38"
+    },
+    {
+      "path": "src/tools/deploy.ts",
+      "bytes": 9445,
+      "sha256": "9ba5ca0fe92bb53e88837e573935803a1c00cb57f00c4c7c820da99b9799745a"
+    },
+    {
+      "path": "src/tools/files.ts",
+      "bytes": 8248,
+      "sha256": "a08001649c432545b1530d564e268ddd868473c0b7f1913ea844c200b69a8b0c"
+    },
+    {
+      "path": "src/tools/git.ts",
+      "bytes": 6173,
+      "sha256": "ffa8e7487d0d32efbbc15917bca8e664ad25f17c1784479b323b27f873d69091"
+    },
+    {
+      "path": "src/tools/hosted-agents.ts",
+      "bytes": 18767,
+      "sha256": "1203f721676d08172c4041bea3fa5dca4649939ffb68e7ef9cfa492fb58b1b32"
+    },
+    {
+      "path": "src/tools/http.ts",
+      "bytes": 4556,
+      "sha256": "0f65ee9080d162129e89821fcc7363d43ae6d147aa95addf4450b47f684ae6b5"
+    },
+    {
+      "path": "src/tools/index.ts",
+      "bytes": 1980,
+      "sha256": "940bb3f49167ff9f82f9725f8ed0cbf00e05a87a0bd3b04087a9fe8840d64aa4"
+    },
+    {
+      "path": "src/tools/one-time-agents.test.ts",
+      "bytes": 8632,
+      "sha256": "2114540d526259cdecc3f85aeb37a7ca1b4abcc67599eb1375a3079f7a933114"
+    },
+    {
+      "path": "src/tools/one-time-agents.ts",
+      "bytes": 20741,
+      "sha256": "51902936b20891bf9243d1bcc694eebaf9b542d80f0b8b13d640acf0fe71eaac"
+    },
+    {
+      "path": "src/tools/outreach.ts",
+      "bytes": 10331,
+      "sha256": "6e2b4d02f28244ba17d553a99fd41f01678d740c2ad5e94aaad6b71b2cd42626"
+    },
+    {
+      "path": "src/tools/pi-xai-agent.ts",
+      "bytes": 5060,
+      "sha256": "5c64d837b55e8e8cfaf81e7ac61b65c6cd50464cd4e09ccb579fd63ccc7a7f5c"
+    },
+    {
+      "path": "src/tools/platform.ts",
+      "bytes": 6140,
+      "sha256": "e4fa14681e7f3be5a73871e2d8c12979ff6fa5e7ccd0183dd0a671bfb1b644a2"
+    },
+    {
+      "path": "src/tools/projects.ts",
+      "bytes": 9857,
+      "sha256": "3e19efa37946add307349d268ced31529cfccf1f3dfb7c9b660a790a6bb9ac92"
+    },
+    {
+      "path": "src/tools/security.ts",
+      "bytes": 5606,
+      "sha256": "0b666ff867a95b48ecd010f153a2af1cdf4e5b0f092838b76ba7fa6311586194"
+    },
+    {
+      "path": "src/tools/server.ts",
+      "bytes": 7445,
+      "sha256": "4b6fb16eb86f2ca6763e9483575ff3ae6c8c36f5445f7f088fc9a77fe4c0713e"
+    },
+    {
+      "path": "src/tools/starli-inference.ts",
+      "bytes": 2562,
+      "sha256": "9cb0aa1811791a3a0c78bdeaf466c1bcf8a71b4c686ccca76ae7544a1ffd33cd"
+    },
+    {
+      "path": "src/tools/starli.ts",
+      "bytes": 9392,
+      "sha256": "0b6f410458dfeecedc8e79d68cbe554d71d05f0d46b5321bc4dc0d75bb931a89"
+    },
+    {
+      "path": "src/tools/video.ts",
+      "bytes": 25077,
+      "sha256": "1a5d666cca5c448490adb367a5b538b45c5975f2b083ba03c161ed8ed46dc7fb"
+    },
+    {
+      "path": "src/tools/website.ts",
+      "bytes": 7266,
+      "sha256": "bc482818cd62083db43100328b78203e8fecacd51c08b1f6d261c7b576cffaec"
+    },
+    {
+      "path": "src/tools/worker-mcp-bridge.ts",
+      "bytes": 3758,
+      "sha256": "3dfb4fab4d81e46d52d9a87be6352aac10389eb41f8afcbdd146db9567b6eaea"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 1342,
+      "sha256": "5c0485f4a8ddc5754a142b4e5f78061ed86a418076cd42462100f260f68d22f8"
+    },
+    {
+      "path": "test/agency.test.ts",
+      "bytes": 8079,
+      "sha256": "b349c939b853845148ffcf221854a3fd1ec0e921080c531d30a12998ca46e70b"
+    },
+    {
+      "path": "test/batch-01.test.ts",
+      "bytes": 8142,
+      "sha256": "f9af57713b177b3f19a044c2c3b5d13e0a1550e013510cf29738476c3b7ce572"
+    },
+    {
+      "path": "test/browser-bridge.test.ts",
+      "bytes": 4958,
+      "sha256": "d187d8684b636df4162200401fe97ff38006cc2f8b51b46a361bb9417233a10c"
+    },
+    {
+      "path": "test/control-plane-full.test.ts",
+      "bytes": 9157,
+      "sha256": "7e2791cac711bf309201058d2b408df028493c0f3dcdf206b60a2a90dbec10e8"
+    },
+    {
+      "path": "test/domain-tools.test.ts",
+      "bytes": 9472,
+      "sha256": "ddc9afcc6920d652bbb098f7a4c1d90c50a77ba0a1fe6cdeac3d2f748031eb85"
+    },
+    {
+      "path": "test/hosted-agents-mcp.test.ts",
+      "bytes": 8552,
+      "sha256": "8564d8f43d765673a7bba86a61014781beb1773627bf94af099f83141b665cad"
+    },
+    {
+      "path": "test/outreach-guard.test.ts",
+      "bytes": 12935,
+      "sha256": "6c7ccd416616098977d60479b12b7ec631f314a7f1a49cf6e08dec28ab10dd9b"
+    },
+    {
+      "path": "test/outreach-mcp.test.ts",
+      "bytes": 8899,
+      "sha256": "2c57ba4ffd6ab9501b29024fe75fee0cb976b0a654bac1bdc21ca1eec85f7948"
+    },
+    {
+      "path": "test/proposal-delivery-mcp.test.ts",
+      "bytes": 7548,
+      "sha256": "eaaf91d439a284bf9d0edcaffcf78b1f554371dc6d03b2e11b212ac9ab515985"
+    },
+    {
+      "path": "test/video-mcp.test.ts",
+      "bytes": 10577,
+      "sha256": "0cbf9083c67a1de1afacb3699a384556e2d5ed46469b605a5a07c83354ef9b58"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 297,
+      "sha256": "661ad4db80b87739a2043c6d6791d0c9c843433ea7de58757cd908bf8ec6414f"
+    }
+  ]
+}

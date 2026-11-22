@@ -1,0 +1,4 @@
+import{readFileSync,writeFileSync}from'node:fs';import{parse}from'dotenv';
+const file='.env';let text=readFileSync(file,'utf8');const env=parse(text);
+const defaults={STARLI_CREDIT_PACKS_JSON:JSON.stringify([{id:'pack-100',name:'100 de credite Starli',credits:100,priceId:'price_pending_pack100',amount:4900,currency:'ron'}]),STARLI_SUBSCRIPTION_PLANS_JSON:JSON.stringify([{id:'starli-monthly',name:'Starli Lunar',credits:250,priceId:'price_pending_monthly',amount:9900,currency:'ron',interval:'month'}]),CREDITS_ENFORCED:'true',CREDIT_COST_BUILD:'100',CREDIT_COST_EDIT:'25',CREDIT_COST_IMAGES:'40',CREDIT_COST_RESEARCH:'10'};
+for(const[key,value]of Object.entries(defaults)){if(env[key]!==undefined)continue;text+='\n'+key+'='+(key.endsWith('_JSON')?"'"+value.replaceAll("'",'\\u0027')+"'":JSON.stringify(value))+'\n';}writeFileSync(file,text,{mode:0o600});console.log('Billing offers and credit costs configured; pending Stripe prices remain non-payable.');

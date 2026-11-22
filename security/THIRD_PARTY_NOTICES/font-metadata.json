@@ -1,0 +1,413 @@
+[
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSans-Bold.ttf",
+    "sha256": "cf382cad35e731fc4f13b1bf068c5085cd17bee2141014cc94919c140529488d",
+    "name_table": {
+      "0": [
+        "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)"
+      ],
+      "1": [
+        "Noto Sans"
+      ],
+      "2": [
+        "Bold"
+      ],
+      "3": [
+        "2.013;GOOG;NotoSans-Bold"
+      ],
+      "5": [
+        "Version 2.013"
+      ],
+      "6": [
+        "NotoSans-Bold"
+      ],
+      "8": [
+        "Monotype Imaging Inc."
+      ],
+      "9": [
+        "Monotype Design Team"
+      ],
+      "11": [
+        "http://www.google.com/get/noto/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSans-Italic.ttf",
+    "sha256": "380a500e3dda76d955dadc77053227cc61149814737dc9f7d973d09415ad851f",
+    "name_table": {
+      "0": [
+        "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)"
+      ],
+      "1": [
+        "Noto Sans"
+      ],
+      "2": [
+        "Italic"
+      ],
+      "3": [
+        "2.013;GOOG;NotoSans-Italic"
+      ],
+      "5": [
+        "Version 2.013"
+      ],
+      "6": [
+        "NotoSans-Italic"
+      ],
+      "8": [
+        "Monotype Imaging Inc."
+      ],
+      "9": [
+        "Monotype Design Team"
+      ],
+      "11": [
+        "http://www.google.com/get/noto/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSans-Regular.ttf",
+    "sha256": "3be6b371cef19ed6add589bd106444ab74c9793bc812d3159298b73d00ee011c",
+    "name_table": {
+      "0": [
+        "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)"
+      ],
+      "1": [
+        "Noto Sans"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.013;GOOG;NotoSans-Regular"
+      ],
+      "5": [
+        "Version 2.013"
+      ],
+      "6": [
+        "NotoSans-Regular"
+      ],
+      "8": [
+        "Monotype Imaging Inc."
+      ],
+      "9": [
+        "Monotype Design Team"
+      ],
+      "11": [
+        "http://www.google.com/get/noto/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSans-Variable.ttf",
+    "sha256": "74df1f61ab9d4bfaa961c65f8dc991deaae2885b0a6a6d6a60ed23980b3c8554",
+    "name_table": {
+      "0": [
+        "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)"
+      ],
+      "1": [
+        "Noto Sans"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.013;GOOG;NotoSans-Regular"
+      ],
+      "5": [
+        "Version 2.013"
+      ],
+      "6": [
+        "NotoSans-Regular"
+      ],
+      "8": [
+        "Monotype Imaging Inc."
+      ],
+      "9": [
+        "Monotype Design Team"
+      ],
+      "11": [
+        "http://www.google.com/get/noto/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "https://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansJP-Regular.ttf",
+    "sha256": "fb3df01b4182734d021d79ec5bac17903bb681e926a059c59ed81a373d612241",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans JP"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004-H2;ADBO;NotoSansJP-Regular"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansJP-Regular"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansJP-Variable.ttf",
+    "sha256": "33119a596d1bfae91165585c90c6e9752cf2c9120b45c18388fb81724b3ec64b",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans JP Thin"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004;ADBO;NotoSansJP-Thin;ADOBE"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansJP-Thin"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansKR-Regular.ttf",
+    "sha256": "9db318b65ee9c575a43e7efd273dbdd1afef26e467eea3e1073a50e1a6595f6d",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans KR"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004-H2;ADBO;NotoSansKR-Regular"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansKR-Regular"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansKR-Variable.ttf",
+    "sha256": "2d2267a83d089cb1a517a4f901676d05d283346e650d1b1845d601cbd696a98e",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans KR Thin"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004;ADBO;NotoSansKR-Thin;ADOBE"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansKR-Thin"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansSC-Regular.ttf",
+    "sha256": "5cf8b2a0576d5680284ab03a7a8219499d59bbe981a79bb3dc0031f251c39736",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans SC"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004-H2;ADBO;NotoSansSC-Regular"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansSC-Regular"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/NotoSansSC-Variable.ttf",
+    "sha256": "2e68d43ae2c504f4e302a9cf522ecc3f06ef66d724cade58bbe13a3a4af70512",
+    "name_table": {
+      "0": [
+        "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+      ],
+      "1": [
+        "Noto Sans SC Thin"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "2.004;ADBO;NotoSansSC-Thin;ADOBE"
+      ],
+      "5": [
+        "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansSC-Thin"
+      ],
+      "8": [
+        "Adobe"
+      ],
+      "9": [
+        "Ryoko NISHIZUKA \u897f\u585a\u6dbc\u5b50 (kana, bopomofo & ideographs); Paul D. Hunt (Latin, Greek & Cyrillic); Sandoll Communications \uc0b0\ub3cc\ucee4\ubba4\ub2c8\ucf00\uc774\uc158, Soo-young JANG \uc7a5\uc218\uc601 & Joo-yeon KANG \uac15\uc8fc\uc5f0 (hangul elements, letters & syllables)"
+      ],
+      "11": [
+        "http://www.adobe.com/type/"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL"
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    }
+  },
+  {
+    "path": "dashboard/backend/open_webui/static/fonts/Twemoji.ttf",
+    "sha256": "c196846223cc229dd9d3df6b377b12faa5a4516393933b227ee5211a6cd9438a",
+    "name_table": {
+      "1": [
+        "Twemoji Mozilla"
+      ],
+      "2": [
+        "Regular"
+      ],
+      "3": [
+        "FontForge 2.0 : Twemoji Mozilla : 18-11-2024"
+      ],
+      "5": [
+        "Version 0.7.0"
+      ],
+      "6": [
+        "TwemojiMozilla"
+      ]
+    }
+  }
+]

@@ -1,0 +1,4 @@
+# Templates are safe to commit; actual environment files are local.
+.env
+*.env
+!*.env.example

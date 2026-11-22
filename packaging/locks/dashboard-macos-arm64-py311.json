@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "target": "aarch64-apple-darwin",
+  "python": "3.11",
+  "resolver": "uv 0.11.19 (7b2cff1c3 2026-06-03 x86_64-pc-windows-msvc)",
+  "requirements": "dashboard/backend/requirements.txt",
+  "requirements_sha256": "930e16bf62b78e22bb647a969aed0c6dc03d22b748af1b42fad24940ff6d8bc5",
+  "lock_sha256": "fad8190aebcfd1ac4f996d495b15b62904d37f3505bfee8d410ac47e2b5f47da",
+  "status": "resolved-with-hashes; installation-not-verified",
+  "hash_normalization": "LF"
+}

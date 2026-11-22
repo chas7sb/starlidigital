@@ -1,0 +1,60 @@
+name: Source and platform validation
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packaging:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Verify archive integrity and exclusion rules
+        run: python -m unittest discover -s packaging -p "test_*.py" -v
+      - name: Check backend environment lock freshness
+        run: python packaging/check_backend_locks.py
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+        component: [platform, dashboard]
+        include:
+          - component: platform
+            node: '24'
+          - component: dashboard
+            node: '22'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      CYPRESS_INSTALL_BINARY: '0'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+      - name: Install locked dependencies and run manifest build
+        run: python packaging/build_component.py ${{ matrix.component }} ${{ matrix.component == 'platform' && '--test' || '' }}
+      - name: Compile dashboard Python source without importing or starting services
+        if: matrix.component == 'dashboard'
+        run: >-
+          python -c "from pathlib import Path; import compileall;
+          p=Path('dashboard/backend/open_webui');
+          assert p.is_dir(), 'Dashboard backend missing';
+          assert compileall.compile_dir(p, quiet=1), 'Backend syntax failures'"

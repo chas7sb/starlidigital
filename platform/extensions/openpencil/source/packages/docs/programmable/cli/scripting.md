@@ -1,0 +1,226 @@
+---
+title: Scripting
+description: Execute JavaScript with a Figma-compatible Plugin API to query, batch-modify, and generate designs.
+---
+
+# Scripting
+
+`openpencil eval` runs JavaScript against an OpenPencil document with a Figma-compatible `figma` global. Use it for headless batch edits, inspection, fixture setup, and automation without opening the editor UI.
+
+## Basic usage
+
+```sh
+openpencil eval design.fig -c "return figma.currentPage.children.length"
+```
+
+The `-c` flag accepts JavaScript. Its last expression is the result, so `return` is optional; `await` works at the top level. A script whose last statement is not an expression, such as a declaration, has no result and prints nothing.
+
+```sh
+openpencil eval design.fig -c "
+  const frame = figma.createFrame()
+  frame.name = 'Card'
+  frame.resize(300, 200)
+  frame.layoutMode = 'VERTICAL'
+  frame.itemSpacing = 12
+  return { id: frame.id, name: frame.name }
+"
+```
+
+## Query nodes
+
+```sh
+openpencil eval design.fig -c "
+  return figma.currentPage
+    .findAll((node) => node.type === 'FRAME' && node.name.includes('Button'))
+    .map((button) => ({
+      id: button.id,
+      name: button.name,
+      width: button.width,
+      height: button.height
+    }))
+"
+```
+
+## Modify and save
+
+Use `--write` / `-w` to write changes back to the input file:
+
+```sh
+openpencil eval design.fig -c "
+  figma.currentPage.children.forEach((node) => {
+    node.opacity = 0.5
+  })
+" --write
+```
+
+Use `--output` / `-o` to write to a new file:
+
+```sh
+openpencil eval design.fig -c "figma.currentPage.name = 'Updated'" -o updated.fig
+```
+
+## Read scripts from stdin
+
+```sh
+cat transform.js | openpencil eval design.fig --stdin --write
+```
+
+## Live app mode
+
+Omit the file path to run against the currently open document in the desktop app:
+
+```sh
+openpencil eval -c "return figma.currentPage.name"
+```
+
+The desktop app must be running with a document open.
+
+## Output
+
+By default, non-TTY output is JSON. Use `--json` to force JSON output:
+
+```sh
+openpencil eval design.fig -c "return figma.currentPage.children.map((n) => n.name)" --json
+```
+
+Use `--quiet` / `-q` to suppress output when only writing a file.
+
+## The `openpencil` API
+
+Next to `figma`, scripts get `openpencil`: what OpenPencil adds to the Figma Plugin API, in the same style. The same global is available to the `eval` tool and the running app's automation.
+
+A main component or component set can [behave as a Reka UI control](/user-guide/components#behaviours-and-preview). Bind it by its own property and slot names:
+
+```sh
+openpencil eval design.fig -w -c '
+  const set = figma.currentPage.findOne((n) => n.type === "COMPONENT_SET" && n.name === "Switch")
+  const behaviour = openpencil.setBehaviour(set, "switch")
+    .bindValue("value", "State")                          // On and Off guessed from the variants
+    .bindPart("thumb", set.findOne((n) => n.name === "Thumb")) // the frame becomes a slot
+  behaviour.states = "Interaction"
+  behaviour.missing
+'
+```
+
+- `openpencil.setBehaviour(node, kindOrSpec)` replaces a component's behaviour: a kind alone, or a spec such as `{ kind: "slider", parts: { track: "Track", thumb: "Thumb" }, numbers: { value: { min: 0, max: 10 } } }`. It returns the behaviour.
+- `openpencil.getBehaviour(node)` reads one, or `null`; a variant reads its set's.
+- A behaviour has `kind`, `spec` (by name), `missing` (required values and parts still unbound), and `states`, and `bindValue(valueId, property, { on, off })`, `bindPart(partId, slotNameOrFrame)`, `setNumber(valueId, { min, max, step, default })`, and `remove()`.
+- `openpencil.behaviourKinds` lists every kind with the values and parts it binds.
+- `openpencil.createSlot(frame)` makes a frame of a main component a slot and returns its name.
+
+Names the component does not have fail with an error that lists the ones it has.
+
+Comments people leave with the Comment tool are part of the document, so scripts and agents can read the feedback on a file, act on it, and answer:
+
+```sh
+openpencil eval design.fig -w -c '
+  for (const comment of openpencil.getComments({ resolved: false })) {
+    console.log(comment.author, comment.node?.name, comment.text)
+    comment.reply("Bumped the title to 24px", { author: "Claude" }).resolve()
+  }
+'
+```
+
+- `openpencil.getComments(filter)` lists threads oldest first: all of them, or `{ resolved: false }` for open ones, `{ page }` for one page's, `{ author }` for those a person started or replied to.
+- `openpencil.addComment(text, { node, page, x, y, author })` pins a comment on a layer, which it follows, or at a point of a page; the current page by default. `author` is `"Agent"` when left out.
+- A comment has `id`, `text` (Markdown), `author`, `createdAt`, `resolved`, `page`, `node` (the top-level layer it is pinned to), `position`, and `replies`, and `reply(text, { author })`, `resolve()`, `reopen()`, and `remove()`. `openpencil.getComment(id)` finds one.
+
+## Supported API surface
+
+The API is intentionally close to Figma's Plugin API, but it maps to OpenPencil's scene graph and file format.
+
+### Document and pages
+
+- `figma.root`
+- `figma.currentPage`
+- `figma.currentPage.selection`
+- `figma.getNodeById(id)`
+- `figma.createPage()`
+
+### Node creation
+
+- `figma.createFrame()`
+- `figma.createRectangle()`
+- `figma.createEllipse()`
+- `figma.createText()`
+- `figma.createLine()`
+- `figma.createPolygon()`
+- `figma.createStar()`
+- `figma.createVector()`
+- `figma.createNodeFromSvg(svg)`
+- `figma.createComponent()`
+- `figma.createSection()`
+
+### Tree operations
+
+- `node.children`
+- `node.parent`
+- `node.appendChild(child)`
+- `node.insertChild(index, child)`
+- `node.clone()`
+- `node.remove()`
+- `node.findAll(callback?)`
+- `node.findOne(callback)`
+- `node.findChild(callback)`
+- `node.findChildren(callback?)`
+- `figma.group(nodes, parent)`
+- `figma.ungroup(node)`
+
+### Components
+
+- `figma.createComponentFromNode(node)`
+- `figma.combineAsVariants(components, parent)` — properties come from names such as `State=On, Size=Large`
+- `component.createInstance()`
+- `instance.mainComponent`
+
+### Variables
+
+- `figma.getLocalVariables(type?)`
+- `figma.getVariableById(id)`
+- `figma.getLocalVariableCollections()`
+- `figma.getVariableCollectionById(id)`
+- `figma.createVariable(name, type, collectionId, value?)`
+- `figma.setVariableValue(variableId, modeId, value)`
+- `figma.deleteVariable(id)`
+- `figma.createVariableCollection(name)`
+- `figma.deleteVariableCollection(id)`
+- `figma.bindVariable(nodeId, field, variableId)`
+- `figma.unbindVariable(nodeId, field)`
+
+### Properties
+
+Common node properties are readable/writable through the proxy, including:
+
+- Geometry: `x`, `y`, `width`, `height`, `rotation`, `resize(width, height)`
+- Appearance: `fills`, `strokes`, `effects`, `opacity`, `visible`, `locked`, `blendMode`, `clipsContent`
+- Radius: `cornerRadius`, `topLeftRadius`, `topRightRadius`, `bottomRightRadius`, `bottomLeftRadius`
+- Text: `characters`, `fontSize`, `fontName`, `fontWeight`, `fills`, `letterSpacing`, `lineHeight`, and `textDecoration`, which read `figma.mixed` while characters differ and restyle every character when set, and alignment
+- Text ranges: `getStyledTextSegments(fields, start?, end?)`, and `getRange…` / `setRange…` for `FontSize`, `FontName`, `Fills`, `LetterSpacing`, `LineHeight`, `TextDecoration` with its `Style`, `Offset`, `Thickness`, `Color`, and `SkipInk`, `TextCase`, `Hyperlink` (a `{ type: 'URL' | 'NODE', value }` link, or `null`), `TextStyleId` and `FillStyleId` (set with `setRangeTextStyleIdAsync` and `setRangeFillStyleIdAsync`, which give the range the style's fields), and `getRangeBoundVariable` / `setRangeBoundVariable` for the text fields Figma binds, plus `getRangeFontWeight`, `getRangeAllFontNames`, and `getRangeOpenTypeFeatures`. Lengths read in pixels; a percent given to a setter is of the font size
+- Text lists and paragraphs: `getRangeListOptions` / `setRangeListOptions` for bulleted (`UNORDERED`) and numbered (`ORDERED`) items, `getRangeIndentation` / `setRangeIndentation` for nesting (1–5 for list items), `listSpacing`, `paragraphSpacing`, and `paragraphIndent` for the whole text (`figma.mixed` when paragraphs differ) or per paragraph with `getRangeListSpacing` / `setRangeListSpacing`, `getRangeParagraphSpacing` / `setRangeParagraphSpacing`, and `getRangeParagraphIndent` / `setRangeParagraphIndent`, and `hangingList`
+- Auto-layout: `layoutMode`, `primaryAxisAlignItems`, `counterAxisAlignItems`, `itemSpacing`, padding, sizing, and layout positioning fields
+- Stroke helpers: `strokeWeight`, `strokeAlign`, `dashPattern`
+
+### Utilities
+
+- `figma.mixed`
+- `figma.createImage(data)`
+- `figma.loadFontAsync(fontName)` no-ops because OpenPencil does not gate text edits on plugin font loading
+- `figma.listAvailableFontsAsync()` returns host-provided fonts when available
+- `figma.getNodeByIdAsync(id)` and `instance.getMainComponentAsync()` resolve to the same nodes as `figma.getNodeById(id)` and `instance.mainComponent`, for scripts written for Figma's dynamic-page mode
+- `figma.notify(message)` logs a warning in headless mode
+- `instance.swapComponent(component)` points an instance at another component
+- A layer inside an instance refuses `x`, `y`, `rotation`, `relativeTransform`, `constraints`, `isMask`, and `maskType` with Figma's error, such as `in set_x: This property cannot be overridden in an instance: relative-transform`; those always follow the component. Slot content keeps them, and setting one on a slot's default content makes the instance own the slot
+- `component.createSlot()` adds a slot frame and its `SLOT` property; slot frames read `type: 'SLOT'`, `resetSlot()` brings back an instance slot's component content, and `limitViolations` lists the limits an instance slot breaks. `addComponentProperty` and `editComponentProperty` take a `description` and, for slots, `slotSettings`
+- `figma.viewport`
+
+## Not yet Figma-compatible
+
+These Figma APIs are not exposed as compatible helpers yet:
+
+- `node.exportAsync()`
+- `node.setBoundVariable(field, variable)`
+- `figma.combineAsVariants(components, parent)`
+- Figma style APIs such as `figma.createPaintStyle()` / `figma.createTextStyle()`
+- Full vector boolean operation parity
+
+Use OpenPencil CLI export commands, core tools, or direct scene-graph helpers where available.

@@ -1,0 +1,31 @@
+[Unit]
+Description=Fixed Search and account MCP child profiles
+After=network.target
+[Service]
+Type=simple
+User=root
+Group=root
+RuntimeDirectory=starli-network-child
+RuntimeDirectoryMode=0755
+ExecStartPre=/usr/bin/python3 -I /opt/starlidigital/network-child/releases/v1/cleanup.py
+ExecStart=/usr/bin/python3 -I /opt/starlidigital/network-child/releases/v1/broker.py
+ExecStopPost=/usr/bin/python3 -I /opt/starlidigital/network-child/releases/v1/cleanup.py
+Restart=on-failure
+RestartSec=2s
+KillMode=control-group
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_SETUID CAP_SETGID CAP_KILL CAP_CHOWN CAP_DAC_READ_SEARCH
+ProtectSystem=strict
+ReadWritePaths=/run/starli-network-child /sys/fs/cgroup/starli-network-children
+ProtectHome=yes
+PrivateTmp=yes
+ProtectControlGroups=no
+MemoryMax=64M
+TasksMax=32
+CPUQuota=100%
+TimeoutStopSec=10s
+UMask=0077
+StandardOutput=null
+StandardError=null
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,83 @@
+name: starlidigital-local
+services:
+  platform:
+    build:
+      context: ../platform
+      dockerfile: ../installer/platform.Dockerfile
+    init: true
+    environment:
+      HOST: 0.0.0.0
+      PORT: '4100'
+      DATABASE_PATH: /data/starli.sqlite
+      PUBLIC_APP_URL: http://localhost:4100
+      ALLOWED_ORIGINS: http://localhost:8080,http://127.0.0.1:8080,http://localhost:4100
+    ports:
+      - '127.0.0.1:${STARLI_PLATFORM_PORT:-4100}:4100'
+      - '127.0.0.1:${STARLI_DASHBOARD_PORT:-8080}:8080'
+      - '127.0.0.1:4120:4120'
+    volumes:
+      - platform-data:/data
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4100/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 60s
+  control-plane:
+    build:
+      context: ../platform
+      dockerfile: ../installer/platform.Dockerfile
+    init: true
+    network_mode: service:platform
+    command: ['npm', 'run', 'start', '-w', 'control-plane']
+    environment:
+      CONTROL_PLANE_HOST: 0.0.0.0
+      CONTROL_PLANE_PORT: '4120'
+      CONTROL_PLANE_UPSTREAM_URL: http://127.0.0.1:4100/health
+      CONTROL_PLANE_DB_PATH: /data/control-plane.sqlite
+    volumes:
+      - control-data:/data
+    profiles: ['extended']
+  task-worker:
+    build:
+      context: ../dashboard
+      dockerfile: ../installer/dashboard.Dockerfile
+    init: true
+    network_mode: service:platform
+    command: ['python', '-m', 'open_webui.starli_task_worker']
+    environment:
+      DATA_DIR: /data
+      STARLI_SOURCE_DATABASE: /platform-data/starli.sqlite
+      STARLI_PLATFORM_ORIGIN: http://127.0.0.1:4100
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?Run installer init to generate local secrets}
+    volumes:
+      - dashboard-data:/data
+      - platform-data:/platform-data
+    profiles: ['extended']
+  dashboard:
+    build:
+      context: ../dashboard
+      dockerfile: ../installer/dashboard.Dockerfile
+    init: true
+    network_mode: service:platform
+    environment:
+      DATA_DIR: /data
+      WEBUI_AUTH: 'True'
+      WEBUI_URL: http://localhost:8080
+      STARLI_PLATFORM_ORIGIN: http://127.0.0.1:4100
+      STARLI_SOURCE_DATABASE: /platform-data/starli.sqlite
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?Run installer init to generate local secrets}
+    volumes:
+      - dashboard-data:/data
+      - platform-data:/platform-data
+    healthcheck:
+      test: ['CMD', 'python', '-c', "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=4)"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 120s
+volumes:
+  platform-data:
+  dashboard-data:
+  control-data:
+

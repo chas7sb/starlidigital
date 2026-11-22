@@ -1,0 +1,168 @@
+import type { SceneGraph, SceneNode } from '@open-pencil/scene-graph'
+
+import type { SkiaRenderer } from '#core/canvas/renderer'
+import {
+  COMPONENT_LABEL_FONT_SIZE,
+  DEFAULT_FONT_FAMILY,
+  DEFAULT_FONT_SIZE,
+  LABEL_FONT_SIZE,
+  SECTION_TITLE_FONT_FAMILY,
+  SECTION_TITLE_FONT_SIZE,
+  SECTION_TITLE_FONT_URL,
+  SIZE_FONT_SIZE,
+  VALUE_FONT_SIZE
+} from '#core/constants'
+import { withTextMeasurer } from '#core/layout/text-measurement'
+import { fontManager } from '#core/text/fonts'
+import { prepareGraphFonts } from '#core/text/prepare'
+import {
+  fontCoverageDemand,
+  fontResolver,
+  missingGlyphsByScript,
+  type MissingGlyphOccurrence,
+  type FontResolutionSnapshot
+} from '#core/text/resolver'
+
+export function resolveLabelFontCoverage(
+  r: Pick<SkiaRenderer, 'isDestroyed' | 'onFontResolutionSettled'>,
+  missing: readonly MissingGlyphOccurrence[],
+  resolver = fontResolver
+): void {
+  if (r.isDestroyed()) return
+  for (const [script, characters] of missingGlyphsByScript(missing)) {
+    const demand = fontCoverageDemand(script, characters)
+    const state = resolver.state(demand).state
+    if (state === 'loaded') resolver.exhaust(demand)
+    else if (state === 'idle' || state === 'loading') {
+      // No fake TEXT node: the shared settlement callback refreshes font generation and repaints.
+      void resolver.demand(demand, r.onFontResolutionSettled)
+    }
+  }
+}
+
+export function syncFontGeneration(r: SkiaRenderer): void {
+  r.fontGeneration = fontManager.generation()
+}
+
+export function trackFontDemand(r: SkiaRenderer, node: SceneNode, key: string): void {
+  const pending = r.pendingFontNodes.get(node.id) ?? { node, keys: new Set<string>() }
+  pending.node = node
+  pending.keys.add(key)
+  r.pendingFontNodes.set(node.id, pending)
+}
+
+interface TextPictureGenerationState {
+  fontGeneration: number
+  textPictureGenerations: Map<string, { data: Uint8Array; generation: number }>
+}
+
+export function isTextPictureCurrent(r: TextPictureGenerationState, node: SceneNode): boolean {
+  const data = node.textPicture
+  if (!data) {
+    r.textPictureGenerations.delete(node.id)
+    return false
+  }
+  const cached = r.textPictureGenerations.get(node.id)
+  if (!cached || cached.data !== data) {
+    r.textPictureGenerations.set(node.id, { data, generation: r.fontGeneration })
+    return true
+  }
+  return cached.generation === r.fontGeneration
+}
+
+function settleFontDemand(
+  r: SkiaRenderer,
+  snapshot: FontResolutionSnapshot,
+  nodeIds: readonly string[]
+): void {
+  syncFontGeneration(r)
+  for (const nodeId of nodeIds) {
+    const pending = r.pendingFontNodes.get(nodeId)
+    if (pending) {
+      pending.node.textPicture = null
+      pending.keys.delete(snapshot.key)
+      if (pending.keys.size === 0) r.pendingFontNodes.delete(nodeId)
+    }
+    r.textPictureGenerations.delete(nodeId)
+    r.invalidateNodePicture(nodeId)
+  }
+}
+
+export function getFontProvider(r: SkiaRenderer) {
+  return r.isDestroyed() || !r.fontProvider ? null : r.fontProvider
+}
+
+/** Section titles' face, for the canvas and for the field that renames a title in the page. */
+function registerSectionTitleFont(r: SkiaRenderer, data: ArrayBuffer) {
+  r.fontProvider?.registerFont(data, SECTION_TITLE_FONT_FAMILY)
+  fontManager.registerFontInBrowser(SECTION_TITLE_FONT_FAMILY, 'SemiBold', data)
+  const typeface = r.ck.Typeface.MakeFreeTypeFaceFromData(data)
+  if (!typeface) return
+  try {
+    r.valueFont?.delete()
+    r.valueFont = new r.ck.Font(typeface, VALUE_FONT_SIZE)
+  } finally {
+    // The font holds its own reference to the face.
+    typeface.delete()
+  }
+}
+
+export async function loadFonts(
+  r: SkiaRenderer,
+  onFallbackFontsLoaded?: () => void
+): Promise<void> {
+  if (r.isDestroyed()) return
+  r.onFontResolutionSettled = (snapshot, nodeIds) => {
+    if (r.isDestroyed()) return
+    settleFontDemand(r, snapshot, nodeIds)
+    onFallbackFontsLoaded?.()
+  }
+  r.fontProvider?.delete()
+  r.fontProvider = r.ck.TypefaceFontProvider.Make()
+
+  fontManager.attachProvider(r.ck, r.fontProvider)
+  syncFontGeneration(r)
+
+  const [fontData, titleData] = await Promise.all([
+    fontManager.loadFont(DEFAULT_FONT_FAMILY, 'Regular'),
+    fontManager.fetchBundledFont(SECTION_TITLE_FONT_URL).catch(() => null)
+  ])
+  if (r.isDestroyed()) return
+  if (titleData) registerSectionTitleFont(r, titleData)
+  if (fontData) {
+    const typeface = r.ck.Typeface.MakeFreeTypeFaceFromData(fontData)
+    if (typeface) {
+      r.textFont?.delete()
+      r.labelFont?.delete()
+      r.sizeFont?.delete()
+      r.sectionTitleFont?.delete()
+      r.componentLabelFont?.delete()
+      r.textFont = new r.ck.Font(typeface, DEFAULT_FONT_SIZE)
+      r.labelFont = new r.ck.Font(typeface, LABEL_FONT_SIZE)
+      r.sizeFont = new r.ck.Font(typeface, SIZE_FONT_SIZE)
+      r.sectionTitleFont = new r.ck.Font(typeface, SECTION_TITLE_FONT_SIZE)
+      r.componentLabelFont = new r.ck.Font(typeface, COMPONENT_LABEL_FONT_SIZE)
+      r.profiler.setTypeface(typeface)
+    }
+    r.fontMgr = r.ck.FontMgr.FromData(fontData) ?? null
+  }
+
+  r.fontsLoaded = true
+  syncFontGeneration(r)
+  r.invalidateAllPictures()
+}
+
+export async function prepareForExport(
+  r: SkiaRenderer,
+  graph: SceneGraph,
+  pageId: string,
+  nodeIds: string[]
+): Promise<void> {
+  const { computeAllLayouts } = await import('#core/layout')
+  await prepareGraphFonts(graph, nodeIds)
+  syncFontGeneration(r)
+  withTextMeasurer(
+    (node, maxWidth) => r.measureTextNode(node, maxWidth),
+    () => graph.applyDerivedLayoutDuring(() => computeAllLayouts(graph, pageId))
+  )
+}

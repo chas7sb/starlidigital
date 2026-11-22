@@ -1,0 +1,32 @@
+{
+  "name": "starlidigital-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "server",
+    "web",
+    "cli",
+    "device",
+    "control-plane"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm run dev -w server\" \"npm run dev -w web\"",
+    "build": "npm run build -w server && npm run build -w control-plane && npm run build -w cli && npm run build -w device && npm run build -w web",
+    "test": "npm run test -w server && npm run test -w control-plane && npm run test -w cli && npm run test -w device && npm run test -w web",
+    "start": "npm run start -w server",
+    "check": "npm run build && npm test && npm run test:e2e",
+    "test:e2e": "node scripts/e2e.mjs",
+    "backup": "node scripts/backup.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "jose": "^6.2.14",
+    "zod": "^3.25.76"
+  }
+}

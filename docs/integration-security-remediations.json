@@ -1,0 +1,29 @@
+{
+  "status": "remediated-owned-source",
+  "paths": [
+    {
+      "path": "platform/extensions/openpencil/source/packages/core/src/constants.ts",
+      "sha256": "570586eb5339a1598e263258644481e2517a10a687aa9ea6bbbf8163b9deef8c"
+    },
+    {
+      "path": "platform/extensions/mission-control/server/src/index.ts",
+      "sha256": "1ab737ded8a0578cd702fe6b0b248d946e8c7d49004d7a565be9ab41358fc5f5"
+    },
+    {
+      "path": "platform/extensions/mission-control/server/src/mailbox/service.ts",
+      "sha256": "f33f9fb96e06e6179be4b4caf2496df7a265bebe50a8ad17b43a661b9b3444b6"
+    },
+    {
+      "path": "platform/extensions/search/source/searx/engines/pexels.py",
+      "sha256": "ca51bbf1731bd543e51c1ace98b262a06b4efac354d5405df60c0f39505fb273"
+    },
+    {
+      "path": "platform/extensions/search/source/searx/settings.yml",
+      "sha256": "e666814f719c5d674c65895036ebe8147cc215cc2fba591b6d88fb6a596da753"
+    },
+    {
+      "path": "platform/extensions/search/wsgi.py",
+      "sha256": "92f88978ab849b70ce8d20a95425e29a154209d4af61a706bcb39ce07a09e170"
+    }
+  ]
+}

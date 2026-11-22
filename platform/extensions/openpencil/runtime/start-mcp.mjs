@@ -1,0 +1,12 @@
+import { readFile } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const config = JSON.parse(await readFile(resolve(root, 'state/config.json'), 'utf8'));
+process.env.PORT = process.env.OPENPENCIL_MCP_PORT || '17600';
+process.env.OPENPENCIL_MCP_ROOT = resolve(root, 'documents');
+process.env.OPENPENCIL_MCP_AUTH_TOKEN = config.mcpToken;
+process.env.OPENPENCIL_MCP_SOCKET ||= resolve(root, 'state/mcp.sock');
+process.env.OPENPENCIL_MCP_DISCOVERY_PATH = resolve(root, 'state/mcp.json');
+process.env.OPENPENCIL_MCP_CORS_ORIGIN ||= 'http://127.0.0.1:17601';
+await import(new URL('./index.mjs', import.meta.resolve('@open-pencil/mcp')).href);

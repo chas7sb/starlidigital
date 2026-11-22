@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-22",
+  "host": "Windows AMD64",
+  "qemu": {
+    "version": "11.1.0 (v11.1.0-12130-ge470268ff4)",
+    "installer": "https://qemu.weilnetz.de/w64/qemu-w64-setup-20260811.exe",
+    "sha512": "5bcf9eed634e8575a37b74f445af41a2fe4106da512d0c30c368301d4c105037fdfab40a5287367a28a957624cddebbc8c07e16c88ab6634f554cdf3d16bf543",
+    "checksum_verified": true
+  },
+  "guest": {
+    "iso": "https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/x86_64/alpine-virt-3.24.4-x86_64.iso",
+    "sha256": "157d353f8e54252cad2d9812a0d56bb7fa2231fc154a110e1d180d7480ef8b4f",
+    "checksum_verified": true,
+    "kernel_observed": "6.18.60-0-virt",
+    "accelerator": "whpx",
+    "memory_mb": 2048,
+    "vcpus": 2,
+    "disk_gb": 12,
+    "boot_to_login": true,
+    "qmp_status": "running",
+    "vnc_screenshot": true,
+    "vnc_keyboard": true,
+    "persistent_disk_boot": true,
+    "persistent_kernel_observed": "6.18.64-0-virt",
+    "persistent_root_observed": "/dev/vda2",
+    "installer_detached": true,
+    "desktop_ready": false,
+    "dashboard_agent_connected": false
+  },
+  "platforms": {"windows": "boot tested", "macos": "not tested", "linux": "not tested"}
+}

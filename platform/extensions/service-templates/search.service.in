@@ -1,0 +1,16 @@
+[Unit]
+Description=StarliDigital local bounded search service
+After=network.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@EXTENSIONS_ROOT@/search
+EnvironmentFile=@PRIVATE_ENV@
+ExecStart=@PYTHON@ -m gunicorn --config gunicorn.conf.py wsgi:application
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

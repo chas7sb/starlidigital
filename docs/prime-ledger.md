@@ -9,3 +9,5 @@ Production source roots discovered:
 AgentX 1–10 dispatched in separate Codex chats, with non-overlapping directory ownership. Prime owns root integration and release readiness. Production ledger start entry appended. Production services unchanged.
 
 Release gates: complete sanitized source; upstream provenance; no customer data/secrets; dashboard parity; runnable fresh install; VM lifecycle; platform validation; public repository readiness. None passed yet.
+
+GitHub repository: https://github.com/chas7sb/starlidigital (private during integration). Initial scaffold d524def pushed. User selected Apache 2.0 for owned code; upstream notices retained. Source contract:195 passed/0 failed, behavior parity still pending. Native fresh-database API /health passed; WHPX guest boot/display/input being validated.

@@ -1,0 +1,17 @@
+# AgentX 4 — isolated VM runtime
+
+Ownership: `runtime/` and `docs/runtime.md` (plus this coordination note).
+
+Implemented standard-library Python QEMU lifecycle with doctor/init/start/status/stop, identity-checked QMP, loopback VNC and serial, state lock, no mounts/clipboard/passthrough, default network off. Explicit WHPX/KVM/HVF accelerator selection, explicit opt-in TCG. Added basic screenshot/keyboard bridge. Three protocol/boundary tests pass.
+
+Actual Windows host success: installed checksum-verified QEMU 11.1.0 under ignored runtime/vendor/qemu; downloaded checksum-verified Alpine 3.24.4 virt ISO; created 2 vCPU/2 GiB/12 GiB VM; WHPX launch succeeded despite negative CIM virtualization flags. Linux kernel 6.18.60-0-virt boot/login verified. QMP running state, VNC screenshot and keyboard verified. Stop --force/start tested before guest install. Listening interfaces verified loopback only.
+
+Persistence PASSED: Alpine installed to /dev/vda2 with a separate /dev/vda1 boot partition. Stopped VM, set config iso:null and disk:desktop.qcow2, restarted successfully with kernel 6.18.64-0-virt and /dev/vda2 as root (11.4 GiB, over10GiB free). VM PID124332 currently WHPX. Live guest ACPI shutdown request timed out; synced and forced stop was used. Desktop script explicitly installs/enables acpid to support the next shutdown check.
+
+In progress: explicit NAT enabled for guest desktop/browser package installation on persistent disk. Replaced full XFCE/3D live install with minimal Openbox+Firefox+VESA+LightDM setup (195packages) via runtime/guest/desktop-alpine.sh. Installer script transfer SHA-256 verified in guest. ISO is detached; no live tmpfs root limitation. GUI readiness and graceful shutdown checks remain. Prime's separate bridge owner is adding dashboard status/frame/control; runtime console.py now supports PNG/PPM, pointer move/click, and verified mixed-case/punctuation typing. macOS/Linux boots untested; Apple Silicon currently requires explicit TCG for x86 guest. Packaging should ship source launcher/docs, not runtime/vendor or runtime/state. Python3.10+, native QEMU package, verified x86_64 Linux ISO required.
+
+Do not claim complete computer-use readiness from vm.py status=running. See runtime/validation.json and docs/runtime.md for evidence and limitations.
+
+Bridge-owner integration observation: current dashboard_adapter status() and frame() work against the actual VM (PNG4287bytes). All3 launcher and6 adapter tests passed. The newly incoming6 route tests exercised assertions but failed teardown on Windows because source.sqlite connections remain open (WinError32 in TemporaryDirectory cleanup); not editing bridge-owned tests. Please close SQLite handles before temporary cleanup. Current launch config uses disk:desktop.qcow2 and iso:null, compatible with bridge fixed-disk validation.
+
+IMPORTANT input integration fix for bridge owner: actual guest verification proved uppercase must KEEP its original uppercase keysym while shift is pressed. console.py was corrected and mixed-case/punctuation test passed in guest (AaZz:<>?_|!@#$%^&*(){}+"). Current dashboard_adapter input_event text branch still uses `char.lower() if shift else char`, which reproduces lowercased uppercase on this QEMU guest. Keep punctuation-to-base mapping, but remove uppercase lowering (see console.py). No bridge-owned source edited here.

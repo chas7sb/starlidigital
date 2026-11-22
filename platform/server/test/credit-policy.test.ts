@@ -1,0 +1,30 @@
+import test from'node:test';import assert from'node:assert/strict';import{graphql}from'graphql';import{Store}from'../src/store.js';import{Events}from'../src/events.js';import{sessionContext}from'../src/security.js';import{createAppSchema}from'../src/schema.js';import{grantCredits,creditsWallet}from'../src/credits.js';import{reserveCreditAction,finishCreditAction}from'../src/credit-policy.js';
+test('paid AI actions require explicit caps, settle once and never cross test/live balances',()=>{
+ const env={CREDITS_ENFORCED:process.env.CREDITS_ENFORCED,STRIPE_SECRET_KEY:process.env.STRIPE_SECRET_KEY,STRIPE_LIVE_ENABLED:process.env.STRIPE_LIVE_ENABLED};process.env.CREDITS_ENFORCED='true';process.env.STRIPE_SECRET_KEY='sk_test_unit';const store=new Store(':memory:');const ctx=sessionContext(store,'');ctx.user={id:'owner',role:'USER'};
+ try{grantCredits(store,{ownerId:'test:owner',amount:150,key:'fund',reason:'Test'});assert.throws(()=>reserveCreditAction(store,ctx,{amount:100,maxCredits:0,action:'build'}),/Autorizează/);assert.equal(creditsWallet(store,'test:owner').available,150);const key=reserveCreditAction(store,ctx,{amount:100,maxCredits:100,action:'build',requestId:'one'})!;assert.equal(creditsWallet(store,'test:owner').reserved,100);finishCreditAction(store,key,false);assert.equal(creditsWallet(store,'test:owner').available,150);const second=reserveCreditAction(store,ctx,{amount:100,maxCredits:100,action:'build',requestId:'two'})!;finishCreditAction(store,second,true);finishCreditAction(store,second,true);assert.equal(creditsWallet(store,'test:owner').available,50);process.env.STRIPE_SECRET_KEY='sk_live_unit';process.env.STRIPE_LIVE_ENABLED='true';assert.throws(()=>reserveCreditAction(store,ctx,{amount:25,maxCredits:25,action:'edit'}),/suficiente/);assert.equal(creditsWallet(store,'test:owner').available,50);
+ }finally{store.close();for(const[key,value]of Object.entries(env))if(value===undefined)delete process.env[key];else process.env[key]=value;}
+});
+test('wallet GraphQL never grants signup money and manual credits are admin-only and idempotent',async()=>{
+ const store=new Store(':memory:');const user={id:'owner',username:'client',role:'USER'};const other={id:'other',username:'other',role:'USER'};const admin={id:'admin',username:'alex',role:'ADMIN'};for(const u of[user,other,admin])store.saveUser(u);const ctx=sessionContext(store,'');ctx.user=user;const schema=createAppSchema(store,new Events());const query='{wallet{available reserved debt} creditHistory{id amount}}';
+ try{let result=await graphql({schema,source:query,contextValue:ctx});assert.equal(result.errors,undefined);assert.equal((result.data as any).wallet.available,0);const source='mutation{adminGrantCredits(userId:"owner",amount:100,reason:"Ajustare verificată",idempotencyKey:"grant-one"){available}}';result=await graphql({schema,source,contextValue:ctx});assert.ok(result.errors?.length);ctx.user=admin;result=await graphql({schema,source,contextValue:ctx});assert.equal(result.errors,undefined);result=await graphql({schema,source,contextValue:ctx});assert.equal((result.data as any).adminGrantCredits.available,100);ctx.user=other;result=await graphql({schema,source:query,contextValue:ctx});assert.equal((result.data as any).wallet.available,0);assert.equal((result.data as any).creditHistory.length,0);
+ }finally{store.close();}
+});
+test('anonymous demo limit survives guest rotation and never grants a transferable balance',()=>{
+ const saved=process.env.CREDITS_ENFORCED;process.env.CREDITS_ENFORCED='true';const store=new Store(':memory:');const first=sessionContext(store,'',()=>{},'ip-demo'),second=sessionContext(store,'',()=>{},'ip-demo');first.guest='first';second.guest='second';try{assert.equal(reserveCreditAction(store,first,{amount:100,action:'build'}),null);assert.throws(()=>reserveCreditAction(store,second,{amount:100,action:'build'}),/Demonstrația/);assert.equal(creditsWallet(store,'test:first').available,0);}finally{store.close();if(saved===undefined)delete process.env.CREDITS_ENFORCED;else process.env.CREDITS_ENFORCED=saved;}
+});
+
+test('expected credit failures expose safe GraphQL codes and leave balances unchanged',()=>{
+ const saved=process.env.CREDITS_ENFORCED;process.env.CREDITS_ENFORCED='true';const store=new Store(':memory:'),ctx=sessionContext(store,'');ctx.user={id:'qa-credit-owner',role:'USER'};
+ try{
+  assert.throws(()=>reserveCreditAction(store,ctx,{amount:25,maxCredits:0,action:'edit'}),(error:any)=>error.extensions?.code==='BAD_USER_INPUT');
+  const before=creditsWallet(store,'qa-credit-owner');
+  assert.throws(()=>reserveCreditAction(store,ctx,{amount:25,maxCredits:25,action:'edit'}),(error:any)=>error.extensions?.code==='PAYMENT_REQUIRED'&&/suficiente credite/.test(error.message));
+  assert.deepEqual(creditsWallet(store,'qa-credit-owner'),before);assert.equal(store.list('credit-operations').length,0);
+ }finally{store.close();if(saved===undefined)delete process.env.CREDITS_ENFORCED;else process.env.CREDITS_ENFORCED=saved;}
+});
+
+test('rejected unpaid builds do not exhaust the hourly build admission limit',async()=>{
+ const saved={CREDITS_ENFORCED:process.env.CREDITS_ENFORCED,OPENAI_API_KEY:process.env.OPENAI_API_KEY};process.env.CREDITS_ENFORCED='true';process.env.OPENAI_API_KEY='unit-no-network';
+ const store=new Store(':memory:'),user={id:'quota-credit-owner',username:'quota-client',role:'USER'};store.saveUser(user);store.put('projects',{id:'quota-project',ownerId:user.id,name:'QA',files:[{path:'app/page.tsx',content:'source'}]},user.id);const ctx=sessionContext(store,'',()=>{},'qa-credit-quota-isolated');ctx.user=user;const schema=createAppSchema(store,new Events());
+ try{for(let n=0;n<4;n++){const result=await graphql({schema,source:'mutation{buildProject(id:"quota-project",maxCredits:100000){id}}',contextValue:ctx});assert.equal(result.errors?.[0]?.extensions.code,'PAYMENT_REQUIRED');}assert.equal(store.list('credit-operations').length,0);}finally{store.close();for(const[k,v]of Object.entries(saved))if(v===undefined)delete process.env[k];else process.env[k]=v;}
+});

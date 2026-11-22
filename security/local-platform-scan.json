@@ -1,0 +1,1693 @@
+{
+  "schema": 1,
+  "scope": "working-tree-only; dependencies and VCS history excluded",
+  "counts": {
+    "files": 7463,
+    "text_scanned": 7236,
+    "oversize": 0,
+    "binary": 227
+  },
+  "license_notice_paths": [
+    "extensions/openpencil/LICENSE",
+    "extensions/openpencil/source/LICENSE",
+    "extensions/openpencil/source/packages/kiwi/NOTICE",
+    "extensions/openpencil/source/skills/open-pencil/LICENSE.txt",
+    "extensions/openpencil/source/tools/checks/lint/NOTICE",
+    "extensions/search/source/LICENSE"
+  ],
+  "manifest_paths": [
+    "package-lock.json",
+    "package.json",
+    "cli/package.json",
+    "control-plane/package-lock.json",
+    "control-plane/package.json",
+    "device/package.json",
+    "extensions/computer-broker/package.json",
+    "extensions/mission-control/package.json",
+    "extensions/mission-control/control-plane/package.json",
+    "extensions/mission-control/server/package.json",
+    "extensions/openpencil/runtime/package-lock.json",
+    "extensions/openpencil/runtime/package.json",
+    "extensions/openpencil/source/package.json",
+    "extensions/openpencil/source/desktop/Cargo.lock",
+    "extensions/openpencil/source/packages/cli/package.json",
+    "extensions/openpencil/source/packages/core/package.json",
+    "extensions/openpencil/source/packages/design-jsx/package.json",
+    "extensions/openpencil/source/packages/docs/package.json",
+    "extensions/openpencil/source/packages/dom-css/package.json",
+    "extensions/openpencil/source/packages/emit/package.json",
+    "extensions/openpencil/source/packages/feedback/package.json",
+    "extensions/openpencil/source/packages/fig/package.json",
+    "extensions/openpencil/source/packages/harness/package.json",
+    "extensions/openpencil/source/packages/kiwi/package.json",
+    "extensions/openpencil/source/packages/mcp/package.json",
+    "extensions/openpencil/source/packages/pen/package.json",
+    "extensions/openpencil/source/packages/scene-graph/package.json",
+    "extensions/openpencil/source/packages/vue/package.json",
+    "extensions/openpencil/source/tools/package.json",
+    "extensions/openpencil/source/tools/checks/architecture/package.json",
+    "extensions/openpencil/source/tools/checks/docs/package.json",
+    "extensions/openpencil/source/tools/checks/i18n/package.json",
+    "extensions/openpencil/source/tools/checks/lint/package.json",
+    "extensions/openpencil/source/tools/checks/package-quality/package.json",
+    "extensions/openpencil/source/tools/checks/secret-scan/package.json",
+    "extensions/openpencil/source/tools/checks/test-homes/package.json",
+    "extensions/openpencil/source/tools/checks/test-types/package.json",
+    "extensions/openpencil/source/tools/checks/type-shapes/package.json",
+    "extensions/openpencil/source/tools/ci/images/package.json",
+    "extensions/openpencil/source/tools/ci/images/ci-images/package.json",
+    "extensions/openpencil/source/tools/ci/policy/package.json",
+    "extensions/openpencil/source/tools/ci/pr-review-guidance/package.json",
+    "extensions/openpencil/source/tools/dev/dev-server/package.json",
+    "extensions/openpencil/source/tools/dev/navigation-benchmark/package.json",
+    "extensions/openpencil/source/tools/dev/unit-tests/package.json",
+    "extensions/openpencil/source/tools/generate/authoring-reference/package.json",
+    "extensions/openpencil/source/tools/generate/brand/package.json",
+    "extensions/openpencil/source/tools/generate/demo/package.json",
+    "extensions/openpencil/source/tools/generate/landing-posters/package.json",
+    "extensions/openpencil/source/tools/generate/tauri-menu/package.json",
+    "extensions/openpencil/source/tools/generate/visual-oracles/package.json",
+    "extensions/openpencil/source/tools/release/package-artifacts/package.json",
+    "extensions/openpencil/source/tools/release/release-packages/package.json",
+    "extensions/openpencil/source/vite/package.json",
+    "extensions/search/source/go.sum",
+    "extensions/search/source/package.json",
+    "extensions/search/source/requirements.txt",
+    "extensions/search/source/client/simple/package-lock.json",
+    "extensions/search/source/client/simple/package.json",
+    "server/package.json",
+    "video-engine/requirements.txt",
+    "web/package.json"
+  ],
+  "findings": [
+    {
+      "path": "control-plane/data/assets/generated/ast-2d909edd-ba6a-4806-b833-10925e0045d9.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "control-plane/data/assets/generated/ast-2d909edd-ba6a-4806-b833-10925e0045d9.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "control-plane/data/assets/generated/ast-4254625d-f192-4eb4-b9d4-6eb58ae048ea.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "control-plane/data/assets/generated/ast-4254625d-f192-4eb4-b9d4-6eb58ae048ea.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "control-plane/data/video/previews/prev-aca22b9d-ffa5-4573-a507-1a1f7a6d64b0.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "control-plane/data/video/previews/prev-aca22b9d-ffa5-4573-a507-1a1f7a6d64b0.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "control-plane/data/video/previews/prev-ed67fec7-d832-4797-972b-ec2e855dad57.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "control-plane/data/video/previews/prev-ed67fec7-d832-4797-972b-ec2e855dad57.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "control-plane/src/index.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/src/tools/one-time-agents.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "control-plane/src/tools/outreach.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/agency.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/batch-01.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/control-plane-full.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/domain-tools.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/outreach-guard.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/outreach-mcp.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/proposal-delivery-mcp.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/test/video-mcp.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/control-plane/src/index.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/control-plane/src/tools/outreach.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/email.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/operator-auth.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/smtp.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/crm/types.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/hosted-agents/tools/universal/contact-validator.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/machinery-demo/launch-safe.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/machinery-demo/sales-safe.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/mailbox/mime.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/mission-control/server/src/oauth/index.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/desktop/tauri.conf.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/Inter-Bold.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/Inter-ExtraBold.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/Inter-Medium.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/Inter-Regular.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/Inter-SemiBold.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/assets/NotoNaskhArabic-Regular.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/src/constants.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/core/tests/figma-api/text/references.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/demos/.webreel/raw/toolbar.mp4",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/demos/videos/toolbar.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/demos/videos/toolbar.webm",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/de.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/en.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/es.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/fr.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/it.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/pl.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/.vitepress/theme/landing/content/messages/ru.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/docs/public/screenshot.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/dom-css/tests/behaviours/fixtures.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/dom-css/tests/export/components/vue.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/README.md",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/worker-configuration.d.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/wrangler.jsonc",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/migrations/0001_feedback.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/migrations/0002_ping_usage_stats.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/tests/harness.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/tests/harness.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/feedback/tests/waitlist.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/fig/docs/observations/nested-protected-rescale-figma.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/de/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/es/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/fr/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/it/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/ja/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/pl/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/ru/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/locales/zh-cn/storage.json",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/messages/ai.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/messages/credentials.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/messages/media.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/packages/vue/src/i18n/messages/storage.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/skills/open-pencil/SKILL.md",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/src/app/document/export/files.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/app/ai/chat/trace/recorder.test.ts",
+      "type": "provider-token"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/app/cloud/waitlist/signup.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/app/diagnostics/scrub.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/app/diagnostics/scrub.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-app-icon-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-app-icon-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-favicon-dark-1x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-favicon-dark-2x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-favicon-light-1x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-favicon-light-2x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-header-dark-1x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-header-dark-2x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-header-light-1x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-header-light-2x-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-mark-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/brand/icons.spec.ts-snapshots/brand-mark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/accent-selection.spec.ts-snapshots/green-selection-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/arrow-caps-visual.spec.ts-snapshots/arrow-stroke-caps-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/auto-layout-values.spec.ts-snapshots/auto-layout-gap-value-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/auto-layout-values.spec.ts-snapshots/auto-layout-padding-value-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/blur-effects-visual.spec.ts-snapshots/blur-effects-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/boolean-visual.spec.ts-snapshots/boolean-operations-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/color-space.webkit.spec.ts-snapshots/paint-effects-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/color-space.webkit.spec.ts-snapshots/paint-effects-openpencil-webkit-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/component-overlays.spec.ts-snapshots/component-descendant-outlines-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/corner-smoothing-visual.spec.ts-snapshots/corner-smoothing-profiles-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/cursor-labels.spec.ts-snapshots/cursor-labels-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/demo-workspace.spec.ts-snapshots/demo-tour-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/demo-workspace.spec.ts-snapshots/demo-tour-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/dense-text-preview.spec.ts-snapshots/dense-text-preview-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/distance-measurement-edge-cases.spec.ts-snapshots/distance-containment-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/distance-measurement-edge-cases.spec.ts-snapshots/distance-multi-rotation-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/distance-measurement-edge-cases.spec.ts-snapshots/distance-overlap-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/distance-measurement.spec.ts-snapshots/distance-measurement-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/document-loading.spec.ts-snapshots/loading-brand-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/document-loading.spec.ts-snapshots/loading-brand-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/drop-files.spec.ts-snapshots/dropped-svg-multicolor-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/fill-modes-visual.spec.ts-snapshots/fit-avatar-clipboard-fixture-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/fill-modes-visual.spec.ts-snapshots/gradients-and-image-fill-modes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/fill-modes-visual.spec.ts-snapshots/shader-live-frame-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/fill-modes-visual.spec.ts-snapshots/shader-saved-frame-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/frame-held-rotation--32-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/frame-held-rotation-32-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/nested-frame-rotation-preview-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/rotated-frame-child-hover-highlight-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/rotated-frame-selection-labels-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/rotated-frame-selection-labels-preview-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/small-layer-selected-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/frame-overlays.spec.ts-snapshots/tiny-layer-selected-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/gradient-handles-visual.spec.ts-snapshots/gradient-angular-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/gradient-handles-visual.spec.ts-snapshots/gradient-diamond-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/gradient-handles-visual.spec.ts-snapshots/gradient-linear-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/gradient-handles-visual.spec.ts-snapshots/gradient-radial-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/image-previews-visual.spec.ts-snapshots/viewport-image-previews-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/absolute-constraint-resize-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/component-layout-scale-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/definition-layout-scale-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/expression-layout-scale-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/nested-layout-scale-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-scale-visual.spec.ts-snapshots/rescale-layout-scale-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/instance-sizing.spec.ts-snapshots/instance-fill-sizing-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/readable-frame--145-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/readable-frame--40-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/readable-frame-50-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-0-5-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-1-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-2-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-hover-0-5-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-hover-1-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/section-pills-hover-2-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/label-anatomy.spec.ts-snapshots/unicode-section-labels-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/labels/component.spec.ts-snapshots/component-set-member-label-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/labels/frame-title-color.spec.ts-snapshots/frame-title-colors-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/labels/frame-title-color.spec.ts-snapshots/frame-title-colors-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/labels/shaping-visual.spec.ts-snapshots/shaped-labels-zoom-125-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/labels/shaping-visual.spec.ts-snapshots/shaped-labels-zoom-200-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/layout-outlines.spec.ts-snapshots/layout-outlines-hovered-card-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/layout-outlines.spec.ts-snapshots/layout-outlines-hovered-plain-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/layout-outlines.spec.ts-snapshots/layout-outlines-hovered-row-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/layout-outlines.spec.ts-snapshots/layout-outlines-moving-child-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/layout-outlines.spec.ts-snapshots/layout-outlines-selected-child-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/live-editing.spec.ts-snapshots/retained-hidpi-crisp-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/nested-transform-interaction.spec.ts-snapshots/nested-transform-false-false-held-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/nested-transform-interaction.spec.ts-snapshots/nested-transform-false-true-held-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/nested-transform-interaction.spec.ts-snapshots/nested-transform-true-false-held-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/nested-transform-interaction.spec.ts-snapshots/nested-transform-true-true-held-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/occurrence-text-visual.spec.ts-snapshots/occurrence-text-override-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/pattern-mask-visual.spec.ts-snapshots/luminance-masks-and-transformed-tile-fills-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/pattern-mask-visual.spec.ts-snapshots/mask-opacity-and-blur-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/pattern-mask-visual.spec.ts-snapshots/pattern-fills-from-source-nodes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/pen-variables.spec.ts-snapshots/pen-variable-colors-and-fonts-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/pixel-grid.spec.ts-snapshots/pixel-grid-800-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/presence-cursors.spec.ts-snapshots/presence-cursors-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/retained-grid.spec.ts-snapshots/retained-grid-1-25-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/retained-grid.spec.ts-snapshots/retained-grid-1-5-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/retained-grid.spec.ts-snapshots/retained-grid-2-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/saved-glyph-visual.spec.ts-snapshots/saved-glyph-authority-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/saved-text-visual.spec.ts-snapshots/reopened-wrapped-text-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/scene-picture-freshness.spec.ts-snapshots/fresh-scene-picture-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/shape-handles/handles-visual.spec.ts-snapshots/differing-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/shape-handles/handles-visual.spec.ts-snapshots/equal-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/shape-handles/handles-visual.spec.ts-snapshots/star-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/shape-handles/polygons-visual.spec.ts-snapshots/polygons-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/slot-overlays.spec.ts-snapshots/slot-frame-selected-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/slot-overlays.spec.ts-snapshots/slot-outlines-instance-selected-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/stroke-geometry-visual.spec.ts-snapshots/stroke-caps-joins-miter-limits-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/stroke-geometry-visual.spec.ts-snapshots/vector-path-joins-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/stroke-paint-visual.spec.ts-snapshots/gradient-strokes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/svg-paste-visual.spec.ts-snapshots/svg-clip-mask-groups-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/svg-paste-visual.spec.ts-snapshots/svg-text-layers-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/lines-visual.spec.ts-snapshots/text-lines-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/lists-visual.spec.ts-snapshots/text-lists-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/path-visual.spec.ts-snapshots/text-path-rendering-and-selection-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/visual.spec.ts-snapshots/complex-text-fills-as-outlines-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/visual.spec.ts-snapshots/text-case-by-range-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/text/visual.spec.ts-snapshots/text-decoration-styles-and-opentype-features-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/tiled-large-blur-visual.spec.ts-snapshots/tiled-large-blur-mutation-settled-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/typography-depth-visual.spec.ts-snapshots/typography-depth-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/vector/editing.spec.ts-snapshots/vector-edit-mode-overlay-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/vector/pencil.spec.ts-snapshots/pencil-live-stroke-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/vector/style-fills.spec.ts-snapshots/vector-path-style-fills-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/vector/winding.spec.ts-snapshots/even-odd-vector-holes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/canvas/vector/winding.spec.ts-snapshots/mixed-region-open-segment-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/jsx.spec.ts-snapshots/jsx-streaming-complete-preview-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/jsx.spec.ts-snapshots/jsx-streaming-open-text-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/jsx.spec.ts-snapshots/jsx-streaming-zoomed-preview-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-nested-fill-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-nested-hug-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-nested-replace-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-page-insertion-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-rotated-clip-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/chat/streaming/placement.spec.ts-snapshots/jsx-placement-top-level-replace-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/code/layer-links.spec.ts-snapshots/code-focus-and-hover-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/components/behaviours.spec.ts-snapshots/switch-island-on-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/components/library-manager.spec.ts-snapshots/library-publish-changes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/components/library-manager.spec.ts-snapshots/library-update-side-by-side-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/design/panel.spec.ts-snapshots/design-panel-paint-effects-export-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/design/panel.spec.ts-snapshots/design-panel-position-appearance-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/design-check/design-check.spec.ts-snapshots/design-check-edge-pin-hover-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/design-check/design-check.spec.ts-snapshots/design-check-marker-hover-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/dom-css/generated-components.spec.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/editor/auto-layout/composition.spec.ts-snapshots/auto-layout-wrap-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/editor/auto-layout/composition.spec.ts-snapshots/auto-layout-wrap-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/export/basic.spec.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/cjk-rendering-visual.spec.ts-snapshots/interactive-font-fallback-pending-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/cjk-rendering-visual.spec.ts-snapshots/interactive-font-fallback-resolved-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/cjk-rendering-visual.spec.ts-snapshots/international-text-first-paint-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/cjk-rendering-visual.spec.ts-snapshots/substituted-font-cjk-fallback-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/substitution/editing-visual.spec.ts-snapshots/missing-font-baked-before-edit-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/substitution/editing-visual.spec.ts-snapshots/missing-font-live-substitution-after-first-edit-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/substitution/editing-visual.spec.ts-snapshots/missing-font-substitution-after-undo-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/fonts/variable-weights-visual.spec.ts-snapshots/variable-font-weights-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/empty-canvas-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/instance-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/mixed-selection-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/nested-groups-layer-tree-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/single-rectangle-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/panels/visual.spec.ts-snapshots/text-selection-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/blend-modes.spec.ts-snapshots/effect-blend-mode-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/component-properties.spec.ts-snapshots/component-properties-controls-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/corner/bindings.spec.ts-snapshots/shared-corner-token-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/dimensions.spec.ts-snapshots/dimensions-bound-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effect-panel.spec.ts-snapshots/inline-shadow-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/alpha-mask-stack-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/blend-modes-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/combined-drop-inner-shadow-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/drop-shadow-ellipse-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/drop-shadow-white-card-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/drop-shadow-with-spread-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/inner-shadow-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/inner-shadow-with-spread-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/invisible-effect-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/layer-blur-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/smoothed-corners-with-blended-shadow-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/effects.spec.ts-snapshots/text-drop-shadow-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/panel-hierarchy.spec.ts-snapshots/fill-missing-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/panel-hierarchy.spec.ts-snapshots/layout-frame-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/panel-hierarchy.spec.ts-snapshots/layout-rectangle-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/panel-hierarchy.spec.ts-snapshots/layout-text-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/effects-applied-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/effects-unbound-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/fill-applied-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/fill-unbound-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/stroke-applied-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/shared-styles.spec.ts-snapshots/stroke-unbound-style-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-dashed-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-dashed-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-line-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-line-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-main-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/stroke-settings.spec.ts-snapshots/stroke-main-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/typography-panel.spec.ts-snapshots/typography-groups-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/typography-panel.spec.ts-snapshots/typography-groups-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/properties/unresolved-binding.spec.ts-snapshots/unresolved-fill-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/credentials.spec.ts",
+      "type": "provider-token"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/mobile.spec.ts-snapshots/mobile-settings-models-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/mobile.spec.ts-snapshots/mobile-settings-models-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/mobile.spec.ts-snapshots/mobile-settings-storage-dark-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/mobile.spec.ts-snapshots/mobile-settings-storage-light-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/settings/tabs.spec.ts-snapshots/settings-tabs-general-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/snap/guides.spec.ts-snapshots/pixel-rounding-without-guides-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/controls.spec.ts-snapshots/design-system-actions-button--color-matrix-dark-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/controls.spec.ts-snapshots/design-system-actions-button--color-matrix-light-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/input.spec.ts-snapshots/populated-search-dark-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/input.spec.ts-snapshots/populated-search-light-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/layer-tree.spec.ts-snapshots/layer-tree-adjacent-hover-dark-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/layer-tree.spec.ts-snapshots/layer-tree-adjacent-hover-light-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/panel-selection.spec.ts-snapshots/selection-header-dark-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/storybook/panel-selection.spec.ts-snapshots/selection-header-light-storybook-chromium-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/e2e/text/formatting.spec.ts-snapshots/typography-panel-openpencil-darwin.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/app/ai/model.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/app/integrations/mcp-connections.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/app/integrations/mcp-connections.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/app/settings/validation.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/app/settings/validation.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tests/engine/tauri/file-actions.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/ci/policy/src/commit-attribution.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/ci/policy/tests/classify.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/ci/policy/tests/commit-messages.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/generate/brand/src/config.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/generate/brand/src/validate.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/openpencil/source/tools/generate/demo/src/document/chapters/lint.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/SECURITY.md",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/manage",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/setup.py",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/.github/workflows/container.yml",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/search/source/.github/workflows/data-update.yml",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/.github/workflows/l10n.yml",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/docs/admin/answer-captcha.rst",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/searx/settings.yml",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/search/source/searx/settings.yml",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/searx/wikidata_properties.py",
+      "type": "email-review"
+    },
+    {
+      "path": "extensions/search/source/searx/engines/azure.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/search/source/searx/engines/braveapi.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/search/source/searx/engines/jina.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "extensions/search/source/searx/engines/xprivo.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "scripts/e2e.mjs",
+      "type": "email-review"
+    },
+    {
+      "path": "server/data/starli.sqlite",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "server/data/starli.sqlite",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/starli.sqlite",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/starli.sqlite-shm",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/starli.sqlite-shm",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/starli.sqlite-wal",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/starli.sqlite-wal",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-088b4329-ab81-43a2-8f6a-ec584ebb98b4.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-088b4329-ab81-43a2-8f6a-ec584ebb98b4.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-3d7f6c9f-417a-4999-9a09-edf1d54d9503.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-3d7f6c9f-417a-4999-9a09-edf1d54d9503.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-69afe667-8857-4a37-aa5e-c6cb8513ff74.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-69afe667-8857-4a37-aa5e-c6cb8513ff74.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-a36f054d-7698-4978-9cef-55d98d0ea5ed.png",
+      "type": "runtime-data-path-exclude-review"
+    },
+    {
+      "path": "server/data/video/previews/prev-a36f054d-7698-4978-9cef-55d98d0ea5ed.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "server/src/operator-auth.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/src/crm/types.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/hosted-agents/tools/universal/contact-validator.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/mailbox/mime.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/oauth/index.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/account-identity.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/automatic-intent.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/billing.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/billing.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/business-events.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/business-events.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/client-journey.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/credit-policy.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/crm-services.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/domain-commerce.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/domain-commerce.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/domains.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/email.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/email.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/hosted-agent-business-events.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/hosted-agent-security.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/hosted-agent-tools-hardening.test.ts",
+      "type": "provider-token"
+    },
+    {
+      "path": "server/test/hosted-agent-tools-hardening.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/hosted-agent-tools.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/hosted-agent-tools.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/hosted-agents-graphql.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/hosted-agents-lifecycle.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/hosted-agents-router.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/hosted-agents-runtime.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/hosted-agents-runtime.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/local-mailbox-config.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/mailbox-adversarial.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/mailbox-sanitizer-mime.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/mailbox-service.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/mailbox-sync-resilience.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/migrationprivacy.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/next-seo.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "server/test/next-seo.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/operator-agent.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/operator-bespoke.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/operator-model.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/operator-platform-tools.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/operator-platform-tools.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/operator-privacy.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/operator-privacy.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/operator-tasks.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/outlier-isolation.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/outlier-provider.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/outlier-provider.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/platform.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/platform.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/premium-template.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/proposal-delivery.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/research.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/site-builder-pages.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/smtp.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/starli-operator.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/subscriptions.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/test/subscriptions.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/template-copy.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "server/test/template-copy.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/test/wallet-webhook.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "web/dist/assets/dm-sans-latin-ext-wght-normal-BOFOeGcA.woff2",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/dist/assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/dist/assets/index-CozfsoTh.js",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/EmailDiagnostics.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/PublicProposal.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/hosted-agent-knowledge.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/main.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/transport.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "web/src/transport.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/wallet-utils.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "web/src/wallet-utils.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/hosted-agent-integrations/HostedAgentProposal.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/mailbox/AdminMailbox.tsx",
+      "type": "email-review"
+    }
+  ],
+  "status": "review-required"
+}

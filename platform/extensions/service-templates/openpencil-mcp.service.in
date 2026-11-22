@@ -1,0 +1,16 @@
+[Unit]
+Description=StarliDigital local OpenPencil MCP
+After=network.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@EXTENSIONS_ROOT@/openpencil/runtime
+EnvironmentFile=@PRIVATE_ENV@
+ExecStart=@NODE@ start-mcp.mjs
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

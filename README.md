@@ -26,4 +26,6 @@ Windows, macOS and Linux are installation targets. Platform validation and outst
 
 Use your own provider accounts and credentials. Production databases, customer files, credentials, sessions and backups are excluded. Preserve component copyright and license notices; see [provenance](docs/provenance.md) for the remaining release review.
 
+StarliDigital-owned code uses [Apache 2.0](LICENSE). Third-party components retain their own licenses and notices; see [NOTICE](NOTICE).
+
 See [architecture](docs/architecture.md), [configuration](docs/configuration.md) and the [Prime execution ledger](docs/prime-ledger.md) for current integration status.

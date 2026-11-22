@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "target": "x86_64-pc-windows-msvc",
+  "python": "3.11",
+  "resolver": "uv 0.11.19 (7b2cff1c3 2026-06-03 x86_64-pc-windows-msvc)",
+  "requirements": "dashboard/backend/requirements.txt",
+  "requirements_sha256": "930e16bf62b78e22bb647a969aed0c6dc03d22b748af1b42fad24940ff6d8bc5",
+  "lock_sha256": "748a4393c1b9c512001bc47cd93339f1bc2dffc020e9f36a51e602c8f989afc7",
+  "status": "resolved-with-hashes; installation-not-verified",
+  "hash_normalization": "LF"
+}

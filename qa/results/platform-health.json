@@ -1,0 +1,11 @@
+{
+  "url": "http://127.0.0.1:4100/health",
+  "status": 200,
+  "body": {
+    "ok": true,
+    "service": "starlidigital-api",
+    "database": true
+  },
+  "pass": true,
+  "parity_status": "NOT_VERIFIED"
+}

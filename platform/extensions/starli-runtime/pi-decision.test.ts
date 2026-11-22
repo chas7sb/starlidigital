@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {parseDecision} from './pi-decision.ts';
+assert.equal(parseDecision('{"tool":"done","result":"Hello"}').result,'Hello');
+assert.equal(parseDecision('\x60\x60\x60json\n{"tool":"platform.call","args":{"tool":"project_files","args":{"projectId":"a"}}}\n\x60\x60\x60').tool,'platform.call');
+assert.throws(()=>parseDecision('{"tool":"platform.call","args":{"content":"truncated'),/INVALID_MODEL_DECISION/);
+assert.throws(()=>parseDecision('[]'),/INVALID_MODEL_DECISION/);
+assert.throws(()=>parseDecision('{"tool":"done"}'),/INVALID_MODEL_DECISION/);
+assert.throws(()=>parseDecision(''),/INVALID_MODEL_DECISION/);
+assert.equal(parseDecision('Example: {"tool":"platform.call","args":{"tool":"delete"}}').tool,'done');
+assert.throws(()=>parseDecision('{"tool":"platform.call","args":[]}'),/INVALID_MODEL_DECISION/);
+console.log('8 strict decision parsing checks passed');

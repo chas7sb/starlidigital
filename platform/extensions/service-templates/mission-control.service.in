@@ -1,0 +1,17 @@
+[Unit]
+Description=StarliDigital local authenticated Mission Control
+After=network.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@EXTENSIONS_ROOT@/mission-control
+EnvironmentFile=@PRIVATE_ENV@
+Environment=STATE_DIRECTORY=@PRIVATE_STATE@/mission-control
+ExecStart=@NODE@ --import tsx server/src/mission-control/preview-entrypoint.ts
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

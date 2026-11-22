@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{mkdtempSync,readFileSync,rmSync}from'node:fs';import{tmpdir}from'node:os';import{join}from'node:path';import{once}from'node:events';import{WebSocketServer}from'ws';
+import{Store,id,now}from'../../server/src/store.js';import{Events}from'../../server/src/events.js';import{hashToken,sessionContext}from'../../server/src/security.js';import{attachDeviceWebSocket,enqueueDeviceTask}from'../../server/src/operator-devices.js';import{saveDeviceState,startDeviceConnectorLoop}from'../src/index.js';
+test('real server and Windows connector complete a leased device job end to end',{timeout:8000},async()=>{
+ const root=mkdtempSync(join(tmpdir(),'starli-real-transport-')),statePath=join(root,'state.json'),target=join(root,'output.txt'),store=new Store(':memory:'),events=new Events(),server=new WebSocketServer({host:'127.0.0.1',port:0});let connector:ReturnType<typeof startDeviceConnectorLoop>|undefined;
+ try{const user=store.saveUser({id:id(),username:'device_test',role:'ADMIN',createdAt:now()}),ctx=sessionContext(store,'',()=>{},'device-test');ctx.user=user;const deviceId=id(),token='starli_dev_test_transport_1234567890';store.put('operator-devices',{id:deviceId,tokenHash:hashToken(token),name:'Windows',pairedBy:user.id,status:'OFFLINE',allowedRoots:[root],capabilities:['filesystem'],adbDevices:[],adbStatus:'NONE',createdAt:now(),updatedAt:now()},user.id);
+ const job=enqueueDeviceTask(store,events,ctx,{deviceId,kind:'device.fs.write',args:{path:target,content:'end-to-end confirmed'}});assert.equal(job.status,'QUEUED_DEVICE');
+ server.on('connection',socket=>attachDeviceWebSocket(store,events,socket,token));await once(server,'listening');saveDeviceState({apiUrl:'http://127.0.0.1:'+(server.address() as {port:number}).port,deviceId,deviceToken:token,allowedRoots:[root],executedJobs:{}},statePath);
+ connector=startDeviceConnectorLoop({statePath,onStatus:()=>{},inspectAdb:async()=>({adbStatus:'NONE',adbDevices:[]})});
+ for(let n=0;n<150&&store.get('operator-jobs',job.id)?.status!=='SUCCEEDED';n++)await new Promise(resolve=>setTimeout(resolve,20));
+ assert.equal(store.get('operator-jobs',job.id)!.status,'SUCCEEDED');assert.equal(readFileSync(target,'utf8'),'end-to-end confirmed');
+ }finally{connector?.stop();await Promise.all([...server.clients].map(client=>new Promise<void>(resolve=>{client.once('close',()=>resolve());client.terminate();})));await new Promise<void>(resolve=>server.close(()=>resolve()));store.close();rmSync(root,{recursive:true,force:true});}
+});

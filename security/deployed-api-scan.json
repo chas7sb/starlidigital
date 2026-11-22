@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "scope": "working-tree-only; dependencies and VCS history excluded",
+  "counts": {
+    "files": 334,
+    "text_scanned": 322,
+    "oversize": 8,
+    "binary": 4
+  },
+  "license_notice_paths": [],
+  "manifest_paths": [
+    "package-lock.json",
+    "package.json",
+    "cli/package.json",
+    "device/package.json",
+    "video-engine/requirements.txt",
+    "web/package.json"
+  ],
+  "findings": [
+    {
+      "path": "control-plane/src/index.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "control-plane/src/tools/outreach.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "scripts/e2e.mjs",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/email.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/index.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/operator-auth.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "server/src/smtp.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/crm/types.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/hosted-agents/tools/universal/contact-validator.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/mailbox/mime.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/mailbox/service.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "server/src/oauth/index.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "web/dist/assets/dm-sans-latin-ext-wght-normal-BOFOeGcA.woff2",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/dist/assets/dm-sans-latin-wght-normal-Xz1IZZA0.woff2",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/dist/assets/index-CBznQwLr.js",
+      "type": "email-review"
+    },
+    {
+      "path": "web/dist/brand/facebook-cover.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/dist/brand/hero.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/dist/brand/herobgstarli.mp4",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/dist/brand/instagram.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/public/brand/facebook-cover.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/public/brand/hero.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/public/brand/herobgstarli.mp4",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/public/brand/home-hero-mobile.webp",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/public/brand/home-hero.webp",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "web/public/brand/instagram.png",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "web/src/EmailDiagnostics.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/PublicProposal.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/hosted-agent-knowledge.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/main.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/transport.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "web/src/transport.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/wallet-utils.test.ts",
+      "type": "credential-url"
+    },
+    {
+      "path": "web/src/wallet-utils.test.ts",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/hosted-agent-integrations/HostedAgentProposal.tsx",
+      "type": "email-review"
+    },
+    {
+      "path": "web/src/mailbox/AdminMailbox.tsx",
+      "type": "email-review"
+    }
+  ],
+  "status": "review-required"
+}

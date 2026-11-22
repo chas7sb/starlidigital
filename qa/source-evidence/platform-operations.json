@@ -1,0 +1,1304 @@
+{
+  "limitations": "Lexical inventory; not a parsed executable GraphQL schema or mounted runtime routes.",
+  "graphql": [
+    {
+      "file": "platform/extensions/computer-broker/company-note-jobs.mjs",
+      "line": 108,
+      "kind": "Mutation",
+      "fields": [
+        "companyComputerNoteExchange",
+        "companyComputerNoteSubmit",
+        "companyComputerNoteStatus"
+      ],
+      "declaration": "companyComputerNoteExchange(deviceToken:String!,message:String!):CompanyNoteExchange! companyComputerNoteSubmit(serviceToken:String!,envelope:String!):CompanyNoteExchange! companyComputerNoteStatus(serviceToken:String!,operationId:String!):CompanyNoteExchange!"
+    },
+    {
+      "file": "platform/extensions/computer-broker/production-broker.mjs",
+      "line": 64,
+      "kind": "Query",
+      "fields": [
+        "pilotReady"
+      ],
+      "declaration": "pilotReady:Boolean!"
+    },
+    {
+      "file": "platform/extensions/computer-broker/production-broker.mjs",
+      "line": 64,
+      "kind": "Mutation",
+      "fields": [
+        "_unused"
+      ],
+      "declaration": "_unused:Boolean"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/agency-cockpit/graphql.ts",
+      "line": 10,
+      "kind": "Query",
+      "fields": [
+        "agencyCockpitSnapshot"
+      ],
+      "declaration": "agencyCockpitSnapshot: AgencyCockpitSnapshotPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/agency-cockpit/graphql.ts",
+      "line": 11,
+      "kind": "Mutation",
+      "fields": [
+        "agencySetPauseAll",
+        "agencySetAutonomyLevel",
+        "agencyUpdateQuietHours",
+        "agencyResolveApproval"
+      ],
+      "declaration": "agencySetPauseAll(paused:Boolean!):AgencyCockpitMutationPayload! agencySetAutonomyLevel(kind:String!,scopeId:ID!,level:String!,paused:Boolean!):AgencyCockpitMutationPayload! agencyUpdateQuietHours(input:AgencyQuietHoursInput!):AgencyCockpitMutationPayload! agencyResolveApproval(approvalId:ID!,decision:String!):AgencyCockpitMutationPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/approval-center/graphql.ts",
+      "line": 7,
+      "kind": "Query",
+      "fields": [
+        "approvalCenterSnapshot"
+      ],
+      "declaration": "approvalCenterSnapshot(receiptLimit:Int,receiptBefore:String):ApprovalCenterPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/approval-center/graphql.ts",
+      "line": 8,
+      "kind": "Mutation",
+      "fields": [
+        "approvalCenterResolve"
+      ],
+      "declaration": "approvalCenterResolve(approvalId:ID!,decision:String!):ApprovalCenterPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/assets/graphql.ts",
+      "line": 20,
+      "kind": "Query",
+      "fields": [
+        "asset",
+        "assets"
+      ],
+      "declaration": "asset(id: String!): AssetRecord\n      assets(prospectId: String, projectId: String, visibility: String): [AssetRecord!]!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/business-engine/graphql.ts",
+      "line": 35,
+      "kind": "Query",
+      "fields": [
+        "businessEngineRecipes",
+        "businessEngines",
+        "businessEngine"
+      ],
+      "declaration": "businessEngineRecipes: [BusinessEngineRecipe!]!\n      businessEngines: BusinessEngineListPayload!\n      businessEngine(id: ID!): BusinessEnginePayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/business-engine/graphql.ts",
+      "line": 40,
+      "kind": "Mutation",
+      "fields": [
+        "createBusinessEngine"
+      ],
+      "declaration": "createBusinessEngine(input: BusinessEngineCreateInput!): BusinessEngineCreatePayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/crm/graphql.ts",
+      "line": 362,
+      "kind": "Query",
+      "fields": [
+        "crmAgencyOverview",
+        "crmPipeline",
+        "crmCompanies",
+        "crmCompany",
+        "crmDuplicateCandidates",
+        "crmContacts",
+        "crmSignals",
+        "crmOpportunities",
+        "crmOpportunity",
+        "crmTasks",
+        "crmActivities",
+        "crmSavedViews",
+        "crmPipelineMetrics",
+        "crmPreviewCsvImport",
+        "crmExportCompaniesCsv"
+      ],
+      "declaration": "crmAgencyOverview: AgencyOverview!\n    crmPipeline: CrmPipelineConfig!\n    crmCompanies(search: String, industry: String, qualificationStatus: String, tag: String): [CrmCompany!]!\n    crmCompany(id: String!): CrmCompany\n    crmDuplicateCandidates(name: String!, domain: String, email: String): [CrmCompany!]!\n    crmContacts(companyId: String): [CrmContact!]!\n    crmSignals(companyId: String): [CrmSignal!]!\n    crmOpportunities(companyId: String, stageId: String, status: String): [CrmOpportunity!]!\n    crmOpportunity(id: String!): CrmOpportunity\n    crmTasks(companyId: String, opportunityId: String, status: String): [CrmTask!]!\n    crmActivities(companyId: String, opportunityId: String): [CrmActivity!]!\n    crmSavedViews(target: String): [CrmSavedView!]!\n    crmPipelineMetrics: CrmPipelineMetrics!\n    crmPreviewCsvImport(csvContent: String!): CrmCsvPreviewResult!\n    crmExportCompaniesCsv: String!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/crm/graphql.ts",
+      "line": 380,
+      "kind": "Mutation",
+      "fields": [
+        "crmConnectLegacyLeads",
+        "crmUpsertCompany",
+        "crmMergeCompanies",
+        "crmUpsertContact",
+        "crmAddSignal",
+        "crmVerifySignal",
+        "crmUpsertOpportunity",
+        "crmUpsertTask",
+        "crmAddActivityNote",
+        "crmUpdatePipelineStages",
+        "crmUpsertSavedView",
+        "crmDeleteSavedView",
+        "crmExecuteCsvImport"
+      ],
+      "declaration": "crmConnectLegacyLeads(dryRun:Boolean = true, limit:Int = 100, after:String):CrmLegacyReconciliation!\n    crmUpsertCompany(input: CrmCompanyInput!, expectedVersion: Int): CrmCompany!\n    crmMergeCompanies(targetCompanyId: String!, sourceCompanyId: String!, expectedTargetVersion: Int!, expectedSourceVersion: Int!): CrmCompany!\n    crmUpsertContact(input: CrmContactInput!, expectedVersion: Int): CrmContact!\n    crmAddSignal(input: CrmSignalInput!): CrmSignal!\n    crmVerifySignal(signalId: String!, verified: Boolean!, expectedVersion: Int): CrmSignal!\n    crmUpsertOpportunity(input: CrmOpportunityInput!, expectedVersion: Int): CrmOpportunity!\n    crmUpsertTask(input: CrmTaskInput!, expectedVersion: Int): CrmTask!\n    crmAddActivityNote(companyId: String, opportunityId: String, summary: String!, details: String): CrmActivity!\n    crmUpdatePipelineStages(stages: [CrmPipelineStageInput!]!, expectedVersion: Int!): CrmPipelineConfig!\n    crmUpsertSavedView(input: CrmSavedViewInput!, expectedVersion: Int): CrmSavedView!\n    crmDeleteSavedView(id: String!): Boolean!\n    crmExecuteCsvImport(csvContent: String!, skipDuplicates: Boolean!): CrmCsvImportResult!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/customer-capabilities/graphql.ts",
+      "line": 15,
+      "kind": "Query",
+      "fields": [
+        "capabilityCloud"
+      ],
+      "declaration": "capabilityCloud(projectId:ID):CapabilityCloudPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/customer-capabilities/graphql.ts",
+      "line": 16,
+      "kind": "Mutation",
+      "fields": [
+        "setCustomerCapabilityEnabled",
+        "setProjectCapabilityGrant",
+        "invokeCustomerCapability"
+      ],
+      "declaration": "setCustomerCapabilityEnabled(capabilityId:ID!,enabled:Boolean!):CapabilityCloudPayload!\n      setProjectCapabilityGrant(projectId:ID!,capabilityId:ID!,enabled:Boolean!):CapabilityCloudPayload!\n      invokeCustomerCapability(capabilityId:ID!,projectId:ID,inputJson:String,idempotencyKey:String):CapabilityCloudPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/hosted-agent-integrations/graphql.ts",
+      "line": 81,
+      "kind": "Query",
+      "fields": [
+        "hostedAgentProposals",
+        "hostedAgentProposal",
+        "hostedAgentProposalPublic"
+      ],
+      "declaration": "hostedAgentProposals(agentId: ID, prospectId: ID): [HostedAgentProposal!]!\n      hostedAgentProposal(id: ID!): HostedAgentProposal\n      hostedAgentProposalPublic(slug: String!): HostedAgentProposalPublicView"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/hosted-agent-integrations/graphql.ts",
+      "line": 87,
+      "kind": "Mutation",
+      "fields": [
+        "hostedAgentCreateProposal"
+      ],
+      "declaration": "hostedAgentCreateProposal(input: CreateAgentProposalInput!): HostedAgentProposal!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/hosted-agents/graphql.ts",
+      "line": 17,
+      "kind": "Subscription",
+      "fields": [
+        "visitorMessage"
+      ],
+      "declaration": "visitorMessage(conversationId: ID!, visitorToken: String!): HostedAgentMessage!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/hosted-agents/graphql.ts",
+      "line": 190,
+      "kind": "Query",
+      "fields": [
+        "visitorListActive",
+        "visitorGetSession",
+        "visitorGetContext",
+        "visitorMessages",
+        "hostedAgents",
+        "hostedAgent",
+        "hostedAgentPublic",
+        "hostedAgentConversations",
+        "hostedAgentLeads",
+        "hostedAgentUsage",
+        "hostedAgentToolExecutions",
+        "hostedAgentToolMetrics"
+      ],
+      "declaration": "visitorListActive(agentId: ID!): String!\n    visitorGetSession(id: ID!): String!\n    visitorGetContext(id: ID!): String!\n    visitorMessages(conversationId: ID!, visitorToken: String!): [HostedAgentMessage!]!\n    hostedAgents(adminAll: Boolean = false, status: HostedAgentStatus): [HostedAgent!]!\n    hostedAgent(id: ID!): HostedAgent!\n    hostedAgentPublic(slug: String, publicId: String): HostedAgentPublic\n    hostedAgentConversations(agentId: ID!, offset: Int = 0, limit: Int = 25): HostedAgentConversationPage!\n    hostedAgentLeads(agentId: ID!, offset: Int = 0, limit: Int = 25): HostedAgentLeadPage!\n    hostedAgentUsage(agentId: ID!): HostedAgentUsage!\n    hostedAgentToolExecutions(agentId: ID!, limit: Int = 50): [HostedAgentToolExecution!]!\n    hostedAgentToolMetrics(agentId: ID!): HostedAgentToolMetrics!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/hosted-agents/graphql.ts",
+      "line": 205,
+      "kind": "Mutation",
+      "fields": [
+        "visitorPresence",
+        "visitorSendMessage",
+        "hostedAgentCreate",
+        "hostedAgentUpdate",
+        "hostedAgentSetKnowledge",
+        "hostedAgentPublish",
+        "hostedAgentDisable",
+        "hostedAgentAssignOwner",
+        "hostedAgentStartConversation",
+        "hostedAgentSendMessage"
+      ],
+      "declaration": "visitorPresence(input: VisitorPresenceInput!): Boolean!\n    visitorSendMessage(id: ID!, topic: String): HostedAgentMessage!\n    hostedAgentCreate(input: HostedAgentCreateInput!): HostedAgent!\n    hostedAgentUpdate(id: ID!, input: HostedAgentUpdateInput!, expectedVersion: Int!): HostedAgent!\n    hostedAgentSetKnowledge(id: ID!, knowledgeJson: String!, expectedVersion: Int!): HostedAgent!\n    hostedAgentPublish(id: ID!, mode: HostedAgentStatus!, expectedVersion: Int!): HostedAgent!\n    hostedAgentDisable(id: ID!, expectedVersion: Int!): HostedAgent!\n    hostedAgentAssignOwner(id: ID!, ownerId: ID!, expectedVersion: Int!): HostedAgent!\n    hostedAgentStartConversation(publicId: String!): HostedAgentSession!\n    hostedAgentSendMessage(publicId: String!, conversationId: ID!, visitorToken: String!, requestId: String!, message: String!): HostedAgentChatResult!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/machinery-run/graphql.ts",
+      "line": 60,
+      "kind": "Query",
+      "fields": [
+        "machineryRun",
+        "machineryReconnect",
+        "machineryRuns",
+        "machineryTimeline"
+      ],
+      "declaration": "machineryRun(runId:ID!):MachineryPayload!\n      machineryReconnect(runId:ID!,cursor:String!):MachineryPayload!\n      machineryRuns(limit:Int):MachineryPayload!\n      machineryTimeline(runId:ID!,limit:Int,cursor:String):MachineryPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/machinery-run/graphql.ts",
+      "line": 66,
+      "kind": "Mutation",
+      "fields": [
+        "startMachineryRun",
+        "advanceMachineryRun",
+        "stopMachineryRun"
+      ],
+      "declaration": "startMachineryRun(objective:String!,idempotencyKey:String!,selections:[MachineryRunSelectionInput!]!):MachineryPayload!\n      advanceMachineryRun(runId:ID!):MachineryPayload!\n      stopMachineryRun(runId:ID!,reason:String):MachineryPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mailbox/graphql.ts",
+      "line": 135,
+      "kind": "Query",
+      "fields": [
+        "mailboxDrafts",
+        "mailboxAccount",
+        "mailboxMessages",
+        "mailboxMessage",
+        "mailboxThread",
+        "mailboxTransactionalEvents"
+      ],
+      "declaration": "mailboxDrafts(limit:Int = 100):[MailDraftRecord!]!\n      mailboxAccount: MailboxAccountInfo!\n      mailboxMessages(\n        folder: String\n        threadId: String\n        search: String\n        direction: String\n        prospectId: String\n        limit: Int\n        offset: Int\n      ): MailMessagesResult!\n      mailboxMessage(id: String!): MailMessageRecord\n      mailboxThread(threadId: String!): [MailMessageRecord!]!\n      mailboxTransactionalEvents(kind: String, outboxId: String, limit: Int): [TransactionalEmailEvent!]!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mailbox/graphql.ts",
+      "line": 152,
+      "kind": "Mutation",
+      "fields": [
+        "mailboxCreateDraft",
+        "mailboxUpdateDraft",
+        "mailboxApproveDraft",
+        "mailboxSendApprovedDraft",
+        "mailboxPrepareReply",
+        "mailboxPrepareForward",
+        "mailboxMarkRead",
+        "mailboxSync"
+      ],
+      "declaration": "mailboxCreateDraft(\n        to: [MailAddressInput!]!\n        cc: [MailAddressInput!]\n        bcc: [MailAddressInput!]\n        subject: String!\n        textBody: String!\n        htmlBody: String\n        inReplyTo: String\n        threadId: String\n        prospectId: String\n        companyId: String\n        opportunityId: String\n        projectId: String\n      ): MailDraftRecord!\n\n      mailboxUpdateDraft(\n        id: String!\n        to: [MailAddressInput!]\n        cc: [MailAddressInput!]\n        bcc: [MailAddressInput!]\n        subject: String\n        textBody: String\n        htmlBody: String\n      ): MailDraftRecord!\n\n      mailboxApproveDraft(\n        id: String!\n        ttlMs: Float\n      ): MailDraftRecord!\n\n      mailboxSendApprovedDraft(\n        draftId: String!\n        idempotencyKey: String\n      ): MailMessageRecord!\n\n      mailboxPrepareReply(\n        originalMsgId: String!\n        replyAll: Boolean\n      ): MailDraftRecord!\n\n      mailboxPrepareForward(\n        originalMsgId: String!\n      ): MailDraftRecord!\n\n      mailboxMarkRead(\n        id: String!\n        isRead: Boolean!\n      ): MailMessageRecord!\n\n      mailboxSync(\n        folder: String\n      ): SyncMailboxResult!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/schema.ts",
+      "line": 151,
+      "kind": "Query",
+      "fields": [
+        "operatorTaskEvents",
+        "operatorTask",
+        "wallet",
+        "creditHistory",
+        "billingCatalog",
+        "creditCosts",
+        "billingAccount",
+        "adminWallets",
+        "me",
+        "platform",
+        "conversations",
+        "conversation",
+        "projects",
+        "project",
+        "projectVersion",
+        "projectPreview",
+        "payments",
+        "pricing",
+        "fulfillmentJobs",
+        "emailStatus",
+        "adminEmailDeliveries",
+        "domainQuotes",
+        "domainPayments",
+        "blogPosts",
+        "blogPost",
+        "memories",
+        "adminOverview",
+        "adminUsers",
+        "adminAudit",
+        "settings",
+        "outlierDiagnostics",
+        "operatorSummary",
+        "operatorPlatformStatus",
+        "operatorDemoBudget",
+        "operatorPlatformChanges",
+        "operatorMessages",
+        "operatorLeads",
+        "operatorProposals",
+        "operatorTokens",
+        "operatorConversations",
+        "operatorConversation",
+        "leads",
+        "lead",
+        "proposals",
+        "proposal",
+        "proposalDeliveryInfo",
+        "publicProposal",
+        "operatorDevices",
+        "operatorJobs",
+        "outboundMessages",
+        "agencyBudget",
+        "platformChanges"
+      ],
+      "declaration": "operatorTaskEvents(id:ID!,after:Int=0,limit:Int=100):[OperatorTaskEvent!]! operatorTask(id:ID!):OperatorTask! wallet:CreditWallet! creditHistory(limit:Int=100,offset:Int=0):[CreditHistoryEntry!]! billingCatalog:BillingCatalog! creditCosts:CreditCosts! billingAccount:BillingAccount! adminWallets:[AdminWallet!]! me: User platform: Platform! conversations: [Conversation!]! conversation(id:ID!):Conversation projects:[Project!]! project(id:ID!):Project projectVersion(projectId:ID!,versionId:ID!):ProjectVersion projectPreview(projectId:ID!,path:String!,versionId:ID):String payments:[Payment!]! pricing:Pricing! fulfillmentJobs(projectId:ID):[FulfillmentJob!]! emailStatus:EmailStatus! adminEmailDeliveries:[EmailDelivery!]! domainQuotes:[DomainQuote!]! domainPayments:[DomainPayment!]! blogPosts:[BlogPost!]! blogPost(slug:String!):BlogPost memories:[Memory!]! adminOverview:AdminOverview! adminUsers:[User!]! adminAudit:[AuditEntry!]! settings:Settings! outlierDiagnostics:OutlierDiagnostics! operatorSummary:OperatorSummary! operatorPlatformStatus:String! operatorDemoBudget:OperatorDemoBudget! operatorPlatformChanges:[PlatformChange!]! operatorMessages:[OutboundMessage!]! operatorLeads(search:String):[Lead!]! operatorProposals:[Proposal!]! operatorTokens:[OperatorToken!]! operatorConversations:[OperatorConversation!]! operatorConversation(id:ID!):OperatorConversation leads:[Lead!]! lead(id:ID!):Lead proposals:[Proposal!]! proposal(id:ID!):Proposal proposalDeliveryInfo(proposalId:ID!,forceReissue:Boolean):ProposalDeliveryInfo! publicProposal(slug:String!,path:String,interactiveVisit:Boolean=true):PublicProposalView! operatorDevices:[OperatorDevice!]! operatorJobs(status:String,deviceId:ID):[OperatorJob!]! outboundMessages(proposalId:ID):[OutboundMessage!]! agencyBudget:AgencyBudget! platformChanges:[PlatformChange!]!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/schema.ts",
+      "line": 152,
+      "kind": "Mutation",
+      "fields": [
+        "startOperatorTask",
+        "stopOperatorTask",
+        "purchaseCredits",
+        "subscribePlan",
+        "openBillingPortal",
+        "adminGrantCredits",
+        "register",
+        "login",
+        "logout",
+        "requestPasswordReset",
+        "resetPassword",
+        "createConversation",
+        "sendMessage",
+        "createProject",
+        "updateProject",
+        "updateProjectKnowledge",
+        "updateProjectFile",
+        "inlineTextEdit",
+        "restoreProjectVersion",
+        "bookmarkProjectVersion",
+        "markProjectNotificationsRead",
+        "runProjectResearch",
+        "deleteProject",
+        "buildProject",
+        "verifyProject",
+        "deployProject",
+        "refreshDeployment",
+        "retryFulfillment",
+        "testEmail",
+        "retryEmail",
+        "createDomainQuote",
+        "createDomainCheckout",
+        "createCheckout",
+        "saveBlogPost",
+        "publishBlogPost",
+        "unpublishBlogPost",
+        "deleteBlogPost",
+        "generateBlogPost",
+        "saveMemory",
+        "deleteMemory",
+        "setMemoryPublic",
+        "updateSettings",
+        "setAIProvider",
+        "updateOutlierConfig",
+        "pingOutlierConnection",
+        "setUserDisabled",
+        "createOperatorToken",
+        "issueOperatorToken",
+        "revokeOperatorToken",
+        "sendOperatorTurn",
+        "invokeOperatorTool",
+        "upsertLead",
+        "prepareProposalDemo",
+        "promoteProposal",
+        "operatorChatTurn",
+        "executeOperatorTool",
+        "upsertOperatorLead",
+        "createOperatorProposal",
+        "revokeProposalClaim",
+        "createDevicePairingCode",
+        "enqueuePrivilegedPowerShellTask",
+        "prepareOperatorProposalInvitation",
+        "approveOperatorMessage",
+        "dispatchOperatorMessage",
+        "stageOperatorPlatformChange",
+        "approveOperatorPlatformChange",
+        "rollbackOperatorPlatformChange",
+        "updateProposalStatus",
+        "rotateProposalClaimCode",
+        "issueProposalDelivery",
+        "sendProposalVisitorMessage",
+        "optOutPublicProposal",
+        "requestProposalClaimOtp",
+        "recordContactOptOut",
+        "claimProposalWebsite",
+        "createDevicePairing",
+        "pairWindowsDevice",
+        "completeDevicePairing",
+        "deviceHeartbeat",
+        "revokeOperatorDevice",
+        "enqueueDeviceJob",
+        "reportDeviceJob",
+        "approveOperatorJob",
+        "cancelOperatorJob",
+        "prepareProposalSms",
+        "approveOutboundMessage",
+        "reportAdbSmsOutcome",
+        "updateAgencyBudget",
+        "stagePlatformChange",
+        "approvePlatformChange",
+        "rollbackPlatformChange"
+      ],
+      "declaration": "startOperatorTask(conversationId:ID,text:String!,requestId:String):OperatorTask! stopOperatorTask(id:ID!):OperatorTask! purchaseCredits(sku:ID!):HostedCheckout! subscribePlan(planId:ID!):HostedCheckout! openBillingPortal:HostedCheckout! adminGrantCredits(userId:ID!,amount:Int!,reason:String!,idempotencyKey:String!):CreditWallet!\n register(username:String!,password:String!,recoveryEmail:String!):User!\n login(username:String!,password:String!):User!\n logout:Boolean!\n requestPasswordReset(username:String!):Boolean!\n resetPassword(token:String!,password:String!):Boolean!\n createConversation(mode:ChatMode=STARLI,title:String,projectId:ID):Conversation!\n sendMessage(conversationId:ID!,content:String!,maxCredits:Int=0,requestId:ID,actionMode:AgentActionMode=AUTO,selectedElementContext:String,attachments:[ChatAttachmentInput!]):Message!\n createProject(name:String!,brief:String!):Project!\n updateProject(id:ID!,name:String,brief:String):Project!\n updateProjectKnowledge(projectId:ID!,input:ProjectKnowledgeInput!):Project!\n updateProjectFile(projectId:ID!,path:String!,content:String!,summary:String):Project!\n inlineTextEdit(projectId:ID!,originalText:String!,replacementText:String!):Project!\n restoreProjectVersion(projectId:ID!,versionId:ID!):Project!\n bookmarkProjectVersion(projectId:ID!,versionId:ID!,bookmarked:Boolean!):Project!\n markProjectNotificationsRead(projectId:ID!,notificationId:ID):Project!\n runProjectResearch(projectId:ID!,maxCredits:Int=0,requestId:ID):Project!\n deleteProject(id:ID!):Boolean!\n buildProject(id:ID!,maxCredits:Int=0,requestId:ID,regenerateImages:Boolean=false,summary:String,selectedElementContext:String):Project!\n verifyProject(id:ID!):Project!\n deployProject(id:ID!):Project!\n refreshDeployment(id:ID!):Project!\n retryFulfillment(id:ID!):FulfillmentJob!\n testEmail(to:String!):EmailDelivery!\n retryEmail(id:ID!):EmailDelivery!\n createDomainQuote(projectId:ID!,domain:String!,years:Int=1):DomainQuote!\n createDomainCheckout(quoteId:ID!,autoRenew:Boolean!,consent:Boolean!,contactInformation:DomainContactInput!):DomainPayment!\n createCheckout(projectId:ID!):Payment!\n saveBlogPost(id:ID,title:String!,excerpt:String!,content:String!,coverImage:String):BlogPost!\n publishBlogPost(id:ID!):BlogPost!\n unpublishBlogPost(id:ID!):BlogPost!\n deleteBlogPost(id:ID!):Boolean!\n generateBlogPost:BlogPost!\n saveMemory(title:String!,content:String!,projectId:ID,publicApproved:Boolean!):Memory!\n deleteMemory(id:ID!):Boolean!\n setMemoryPublic(id:ID!,publicApproved:Boolean!):Memory!\n updateSettings(autoBlogEnabled:Boolean!,blogHour:Int!,aiProvider:AIProvider,aiFallbackEnabled:Boolean,outlierModel:String):Settings!\n setAIProvider(provider:AIProvider!,fallbackToOpenAI:Boolean):Settings!\n updateOutlierConfig(model:String,cookie:String,csrfToken:String,conversationId:String):OutlierDiagnostics!\n pingOutlierConnection(rotateIfNeeded:Boolean=false):OutlierPingResult!\n setUserDisabled(id:ID!,disabled:Boolean!):User!\n createOperatorToken(label:String!,permissions:[String!],ttlHours:Int):IssuedOperatorToken!\n  issueOperatorToken(label:String!,permissions:[String!],expiresInDays:Int,ttlHours:Int):IssuedOperatorToken!\n revokeOperatorToken(id:ID!):OperatorToken!\n sendOperatorTurn(conversationId:ID,prompt:String!):OperatorTurnResult!\n invokeOperatorTool(tool:String!,argsJson:String!):OperatorToolActivity!\n upsertLead(id:ID,businessName:String!,industry:String,locality:String,phone:String,email:String,existingWebsite:String,source:String,internalNotes:String,consentStatus:String,consentProvenance:String,confirmedFacts:[ConfirmedFactInput!],missingFields:[String!]):Lead!\n prepareProposalDemo(leadId:ID,businessName:String,industry:String,locality:String,phone:String,email:String,existingWebsite:String,includeWhatsapp:Boolean=true,customBrief:String,consentStatus:String,consentProvenance:String,mode:String):PreparedProposalResult!\n promoteProposal(proposalId:ID!,targetMode:String,toMode:String):Proposal!\n\n  operatorChatTurn(conversationId:ID,text:String!):OperatorChatTurnResult!\n  executeOperatorTool(input:OperatorToolCallInput!):OperatorToolActivity!\n  upsertOperatorLead(input:LeadInput!):Lead!\n  createOperatorProposal(input:ProposalCreateInput!):CreatedProposalPayload!\n  revokeProposalClaim(proposalId:ID!,reason:String):Proposal\n  createDevicePairingCode(label:String!,allowedRoots:[String!],ttlMinutes:Int=15):DevicePairingResult!\n  enqueuePrivilegedPowerShellTask(deviceId:ID!,command:String!,reason:String!):OperatorJob!\n  prepareOperatorProposalInvitation(input:ProposalInvitationInput!):OutboundMessage!\n  approveOperatorMessage(messageId:ID!):OutboundMessage!\n  dispatchOperatorMessage(messageId:ID!):OutboundMessage!\n  stageOperatorPlatformChange(title:String!,targetPath:String!,proposedContent:String!,originalContent:String,verificationCmd:String):PlatformChange!\n  approveOperatorPlatformChange(changeId:ID!):PlatformChange!\n  rollbackOperatorPlatformChange(changeId:ID!):PlatformChange!\n\n updateProposalStatus(proposalId:ID!,status:String!,errorDetail:String):Proposal!\n rotateProposalClaimCode(proposalId:ID!,revokeOnly:Boolean=false,ttlHours:Int=336):IssuedClaimCodeResult!\n issueProposalDelivery(proposalId:ID!,forceReissue:Boolean):ProposalDeliveryInfo!\n sendProposalVisitorMessage(publicSlug:String!,content:String!):Message!\n optOutPublicProposal(publicSlug:String!,reason:String):Boolean!\n requestProposalClaimOtp(publicSlug:String,slug:String,claimCode:String!,contact:String):ClaimOtpResponse!\n  recordContactOptOut(contact:String!,channel:String,reason:String):ContactOptOutResult!\n claimProposalWebsite(publicSlug:String,slug:String,claimCode:String!,otpCode:String,otp:String):ClaimWebsiteResult!\n createDevicePairing(label:String!,allowedRoots:[String!],ttlMinutes:Int=15):DevicePairingResult!\n pairWindowsDevice(pairingCode:String!,deviceName:String,platform:String,version:String,capabilities:[String!],allowedRoots:[String!]):PairedDeviceSession!\n  completeDevicePairing(pairingCode:String!,name:String,deviceName:String,platform:String,version:String,capabilities:[String!]):PairedDeviceSession!\n deviceHeartbeat(deviceToken:String!,version:String,capabilities:[String!],adbStatus:String,adbDevices:[AdbDeviceInfoInput!]):OperatorDevice!\n revokeOperatorDevice(deviceId:ID!):OperatorDevice!\n enqueueDeviceJob(deviceId:ID!,kind:String!,argsJson:String!,idempotencyKey:String):OperatorJob!\n reportDeviceJob(deviceToken:String!,jobId:ID!,leaseToken:String,status:String!,output:String,error:String,exitCode:Int):OperatorJob!\n approveOperatorJob(jobId:ID!):OperatorJob!\n cancelOperatorJob(jobId:ID!,reason:String):OperatorJob!\n prepareProposalSms(proposalId:ID!,adapter:String,deviceId:ID,customBody:String,idempotencyKey:String):OutboundMessage!\n approveOutboundMessage(messageId:ID!):OutboundMessage!\n reportAdbSmsOutcome(messageId:ID!,outcome:String!,detail:String!):OutboundMessage!\n updateAgencyBudget(perDemoMaxUnits:Int!,dailyMaxUnits:Int!):AgencyBudget!\n stagePlatformChange(title:String!,targetPath:String!,originalContent:String!,proposedContent:String!):PlatformChange!\n approvePlatformChange(changeId:ID!):PlatformChange!\n rollbackPlatformChange(changeId:ID!):PlatformChange!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/schema.ts",
+      "line": 241,
+      "kind": "Subscription",
+      "fields": [
+        "walletUpdated",
+        "conversationUpdated",
+        "conversationsUpdated",
+        "projectsUpdated",
+        "projectUpdated",
+        "paymentsUpdated",
+        "memoriesUpdated",
+        "blogUpdated",
+        "platformUpdated",
+        "fulfillmentUpdated",
+        "emailDeliveriesUpdated",
+        "domainsUpdated",
+        "operatorConversationUpdated",
+        "operatorDevicesUpdated",
+        "operatorJobsUpdated",
+        "proposalsUpdated",
+        "leadsUpdated",
+        "outboundMessagesUpdated"
+      ],
+      "declaration": "walletUpdated:CreditWallet! conversationUpdated(id:ID!):Conversation! conversationsUpdated:[Conversation!]! projectsUpdated:[Project!]! projectUpdated(id:ID!):Project paymentsUpdated:[Payment!]! memoriesUpdated:[Memory!]! blogUpdated:[BlogPost!]! platformUpdated:Platform! fulfillmentUpdated(projectId:ID):[FulfillmentJob!]! emailDeliveriesUpdated:[EmailDelivery!]! domainsUpdated:DomainState! operatorConversationUpdated(id:ID!):OperatorConversation! operatorDevicesUpdated:[OperatorDevice!]! operatorJobsUpdated:[OperatorJob!]! proposalsUpdated:[Proposal!]! leadsUpdated:[Lead!]! outboundMessagesUpdated:[OutboundMessage!]!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/social-publishing/graphql.ts",
+      "line": 18,
+      "kind": "Query",
+      "fields": [
+        "socialCloud"
+      ],
+      "declaration": "socialCloud:SocialCloudPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/social-publishing/graphql.ts",
+      "line": 19,
+      "kind": "Mutation",
+      "fields": [
+        "createSocialDraft",
+        "beginSocialConnection",
+        "syncSocialConnections"
+      ],
+      "declaration": "createSocialDraft(input:SocialDraftInput!):SocialCloudPayload! beginSocialConnection(platforms:[String!]):SocialCloudPayload! syncSocialConnections:SocialCloudPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/starli-conversation/customer-graphql.ts",
+      "line": 431,
+      "kind": "Query",
+      "fields": [
+        "starliGovernedState"
+      ],
+      "declaration": "starliGovernedState(conversationId:ID!):StarliGovernedPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/starli-conversation/customer-graphql.ts",
+      "line": 432,
+      "kind": "Mutation",
+      "fields": [
+        "starliGovernedSend",
+        "starliGovernedAction"
+      ],
+      "declaration": "starliGovernedSend(conversationId:ID!,expectedConversationRevision:Int!,idempotencyKey:String!,content:String!):StarliGovernedPayload!\n  starliGovernedAction(conversationId:ID!,expectedConversationRevision:Int!,expectedPlanRevision:Int!,action:StarliGovernedAction!):StarliGovernedPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/starli-os/graphql.ts",
+      "line": 13,
+      "kind": "Query",
+      "fields": [
+        "starliHomeSnapshot",
+        "starliWorkspaceSnapshot",
+        "starliConnections",
+        "starliTrust",
+        "starliHomeActivity"
+      ],
+      "declaration": "starliHomeSnapshot:StarliAggregatePayload!\n starliWorkspaceSnapshot(projectId:ID!,artifactCursor:String):StarliAggregatePayload!\n starliConnections:StarliAggregatePayload!\n starliTrust:StarliAggregatePayload!\n starliHomeActivity(afterSequence:Int,limit:Int):StarliAggregatePayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/starli-os/graphql.ts",
+      "line": 20,
+      "kind": "Mutation",
+      "fields": [
+        "starliSetGlobalPause"
+      ],
+      "declaration": "starliSetGlobalPause(paused:Boolean!):StarliAggregatePayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/video/graphql.ts",
+      "line": 113,
+      "kind": "Query",
+      "fields": [
+        "videoProjects",
+        "videoProject",
+        "videoRenders",
+        "videoRender",
+        "brandProfiles",
+        "brandProfile",
+        "videoPreviewFrame",
+        "validateVideoSpec"
+      ],
+      "declaration": "videoProjects: [VideoProject!]!\n    videoProject(id: ID!): VideoProject\n    videoRenders(projectId: ID!): [VideoRender!]!\n    videoRender(id: ID!): VideoRender\n    brandProfiles: [BrandProfile!]!\n    brandProfile(id: ID!): BrandProfile\n    videoPreviewFrame(projectId: ID!, timestamp: Float!): VideoPreviewResult!\n    validateVideoSpec(specJson: String!): SpecValidationResult!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/video/graphql.ts",
+      "line": 124,
+      "kind": "Mutation",
+      "fields": [
+        "createVideoProject",
+        "applyVideoSpec",
+        "patchVideoSpec",
+        "deleteVideoProject",
+        "startVideoRender",
+        "cancelVideoRender",
+        "createBrandProfile",
+        "synthesizeVoiceover"
+      ],
+      "declaration": "createVideoProject(\n      title: String!\n      format: VideoFormat\n      purpose: String\n      brandProfileId: ID\n      specJson: String\n    ): VideoProject!\n\n    applyVideoSpec(projectId: ID!, specJson: String!): VideoProject!\n\n    patchVideoSpec(projectId: ID!, patchJson: String!): VideoProject!\n\n    deleteVideoProject(projectId: ID!): Boolean!\n\n    startVideoRender(projectId: ID!, thumbnailTimestamp: Float): VideoRender!\n\n    cancelVideoRender(renderId: ID!): VideoRender!\n\n    createBrandProfile(\n      businessName: String!\n      primaryColor: String\n      secondaryColor: String\n      accentColor: String\n      textColor: String\n      website: String\n      ctaText: String\n      tagline: String\n    ): BrandProfile!\n\n    synthesizeVoiceover(\n      text: String!\n      voice: String\n      language: String\n      projectId: ID\n    ): VoiceoverResult!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/video/graphql.ts",
+      "line": 162,
+      "kind": "Subscription",
+      "fields": [
+        "videoProjectsUpdated",
+        "videoRendersUpdated"
+      ],
+      "declaration": "videoProjectsUpdated: [VideoProject!]!\n    videoRendersUpdated(projectId: ID!): [VideoRender!]!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/video-director/graphql.ts",
+      "line": 21,
+      "kind": "Query",
+      "fields": [
+        "videoDirectorPlans",
+        "videoDirectorRuns",
+        "videoDirectorPlan",
+        "videoDirectorRun"
+      ],
+      "declaration": "videoDirectorPlans: VideoDirectorPayload!\n      videoDirectorRuns: VideoDirectorPayload!\n      videoDirectorPlan(id:ID!): VideoDirectorPayload!\n      videoDirectorRun(id:ID!): VideoDirectorPayload!"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/video-director/graphql.ts",
+      "line": 27,
+      "kind": "Mutation",
+      "fields": [
+        "createVideoDirectorPlan",
+        "prepareVideoDirectorRun",
+        "generateVideoDirectorPreviews"
+      ],
+      "declaration": "createVideoDirectorPlan(input:VideoDirectorBriefInput!): VideoDirectorPayload!\n      prepareVideoDirectorRun(planId:ID!): VideoDirectorPayload!\n      generateVideoDirectorPreviews(runId:ID!, timestamp:Float): VideoDirectorPayload!"
+    },
+    {
+      "file": "platform/server/src/assets/graphql.ts",
+      "line": 20,
+      "kind": "Query",
+      "fields": [
+        "asset",
+        "assets"
+      ],
+      "declaration": "asset(id: String!): AssetRecord\n      assets(prospectId: String, projectId: String, visibility: String): [AssetRecord!]!"
+    },
+    {
+      "file": "platform/server/src/crm/graphql.ts",
+      "line": 362,
+      "kind": "Query",
+      "fields": [
+        "crmAgencyOverview",
+        "crmPipeline",
+        "crmCompanies",
+        "crmCompany",
+        "crmDuplicateCandidates",
+        "crmContacts",
+        "crmSignals",
+        "crmOpportunities",
+        "crmOpportunity",
+        "crmTasks",
+        "crmActivities",
+        "crmSavedViews",
+        "crmPipelineMetrics",
+        "crmPreviewCsvImport",
+        "crmExportCompaniesCsv"
+      ],
+      "declaration": "crmAgencyOverview: AgencyOverview!\n    crmPipeline: CrmPipelineConfig!\n    crmCompanies(search: String, industry: String, qualificationStatus: String, tag: String): [CrmCompany!]!\n    crmCompany(id: String!): CrmCompany\n    crmDuplicateCandidates(name: String!, domain: String, email: String): [CrmCompany!]!\n    crmContacts(companyId: String): [CrmContact!]!\n    crmSignals(companyId: String): [CrmSignal!]!\n    crmOpportunities(companyId: String, stageId: String, status: String): [CrmOpportunity!]!\n    crmOpportunity(id: String!): CrmOpportunity\n    crmTasks(companyId: String, opportunityId: String, status: String): [CrmTask!]!\n    crmActivities(companyId: String, opportunityId: String): [CrmActivity!]!\n    crmSavedViews(target: String): [CrmSavedView!]!\n    crmPipelineMetrics: CrmPipelineMetrics!\n    crmPreviewCsvImport(csvContent: String!): CrmCsvPreviewResult!\n    crmExportCompaniesCsv: String!"
+    },
+    {
+      "file": "platform/server/src/crm/graphql.ts",
+      "line": 380,
+      "kind": "Mutation",
+      "fields": [
+        "crmConnectLegacyLeads",
+        "crmUpsertCompany",
+        "crmMergeCompanies",
+        "crmUpsertContact",
+        "crmAddSignal",
+        "crmVerifySignal",
+        "crmUpsertOpportunity",
+        "crmUpsertTask",
+        "crmAddActivityNote",
+        "crmUpdatePipelineStages",
+        "crmUpsertSavedView",
+        "crmDeleteSavedView",
+        "crmExecuteCsvImport"
+      ],
+      "declaration": "crmConnectLegacyLeads(dryRun:Boolean = true, limit:Int = 100, after:String):CrmLegacyReconciliation!\n    crmUpsertCompany(input: CrmCompanyInput!, expectedVersion: Int): CrmCompany!\n    crmMergeCompanies(targetCompanyId: String!, sourceCompanyId: String!, expectedTargetVersion: Int!, expectedSourceVersion: Int!): CrmCompany!\n    crmUpsertContact(input: CrmContactInput!, expectedVersion: Int): CrmContact!\n    crmAddSignal(input: CrmSignalInput!): CrmSignal!\n    crmVerifySignal(signalId: String!, verified: Boolean!, expectedVersion: Int): CrmSignal!\n    crmUpsertOpportunity(input: CrmOpportunityInput!, expectedVersion: Int): CrmOpportunity!\n    crmUpsertTask(input: CrmTaskInput!, expectedVersion: Int): CrmTask!\n    crmAddActivityNote(companyId: String, opportunityId: String, summary: String!, details: String): CrmActivity!\n    crmUpdatePipelineStages(stages: [CrmPipelineStageInput!]!, expectedVersion: Int!): CrmPipelineConfig!\n    crmUpsertSavedView(input: CrmSavedViewInput!, expectedVersion: Int): CrmSavedView!\n    crmDeleteSavedView(id: String!): Boolean!\n    crmExecuteCsvImport(csvContent: String!, skipDuplicates: Boolean!): CrmCsvImportResult!"
+    },
+    {
+      "file": "platform/server/src/hosted-agent-integrations/graphql.ts",
+      "line": 81,
+      "kind": "Query",
+      "fields": [
+        "hostedAgentProposals",
+        "hostedAgentProposal",
+        "hostedAgentProposalPublic"
+      ],
+      "declaration": "hostedAgentProposals(agentId: ID, prospectId: ID): [HostedAgentProposal!]!\n      hostedAgentProposal(id: ID!): HostedAgentProposal\n      hostedAgentProposalPublic(slug: String!): HostedAgentProposalPublicView"
+    },
+    {
+      "file": "platform/server/src/hosted-agent-integrations/graphql.ts",
+      "line": 87,
+      "kind": "Mutation",
+      "fields": [
+        "hostedAgentCreateProposal"
+      ],
+      "declaration": "hostedAgentCreateProposal(input: CreateAgentProposalInput!): HostedAgentProposal!"
+    },
+    {
+      "file": "platform/server/src/hosted-agents/graphql.ts",
+      "line": 17,
+      "kind": "Subscription",
+      "fields": [
+        "visitorMessage"
+      ],
+      "declaration": "visitorMessage(conversationId: ID!, visitorToken: String!): HostedAgentMessage!"
+    },
+    {
+      "file": "platform/server/src/hosted-agents/graphql.ts",
+      "line": 190,
+      "kind": "Query",
+      "fields": [
+        "visitorListActive",
+        "visitorGetSession",
+        "visitorGetContext",
+        "visitorMessages",
+        "hostedAgents",
+        "hostedAgent",
+        "hostedAgentPublic",
+        "hostedAgentConversations",
+        "hostedAgentLeads",
+        "hostedAgentUsage",
+        "hostedAgentToolExecutions",
+        "hostedAgentToolMetrics"
+      ],
+      "declaration": "visitorListActive(agentId: ID!): String!\n    visitorGetSession(id: ID!): String!\n    visitorGetContext(id: ID!): String!\n    visitorMessages(conversationId: ID!, visitorToken: String!): [HostedAgentMessage!]!\n    hostedAgents(adminAll: Boolean = false, status: HostedAgentStatus): [HostedAgent!]!\n    hostedAgent(id: ID!): HostedAgent!\n    hostedAgentPublic(slug: String, publicId: String): HostedAgentPublic\n    hostedAgentConversations(agentId: ID!, offset: Int = 0, limit: Int = 25): HostedAgentConversationPage!\n    hostedAgentLeads(agentId: ID!, offset: Int = 0, limit: Int = 25): HostedAgentLeadPage!\n    hostedAgentUsage(agentId: ID!): HostedAgentUsage!\n    hostedAgentToolExecutions(agentId: ID!, limit: Int = 50): [HostedAgentToolExecution!]!\n    hostedAgentToolMetrics(agentId: ID!): HostedAgentToolMetrics!"
+    },
+    {
+      "file": "platform/server/src/hosted-agents/graphql.ts",
+      "line": 205,
+      "kind": "Mutation",
+      "fields": [
+        "visitorPresence",
+        "visitorSendMessage",
+        "hostedAgentCreate",
+        "hostedAgentUpdate",
+        "hostedAgentSetKnowledge",
+        "hostedAgentPublish",
+        "hostedAgentDisable",
+        "hostedAgentAssignOwner",
+        "hostedAgentStartConversation",
+        "hostedAgentSendMessage"
+      ],
+      "declaration": "visitorPresence(input: VisitorPresenceInput!): Boolean!\n    visitorSendMessage(id: ID!, topic: String): HostedAgentMessage!\n    hostedAgentCreate(input: HostedAgentCreateInput!): HostedAgent!\n    hostedAgentUpdate(id: ID!, input: HostedAgentUpdateInput!, expectedVersion: Int!): HostedAgent!\n    hostedAgentSetKnowledge(id: ID!, knowledgeJson: String!, expectedVersion: Int!): HostedAgent!\n    hostedAgentPublish(id: ID!, mode: HostedAgentStatus!, expectedVersion: Int!): HostedAgent!\n    hostedAgentDisable(id: ID!, expectedVersion: Int!): HostedAgent!\n    hostedAgentAssignOwner(id: ID!, ownerId: ID!, expectedVersion: Int!): HostedAgent!\n    hostedAgentStartConversation(publicId: String!): HostedAgentSession!\n    hostedAgentSendMessage(publicId: String!, conversationId: ID!, visitorToken: String!, requestId: String!, message: String!): HostedAgentChatResult!"
+    },
+    {
+      "file": "platform/server/src/mailbox/graphql.ts",
+      "line": 135,
+      "kind": "Query",
+      "fields": [
+        "mailboxDrafts",
+        "mailboxAccount",
+        "mailboxMessages",
+        "mailboxMessage",
+        "mailboxThread",
+        "mailboxTransactionalEvents"
+      ],
+      "declaration": "mailboxDrafts(limit:Int = 100):[MailDraftRecord!]!\n      mailboxAccount: MailboxAccountInfo!\n      mailboxMessages(\n        folder: String\n        threadId: String\n        search: String\n        direction: String\n        prospectId: String\n        limit: Int\n        offset: Int\n      ): MailMessagesResult!\n      mailboxMessage(id: String!): MailMessageRecord\n      mailboxThread(threadId: String!): [MailMessageRecord!]!\n      mailboxTransactionalEvents(kind: String, outboxId: String, limit: Int): [TransactionalEmailEvent!]!"
+    },
+    {
+      "file": "platform/server/src/mailbox/graphql.ts",
+      "line": 152,
+      "kind": "Mutation",
+      "fields": [
+        "mailboxCreateDraft",
+        "mailboxUpdateDraft",
+        "mailboxApproveDraft",
+        "mailboxSendApprovedDraft",
+        "mailboxPrepareReply",
+        "mailboxPrepareForward",
+        "mailboxMarkRead",
+        "mailboxSync"
+      ],
+      "declaration": "mailboxCreateDraft(\n        to: [MailAddressInput!]!\n        cc: [MailAddressInput!]\n        bcc: [MailAddressInput!]\n        subject: String!\n        textBody: String!\n        htmlBody: String\n        inReplyTo: String\n        threadId: String\n        prospectId: String\n        companyId: String\n        opportunityId: String\n        projectId: String\n      ): MailDraftRecord!\n\n      mailboxUpdateDraft(\n        id: String!\n        to: [MailAddressInput!]\n        cc: [MailAddressInput!]\n        bcc: [MailAddressInput!]\n        subject: String\n        textBody: String\n        htmlBody: String\n      ): MailDraftRecord!\n\n      mailboxApproveDraft(\n        id: String!\n        ttlMs: Float\n      ): MailDraftRecord!\n\n      mailboxSendApprovedDraft(\n        draftId: String!\n        idempotencyKey: String\n      ): MailMessageRecord!\n\n      mailboxPrepareReply(\n        originalMsgId: String!\n        replyAll: Boolean\n      ): MailDraftRecord!\n\n      mailboxPrepareForward(\n        originalMsgId: String!\n      ): MailDraftRecord!\n\n      mailboxMarkRead(\n        id: String!\n        isRead: Boolean!\n      ): MailMessageRecord!\n\n      mailboxSync(\n        folder: String\n      ): SyncMailboxResult!"
+    },
+    {
+      "file": "platform/server/src/schema.ts",
+      "line": 131,
+      "kind": "Query",
+      "fields": [
+        "operatorTaskEvents",
+        "operatorTask",
+        "wallet",
+        "creditHistory",
+        "billingCatalog",
+        "creditCosts",
+        "billingAccount",
+        "adminWallets",
+        "me",
+        "platform",
+        "conversations",
+        "conversation",
+        "projects",
+        "project",
+        "projectVersion",
+        "projectPreview",
+        "payments",
+        "pricing",
+        "fulfillmentJobs",
+        "emailStatus",
+        "adminEmailDeliveries",
+        "domainQuotes",
+        "domainPayments",
+        "blogPosts",
+        "blogPost",
+        "memories",
+        "adminOverview",
+        "adminUsers",
+        "adminAudit",
+        "settings",
+        "outlierDiagnostics",
+        "operatorSummary",
+        "operatorPlatformStatus",
+        "operatorDemoBudget",
+        "operatorPlatformChanges",
+        "operatorMessages",
+        "operatorLeads",
+        "operatorProposals",
+        "operatorTokens",
+        "operatorConversations",
+        "operatorConversation",
+        "leads",
+        "lead",
+        "proposals",
+        "proposal",
+        "proposalDeliveryInfo",
+        "publicProposal",
+        "operatorDevices",
+        "operatorJobs",
+        "outboundMessages",
+        "agencyBudget",
+        "platformChanges"
+      ],
+      "declaration": "operatorTaskEvents(id:ID!,after:Int=0,limit:Int=100):[OperatorTaskEvent!]! operatorTask(id:ID!):OperatorTask! wallet:CreditWallet! creditHistory(limit:Int=100,offset:Int=0):[CreditHistoryEntry!]! billingCatalog:BillingCatalog! creditCosts:CreditCosts! billingAccount:BillingAccount! adminWallets:[AdminWallet!]! me: User platform: Platform! conversations: [Conversation!]! conversation(id:ID!):Conversation projects:[Project!]! project(id:ID!):Project projectVersion(projectId:ID!,versionId:ID!):ProjectVersion projectPreview(projectId:ID!,path:String!,versionId:ID):String payments:[Payment!]! pricing:Pricing! fulfillmentJobs(projectId:ID):[FulfillmentJob!]! emailStatus:EmailStatus! adminEmailDeliveries:[EmailDelivery!]! domainQuotes:[DomainQuote!]! domainPayments:[DomainPayment!]! blogPosts:[BlogPost!]! blogPost(slug:String!):BlogPost memories:[Memory!]! adminOverview:AdminOverview! adminUsers:[User!]! adminAudit:[AuditEntry!]! settings:Settings! outlierDiagnostics:OutlierDiagnostics! operatorSummary:OperatorSummary! operatorPlatformStatus:String! operatorDemoBudget:OperatorDemoBudget! operatorPlatformChanges:[PlatformChange!]! operatorMessages:[OutboundMessage!]! operatorLeads(search:String):[Lead!]! operatorProposals:[Proposal!]! operatorTokens:[OperatorToken!]! operatorConversations:[OperatorConversation!]! operatorConversation(id:ID!):OperatorConversation leads:[Lead!]! lead(id:ID!):Lead proposals:[Proposal!]! proposal(id:ID!):Proposal proposalDeliveryInfo(proposalId:ID!,forceReissue:Boolean):ProposalDeliveryInfo! publicProposal(slug:String!,path:String,interactiveVisit:Boolean=true):PublicProposalView! operatorDevices:[OperatorDevice!]! operatorJobs(status:String,deviceId:ID):[OperatorJob!]! outboundMessages(proposalId:ID):[OutboundMessage!]! agencyBudget:AgencyBudget! platformChanges:[PlatformChange!]!"
+    },
+    {
+      "file": "platform/server/src/schema.ts",
+      "line": 132,
+      "kind": "Mutation",
+      "fields": [
+        "startOperatorTask",
+        "stopOperatorTask",
+        "purchaseCredits",
+        "subscribePlan",
+        "openBillingPortal",
+        "adminGrantCredits",
+        "register",
+        "login",
+        "logout",
+        "requestPasswordReset",
+        "resetPassword",
+        "createConversation",
+        "sendMessage",
+        "createProject",
+        "updateProject",
+        "updateProjectKnowledge",
+        "updateProjectFile",
+        "inlineTextEdit",
+        "restoreProjectVersion",
+        "bookmarkProjectVersion",
+        "markProjectNotificationsRead",
+        "runProjectResearch",
+        "deleteProject",
+        "buildProject",
+        "verifyProject",
+        "deployProject",
+        "refreshDeployment",
+        "retryFulfillment",
+        "testEmail",
+        "retryEmail",
+        "createDomainQuote",
+        "createDomainCheckout",
+        "createCheckout",
+        "saveBlogPost",
+        "publishBlogPost",
+        "unpublishBlogPost",
+        "deleteBlogPost",
+        "generateBlogPost",
+        "saveMemory",
+        "deleteMemory",
+        "setMemoryPublic",
+        "updateSettings",
+        "setAIProvider",
+        "updateOutlierConfig",
+        "pingOutlierConnection",
+        "setUserDisabled",
+        "createOperatorToken",
+        "issueOperatorToken",
+        "revokeOperatorToken",
+        "sendOperatorTurn",
+        "invokeOperatorTool",
+        "upsertLead",
+        "prepareProposalDemo",
+        "promoteProposal",
+        "operatorChatTurn",
+        "executeOperatorTool",
+        "upsertOperatorLead",
+        "createOperatorProposal",
+        "revokeProposalClaim",
+        "createDevicePairingCode",
+        "enqueuePrivilegedPowerShellTask",
+        "prepareOperatorProposalInvitation",
+        "approveOperatorMessage",
+        "dispatchOperatorMessage",
+        "stageOperatorPlatformChange",
+        "approveOperatorPlatformChange",
+        "rollbackOperatorPlatformChange",
+        "updateProposalStatus",
+        "rotateProposalClaimCode",
+        "issueProposalDelivery",
+        "sendProposalVisitorMessage",
+        "optOutPublicProposal",
+        "requestProposalClaimOtp",
+        "recordContactOptOut",
+        "claimProposalWebsite",
+        "createDevicePairing",
+        "pairWindowsDevice",
+        "completeDevicePairing",
+        "deviceHeartbeat",
+        "revokeOperatorDevice",
+        "enqueueDeviceJob",
+        "reportDeviceJob",
+        "approveOperatorJob",
+        "cancelOperatorJob",
+        "prepareProposalSms",
+        "approveOutboundMessage",
+        "reportAdbSmsOutcome",
+        "updateAgencyBudget",
+        "stagePlatformChange",
+        "approvePlatformChange",
+        "rollbackPlatformChange"
+      ],
+      "declaration": "startOperatorTask(conversationId:ID,text:String!,requestId:String):OperatorTask! stopOperatorTask(id:ID!):OperatorTask! purchaseCredits(sku:ID!):HostedCheckout! subscribePlan(planId:ID!):HostedCheckout! openBillingPortal:HostedCheckout! adminGrantCredits(userId:ID!,amount:Int!,reason:String!,idempotencyKey:String!):CreditWallet!\n register(username:String!,password:String!,recoveryEmail:String!):User!\n login(username:String!,password:String!):User!\n logout:Boolean!\n requestPasswordReset(username:String!):Boolean!\n resetPassword(token:String!,password:String!):Boolean!\n createConversation(mode:ChatMode=STARLI,title:String,projectId:ID):Conversation!\n sendMessage(conversationId:ID!,content:String!,maxCredits:Int=0,requestId:ID,actionMode:AgentActionMode=AUTO,selectedElementContext:String,attachments:[ChatAttachmentInput!]):Message!\n createProject(name:String!,brief:String!):Project!\n updateProject(id:ID!,name:String,brief:String):Project!\n updateProjectKnowledge(projectId:ID!,input:ProjectKnowledgeInput!):Project!\n updateProjectFile(projectId:ID!,path:String!,content:String!,summary:String):Project!\n inlineTextEdit(projectId:ID!,originalText:String!,replacementText:String!):Project!\n restoreProjectVersion(projectId:ID!,versionId:ID!):Project!\n bookmarkProjectVersion(projectId:ID!,versionId:ID!,bookmarked:Boolean!):Project!\n markProjectNotificationsRead(projectId:ID!,notificationId:ID):Project!\n runProjectResearch(projectId:ID!,maxCredits:Int=0,requestId:ID):Project!\n deleteProject(id:ID!):Boolean!\n buildProject(id:ID!,maxCredits:Int=0,requestId:ID,regenerateImages:Boolean=false,summary:String,selectedElementContext:String):Project!\n verifyProject(id:ID!):Project!\n deployProject(id:ID!):Project!\n refreshDeployment(id:ID!):Project!\n retryFulfillment(id:ID!):FulfillmentJob!\n testEmail(to:String!):EmailDelivery!\n retryEmail(id:ID!):EmailDelivery!\n createDomainQuote(projectId:ID!,domain:String!,years:Int=1):DomainQuote!\n createDomainCheckout(quoteId:ID!,autoRenew:Boolean!,consent:Boolean!,contactInformation:DomainContactInput!):DomainPayment!\n createCheckout(projectId:ID!):Payment!\n saveBlogPost(id:ID,title:String!,excerpt:String!,content:String!,coverImage:String):BlogPost!\n publishBlogPost(id:ID!):BlogPost!\n unpublishBlogPost(id:ID!):BlogPost!\n deleteBlogPost(id:ID!):Boolean!\n generateBlogPost:BlogPost!\n saveMemory(title:String!,content:String!,projectId:ID,publicApproved:Boolean!):Memory!\n deleteMemory(id:ID!):Boolean!\n setMemoryPublic(id:ID!,publicApproved:Boolean!):Memory!\n updateSettings(autoBlogEnabled:Boolean!,blogHour:Int!,aiProvider:AIProvider,aiFallbackEnabled:Boolean,outlierModel:String):Settings!\n setAIProvider(provider:AIProvider!,fallbackToOpenAI:Boolean):Settings!\n updateOutlierConfig(model:String,cookie:String,csrfToken:String,conversationId:String):OutlierDiagnostics!\n pingOutlierConnection(rotateIfNeeded:Boolean=false):OutlierPingResult!\n setUserDisabled(id:ID!,disabled:Boolean!):User!\n createOperatorToken(label:String!,permissions:[String!],ttlHours:Int):IssuedOperatorToken!\n  issueOperatorToken(label:String!,permissions:[String!],expiresInDays:Int,ttlHours:Int):IssuedOperatorToken!\n revokeOperatorToken(id:ID!):OperatorToken!\n sendOperatorTurn(conversationId:ID,prompt:String!):OperatorTurnResult!\n invokeOperatorTool(tool:String!,argsJson:String!):OperatorToolActivity!\n upsertLead(id:ID,businessName:String!,industry:String,locality:String,phone:String,email:String,existingWebsite:String,source:String,internalNotes:String,consentStatus:String,consentProvenance:String,confirmedFacts:[ConfirmedFactInput!],missingFields:[String!]):Lead!\n prepareProposalDemo(leadId:ID,businessName:String,industry:String,locality:String,phone:String,email:String,existingWebsite:String,includeWhatsapp:Boolean=true,customBrief:String,consentStatus:String,consentProvenance:String,mode:String):PreparedProposalResult!\n promoteProposal(proposalId:ID!,targetMode:String,toMode:String):Proposal!\n\n  operatorChatTurn(conversationId:ID,text:String!):OperatorChatTurnResult!\n  executeOperatorTool(input:OperatorToolCallInput!):OperatorToolActivity!\n  upsertOperatorLead(input:LeadInput!):Lead!\n  createOperatorProposal(input:ProposalCreateInput!):CreatedProposalPayload!\n  revokeProposalClaim(proposalId:ID!,reason:String):Proposal\n  createDevicePairingCode(label:String!,allowedRoots:[String!],ttlMinutes:Int=15):DevicePairingResult!\n  enqueuePrivilegedPowerShellTask(deviceId:ID!,command:String!,reason:String!):OperatorJob!\n  prepareOperatorProposalInvitation(input:ProposalInvitationInput!):OutboundMessage!\n  approveOperatorMessage(messageId:ID!):OutboundMessage!\n  dispatchOperatorMessage(messageId:ID!):OutboundMessage!\n  stageOperatorPlatformChange(title:String!,targetPath:String!,proposedContent:String!,originalContent:String,verificationCmd:String):PlatformChange!\n  approveOperatorPlatformChange(changeId:ID!):PlatformChange!\n  rollbackOperatorPlatformChange(changeId:ID!):PlatformChange!\n\n updateProposalStatus(proposalId:ID!,status:String!,errorDetail:String):Proposal!\n rotateProposalClaimCode(proposalId:ID!,revokeOnly:Boolean=false,ttlHours:Int=336):IssuedClaimCodeResult!\n issueProposalDelivery(proposalId:ID!,forceReissue:Boolean):ProposalDeliveryInfo!\n sendProposalVisitorMessage(publicSlug:String!,content:String!):Message!\n optOutPublicProposal(publicSlug:String!,reason:String):Boolean!\n requestProposalClaimOtp(publicSlug:String,slug:String,claimCode:String!,contact:String):ClaimOtpResponse!\n  recordContactOptOut(contact:String!,channel:String,reason:String):ContactOptOutResult!\n claimProposalWebsite(publicSlug:String,slug:String,claimCode:String!,otpCode:String,otp:String):ClaimWebsiteResult!\n createDevicePairing(label:String!,allowedRoots:[String!],ttlMinutes:Int=15):DevicePairingResult!\n pairWindowsDevice(pairingCode:String!,deviceName:String,platform:String,version:String,capabilities:[String!],allowedRoots:[String!]):PairedDeviceSession!\n  completeDevicePairing(pairingCode:String!,name:String,deviceName:String,platform:String,version:String,capabilities:[String!]):PairedDeviceSession!\n deviceHeartbeat(deviceToken:String!,version:String,capabilities:[String!],adbStatus:String,adbDevices:[AdbDeviceInfoInput!]):OperatorDevice!\n revokeOperatorDevice(deviceId:ID!):OperatorDevice!\n enqueueDeviceJob(deviceId:ID!,kind:String!,argsJson:String!,idempotencyKey:String):OperatorJob!\n reportDeviceJob(deviceToken:String!,jobId:ID!,leaseToken:String,status:String!,output:String,error:String,exitCode:Int):OperatorJob!\n approveOperatorJob(jobId:ID!):OperatorJob!\n cancelOperatorJob(jobId:ID!,reason:String):OperatorJob!\n prepareProposalSms(proposalId:ID!,adapter:String,deviceId:ID,customBody:String,idempotencyKey:String):OutboundMessage!\n approveOutboundMessage(messageId:ID!):OutboundMessage!\n reportAdbSmsOutcome(messageId:ID!,outcome:String!,detail:String!):OutboundMessage!\n updateAgencyBudget(perDemoMaxUnits:Int!,dailyMaxUnits:Int!):AgencyBudget!\n stagePlatformChange(title:String!,targetPath:String!,originalContent:String!,proposedContent:String!):PlatformChange!\n approvePlatformChange(changeId:ID!):PlatformChange!\n rollbackPlatformChange(changeId:ID!):PlatformChange!"
+    },
+    {
+      "file": "platform/server/src/schema.ts",
+      "line": 221,
+      "kind": "Subscription",
+      "fields": [
+        "walletUpdated",
+        "conversationUpdated",
+        "conversationsUpdated",
+        "projectsUpdated",
+        "projectUpdated",
+        "paymentsUpdated",
+        "memoriesUpdated",
+        "blogUpdated",
+        "platformUpdated",
+        "fulfillmentUpdated",
+        "emailDeliveriesUpdated",
+        "domainsUpdated",
+        "operatorConversationUpdated",
+        "operatorDevicesUpdated",
+        "operatorJobsUpdated",
+        "proposalsUpdated",
+        "leadsUpdated",
+        "outboundMessagesUpdated"
+      ],
+      "declaration": "walletUpdated:CreditWallet! conversationUpdated(id:ID!):Conversation! conversationsUpdated:[Conversation!]! projectsUpdated:[Project!]! projectUpdated(id:ID!):Project paymentsUpdated:[Payment!]! memoriesUpdated:[Memory!]! blogUpdated:[BlogPost!]! platformUpdated:Platform! fulfillmentUpdated(projectId:ID):[FulfillmentJob!]! emailDeliveriesUpdated:[EmailDelivery!]! domainsUpdated:DomainState! operatorConversationUpdated(id:ID!):OperatorConversation! operatorDevicesUpdated:[OperatorDevice!]! operatorJobsUpdated:[OperatorJob!]! proposalsUpdated:[Proposal!]! leadsUpdated:[Lead!]! outboundMessagesUpdated:[OutboundMessage!]!"
+    },
+    {
+      "file": "platform/server/src/video/graphql.ts",
+      "line": 113,
+      "kind": "Query",
+      "fields": [
+        "videoProjects",
+        "videoProject",
+        "videoRenders",
+        "videoRender",
+        "brandProfiles",
+        "brandProfile",
+        "videoPreviewFrame",
+        "validateVideoSpec"
+      ],
+      "declaration": "videoProjects: [VideoProject!]!\n    videoProject(id: ID!): VideoProject\n    videoRenders(projectId: ID!): [VideoRender!]!\n    videoRender(id: ID!): VideoRender\n    brandProfiles: [BrandProfile!]!\n    brandProfile(id: ID!): BrandProfile\n    videoPreviewFrame(projectId: ID!, timestamp: Float!): VideoPreviewResult!\n    validateVideoSpec(specJson: String!): SpecValidationResult!"
+    },
+    {
+      "file": "platform/server/src/video/graphql.ts",
+      "line": 124,
+      "kind": "Mutation",
+      "fields": [
+        "createVideoProject",
+        "applyVideoSpec",
+        "patchVideoSpec",
+        "deleteVideoProject",
+        "startVideoRender",
+        "cancelVideoRender",
+        "createBrandProfile",
+        "synthesizeVoiceover"
+      ],
+      "declaration": "createVideoProject(\n      title: String!\n      format: VideoFormat\n      purpose: String\n      brandProfileId: ID\n      specJson: String\n    ): VideoProject!\n\n    applyVideoSpec(projectId: ID!, specJson: String!): VideoProject!\n\n    patchVideoSpec(projectId: ID!, patchJson: String!): VideoProject!\n\n    deleteVideoProject(projectId: ID!): Boolean!\n\n    startVideoRender(projectId: ID!, thumbnailTimestamp: Float): VideoRender!\n\n    cancelVideoRender(renderId: ID!): VideoRender!\n\n    createBrandProfile(\n      businessName: String!\n      primaryColor: String\n      secondaryColor: String\n      accentColor: String\n      textColor: String\n      website: String\n      ctaText: String\n      tagline: String\n    ): BrandProfile!\n\n    synthesizeVoiceover(\n      text: String!\n      voice: String\n      language: String\n      projectId: ID\n    ): VoiceoverResult!"
+    },
+    {
+      "file": "platform/server/src/video/graphql.ts",
+      "line": 162,
+      "kind": "Subscription",
+      "fields": [
+        "videoProjectsUpdated",
+        "videoRendersUpdated"
+      ],
+      "declaration": "videoProjectsUpdated: [VideoProject!]!\n    videoRendersUpdated(projectId: ID!): [VideoRender!]!"
+    }
+  ],
+  "http": [
+    {
+      "file": "platform/control-plane/src/browser-bridge.ts",
+      "line": 95,
+      "path": "/browser-bridge/v1/heartbeat"
+    },
+    {
+      "file": "platform/control-plane/src/browser-bridge.ts",
+      "line": 106,
+      "path": "/browser-bridge/v1/poll"
+    },
+    {
+      "file": "platform/control-plane/src/browser-bridge.ts",
+      "line": 117,
+      "path": "/browser-bridge/v1/receipt"
+    },
+    {
+      "file": "platform/control-plane/src/server.ts",
+      "line": 177,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/control-plane/src/server.ts",
+      "line": 177,
+      "path": "/live"
+    },
+    {
+      "file": "platform/control-plane/src/server.ts",
+      "line": 184,
+      "path": "/.well-known/oauth-protected-resource"
+    },
+    {
+      "file": "platform/control-plane/src/server.ts",
+      "line": 184,
+      "path": "/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "file": "platform/control-plane/src/server.ts",
+      "line": 208,
+      "path": "/mcp"
+    },
+    {
+      "file": "platform/control-plane/test/batch-01.test.ts",
+      "line": 24,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/extensions/computer-broker/production-broker.mjs",
+      "line": 71,
+      "path": "/internal/company-note/publisher-identity"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/browser-bridge.ts",
+      "line": 116,
+      "path": "/browser-bridge/v1/heartbeat"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/browser-bridge.ts",
+      "line": 127,
+      "path": "/browser-bridge/v1/poll"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/browser-bridge.ts",
+      "line": 144,
+      "path": "/browser-bridge/v1/receipt"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 186,
+      "path": "/mission-control"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 192,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 192,
+      "path": "/live"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 199,
+      "path": "/.well-known/oauth-protected-resource"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 199,
+      "path": "/.well-known/oauth-protected-resource/mcp"
+    },
+    {
+      "file": "platform/extensions/mission-control/control-plane/src/server.ts",
+      "line": 216,
+      "path": "/mcp"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/backend-factory/generator.ts",
+      "line": 22,
+      "path": "/${path}",
+      "method": "get"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/customer-mcp/customer-http.ts",
+      "line": 552,
+      "path": "/.well-known/openid-configuration"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/facebook-customer/post-now.ts",
+      "line": 31,
+      "path": "/"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/facebook-integration/standalone-listener.ts",
+      "line": 30,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/facebook-pages/oauth.ts",
+      "line": 1034,
+      "path": "/customer/facebook/connect"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/facebook-pilot/lcg8-provider.ts",
+      "line": 94,
+      "path": "/"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 72,
+      "path": "/health"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 74,
+      "path": "/mission-control"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 77,
+      "path": "/.well-known/oauth-authorization-server"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 77,
+      "path": "/.well-known/openid-configuration"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 78,
+      "path": "/oauth/authorize"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 79,
+      "path": "/oauth/token"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 80,
+      "path": "/customer/facebook/connect"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 80,
+      "path": "/customer/facebook/callback"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 85,
+      "path": "/webhooks/stripe"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 86,
+      "path": "/webhooks/resend"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 163,
+      "path": "/ws/device"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/index.ts",
+      "line": 170,
+      "path": "/graphql"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 292,
+      "path": "/mission-control"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 298,
+      "path": "/mission-control/dashboard.js"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 303,
+      "path": "/mission-control/api/dashboard"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 328,
+      "path": "/mission-control/api/history"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 335,
+      "path": "/mission-control/api/recovery-request"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/lcg7-dashboard-read-api.ts",
+      "line": 372,
+      "path": "/mission-control/api/control-request"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/preview-entrypoint.ts",
+      "line": 18,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/extensions/mission-control/server/src/mission-control/staging-entrypoint.ts",
+      "line": 26,
+      "path": "/healthz"
+    },
+    {
+      "file": "platform/extensions/openpencil/runtime/server.mjs",
+      "line": 91,
+      "path": "/_health"
+    },
+    {
+      "file": "platform/extensions/openpencil/source/packages/core/tests/icons/provider.test.ts",
+      "line": 39,
+      "path": "/collections"
+    },
+    {
+      "file": "platform/extensions/openpencil/source/packages/core/tests/icons/provider.test.ts",
+      "line": 40,
+      "path": "/collection"
+    },
+    {
+      "file": "platform/scripts/wire-oauth-server.mjs",
+      "line": 10,
+      "path": "/.well-known/oauth-authorization-server"
+    },
+    {
+      "file": "platform/scripts/wire-oauth-server.mjs",
+      "line": 10,
+      "path": "/.well-known/openid-configuration"
+    },
+    {
+      "file": "platform/scripts/wire-oauth-server.mjs",
+      "line": 11,
+      "path": "/oauth/authorize"
+    },
+    {
+      "file": "platform/scripts/wire-oauth-server.mjs",
+      "line": 12,
+      "path": "/oauth/token"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 69,
+      "path": "/health"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 71,
+      "path": "/.well-known/oauth-authorization-server"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 71,
+      "path": "/.well-known/openid-configuration"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 72,
+      "path": "/oauth/authorize"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 73,
+      "path": "/oauth/token"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 74,
+      "path": "/webhooks/stripe"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 75,
+      "path": "/webhooks/resend"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 150,
+      "path": "/ws/device"
+    },
+    {
+      "file": "platform/server/src/index.ts",
+      "line": 157,
+      "path": "/graphql"
+    },
+    {
+      "file": "platform/web/dist/assets/react-vendor-DiF9izCW.js",
+      "line": 18,
+      "path": "/"
+    },
+    {
+      "file": "platform/web/dist/assets/react-vendor-DiF9izCW.js",
+      "line": 20,
+      "path": "/"
+    },
+    {
+      "file": "platform/web/dist/assets/react-vendor-DiF9izCW.js",
+      "line": 20,
+      "path": "/"
+    },
+    {
+      "file": "platform/web/dist/assets/react-vendor-DiF9izCW.js",
+      "line": 20,
+      "path": "/"
+    }
+  ]
+}

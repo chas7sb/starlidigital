@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "scope": "working-tree-only; dependencies and VCS history excluded",
+  "counts": {
+    "files": 10318,
+    "text_scanned": 10103,
+    "oversize": 39,
+    "binary": 176
+  },
+  "license_notice_paths": [
+    "LICENSE"
+  ],
+  "manifest_paths": [
+    "package-lock.json",
+    "package.json",
+    "pyproject.toml",
+    "backend/requirements.txt",
+    "build.backend-baseline/pyodide/package.json",
+    "static/pyodide/package.json"
+  ],
+  "findings": [
+    {
+      "path": "README.md",
+      "type": "email-review"
+    },
+    {
+      "path": "pyproject.toml",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/constants.py",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/retrieval/web/testdata/google_pse.json",
+      "type": "email-review"
+    },
+    {
+      "path": "backend/open_webui/static/apple-touch-icon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-96x96.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.ico",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/favicon.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/logo.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/splash-dark.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/splash.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-192x192.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/web-app-manifest-512x512.png",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Bold.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Italic.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Regular.ttf",
+      "type": "binary-unscanned-review"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSans-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansJP-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansKR-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Regular.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/NotoSansSC-Variable.ttf",
+      "type": "oversize-unscanned"
+    },
+    {
+      "path": "backend/open_webui/static/fonts/Twemoji.ttf",
+      "type": "binary-unscanned-review"
+    }
+  ],
+  "status": "review-required",
+  "finding_type_counts": {
+    "email-review": 54,
+    "binary-unscanned-review": 176,
+    "oversize-unscanned": 39,
+    "credential-url": 116,
+    "credential-literal-review": 13,
+    "runtime-or-archive-exclude-review": 7,
+    "provider-token": 1
+  },
+  "finding_count": 406,
+  "findings_truncated": true
+}

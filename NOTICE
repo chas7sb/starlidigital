@@ -1,0 +1,20 @@
+StarliDigital
+Copyright 2026 StarliDigital contributors.
+
+StarliDigital-owned code and new project contributions are licensed under the
+Apache License, Version 2.0, as selected by the project owner on 2026-11-22.
+
+This repository also contains third-party source, assets and modifications of
+third-party components. The root license does not replace the licenses or
+copyright notices that apply to those components. Retain the component license
+files and attribution notices when redistributing them.
+
+Component notice locations include:
+- dashboard/LICENSE and security/UPSTREAM-DASHBOARD-LICENSE.txt
+- platform/extensions/openpencil/ (upstream license and source provenance)
+- platform/extensions/search/source/ (SearXNG license and notices)
+- security/ (dependency and asset notice inventory)
+
+See docs/provenance.md for source origins and outstanding distribution reviews.
+Source extraction does not imply endorsement by upstream authors or bundled
+access to their hosted services.

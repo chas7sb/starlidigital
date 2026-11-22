@@ -1,0 +1,14 @@
+import { createHash, randomBytes } from 'node:crypto';
+import assert from 'node:assert/strict';
+import { validateJob } from '../computer-broker/company-note-jobs.mjs';
+import { SignedNativeChannel } from '../computer-broker/native-authority.mjs';
+const text='Synthetic local broker smoke';
+const job={companyId:'11111111-1111-4111-8111-111111111111',computerId:'22222222-2222-4222-8222-222222222222',workerId:'worker',actorUserId:'test-user',botId:'test-bot',roomId:'test-room',runId:'test-run',assistantMessageId:'test-message',toolCallId:'test-tool',operationId:'test-operation',membershipRevision:1,text,noteSha256:createHash('sha256').update(text).digest('hex')};
+assert.equal(validateJob(job),job);
+assert.throws(()=>validateJob({...job,text:'tampered'}));
+const channel=new SignedNativeChannel(randomBytes(32));
+const envelope=channel.sign('submit',job);
+assert.deepEqual(channel.read('submit',envelope),job);
+assert.throws(()=>channel.read('other-purpose',envelope));
+assert.throws(()=>channel.read('submit',{...envelope,message:{...envelope.message,payload:{...job,text:'tampered'}}}));
+console.log('PASS: actual broker job validation and signed native channel accept valid job, reject content/purpose/signature tampering');

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "scope": "working-tree-only; dependencies and VCS history excluded",
+  "counts": {
+    "files": 10318,
+    "text_scanned": 10103,
+    "oversize": 39,
+    "binary": 176
+  },
+  "license_notice_paths": [
+    "LICENSE"
+  ],
+  "manifest_paths": [
+    "package-lock.json",
+    "package.json",
+    "pyproject.toml",
+    "backend/requirements.txt",
+    "build.backend-baseline/pyodide/package.json",
+    "static/pyodide/package.json"
+  ],
+  "findings": [
+    {
+      "path": "backend/open_webui/test/test_native_safe_http.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_native_capabilities.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/test_starli_pi_cancellation.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/open_webui/test/apps/webui/routers/test_auths.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/starli_automations/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/schema.sql",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "backend/tests/test_starli_mail.py",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "backend/tests/test_starli_result_status.py",
+      "type": "provider-token"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/7HnofjA4.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/BAzDOzyr.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/CW2zLh94.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/CaRz385l.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/CuTOWM55.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/PDmi8rg3.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/_app/immutable/chunks/whveAslg.js",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "build.backend-baseline/pyodide/openblas-0.3.26.zip",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "build.backend-baseline/pyodide/python_stdlib.zip",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "scripts/starli-runtime/provider-runtime.test.ts",
+      "type": "credential-literal-review"
+    },
+    {
+      "path": "static/pyodide/openblas-0.3.26.zip",
+      "type": "runtime-or-archive-exclude-review"
+    },
+    {
+      "path": "static/pyodide/python_stdlib.zip",
+      "type": "runtime-or-archive-exclude-review"
+    }
+  ],
+  "status": "review-required"
+}

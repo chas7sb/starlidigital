@@ -1,0 +1,1335 @@
+{
+  "parity_status": "NOT_VERIFIED",
+  "scope": "source contract plus optional unauthenticated local HTTP smoke",
+  "checks": [
+    {
+      "name": "source:lib/components/starli-preview/StarliActivityStream.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliCRMPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliLiveLocationPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliSocialPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliBillingPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliIntelligencePanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliMailActions.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliMailboxPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliProjectToolbar.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliApprovalsPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliBrowserPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliBrand.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliMessageActivity.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliToolFields.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliGuestChat.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliCollectionsPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliAdminPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliLiveMap.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliToolsPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliCompanyPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliProjectPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliMomentsPanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliAvatar.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliResourcePanel.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliMailSettings.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliWhisper.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliDrawerLinks.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliBrowserDock.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:lib/components/starli-preview/StarliAccessMode.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/+error.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/+layout.js",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/s/[id]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/watch/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/auth/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/error/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/home/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/home/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/tools/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/tools/edit/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/tools/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/prompts/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/prompts/edit/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/prompts/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/functions/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/models/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/models/edit/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/models/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/knowledge/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/knowledge/[id]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/workspace/knowledge/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/c/[id]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/starli/[section]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/settings/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/evaluations/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/functions/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/functions/edit/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/functions/create/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/admin/users/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/playground/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/playground/+layout.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/playground/completions/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/playground/notes/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/[botChat]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "source:routes/(app)/channels/[id]/+page.svelte",
+      "status": "PASS",
+      "detail": "File retained from active dashboard inventory"
+    },
+    {
+      "name": "panel:StarliAccessMode.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliActivityStream.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliAdminPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliApprovalsPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliAvatar.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliBillingPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliBrand.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliBrowserDock.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliBrowserPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliCRMPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliCollectionsPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliCompanyPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliDrawerLinks.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliGuestChat.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliIntelligencePanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliLiveLocationPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliLiveMap.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliMailActions.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliMailSettings.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliMailboxPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliMessageActivity.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliMomentsPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliProjectPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliProjectToolbar.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliResourcePanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliSocialPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliToolFields.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliToolsPanel.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "panel:StarliWhisper.svelte",
+      "status": "PASS",
+      "detail": {
+        "missing_functions": []
+      }
+    },
+    {
+      "name": "routes:company_messaging/channel_management.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:company_messaging/http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:company_messaging/native_dispatch.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:company_messaging/native_mount.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:enterprise_browser/routes.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:enterprise_messaging.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/company_authority/company_routes.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/company_authority/pilot_routes.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/main.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/audio.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/auths.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/channels.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/chats.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/configs.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/customer_http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/evaluations.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/files.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/folders.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/functions.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/groups.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/images.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/knowledge.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/memories.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/models.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/ollama.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/openai.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/pipelines.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/prompts.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/retrieval.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_access.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_approvals.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_billing.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_browser.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_chat_sync.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_chat_turns.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_customer_data.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_customer_identity.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_mail.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_native_capabilities.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_platform.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_providers.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_public.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_registrations.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_resources.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_runs.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_runtime.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_social.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_tools.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_v3_native.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/starli_workspace.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/tasks.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/tools.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/users.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/routers/utils.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/starli_account_mcp/account_mcp/api.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/starli_account_mcp/account_mcp/oauth_connect.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/starli_account_mcp/account_mcp/oauth_development.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/starli_account_mcp/account_mcp/oauth_external.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/test/test_native_admin_boundary.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:open_webui/test/test_native_customer_pi.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_agent_triggers/native.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_automations/http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_automations_pre_orders_v4/http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_automations_v2_snapshot/http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/app_previews.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/chat_vision.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/company_compute.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/company_frame_relay/routes.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/company_provider_images.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/runtime/company_bot_runtime/company_provider_api.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/runtime/company_bot_runtime/router.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_computer/viewer.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_n8n/native.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_social/http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_social/posts.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_tools/bot_outreach.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_company_tools/router.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_engine_connections/native.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_engine_connections/smtp_http.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_integration_catalog/native.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/agent_creation.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/agent_profiles.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/api.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/bot_role_assignments.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/company_avatars.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_memory/workspace_api.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:starli_priority_gateway/reuse.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:wave_panels/controlled_routes.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:wave_panels/panel_api.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:wave_panels/product_router.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "routes:wave_panels/sheets.py",
+      "status": "PASS",
+      "detail": {
+        "error": null,
+        "missing": []
+      }
+    },
+    {
+      "name": "marketing-route-names",
+      "status": "PASS",
+      "detail": {
+        "candidates": [],
+        "limitation": "Heuristic only; rendered root, auth and navigation review still required."
+      }
+    },
+    {
+      "name": "entrypoint:workspace_entry.py",
+      "status": "PASS",
+      "detail": "Effective production dashboard entrypoint/worker required"
+    },
+    {
+      "name": "entrypoint:open_webui/starli_task_worker.py",
+      "status": "PASS",
+      "detail": "Effective production dashboard entrypoint/worker required"
+    },
+    {
+      "name": "http:/",
+      "status": "FAIL",
+      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    },
+    {
+      "name": "http:/auth",
+      "status": "FAIL",
+      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    },
+    {
+      "name": "http:/api/config",
+      "status": "FAIL",
+      "detail": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    }
+  ],
+  "passed": 195,
+  "failed": 3
+}

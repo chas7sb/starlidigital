@@ -1,0 +1,249 @@
+/* StarliDigital Video Studio Styles */
+
+.video-studio-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--color-text, #f4f6fa);
+  font-family: 'DM Sans Variable', sans-serif;
+}
+
+.video-studio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(198, 219, 240, 0.12);
+}
+
+.video-studio-title h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px 0;
+  color: #f4f6fa;
+}
+
+.video-studio-title p {
+  margin: 0;
+  font-size: 14px;
+  color: #a8b0bd;
+}
+
+.video-studio-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.video-card {
+  background: #10151d;
+  border: 1px solid rgba(198, 219, 240, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-card:hover {
+  border-color: rgba(198, 219, 240, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.video-card.is-active {
+  border-color: #c6dbf0;
+  box-shadow: 0 0 0 1px #c6dbf0, 0 12px 30px rgba(198, 219, 240, 0.15);
+}
+
+.video-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.video-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #f4f6fa;
+  margin: 0 0 4px 0;
+}
+
+.video-card-meta {
+  font-size: 12px;
+  color: #8993a3;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.video-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a8b0bd;
+}
+
+.video-badge.ready {
+  background: rgba(198, 219, 240, 0.1);
+  border-color: rgba(198, 219, 240, 0.3);
+  color: #c6dbf0;
+}
+
+.video-badge.complete {
+  background: rgba(172, 219, 191, 0.1);
+  border-color: rgba(172, 219, 191, 0.3);
+  color: #acdbbf;
+}
+
+.video-badge.rendering {
+  background: rgba(238, 214, 184, 0.1);
+  border-color: rgba(238, 214, 184, 0.3);
+  color: #eed6b8;
+}
+
+.video-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+}
+
+@media (max-width: 1024px) {
+  .video-detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-stage-panel {
+  background: #10151d;
+  border: 1px solid rgba(198, 219, 240, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.video-player-container {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9 / 16;
+  background: #080c12;
+  border: 1px solid rgba(198, 219, 240, 0.2);
+  border-radius: 20px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.video-player-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-player-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.timeline-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scene-timeline-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.scene-block {
+  min-width: 140px;
+  background: #141c26;
+  border: 1px solid rgba(198, 219, 240, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scene-block-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c6dbf0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scene-block-layers {
+  font-size: 11px;
+  color: #8993a3;
+}
+
+.pill-button.accent {
+  background: #c6dbf0;
+  color: #080c12;
+  font-weight: 600;
+  border: none;
+}
+
+.pill-button.accent:hover {
+  background: #e2eaf5;
+}
+
+.video-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.video-meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.video-meta-item span:first-child {
+  color: #8993a3;
+}
+
+.video-meta-item span:last-child {
+  color: #f4f6fa;
+  font-weight: 500;
+}

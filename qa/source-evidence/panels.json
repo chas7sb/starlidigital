@@ -1,0 +1,735 @@
+[
+  {
+    "file": "StarliAccessMode.svelte",
+    "functions": [
+      "current",
+      "request",
+      "apply",
+      "load",
+      "change"
+    ],
+    "api": [
+      "/api/v1/starli/v3-native/chats/"
+    ],
+    "labels": [
+      "Platform access",
+      "This agent is paused. Its grant applies when it resumes.",
+      "Retry"
+    ]
+  },
+  {
+    "file": "StarliActivityStream.svelte",
+    "functions": [
+      "load",
+      "statusClass"
+    ],
+    "api": [
+      "/api/v1/starli/workspace/chats/"
+    ],
+    "labels": [
+      "Activity",
+      "Tool calls and execution status",
+      "Retry",
+      "No tool calls recorded yet.",
+      "Status",
+      "Tool",
+      "Files",
+      "Retry activity"
+    ]
+  },
+  {
+    "file": "StarliAdminPanel.svelte",
+    "functions": [
+      "load"
+    ],
+    "api": [
+      "/api/v1/starli/platform/admin",
+      "/starli/crm"
+    ],
+    "labels": [
+      "STARLIDIGITAL",
+      "Platform administration",
+      "Manage your platform, people and AI settings.",
+      "Administrator access required.",
+      "Loading platform…",
+      "Retry",
+      "Platform connections",
+      "Release status",
+      "Open CRM",
+      "Evaluations",
+      "Functions",
+      "Refresh"
+    ]
+  },
+  {
+    "file": "StarliApprovalsPanel.svelte",
+    "functions": [],
+    "api": [],
+    "labels": [
+      "Action reviews",
+      "Review the exact messages, posts and schedules prepared in your chat."
+    ]
+  },
+  {
+    "file": "StarliAvatar.svelte",
+    "functions": [],
+    "api": [],
+    "labels": []
+  },
+  {
+    "file": "StarliBillingPanel.svelte",
+    "functions": [
+      "authHeaders",
+      "when",
+      "load"
+    ],
+    "api": [
+      "/api/v1/starli/billing"
+    ],
+    "labels": [
+      "Credits",
+      "Wallet billing only. Provider model cost estimates are not wallet billing.",
+      "Retry",
+      "Loading credits…",
+      "Payments are not connected.",
+      "No wallet on this account. This is not a zero balance.",
+      "When",
+      "Kind",
+      "Amount",
+      "Reason",
+      "Δ avail/res/debt",
+      "No ledger entries yet.",
+      "Reservations",
+      "No reservations."
+    ]
+  },
+  {
+    "file": "StarliBrand.svelte",
+    "functions": [],
+    "api": [
+      "http://www.w3.org/2000/svg"
+    ],
+    "labels": [
+      "STARLIDIGITAL"
+    ]
+  },
+  {
+    "file": "StarliBrowserDock.svelte",
+    "functions": [
+      "poll"
+    ],
+    "api": [
+      "/api/v1/starli/browser/status"
+    ],
+    "labels": [
+      "Hide browser",
+      "Live browser"
+    ]
+  },
+  {
+    "file": "StarliBrowserPanel.svelte",
+    "functions": [
+      "applyFrame",
+      "reset",
+      "bindAccount",
+      "storage",
+      "checkAccess",
+      "refresh",
+      "action",
+      "navigate",
+      "interact",
+      "scroll",
+      "clickScreenshot",
+      "pageClick",
+      "close",
+      "poll"
+    ],
+    "api": [
+      "/api/v1/starli/browser/capability?",
+      "/api/v1/starli/v3-native/chats/",
+      "https://example.com"
+    ],
+    "labels": [
+      "Live browser",
+      "Reconnect browser",
+      "Check access",
+      "Close session",
+      "Scroll up",
+      "Scroll down",
+      "Refresh view",
+      "Type",
+      "Enter",
+      "Open a website or ask Starli to research a page. Its live view will appear here."
+    ]
+  },
+  {
+    "file": "StarliCRMPanel.svelte",
+    "functions": [
+      "authHeaders",
+      "search",
+      "page",
+      "label",
+      "askStarli",
+      "clearTarget",
+      "cancel",
+      "aborted",
+      "load",
+      "openCompany",
+      "startCreate",
+      "startEdit",
+      "startNote",
+      "toolText",
+      "submit",
+      "saveCompany",
+      "saveNote"
+    ],
+    "api": [
+      "/api/v1/starli/customer-data/crm/${encodeURIComponent(id)}",
+      "/api/v1/starli/customer-data/crm?${params}",
+      "/api/v1/starli/tools/invoke",
+      "/starli/approvals"
+    ],
+    "labels": [
+      "CRM",
+      "Search",
+      "New company",
+      "Review pending",
+      "Loading companies…",
+      "Retry",
+      "Previous",
+      "Next",
+      "Name",
+      "Status",
+      "Industry",
+      "Domain",
+      "Qualification",
+      "Notes",
+      "Cancel",
+      "Summary",
+      "Details",
+      "Loading detail…",
+      "Edit",
+      "Add note",
+      "New opportunity in chat",
+      "Add task in chat",
+      "Sales pipeline",
+      "Contacts",
+      "None",
+      "Opportunities",
+      "Tasks",
+      "Interactions",
+      "Select a company."
+    ]
+  },
+  {
+    "file": "StarliCollectionsPanel.svelte",
+    "functions": [
+      "safeUrl",
+      "when",
+      "load",
+      "submit"
+    ],
+    "api": [
+      "/api/v1/starli/resources/${encodeURIComponent(kind)}?${params}"
+    ],
+    "labels": [
+      "Read-only",
+      "Search",
+      "Retry",
+      "Open link",
+      "Select a row to view details.",
+      "Previous",
+      "Next"
+    ]
+  },
+  {
+    "file": "StarliCompanyPanel.svelte",
+    "functions": [
+      "headers",
+      "capLabel",
+      "loadOverview",
+      "loadCaps"
+    ],
+    "api": [
+      "/api/v1/starli/native-capabilities",
+      "/api/v1/starli/overview",
+      "/starli/approvals",
+      "/starli/browser",
+      "/starli/crm",
+      "/starli/hosted-agents",
+      "/starli/mailbox",
+      "/starli/projects",
+      "/starli/videos"
+    ],
+    "labels": [
+      "Delegation stays in chat. This page does not list subagents.",
+      "Read-only",
+      "Credits",
+      "Retry",
+      "Loading overview…",
+      "No company on this account.",
+      "Credits unavailable",
+      "Native capabilities",
+      "Loading capabilities…",
+      "No native capabilities reported."
+    ]
+  },
+  {
+    "file": "StarliDrawerLinks.svelte",
+    "functions": [
+      "isActive",
+      "close",
+      "cls"
+    ],
+    "api": [
+      "/starli/activity",
+      "/starli/admin",
+      "/starli/approvals",
+      "/starli/billing",
+      "/starli/browser",
+      "/starli/company",
+      "/starli/crm",
+      "/starli/hosted-agents",
+      "/starli/mailbox",
+      "/starli/projects",
+      "/starli/proposals",
+      "/starli/social",
+      "/starli/tools",
+      "/starli/videos"
+    ],
+    "labels": [
+      "Business",
+      "Platform"
+    ]
+  },
+  {
+    "file": "StarliGuestChat.svelte",
+    "functions": [
+      "activateGuestPreview",
+      "resizeGuestPane",
+      "stop",
+      "newChat",
+      "onKey",
+      "send",
+      "restoreProject",
+      "persist",
+      "buildProject"
+    ],
+    "api": [
+      "/api/v1/starli/public/chat",
+      "/api/v1/starli/public/projects",
+      "/api/v1/starli/public/projects/",
+      "/api/v1/starli/public/projects/build",
+      "/api/v1/starli/public/session"
+    ],
+    "labels": [
+      "Build a project",
+      "Chat",
+      "Preview",
+      "Check build",
+      "Create account",
+      "or",
+      "sign in",
+      "to keep your projects and chats.",
+      "Building your project preview…",
+      "The project preview is not ready yet.",
+      "Back to chat"
+    ]
+  },
+  {
+    "file": "StarliIntelligencePanel.svelte",
+    "functions": [
+      "connect",
+      "reset",
+      "evidence",
+      "safeLink",
+      "when",
+      "chooseFollow",
+      "save"
+    ],
+    "api": [
+      "/api/v1/auths/",
+      "https://www.openstreetmap.org/?"
+    ],
+    "labels": [
+      "Retry connection",
+      "Confidence:",
+      "Expires:",
+      "Sources:",
+      "Open source ↗",
+      "View this location on OpenStreetMap ↗",
+      "Opening the map shares this observation’s coordinates with OpenStreetMap.",
+      "Discuss in this chat",
+      "Follow this source",
+      "No saved watchlists.",
+      "Your connected sources",
+      "No sources configured.",
+      "Connector coverage",
+      "Watchlist name",
+      "Save an enabled watchlist for this observation’s source on your account.",
+      "Cancel"
+    ]
+  },
+  {
+    "file": "StarliLiveLocationPanel.svelte",
+    "functions": [
+      "clear",
+      "stopServer",
+      "load",
+      "setConsent",
+      "start",
+      "stop",
+      "cancelStart",
+      "hidden"
+    ],
+    "api": [],
+    "labels": [
+      "Live location",
+      "Checking location availability…",
+      "Check availability",
+      "Your account identity could not be confirmed. Reconnect Intelligence.",
+      "Allow location use",
+      "Audience",
+      "Only me",
+      "Selected connections",
+      "No accepted connections are available.",
+      "Precision",
+      "Approximate area",
+      "Precise position",
+      "I confirm sharing precise coordinates.",
+      "Duration",
+      "15 minutes",
+      "1 hour",
+      "Allow this location for Starli AI",
+      "Review sharing",
+      "Start sharing",
+      "Cancel",
+      "Stop sharing",
+      "Turn off location use"
+    ]
+  },
+  {
+    "file": "StarliLiveMap.svelte",
+    "functions": [
+      "move",
+      "down",
+      "pan",
+      "key"
+    ],
+    "api": [
+      "https://www.openstreetmap.org/copyright"
+    ],
+    "labels": [
+      "=0&&tile.y",
+      "Show map",
+      "© OpenStreetMap contributors",
+      "Map tiles are off.",
+      "Follow me",
+      "Hide map"
+    ]
+  },
+  {
+    "file": "StarliMailActions.svelte",
+    "functions": [
+      "load",
+      "decide"
+    ],
+    "api": [
+      "/api/v1/starli/mail/actions",
+      "/api/v1/starli/mail/actions/"
+    ],
+    "labels": [
+      "Send reviews",
+      "From:",
+      "To:",
+      "Cc:",
+      "Bcc:",
+      "Reject",
+      "The SMTP server accepted the message. Recipient delivery has not been verified.",
+      "Send receipt"
+    ]
+  },
+  {
+    "file": "StarliMailSettings.svelte",
+    "functions": [
+      "api",
+      "load",
+      "save",
+      "test",
+      "disconnect",
+      "toggleAdvanced"
+    ],
+    "api": [
+      "/api/v1/starli/mail"
+    ],
+    "labels": [
+      "Mailbox connection",
+      "Email address",
+      "Sender name",
+      "IMAP server",
+      "Secure IMAP · port 993",
+      "SMTP server",
+      "Username",
+      "Password or app password",
+      "SMTP security",
+      "TLS · port 465",
+      "STARTTLS · port 587",
+      "Different SMTP credentials",
+      "SMTP username",
+      "SMTP password",
+      "Test connection",
+      "Disconnect"
+    ]
+  },
+  {
+    "file": "StarliMailboxPanel.svelte",
+    "functions": [
+      "unpack",
+      "tool",
+      "load",
+      "open",
+      "newDraft",
+      "save",
+      "display",
+      "editDraft",
+      "prepareSend",
+      "syncInbox",
+      "markRead",
+      "ask"
+    ],
+    "api": [
+      "/api/v1/starli/customer-data/mailbox/drafts",
+      "/api/v1/starli/customer-data/mailbox/messages/",
+      "/api/v1/starli/mail",
+      "/api/v1/starli/mail/sync",
+      "/api/v1/starli/tools/invoke"
+    ],
+    "labels": [
+      "Mailbox",
+      "Read synchronized messages and work on replies with Starli in chat.",
+      "Ask Starli",
+      "New draft",
+      "Sync inbox",
+      "Search",
+      "Previous",
+      "Next",
+      "Subject",
+      "Message",
+      "Cancel",
+      "Saving a draft does not send an email.",
+      "Edit draft",
+      "Review send",
+      "Reply draft",
+      "Draft with Starli",
+      "Attachments",
+      "Select a message or ask Starli to prepare a draft in chat."
+    ]
+  },
+  {
+    "file": "StarliMessageActivity.svelte",
+    "functions": [
+      "label",
+      "color"
+    ],
+    "api": [],
+    "labels": [
+      "Execution updates will appear here.",
+      "Project files"
+    ]
+  },
+  {
+    "file": "StarliMomentsPanel.svelte",
+    "functions": [
+      "hash",
+      "center",
+      "applyArea",
+      "loadMine",
+      "run",
+      "retry",
+      "watchArea",
+      "discussNotice",
+      "create",
+      "prepare",
+      "share",
+      "erase",
+      "showMap",
+      "discuss"
+    ],
+    "api": [
+      "https://www.openstreetmap.org/export/embed.html?"
+    ],
+    "labels": [
+      "85||lon",
+      "Last 24 hours",
+      "Last 7 days",
+      "Show this area",
+      "Watch this area",
+      "Notify me in the app about matching moments",
+      "Save area watchlist",
+      "Discuss in this chat",
+      "Show location map",
+      "Loading this map shares the moment’s selected coordinates with OpenStreetMap.",
+      "Hide map",
+      "Choose to use social moments",
+      "Create social profile",
+      "Your moments",
+      "Review public sharing",
+      "Review deletion",
+      "Stop and remove watchlist",
+      "Mark read",
+      "No matching moment notifications.",
+      "Confirm share publicly",
+      "Cancel",
+      "This review expired. Prepare a new review before sharing.",
+      "Delete this moment?",
+      "This removes it from your moments and authorized shared views.",
+      "Confirm deletion",
+      "The last request is unconfirmed. Retry uses the same operation identifier.",
+      "Retry unconfirmed request"
+    ]
+  },
+  {
+    "file": "StarliProjectPanel.svelte",
+    "functions": [
+      "api",
+      "load",
+      "file",
+      "askBuild",
+      "save",
+      "projectEvent",
+      "visible",
+      "reconnect",
+      "accountChanged"
+    ],
+    "api": [
+      "/api/v1/starli/workspace"
+    ],
+    "labels": [
+      "Refresh",
+      "Ask Starli to create a project, then select it in the chat toolbar.",
+      "Viewport",
+      "Desktop",
+      "Tablet",
+      "Mobile",
+      "Reload preview",
+      "Build preview in chat",
+      "Save",
+      "Select a file. Starli edits these same saved files through chat."
+    ]
+  },
+  {
+    "file": "StarliProjectToolbar.svelte",
+    "functions": [
+      "syncPane",
+      "load",
+      "open",
+      "select",
+      "projectEvent",
+      "accountChanged"
+    ],
+    "api": [
+      "/api/v1/starli/workspace/projects"
+    ],
+    "labels": [
+      "Customer workspace",
+      "Preview"
+    ]
+  },
+  {
+    "file": "StarliResourcePanel.svelte",
+    "functions": [
+      "loadOverview"
+    ],
+    "api": [],
+    "labels": [
+      "Read-only",
+      "Retry",
+      "This information is read-only.",
+      "No company information is available.",
+      "No agents are available.",
+      "No tools are available. Open the native Tools workspace to configure tools.",
+      "Browser availability",
+      "Available",
+      "Credits",
+      "Credit information is unavailable.",
+      "A credit balance is not available.",
+      "Choose a company, agents, tools, browser, or billing section."
+    ]
+  },
+  {
+    "file": "StarliSocialPanel.svelte",
+    "functions": [
+      "api",
+      "load",
+      "connect",
+      "decision",
+      "ask",
+      "title",
+      "fields"
+    ],
+    "api": [
+      "/api/v1/starli/social",
+      "https://api.starlidigital.ro"
+    ],
+    "labels": [
+      "Social publishing",
+      "Refresh",
+      "Connect your publishing account",
+      "Connect Facebook & Instagram",
+      "You choose the account, pages and permissions in the secure authorization flow.",
+      "Publishing account connected",
+      "Reconnect",
+      "Prepared actions and receipts",
+      "Reject"
+    ]
+  },
+  {
+    "file": "StarliToolFields.svelte",
+    "functions": [
+      "set",
+      "complex",
+      "lines"
+    ],
+    "api": [],
+    "labels": [
+      "Structured data",
+      "This field has a nested format. Use its parameter schema below as a reference."
+    ]
+  },
+  {
+    "file": "StarliToolsPanel.svelte",
+    "functions": [
+      "api",
+      "load",
+      "choose",
+      "advancedMode",
+      "operationKey",
+      "argumentsValue",
+      "invoke",
+      "prepare"
+    ],
+    "api": [
+      "/api/v1/starli/",
+      "/starli/approvals"
+    ],
+    "labels": [
+      "Tools",
+      "Refresh",
+      "Loading connected tools…",
+      "No tools match this search.",
+      "Arguments",
+      "This tool needs no additional information.",
+      "Prepare for review",
+      "Approvals",
+      "Result",
+      "Parameter schema",
+      "Choose an action to see its inputs, connection status and latest result."
+    ]
+  },
+  {
+    "file": "StarliWhisper.svelte",
+    "functions": [],
+    "api": [],
+    "labels": []
+  }
+]

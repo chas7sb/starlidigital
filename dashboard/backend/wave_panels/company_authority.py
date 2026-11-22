@@ -1,0 +1,1 @@
+from open_webui.company_authority import Authority

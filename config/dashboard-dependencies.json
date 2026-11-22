@@ -1,0 +1,476 @@
+{
+  "sourceRoot": "/srv/starlidigital/webui-current",
+  "scope": "Backend Python non-test source references; literals only, not configured values",
+  "references": [
+    {
+      "path": "backend/open_webui/routers/starli_admin_dispatch.py",
+      "line": 143,
+      "references": [
+        "/srv/starlidigital/webui-current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_guest_provider.py",
+      "line": 11,
+      "references": [
+        "/etc/starlidigital/production.env"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_guest_provider.py",
+      "line": 44,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_intelligence.py",
+      "line": 30,
+      "references": [
+        "/srv/starlidigital/current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_intelligence.py",
+      "line": 66,
+      "references": [
+        "/srv/starlidigital/current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 301,
+      "references": [
+        "/srv/starlidigital/webui-current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 313,
+      "references": [
+        "/srv/starlidigital/webui-current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 326,
+      "references": [
+        "/srv/starlidigital/mcp-workspace"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 440,
+      "references": [
+        "/srv/starlidigital/mcp-workspace/STARLI-V3-BOSS-EXECUTION-LEDGER.md"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 451,
+      "references": [
+        "/srv/starlidigital/mcp-workspace/PRO-PLAN-LEDGER.md"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_pi_master.py",
+      "line": 638,
+      "references": [
+        "/var/lib/starlidigital/.pi/agent"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_public.py",
+      "line": 12,
+      "references": [
+        "/srv/starlidigital/mcp-workspace/prime-platform-20261109/runtime"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_registrations.py",
+      "line": 46,
+      "references": [
+        "/var/lib/starlidigital/registration-intake/registrations.sqlite3"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_runtime_adapter.py",
+      "line": 419,
+      "references": [
+        "/etc/starlidigital/production.env"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_runtime_adapter.py",
+      "line": 429,
+      "references": [
+        "/var/lib/starlidigital/.pi/agent"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_session_revocation.py",
+      "line": 233,
+      "references": [
+        "/srv/starlidigital/current"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_social.py",
+      "line": 14,
+      "references": [
+        "https://api.starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_social.py",
+      "line": 21,
+      "references": [
+        "https://starlidigital.ro/starli/social"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_social.py",
+      "line": 24,
+      "references": []
+    },
+    {
+      "path": "backend/open_webui/routers/starli_social.py",
+      "line": 139,
+      "references": []
+    },
+    {
+      "path": "backend/open_webui/routers/starli_state.py",
+      "line": 16,
+      "references": [
+        "/var/lib/starlidigital/starli.sqlite"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_subprocess.py",
+      "line": 5,
+      "references": [
+        "/srv/starlidigital/mcp-workspace/customer-native-phase2-20261112/release-tools/phase2-stage-20261112/isolated-stacks"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_v3_native.py",
+      "line": 31,
+      "references": [
+        "/var/lib/starlidigital/webui-v3/admin-beta.json"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_v3_native.py",
+      "line": 93,
+      "references": [
+        "/var/lib/starlidigital/starli.sqlite"
+      ]
+    },
+    {
+      "path": "backend/open_webui/routers/starli_v3_native.py",
+      "line": 106,
+      "references": [
+        "/var/lib/starlidigital/webui-v3/agents.sqlite"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/firstparty_mcp.py",
+      "line": 20,
+      "references": [
+        "https://api.starlidigital.ro/mcp"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_connect.py",
+      "line": 3,
+      "references": []
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_connect.py",
+      "line": 20,
+      "references": [
+        "https://api.starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_connect.py",
+      "line": 25,
+      "references": [
+        "https://starliapp.com",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_development.py",
+      "line": 3,
+      "references": []
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_development.py",
+      "line": 20,
+      "references": [
+        "https://api.starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_development.py",
+      "line": 25,
+      "references": [
+        "https://starliapp.com",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/open_webui/starli_account_mcp/account_mcp/oauth_external.py",
+      "line": 34,
+      "references": [
+        "https://starliapp.com",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_agent_triggers/production.py",
+      "line": 9,
+      "references": [
+        "/etc/starlidigital/agent-wake-broker.key",
+        "/etc/starlidigital/n8n-mcp.json"
+      ]
+    },
+    {
+      "path": "backend/starli_automations/business_config.py",
+      "line": 20,
+      "references": [
+        "https://starlidigital.ro/api/v1/starli/automations/oauth/"
+      ]
+    },
+    {
+      "path": "backend/starli_automations/business_config.py",
+      "line": 22,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_automations/business_config.py",
+      "line": 25,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_automations/production.py",
+      "line": 20,
+      "references": [
+        "/etc/starlidigital/automation-engine.json"
+      ]
+    },
+    {
+      "path": "backend/starli_automations/shopify_orders.py",
+      "line": 44,
+      "references": [
+        "https://starlidigital.ro/api/v1/starli/automations/shopify/webhooks/"
+      ]
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/business_config.py",
+      "line": 20,
+      "references": [
+        "https://starlidigital.ro/api/v1/starli/automations/oauth/"
+      ]
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/business_config.py",
+      "line": 22,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/business_config.py",
+      "line": 25,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_automations_pre_orders_v4/production.py",
+      "line": 20,
+      "references": [
+        "/etc/starlidigital/automation-engine.json"
+      ]
+    },
+    {
+      "path": "backend/starli_automations_v2_snapshot/production.py",
+      "line": 20,
+      "references": [
+        "/etc/starlidigital/automation-engine.json"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/app_previews.py",
+      "line": 20,
+      "references": [
+        "https://starlidigital.ro/published/"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/company_compute.py",
+      "line": 103,
+      "references": [
+        "https://starlidigital.ro/published/"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/company_compute.py",
+      "line": 133,
+      "references": [
+        "/etc/starlidigital/company-compute.json"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/company_compute.py",
+      "line": 170,
+      "references": [
+        "https://starlidigital.ro/published/"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/platform_jobs.py",
+      "line": 63,
+      "references": []
+    },
+    {
+      "path": "backend/starli_company_computer/production_mount.py",
+      "line": 115,
+      "references": [
+        "/etc/starlidigital/agent-wake-broker.key"
+      ]
+    },
+    {
+      "path": "backend/starli_company_computer/production_relay.py",
+      "line": 60,
+      "references": [
+        "https://starlidigital.ro",
+        "https://www.starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_company_n8n/production.py",
+      "line": 16,
+      "references": [
+        "/etc/starlidigital/n8n-mcp.json"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/http.py",
+      "line": 17,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/legacy.py",
+      "line": 5,
+      "references": [
+        "https://api.starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/legacy.py",
+      "line": 6,
+      "references": [
+        "https://starlidigital.ro/api/v1/starli/social/oauth/return"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/legacy.py",
+      "line": 114,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/legacy.py",
+      "line": 115,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_company_social/production.py",
+      "line": 23,
+      "references": [
+        "/etc/starlidigital/company-social.json"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/native.py",
+      "line": 12,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/native.py",
+      "line": 13,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/production.py",
+      "line": 11,
+      "references": [
+        "/etc/starlidigital/n8n-credentials-engine.json"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/production.py",
+      "line": 36,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/smtp_http.py",
+      "line": 189,
+      "references": [
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_engine_connections/smtp_http.py",
+      "line": 190,
+      "references": [
+        "http://127.0.0.1:5180",
+        "https://starlidigital.ro"
+      ]
+    },
+    {
+      "path": "backend/starli_priority_gateway/__init__.py",
+      "line": 121,
+      "references": [
+        "/etc/starlidigital/n8n-execution-policy.json"
+      ]
+    },
+    {
+      "path": "backend/starli_priority_gateway/policy.py",
+      "line": 22,
+      "references": [
+        "/etc/starlidigital/n8n-execution-policy.json"
+      ]
+    },
+    {
+      "path": "backend/starli_priority_gateway/universal.py",
+      "line": 226,
+      "references": [
+        "/etc/starlidigital/n8n-execution-policy.json"
+      ]
+    }
+  ]
+}

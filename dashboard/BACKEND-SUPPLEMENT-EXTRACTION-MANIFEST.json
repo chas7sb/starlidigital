@@ -1,0 +1,136 @@
+{
+  "source": "/srv/starlidigital/webui-releases/native-company-mcp-always-v33-20261119",
+  "files": [
+    {
+      "path": "backend/.dockerignore",
+      "bytes": 150,
+      "sha256": "2e98eb5546a00a50691dc5aef2ee6eede1223dc5150be5bd8b5a5aa7adfad512"
+    },
+    {
+      "path": "backend/.gitignore",
+      "bytes": 119,
+      "sha256": "f2662983c67007d59c7a168b2230aa5c056f0e3f1cbc9625a0c0cdd8753a47ad"
+    },
+    {
+      "path": "backend/open_webui/migrations/README",
+      "bytes": 157,
+      "sha256": "67e8564ffcbac31f7b51bd8f899076f2e21be0cabf41904130efeecc12b542bb"
+    },
+    {
+      "path": "backend/open_webui/static/site.webmanifest",
+      "bytes": 596,
+      "sha256": "3a38535adffbf01d439345df1170c78f6e5bca075e74340d98866da19c11c2dc"
+    },
+    {
+      "path": "backend/open_webui/static/user-import.csv",
+      "bytes": 25,
+      "sha256": "d918b069f601437e8fda78110b01c04fa8a623b00d1f87a6e557abc1ca94f026"
+    },
+    {
+      "path": "backend/starli_company_computer/company-selected-profile.mts",
+      "bytes": 5085,
+      "sha256": "615e8127f096a12fdebf5e5bd3b89bfaee3240cabd2d0dc63ade82755ae9421b"
+    },
+    {
+      "path": "backend/starli_company_computer/company_provider_sdk.mts",
+      "bytes": 2978,
+      "sha256": "1679906910d1842c53dfd0a6035f8c73733c83fef477304e78fc43771f36e8d9"
+    },
+    {
+      "path": "backend/starli_company_computer/production-hosted-profile.mts",
+      "bytes": 4063,
+      "sha256": "22f0e365a11f9e557fbb06ff1629d710ded0da8e8e7bd7595dcf7a3e23933054"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/account-driver.mts",
+      "bytes": 6080,
+      "sha256": "833c0087ab94383892098e8b7b6acbc2aa2921c83e8b7f2f5cd1a9f753ba39a0"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/agent-system-prompt.mts",
+      "bytes": 862,
+      "sha256": "02b5db281c7f1ab128873f7277c3022200dddd02e30f15a262436bbb60fbb79d"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/company-memory-context.mts",
+      "bytes": 1208,
+      "sha256": "703eeda4932241425c7b7c7f6320a1698ff721ab7c550d66400de2a339def47f"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/company-provider-host.mts",
+      "bytes": 3231,
+      "sha256": "2d05f125fd28a82e05821bc528a4f93b13e63a6a7022e8b0cd0f6a012346404d"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/company-wire-tools.mts",
+      "bytes": 2540,
+      "sha256": "015877b4ee7317c14a8084f222db5ce2880eea89c7e89b857de1bcb8be592d1c"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/pi-live-agent.mts",
+      "bytes": 10650,
+      "sha256": "adccf4d8fbf5a80a35d82c179a6693fdad79bf1ce6fc1f20d8eb00c2b7c5101c"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/selected-provider-host.mts",
+      "bytes": 5663,
+      "sha256": "708c4748b8df666a6a9c5a3ed04f0be22cc0cf9cac9b3fab6bd39ed52dc83338"
+    },
+    {
+      "path": "backend/starli_company_computer/runtime/company_bot_runtime/sdk/turn-worker.mts",
+      "bytes": 12244,
+      "sha256": "d7e99f5f394336deecbdde3d1b2cffb9d04cb10e5da2aca08e3d214e587605ec"
+    },
+    {
+      "path": "backend/starli_company_computer/vision-capability.mts",
+      "bytes": 1609,
+      "sha256": "e1b158dc5b23635a2fc57de4c25ff1c3a5ff3b21ad63ae4020e8b61d5080bdb3"
+    }
+  ],
+  "excludedParts": [
+    ".cache",
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "cache",
+    "data",
+    "dist",
+    "logs",
+    "node_modules",
+    "uploads",
+    "venv"
+  ],
+  "allowedExtensions": [
+    ".bat",
+    ".cfg",
+    ".css",
+    ".csv",
+    ".html",
+    ".ico",
+    ".ini",
+    ".js",
+    ".json",
+    ".mako",
+    ".map",
+    ".md",
+    ".mjs",
+    ".mts",
+    ".otf",
+    ".png",
+    ".py",
+    ".sh",
+    ".sql",
+    ".svelte",
+    ".svg",
+    ".toml",
+    ".ts",
+    ".ttf",
+    ".txt",
+    ".webmanifest",
+    ".woff",
+    ".woff2",
+    ".yaml",
+    ".yml"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@starlidigital/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "graphql": "^16.11.0",
+    "graphql-ws": "^6.0.6",
+    "graphql-yoga": "^5.16.0",
+    "imapflow": "2.10.0",
+    "svix": "^2.9.1",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
