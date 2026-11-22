@@ -1,0 +1,23 @@
+{
+  "schema": "starli.public-live-team-proof.v1",
+  "status": "PASS",
+  "testedCodeCommit": "8283115df7c116e2d620048d508df5795da511b0",
+  "host": "windows-x64",
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "modelCallsInPassingHandoff": 5,
+  "reportedCostInPassingHandoff": 0,
+  "paidFallback": false,
+  "allSelectedTeammatesReplied": true,
+  "nativeAgentAttributionVerified": true,
+  "generatedTestCode": "JAVA202",
+  "pretendTestBudget": "$7,850",
+  "exactValuesPassedFromPicoToPixelToBoss": true,
+  "valuesAbsentFromHumanSourceAnd13EarlierMessages": true,
+  "browserReloadPersistenceVerified": true,
+  "verification": "UI-triggered actual provider requests and an independent read-only native-message/receipt audit; no fixture replies in this proof.",
+  "priorFailure": "A stricter earlier test omitted a selected teammate. The scheduler now requires every selected teammate's persisted reply before completion; shared history is quoted data and sequential replies retain prior generated values.",
+  "regressions": "19 isolated collaboration tests, native callback fixtures and 15 combined frontend tests passed; fixtures are separate from this live proof.",
+  "privacy": "Detailed receipts remain private locally. This public record includes no provider response IDs, company/actor/message identifiers, private paths, account data or credentials.",
+  "scope": "Bounded text discussion only; no generated-app workers, trusted app-preview lifecycle, autonomous tools or full production parity asserted."
+}

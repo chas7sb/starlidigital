@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": [
+    "fresh private boot before owner",
+    "strict browser Origin/Host guards",
+    "password-safe validation",
+    "atomic rollback leaves no account/company/lock",
+    "concurrent first setup exactly one201 and one409",
+    "native administrator sign-in",
+    "first-owner canonical membership audit supports actual team and human direction",
+    "one administrator plus one owner company",
+    "permanent setup lock",
+    "four concurrent second-company creates denied",
+    "database-trigger alternate-writer/deletion protection",
+    "wrong-company access denied",
+    "signup/guest/claim/pilot-company creation disabled"
+  ],
+  "modelCalls": 0,
+  "externalActions": 0
+}

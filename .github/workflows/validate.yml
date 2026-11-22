@@ -94,3 +94,6 @@ jobs:
         env:
           PYTHON_BIN: ${{ steps.python.outputs.python-path }}
         run: python packaging/build_component.py ${{ matrix.component }} ${{ matrix.component == 'platform' && '--test' || '' }}
+      - name: Verify self-hosted entry and setup behavior
+        if: matrix.component == 'product'
+        run: node --test product/tests/selfhost-setup.test.mjs

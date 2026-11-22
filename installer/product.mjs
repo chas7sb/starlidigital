@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve, join, delimiter } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { persistNewInstanceConfig, validateFirstRunStatus } from './product-config.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
@@ -49,10 +50,10 @@ function backendLock() {
 function env() {
   return { ...process.env, PATH: dirname(node22) + delimiter + process.env.PATH,
     ONNXRUNTIME_NODE_INSTALL_CUDA: 'skip', CYPRESS_INSTALL_BINARY: '0', NODE_OPTIONS: process.env.NODE_OPTIONS || '--max-old-space-size=6144',
-    VITE_PUBLIC_STARLI_BOSS_INTAKE_ENABLED: 'true', VITE_PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED: 'true', PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' };
+    VITE_PUBLIC_STARLI_BOSS_INTAKE_ENABLED: 'false', VITE_PUBLIC_STARLI_GROKBOT1_WIRE_ENABLED: 'false', PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' };
 }
 function settings(requireConfigured = false) {
-  if (requireConfigured && !existsSync(configFile)) throw new Error('New product owner setup is required. Run starlidigital setup first.');
+  if (requireConfigured && !existsSync(configFile)) throw new Error('Instance not started yet. Run starlidigital start, then complete first-run administration in the browser.');
   const c = existsSync(configFile) ? JSON.parse(readFileSync(configFile, 'utf8')) : {
     schema: 'starli.product-install.v1', state: process.env.STARLI_PRODUCT_STATE || `work/product-${instance || 'local'}`,
     frontendPort: Number(process.env.STARLI_PRODUCT_FRONTEND_PORT || 5186), backendPort: Number(process.env.STARLI_PRODUCT_BACKEND_PORT || 8080)
@@ -66,6 +67,7 @@ function settings(requireConfigured = false) {
   return { ...c, state, frontend: `http://127.0.0.1:${c.frontendPort}`, backend: `http://127.0.0.1:${c.backendPort}` };
 }
 function backendArgs(c, mode) { return [join(root, 'product-backend/local_server.py'), mode, '--state', c.state, '--port', String(c.backendPort), '--origin', c.frontend]; }
+function builtProductAvailable(){return existsSync(join(root,'product/build/index.html')) && existsSync(join(root,'product/.svelte-kit/output/server/manifest.js'));}
 async function response(url) {
   const r = await fetch(url, { signal: AbortSignal.timeout(5000), redirect: 'error' });
   if (!r.ok) throw new Error(`${new URL(url).pathname} HTTP${r.status}`);
@@ -73,14 +75,17 @@ async function response(url) {
 }
 async function readiness(c) {
   const health = await (await response(c.backend + '/health')).json();
-  if (health.status !== 'ready' || health.backend !== 'NEW_COMPANY_NATIVE_CANDIDATE' || health.nativeAuth !== true || health.nativeMessaging !== true || health.guestClaim !== true) throw new Error('New product backend capability health contract did not pass.');
+  if (!['ready', 'setup_required'].includes(health.status) || health.backend !== 'NEW_COMPANY_NATIVE_CANDIDATE' || health.nativeAuth !== true || health.nativeMessaging !== true) throw new Error('Single-company backend health contract did not pass.');
   const proxied = await (await response(c.frontend + '/health')).json();
-  if (proxied.backend !== health.backend || proxied.status !== 'ready') throw new Error('Frontend API proxy is not joined to the new backend.');
+  if (proxied.backend !== health.backend || proxied.status !== health.status) throw new Error('Frontend API proxy is not joined to the single-company backend.');
+  const setup=validateFirstRunStatus(await (await response(c.backend+'/api/v1/setup/status')).json());
+  const frontSetup=validateFirstRunStatus(await (await response(c.frontend+'/api/v1/setup/status')).json());
+  if (frontSetup.setupRequired!==setup.setupRequired) throw new Error('First-run status changed or frontend proxy is joined to another instance; retrying.');
   for (const path of ['/', '/app']) {
     const r = await response(c.frontend + path);
     if (!r.headers.get('content-type')?.includes('text/html') || !(await r.text()).toLowerCase().includes('<!doctype html')) throw new Error(`New product ${path} did not serve an HTML application.`);
   }
-  return health;
+  return {...health,setupRequired:setup.setupRequired,deploymentMode:'single_company'};
 }
 async function freePorts(c) {
   const { createServer } = await import('node:net');
@@ -115,36 +120,37 @@ try {
       run('uv', ['pip', 'install', '--python', py, '--require-hashes', '-r', backendLock()]);
       run(node22, [npm(), 'ci', '--include=dev'], join(root, 'product'), env());
       run(node22, [npm(), 'run', 'build'], join(root, 'product'), env());
-      if (!dry) console.log('New product frontend built and Python dependencies installed. Run setup for a private local owner. Model/provider and worker availability require their own configuration and health checks.');
+      if (!dry) console.log('Single-company product installed. Run start, then create the first administrator and company in the browser. No default account/password is created. CLI setup is an optional privileged alternative.');
     } else if (action === 'build') run(node22, [npm(), 'run', 'build'], join(root, 'product'), env());
     else if (action === 'doctor') {
       run(node22, ['--version']);run(py, ['-c', 'import fastapi,uvicorn,pyarrow,numpy; print("Product backend Python dependencies import successfully")']);
-      if (!existsSync(join(root, 'product/build/index.html'))) throw new Error('New product build missing; run install or build.');
-      if (!dry) console.log(existsSync(configFile) ? 'New product source/dependencies/build/setup: present. Use health after start.' : 'New product source/dependencies/build: present. Owner setup is still required.');
+      if (!builtProductAvailable()) throw new Error('Product build/preview manifest missing or build in progress; finish install/build before start.');
+      if (!dry) console.log(existsSync(configFile) ? 'Product source/dependencies/build and instance configuration: present. Use health after start to inspect first-run status.' : 'Product source/dependencies/build: present. Start will serve browser first-run setup.');
     } else if (action === 'setup') {
-      if (existsSync(configFile)) throw new Error('Existing product setup preserved. Run start; no owner reset is performed.');
       const c = settings();if (!dry) await freePorts(c);
-      run(py, backendArgs(c, 'init'), root, env());
-      if (!dry) { mkdirSync(cache, { recursive: true });writeFileSync(configFile, JSON.stringify(c, null, 2) + '\n', { flag: 'wx', mode: 0o600 });console.log('New product owner initialized. Run start. Configuration contains paths/ports only.'); }
+      run(py, [join(here,'first-run-cli.py'),'--state',c.state,'--port',String(c.backendPort),'--origin',c.frontend], root, env());
+      if (!dry) { persistNewInstanceConfig(configFile,c);console.log('Privileged CLI initialization completed. Existing instance configuration and private keys are preserved. Run start.'); }
     } else if (action === 'health') {
       const c = settings(!dry);
-      if (dry) console.log(JSON.stringify({ health: [c.backend + '/health', c.frontend + '/health', c.frontend + '/', c.frontend + '/app'] }));
-      else { const h = await readiness(c);console.log(JSON.stringify({ core: 'ready', frontend: c.frontend, providerConfigured: h.providerConfigured, modelExecution: h.modelExecution, workerExecution: h.workerExecution, productionReady: h.productionReady })); }
+      if (dry) console.log(JSON.stringify({ health: [c.backend + '/health', c.frontend + '/health', c.backend+'/api/v1/setup/status',c.frontend+'/api/v1/setup/status',c.frontend + '/', c.frontend + '/app'] }));
+      else { const h = await readiness(c);console.log(JSON.stringify({ core: h.setupRequired ? 'setup_required' : 'ready', setupRequired:h.setupRequired, deploymentMode:h.deploymentMode, frontend: c.frontend, providerConfigured: h.providerConfigured, modelExecution: h.modelExecution, workerExecution: h.workerExecution, productionReady: h.productionReady })); }
     } else if (action === 'start') {
-      const c = settings(!dry);
+      const hadConfig=existsSync(configFile);
+      const c = settings();
       const vite = join(root, 'product/node_modules/vite/bin/vite.js');
       const frontArgs = [vite, 'preview', '--host', '127.0.0.1', '--port', String(c.frontendPort), '--strictPort'];
       const childEnv = { ...env(), STARLI_BACKEND_URL: c.backend };
       if (dry) { run(py, backendArgs(c, 'serve'), root, childEnv);run(node22, frontArgs, join(root, 'product'), childEnv); }
       else {
-        if (!existsSync(py) || !existsSync(vite) || !existsSync(join(root, 'product/build/index.html'))) throw new Error('New product dependencies/build missing. Run install.');
+        if (!existsSync(py) || !existsSync(vite) || !builtProductAvailable()) throw new Error('Product dependencies/build/preview manifest missing or build in progress. Finish install/build first.');
         await freePorts(c);
+        if (!hadConfig && !persistNewInstanceConfig(configFile,c)) throw new Error('Another start configured this instance concurrently. Existing configuration preserved; retry start.');
         startChild(py, backendArgs(c, 'serve'), root, childEnv);startChild(node22, frontArgs, join(root, 'product'), childEnv);
         process.on('SIGINT', () => { stop();process.exitCode = 130; });process.on('SIGTERM', () => { stop();process.exitCode = 143; });
         const deadline = Date.now() + 180000;let last;
         while (Date.now() < deadline) {
           if (children.some(c => c.exitCode !== null)) throw new Error('A product process exited before readiness.');
-          try { const h = await readiness(c);console.log(`New product core ready at${c.frontend}; native auth/messaging/guest claim and frontend API proxy verified. Provider=${h.providerConfigured}, model=${h.modelExecution}, worker=${h.workerExecution}. Ctrl+C stops both services.`);last = null;break; }
+          try { const h = await readiness(c);console.log(h.setupRequired ? `First-run page ready at ${c.frontend}. Create the single administrator and company in your browser; no default credentials exist. Ctrl+C stops both services.` : `Single-company workspace ready at ${c.frontend}; sign in to continue. Provider=${h.providerConfigured}, model=${h.modelExecution}, worker=${h.workerExecution}. Ctrl+C stops both services.`);last = null;break; }
           catch (e) { last = e;await new Promise(r => setTimeout(r, 1500)); }
         }
         if (last) throw new Error(`New product readiness failed: ${last.message}`);

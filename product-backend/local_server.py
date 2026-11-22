@@ -30,11 +30,13 @@ def configure(state,origin):
   if name.startswith(('STARLI_','DATABASE_','WEBUI_','OPENAI','OPENROUTER','REDIS')) or name in ('DATA_DIR','EMAIL_FROM','SMTP_FROM'):os.environ.pop(name,None)
  paths={'data':state/'data','state':state/'state','memory':state/'memory','config':state/'config','static':state/'static','tasks':state/'tasks'}
  for p in paths.values():private.ensure_private_directory(p)
+ authority_path=paths['data']/'company-authority.sqlite3'
+ if not authority_path.exists():authority_path=paths['data']/'webui.db'
  os.environ.update(DATA_DIR=str(paths['data']),DATABASE_URL='sqlite:///'+(paths['data']/'webui.db').as_posix(),WEBUI_SECRET_KEY=secret.read_text(),
   WEBUI_AUTH='true',ENABLE_SIGNUP='false',ENABLE_LOGIN_FORM='true',ENABLE_PERSISTENT_CONFIG='false',OFFLINE_MODE='true',HF_HUB_OFFLINE='1',ANONYMIZED_TELEMETRY='false',
   ENABLE_OPENAI_API='false',ENABLE_OLLAMA_API='false',ENABLE_COMMUNITY_SHARING='false',ENABLE_VERSION_UPDATE_CHECK='false',
   STARLI_STATE_DIR=str(paths['state']),STARLI_DATA_DIR=str(paths['data']),STARLI_CONFIG_DIR=str(paths['config']),STARLI_MEMORY_ROOT=str(paths['memory']),STARLI_TASK_HOME=str(paths['tasks']),
-  STARLI_SOURCE_DATABASE=str(state/'compatibility-unused.sqlite'),STARLI_COMPANY_DATABASE=str(paths['data']/'company-authority.sqlite3'),STARLI_COMPANY_BOT_DATABASE=str(paths['data']/'company-authority.sqlite3'),
+  STARLI_SOURCE_DATABASE=str(state/'compatibility-unused.sqlite'),STARLI_COMPANY_DATABASE=str(authority_path),STARLI_COMPANY_BOT_DATABASE=str(authority_path),
   STATIC_DIR=str(paths['static']),WEBUI_URL=origin,STARLI_PUBLIC_ORIGIN=origin,CORS_ALLOW_ORIGIN=origin)
  os.chdir(state)
  for directory in [WAVE/'grokbot1',WAVE/'grokbot1/vendor',CODEX/'guest-company-authority-r1',CODEX/'guest-session-refresh-r1',CODEX/'postclaim-name-r1',CODEX/'assembly-r1/adapters']:
@@ -45,16 +47,20 @@ def native(state):
  import native_harness as h
  h.NATIVE_BACKEND=str(REPO/'dashboard/backend')
  h.NATIVE_PINS=json.loads((HERE/'LOCAL-NATIVE-PINS.json').read_text())
- ns=h.load_native(h.Paths(state));h.ensure_native_databases(ns)
+ ns=h.load_native(h.Paths(state))
+ previous=ns.paths
+ ns.paths=SimpleNamespace(root=previous.root,data=previous.data,state=previous.state,main=previous.main,authority=Path(os.environ['STARLI_COMPANY_DATABASE']),drive=previous.drive,intake=previous.intake)
+ h.ensure_native_databases(ns)
  return ns
 
 def create_app(state,origin):
  state=configure(state,origin);ns=native(state)
- from fastapi import FastAPI,Request,HTTPException
+ from fastapi import FastAPI,Request,HTTPException,Depends
  from fastapi.responses import JSONResponse
- from grokbot1_claim import Grokbot1Service
- from grokbot1_routes import install
- app=FastAPI(title='Starli company candidate — local native backend')
+ app=FastAPI(title='Starli single-company local backend')
+ app.state.native=ns
+ from local_installation import mount as mount_installation
+ installation=mount_installation(app,ns,origin)
  async def no_provider(*args,**kwargs):raise HTTPException(503,'LOCAL_MODEL_PROVIDER_NOT_CONFIGURED')
  ns.public.call_provider=no_provider
  app.state.config=SimpleNamespace(JWT_EXPIRES_IN='1h',USER_PERMISSIONS={},ENABLE_SIGNUP=False,ENABLE_LOGIN_FORM=True,WEBHOOK_URL='',ENABLE_API_KEY_ENDPOINT_RESTRICTIONS=True,API_KEY_ALLOWED_ENDPOINTS='')
@@ -62,6 +68,8 @@ def create_app(state,origin):
  @app.middleware('http')
  async def auth_state(request:Request,call_next):
   request.state.enable_api_key=False
+  if request.url.path.startswith(('/api/v1/starli/public','/api/v1/starli/grokbot1')) or request.url.path in ('/api/v1/auths/signup','/api/v1/auths/add','/api/v1/company-pilot/company'):
+   return JSONResponse({'detail':'ROUTE_NOT_AVAILABLE'},status_code=404)
   if request.method in ('POST','PUT','PATCH','DELETE') and ('/provider-' in request.url.path or '/collaborations' in request.url.path or request.url.path.endswith('/provider-selection')):
    if not request.headers.get('authorization','').startswith('Bearer ') or request.headers.get('origin')!=origin:
     return JSONResponse({'detail':'PROVIDER_BEARER_ORIGIN_REQUIRED'},status_code=403)
@@ -74,13 +82,19 @@ def create_app(state,origin):
  for source in auths.router.routes:
   if source.path in ('/','/signin','/signout'):
    route=copy(source);route.path='/api/v1/auths'+source.path;route.path_format='/api/v1/auths'+source.path_format;route.path_regex,route.path_format,route.param_convertors=compile_path(route.path);app.router.routes.append(route)
- app.include_router(ns.public.router,prefix='/api/v1/starli/public')
  store=ns.native_mount.install(app,str(ns.paths.main),authority_database=str(ns.paths.authority),registry_database=str(ns.paths.authority))
- key=(state/'session.key').read_bytes()
- svc=Grokbot1Service(ns,store,signing_key=hmac.new(key,b'grokbot1-intent-binding',hashlib.sha256).digest(),nav_key=hmac.new(key,b'grokbot1-navigation',hashlib.sha256).digest())
- install(app,svc,allowed_origins={origin});app.state.grokbot1=svc
  from open_webui.utils.auth import get_verified_user
- from open_webui.company_authority.company_routes import build_router
+ from open_webui.company_authority.company_routes import build_router,CompanyForm
+ @app.post('/api/v1/companies')
+ def create_only_company(body:CompanyForm,request:Request,user=Depends(get_verified_user)):
+  if not request.headers.get('authorization','').startswith('Bearer ') or request.headers.get('origin')!=origin:raise HTTPException(403,'COMPANY_BEARER_ORIGIN_REQUIRED')
+  if installation.status()['companyConfigured']:raise HTTPException(409,'SINGLE_COMPANY_ONLY')
+  if user.role!='admin':raise HTTPException(403,'ADMINISTRATOR_REQUIRED')
+  import sqlite3
+  authority=ns.RbacAuthority(str(ns.paths.authority))
+  try:return {'company_id':authority.create(user.id,body.name,user.name)}
+  except sqlite3.IntegrityError:raise HTTPException(409,'SINGLE_COMPANY_ONLY')from None
+  finally:authority.db.close()
  app.include_router(build_router(get_verified_user,str(ns.paths.authority)),prefix='/api/v1/companies')
  from starli_memory.native_directory import build_native_router
  app.include_router(build_native_router(company_path=str(ns.paths.authority),registry_path=str(ns.paths.authority)),prefix='/api/v1/bot-directory')
@@ -92,20 +106,10 @@ def create_app(state,origin):
  model_runtime,company_providers=install_local_provider(app,ns,state,store,origin)
  from local_collaboration_routes import install as install_collaboration
  install_collaboration(app,state,store,model_runtime)
- from guest_session_refresh import install_guest_session_refresh
- install_guest_session_refresh(app,svc)
- from claimed_chat_defaults import install_claimed_chat_defaults
- install_claimed_chat_defaults(svc)
- from claimed_coordinator_name import install_claimed_coordinator_name
- install_claimed_coordinator_name(svc)
- from guest_company_authority import install_guest_company_authority
- authority=install_guest_company_authority(app,svc,allowed_origins={origin})
- from guest_workspace import install_guest_workspace
- install_guest_workspace(app,svc,allowed_origins={origin},authority=authority)
  @app.get('/health')
  def health():
   with company_providers.db() as db:configured=db.execute('SELECT 1 FROM company_provider_connections WHERE active=1 LIMIT 1').fetchone()is not None
-  return {'status':'ready','backend':'NEW_COMPANY_NATIVE_CANDIDATE','nativeAuth':True,'nativeMessaging':True,'guestClaim':True,'providerConfigured':configured,'modelExecution':'CONFIGURED_NOT_YET_VERIFIED' if configured else 'NOT_CONFIGURED','boundedCollaborationAvailable':True,'workerExecution':'NOT_CONFIGURED','productionReady':False}
+  return {'status':'ready','backend':'NEW_COMPANY_NATIVE_CANDIDATE','nativeAuth':True,'nativeMessaging':True,'guestClaim':False,'singleCompany':True,'registrationAllowed':False,'setupRequired':installation.status()['setupRequired'],'providerConfigured':configured,'modelExecution':'CONFIGURED_NOT_YET_VERIFIED' if configured else 'NOT_CONFIGURED','boundedCollaborationAvailable':True,'workerExecution':'NOT_CONFIGURED','productionReady':False}
  from fastapi.responses import HTMLResponse
  @app.get('/local/provider',response_class=HTMLResponse)
  @app.get('/api/local/provider',response_class=HTMLResponse)
@@ -118,15 +122,7 @@ def create_app(state,origin):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('action',choices=['serve','init']);p.add_argument('--state',required=True);p.add_argument('--port',type=int,default=18381);p.add_argument('--origin');a=p.parse_args();origin=a.origin or f'http://127.0.0.1:{a.port}'
- if a.action=='init':
-  import getpass
-  state=configure(a.state,origin);ns=native(state)
-  if ns.Users.get_num_users()!=0:raise RuntimeError('Existing native users preserved; owner initialization refused')
-  email=input('Local owner email: ').strip().lower();name=input('Owner display name: ').strip();password=getpass.getpass('Owner password (14+ characters): ')
-  import re
-  if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email) or not name or len(password)<14 or len(password.encode())>72:raise ValueError('Invalid local owner credentials')
-  if password!=getpass.getpass('Confirm password: '):raise ValueError('Passwords differ')
-  ns.Auths.insert_new_auth(email,ns.auth.get_password_hash(password),name,'/user.png','admin');print('Local owner initialized; no session issued.');return
+ if a.action=='init':raise RuntimeError('Use the browser first-run setup to create the administrator and sole company atomically.')
  import uvicorn
  uvicorn.run(create_app(a.state,origin),host='127.0.0.1',port=a.port,access_log=False,log_level='warning')
 

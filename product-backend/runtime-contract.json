@@ -2,15 +2,6 @@
   "schema": "starli.local-product-backend.v1",
   "entrypoint": "product-backend/local_server.py",
   "python": "3.11 (same locked dashboard environment)",
-  "init": [
-    "python",
-    "product-backend/local_server.py",
-    "init",
-    "--state",
-    "work/new-product-local",
-    "--port",
-    "18381"
-  ],
   "serve": [
     "python",
     "product-backend/local_server.py",
@@ -30,13 +21,13 @@
     "companies-and-authority",
     "bot-directory-and-explicit-admission",
     "messaging-and-bounded-team-work-sessions",
-    "cookie-owned-guest-intent-and-provisional-company",
-    "guest-workspace-history-read",
-    "claim-and-history-transfer-routes",
     "encrypted-company-openrouter-vault",
     "per-bot-provider-selection-and-profiles",
     "native-model-chat-with-persisted-receipts",
-    "human-started-bounded-boss-team-text-collaboration"
+    "human-started-bounded-boss-team-text-collaboration",
+    "atomic-browser-first-administrator-and-sole-company",
+    "permanent-first-run-lock",
+    "database-enforced-single-company"
   ],
   "notConfigured": [
     "user-openrouter-key-until-explicit-entry",
@@ -45,9 +36,9 @@
     "autonomous-tool-execution"
   ],
   "sourceHashes": {
-    "product-backend/local_server.py": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+    "product-backend/local_server.py": "f26a71b2c855f94a9de388faebb554667aeedcb2c0ffe9da96b516e71156b758",
     "product-backend/local_provider.py": "6940c40115d4cd537529207f7d07915a53e15ad31f0d6ac259c53af5f88c2fc9",
-    "product-backend/provider-setup.html": "32c1f6b325822720e245b3e5d6a74644ed1936aa2c4c8ed9ab5da6447f4be096",
+    "product-backend/provider-setup.html": "5f047abdc2fa22859366adf287e61a07418d219c60ff1407671e65ba6a6a57fc",
     "product-backend/local_collaboration.py": "da91587ff4754cb3087feede04fbf258ff8331023f7bcff9d7eeccc300318959",
     "product-backend/local_collaboration_routes.py": "c508170ea3c8d39a73aaeda2d356b5454c1dfc6378e3fc883c07e8eb9a5eea0a",
     "product-backend/LOCAL-NATIVE-PINS.json": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
@@ -59,7 +50,8 @@
     "packaging/locks/dashboard-macos-x64-py311.json": "12d6ef222fe14e8037006c173bab80c071d47b903c1089f3d38e5b6b87f9eaa3",
     "packaging/locks/dashboard-macos-x64-py311.txt": "9080f1df8bc9dcb0f7da3702e169fee0e240b827902dc98b833d777621c4baeb",
     "packaging/locks/dashboard-windows-x64-py311.json": "f5098b7f5bce3df780e406fc462b1ccc3a6b59b0c7b3abed05525c42fed0cf9b",
-    "packaging/locks/dashboard-windows-x64-py311.txt": "e88023227a89156d8e9c2570dd82cf899aae20d0510d8e36a9c0808748235086"
+    "packaging/locks/dashboard-windows-x64-py311.txt": "e88023227a89156d8e9c2570dd82cf899aae20d0510d8e36a9c0808748235086",
+    "product-backend/local_installation.py": "f66394de1126fcb41a5d1216cea1a12d89a475db4e9be5bde96c15fc1b509b10"
   },
   "fullJoinedCandidateClosureComplete": false,
   "fullJoinedBlockedBy": [
@@ -76,9 +68,12 @@
     "keyStorage": "Fernet encrypted company vault, derived from private instance key",
     "ambientCredentials": false,
     "paidFallback": false,
-    "actualInferenceVerified": false,
+    "actualInferenceVerified": true,
     "catalogVerifiedAt": "2026-11-22",
-    "catalogSource": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b%3Afree"
+    "catalogSource": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b%3Afree",
+    "verificationScope": "Historical Windows proof at commit 8283115; predates singleton working changes; every fresh installation requires its own connection",
+    "verificationEvidence": "qa/results/new-product-live-proof.json",
+    "verificationCommit": "8283115df7c116e2d620048d508df5795da511b0"
   },
   "collaboration": {
     "path": "/api/v1/starli/companies/{company}/messaging/rooms/{room}/collaborations",
@@ -100,7 +95,25 @@
       "missingIds"
     ]
   },
-  "sourceHashNormalization": "current staged Git blob bytes",
-  "sourceBaseCommit": "b934a1b556823518d5ee2950f932950d8ac0bb9c",
-  "sourceWorkingTree": "Changed core/adapter bytes are identified by sourceHashes; no current sourceCommit is asserted."
+  "sourceHashNormalization": "canonical LF source bytes (CRLF normalized to LF before SHA256)",
+  "sourceWorkingTree": "Current working sources are identified by canonical LF sourceHashes; sourceBaseCommit is the prior committed baseline, not a current sourceCommit assertion.",
+  "installation": {
+    "profile": "single-company",
+    "statusPath": "/api/v1/setup/status",
+    "setupPath": "/api/v1/setup",
+    "setupFields": [
+      "name",
+      "email",
+      "password",
+      "companyName"
+    ],
+    "setupHeader": "X-Starli-Setup: 1",
+    "registrationAllowed": false,
+    "guestIntentAllowed": false,
+    "claimAllowed": false,
+    "atomicFreshSetup": true,
+    "existingStatePreserved": true,
+    "multipleExistingCompanies": "fail-closed-migration-required"
+  },
+  "sourceBaseCommit": "8283115df7c116e2d620048d508df5795da511b0"
 }

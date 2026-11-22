@@ -1,19 +1,18 @@
 # New company product backend
 
-This directory contains the recovered autonomous-company candidate and a runnable local composition of its native identity, company, bot, messaging, guest-workspace and claim services. The retained `dashboard/backend` is a native foundation dependency. The old GraphQL platform is not the canonical product API.
+This directory contains the recovered autonomous-company candidate and a runnable local composition of its native identity, company, bot, messaging and single-company installation services. The retained `dashboard/backend` is a native foundation dependency. The old GraphQL platform is not the canonical product API.
 
 From the repository root, after installing the locked dashboard Python dependencies:
 
 ```powershell
-installer/.runtime/python/Scripts/python.exe product-backend/local_server.py init --state work/new-product-local --port 18381
 installer/.runtime/python/Scripts/python.exe product-backend/local_server.py serve --state work/new-product-local --port 18381
 ```
 
-`init` prompts for the local owner credentials. It refuses to replace existing users. `serve` binds127.0.0.1, uses fresh private state under `work/`, and preserves state on restart. Do not pass production directories, configuration or credentials. The session key is generated locally and checked through the existing private-owner storage policy. `--origin` can specify a separate literal-loopback frontend origin.
+`serve` binds 127.0.0.1, uses private state under `work/`, and preserves state on restart. On the first browser visit, create the initial administrator and sole company together. Subsequent visits show the workspace or native sign-in. Registration, guest intent, provisional companies and claims are disabled. CLI `init` is retired. `--origin` specifies the literal-loopback frontend origin.
 
-The selected frontend must proxy the backend `/api/` paths to this service. Authentication uses native `/api/v1/auths/signin`; collaboration uses native companies, bot-directory, company-pilot admission and company messaging. New guest/claim routes are under `/api/v1/starli/{public/grokbot1,grokbot1}`. See [backend map](../docs/new-product-backend.md).
+The frontend proxies `/api/` to this service. GET `/api/v1/setup/status` reports `setupRequired`, `singleCompany:true`, `registrationAllowed:false`, `setupLocked` and `companyConfigured`. POST `/api/v1/setup` accepts `name`, `email`, `password`, `companyName`, the exact configured Origin and `X-Starli-Setup: 1`. Success is 201 with `setupComplete`, `companyId` and `signInRequired:true`; sign in normally afterward. Concurrent or subsequent setup receives 409. Account, company, membership, canonical membership audit and permanent lock commit in one SQLite transaction. Fresh installations use one database; configured legacy installations retain their separate native databases, users, company, bots and encrypted vault. Existing multiple companies fail closed with migration required. Database constraints prevent a second company through alternate writers.
 
-Open `/api/local/provider` through the trusted frontend proxy to sign in, select a company, enter your own OpenRouter key and select its bots. The older `/local/provider` alias also exists. Use the same browser origin supplied by `--origin`; for a frontend on5186, serve with `--origin http://127.0.0.1:5186` and open `http://127.0.0.1:5186/api/local/provider`. The setup page is loopback-only, no-store, and keeps its bearer token only in memory. Saving makes no inference call. Keys are encrypted in the private company vault and are never returned in API responses. Ambient OpenAI or upstream production credentials are never used.
+Open `/api/local/provider` through the trusted frontend proxy to sign in, view the sole configured company, enter your own OpenRouter key and select its bots. The older `/local/provider` alias also exists. Use the same browser origin supplied by `--origin`; for a frontend on5186, serve with `--origin http://127.0.0.1:5186` and open `http://127.0.0.1:5186/api/local/provider`. The setup page is loopback-only, no-store, and keeps its bearer token only in memory. Saving makes no inference call. Keys are encrypted in the private company vault and are never returned in API responses. Ambient OpenAI or upstream production credentials are never used.
 
 The selected model is `nvidia/nemotron-3-ultra-550b-a55b:free`, verified against the official OpenRouter catalog on2026-11-22. Requests use the fixed HTTPS OpenRouter endpoint, no redirects/proxies, no paid fallback and zero-price routing. No implicit model retry occurs. Key syntax validation/configuration does not prove provider acceptance: health remains `CONFIGURED_NOT_YET_VERIFIED` until actual calls are independently checked.
 
@@ -34,6 +33,7 @@ Mutations require current native bearer authentication, the configured Origin an
 Run actual native HTTP/ASGI regression checks with:
 
 ```powershell
+installer/.runtime/python/Scripts/python.exe product-backend/test_single_company.py
 installer/.runtime/python/Scripts/python.exe product-backend/test_local_server.py
 installer/.runtime/python/Scripts/python.exe product-backend/test_local_provider.py
 installer/.runtime/python/Scripts/python.exe product-backend/test_provider_transport.py

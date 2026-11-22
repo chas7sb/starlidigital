@@ -1,5 +1,6 @@
 """Boundary tests for the new product smoke; actual boot is a separate command."""
 import importlib.util
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import os
 import select
@@ -38,6 +39,32 @@ class Boundaries(unittest.TestCase):
         for path in ('https://example.com', '//example.com'):
             with self.assertRaises(ValueError):
                 client.request(path)
+
+    def test_setup_client_preserves_status_and_sends_explicit_csrf_header(self):
+        # Client transport regression only; application correctness is checked
+        # by the separate fresh-state real-product boot, never this fixture.
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self, *_):
+                pass
+            def do_POST(self):
+                self.rfile.read(int(self.headers.get('Content-Length', '0')))
+                self.send_response(201 if self.headers.get('x-starli-setup') == '1' else 403)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(b'{"setupComplete":true,"companyId":"transport-fixture"}')
+        server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+        thread = threading.Thread(target=server.serve_forever)
+        thread.start()
+        try:
+            client = smoke.Client(f'http://127.0.0.1:{server.server_port}')
+            status, body = client.request('/api/v1/setup', {}, setup=True, expect=(201,), include_status=True)
+            self.assertEqual(status, 201)
+            self.assertTrue(body['setupComplete'])
+            self.assertEqual(client.request('/api/v1/setup', {}, expect=(403,), include_status=True), (403, {}))
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(3)
 
     def test_listener_release_is_waited_for_and_bounded(self):
         listener = socket.socket()

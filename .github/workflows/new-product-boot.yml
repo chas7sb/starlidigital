@@ -1,4 +1,4 @@
-name: New product fresh-install boot
+name: Single-company browser-first fresh-install boot
 on:
   workflow_dispatch:
 permissions:
@@ -34,7 +34,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check uv==0.11.19
       - name: Check smoke boundaries and dependency locks
         run: python -m unittest discover -s packaging -p test_new_product_boot_smoke.py -v
-      - name: Install NEW product through public root command and test actual socket/restart flows
+      - name: Install and start without CLI setup; test browser-first singleton, denial, race and restart
         run: python packaging/new_product_boot_smoke.py --install --installer --output work/new-product-boot-result.json
       - name: Upload only sanitized corrected-product evidence
         if: always()

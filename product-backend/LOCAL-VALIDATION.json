@@ -3,15 +3,13 @@
   "checks": [
     "truthful health",
     "native password signin",
-    "native company create",
+    "atomic first-run owner/company setup",
     "owner company directory",
     "two actual company bots installed and explicitly admitted",
     "bounded two-bot team work session created",
     "team session persisted readback without simulated inference",
     "unauthenticated company denied",
-    "native cookie guest intent and provisional company",
-    "persisted guest workspace readback",
-    "unconfigured inference fails closed without fallback",
+    "guest intent and registration disabled",
     "unconfigured worker fails closed"
   ],
   "modelCalls": 0,

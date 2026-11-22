@@ -1,8 +1,9 @@
 """Run the actual new-product native core API checks using the target hash lock.
 
-This proves core auth/company/bot/team/guest boundaries and isolated collaboration
-fixtures, not configured inference, workers or the joined preview. Only sanitized
-reports are CI artifacts.
+This runs the current single-company self-host foundation contract (browser admin
+setup, default workspace, no public signup or guest/provisional creation) and
+isolated collaboration fixtures, not configured inference, workers or the joined
+preview. Only sanitized reports are CI artifacts.
 """
 import argparse
 import json
@@ -42,6 +43,7 @@ print(json.dumps({'status':'PASS' if ok else 'FAIL','testsRun':result.testsRun,'
 raise SystemExit(0 if ok else 1)
 """
     suites=[('foundation','test_local_server.py',None),
+            ('single-company-setup','test_single_company.py',None),
             ('collaboration-fixtures','test_local_collaboration.py',unit_runner),
             ('native-collaboration-fixtures','test_native_collaboration_routes.py',None)]
     reports=[]
@@ -57,7 +59,9 @@ raise SystemExit(0 if ok else 1)
         command=([sys.executable,'-c',runner,str(ROOT/'product-backend')] if runner
                  else [sys.executable,str(ROOT/'product-backend'/filename)])
         entry={'suite':label,'status':'FAIL','private_logs_uploaded':False}
-        if label!='foundation':entry.update(actualInference=False,externalCalls=0,executionClass='TEST_FIXTURE')
+        fixture=label.endswith('-fixtures')
+        if fixture:entry.update(actualInference=False,externalCalls=0,executionClass='TEST_FIXTURE')
+        else:entry.update(actualInference=False,modelCalls=0,externalActions=0)
         try:
             result=subprocess.run(command,cwd=ROOT,env=child_env,capture_output=True,text=True,timeout=240)
             (case/'private-test.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
@@ -71,8 +75,8 @@ raise SystemExit(0 if ok else 1)
                         if not isinstance(value.get('testsRun'),int) or value['testsRun']<1 or value.get('skipped')!=0:continue
                         entry.update(status='PASS',testsRun=value['testsRun'],skipped=0)
                     elif isinstance(value.get('checks'),list):
-                        if label=='foundation' and (value.get('modelCalls')!=0 or value.get('externalActions')!=0):continue
-                        if label!='foundation' and (value.get('actualInference') is not False or value.get('externalCalls')!=0):continue
+                        if not fixture and (value.get('modelCalls')!=0 or value.get('externalActions')!=0):continue
+                        if fixture and (value.get('actualInference') is not False or value.get('externalCalls')!=0):continue
                         entry.update(status='PASS',checks=value['checks'])
                     else:continue
                     break
@@ -81,7 +85,7 @@ raise SystemExit(0 if ok else 1)
         reports.append(entry)
     foundation=reports[0]
     report={'status':'PASS' if all(item['status']=='PASS' for item in reports) else 'FAIL',
-            'attempt':attempt,'scope':'native core ASGI APIs and separate isolated collaboration fixtures; no actual inference',
+            'attempt':attempt,'scope':'current self-host foundation ASGI APIs and separate isolated collaboration fixtures; no actual inference',
             'checks':foundation.get('checks',[]),'modelCalls':0,'externalActions':0,
             'actualInference':False,'suites':reports,'private_logs_uploaded':False,
             'limitations':['Collaboration model/native callback results use explicit fixtures, not actual inference',

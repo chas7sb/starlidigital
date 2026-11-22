@@ -4,7 +4,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 def main():
  spec=importlib.util.spec_from_file_location('provider_test_server',HERE/'local_server.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
- state=HERE.parent/'work'/('provider-config-qa-'+uuid.uuid4().hex[:12]);origin='http://127.0.0.1:18381';app=m.create_app(state,origin);ns=app.state.grokbot1.ns
+ state=HERE.parent/'work'/('provider-config-qa-'+uuid.uuid4().hex[:12]);origin='http://127.0.0.1:18381';app=m.create_app(state,origin);ns=app.state.native
  from fastapi.testclient import TestClient
  from local_provider import MODEL
  password=secrets.token_urlsafe(24);ns.Auths.insert_new_auth('provider-owner@example.invalid',ns.auth.get_password_hash(password),'Provider QA','/user.png','admin')

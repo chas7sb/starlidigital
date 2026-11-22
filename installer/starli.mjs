@@ -46,7 +46,7 @@ function nativeCommand(command, params) {
 }
 function productFlow() {
   if (action === 'help') {
-    console.log('StarliDigital — native mode by default\nNew bots/teams/Boss product: install, setup, start, doctor, build, health.\nnode installer/starli.mjs install\nnode installer/starli.mjs setup\nnode installer/starli.mjs start\nInstall builds product/ and installs its native backend dependencies. Setup prompts privately for a local owner. Start verifies frontend, backend capabilities and API proxy before reporting core readiness. Model/provider/worker readiness is reported separately. Ctrl+C stops foreground services.\n--native is optional. Docker requires --docker and is not yet adapted to the corrected product.');
+    console.log('StarliDigital — native mode by default\nNew bots/teams/Boss product: install, setup, start, doctor, build, health.\nnode installer/starli.mjs install\nnode installer/starli.mjs start\nInstall builds product/ and installs its native backend dependencies. Start serves first-run administrator/company setup in your browser without creating default credentials. After initialization, / is the workspace/sign-in. CLI setup is an optional privileged alternative. Start verifies the matching first-run/ready backend and frontend proxy. Model/provider/worker readiness is reported separately. Ctrl+C stops foreground services.\n--native is optional. Docker requires --docker and is not yet adapted to the corrected product.');
     return;
   }
   if (!['install', 'setup', 'start', 'doctor', 'build', 'health'].includes(action)) fail(`${action} is not a new product native command. Use help. Ctrl+C stops foreground services.`);

@@ -4,7 +4,7 @@ No model response is mocked or requested. Only sanitized result JSON may be
 uploaded. Private synthetic credentials, cookies, databases and logs stay in work/.
 """
 import argparse
-import builtins
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import http.cookiejar
 import importlib.util
@@ -19,6 +19,7 @@ import signal
 import socket
 import subprocess
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -90,8 +91,9 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 class ApiError(RuntimeError):
-    def __init__(self, status):
+    def __init__(self, status, diagnostic_code=None):
         self.status = status
+        self.diagnostic_code = diagnostic_code
         super().__init__('HTTP_CHECK_FAILED')
 
 
@@ -104,7 +106,7 @@ class Client:
                                                   urllib.request.HTTPCookieProcessor(self.jar), NoRedirect())
         self.token = None
 
-    def request(self, path, payload=None, method=None, key=None, guest=False, expect=(200,)):
+    def request(self, path, payload=None, method=None, key=None, guest=False, expect=(200,), status_only=False, include_status=False, setup=False):
         if not path.startswith('/') or path.startswith('//'):
             raise ValueError('Fixed API-relative path required')
         headers = {'Content-Type': 'application/json', 'Origin': self.origin}
@@ -114,22 +116,41 @@ class Client:
             headers['Idempotency-Key'] = key
         if guest:
             headers['x-starli-guest-intent'] = '1'
+        if setup:
+            headers['x-starli-setup'] = '1'
         request = urllib.request.Request(self.base + path, method=method or ('POST' if payload is not None else 'GET'),
                                          headers=headers, data=None if payload is None else json.dumps(payload).encode())
         try:
             with self.opener.open(request, timeout=45) as response:
                 if response.status not in expect:
                     raise ApiError(response.status)
+                if status_only:
+                    return response.status
                 raw = response.read(4 * 1024 * 1024 + 1)
                 if len(raw) > 4 * 1024 * 1024:
                     raise RuntimeError('RESPONSE_LIMIT')
                 if response.headers.get_content_type() == 'text/html':
                     return raw.decode('utf-8')
-                return json.loads(raw)
+                value = json.loads(raw)
+                return (response.status, value) if include_status else value
         except urllib.error.HTTPError as error:
-            if error.code in expect:
-                return {'expected_status': error.code}
-            raise ApiError(error.code) from None
+            try:
+                if error.code in expect:
+                    if include_status:
+                        return error.code, {}
+                    return error.code if status_only else {'expected_status': error.code}
+                diagnostic_code = None
+                try:
+                    body = json.loads(error.read(16385))
+                    code = body.get('error', {}).get('code') if isinstance(body.get('error'), dict) else body.get('detail')
+                    if code in {'MESSAGING_UNAVAILABLE', 'MEMBERSHIP_INCARNATION_REQUIRED', 'ATOMIC_AUTHORITY_REQUIRED',
+                                'AUTHORITY_TABLE_COLLISION', 'COMPANY_INTEGRATION_GATES_REQUIRED', 'CANONICAL_CHANNEL_MISSING'}:
+                        diagnostic_code = code
+                except (ValueError, TypeError, AttributeError):
+                    pass
+                raise ApiError(error.code, diagnostic_code) from None
+            finally:
+                error.close()
 
 
 def target_lock():
@@ -149,20 +170,35 @@ def target_lock():
     return target, lock
 
 
-def bootstrap(args):
-    case = checked_case(args.bootstrap)
-    private_fs().require_private_file(case / 'credentials.json')
-    credentials = json.loads((case / 'credentials.json').read_text(encoding='utf-8'))
-    if credentials.get('schema') != 'starli.new-product-smoke-credentials.v1':
-        raise ValueError('Not a synthetic product smoke fixture')
-    server = load_file('_new_product_server_bootstrap', ENTRY)
-    import getpass
-    values = iter([credentials['email'], 'New Product Boot QA Owner'])
-    builtins.input = lambda _prompt: next(values)
-    getpass.getpass = lambda _prompt: credentials['password']
-    sys.argv = [str(ENTRY), 'init', '--state', str(case / 'instance'), '--port', str(args.backend_port),
-                '--origin', f'http://127.0.0.1:{args.frontend_port if args.installer else args.backend_port}']
-    server.main()
+def setup_status(client, required):
+    status = client.request('/api/v1/setup/status')
+    if (status.get('setupRequired') is not required or status.get('singleCompany') is not True
+            or status.get('registrationAllowed') is not False or status.get('setupLocked') is not (not required)
+            or status.get('companyConfigured') is not (not required) or status.get('requiresMigration') is not False):
+        raise RuntimeError('SINGLE_COMPANY_SETUP_STATUS_MISMATCH')
+
+
+def browser_setup_race(base, credentials):
+    """Exercise the public HTTP first-admin flow, never a patched initializer."""
+    payload = {key: credentials[key] for key in ('email', 'password')}
+    payload.update(name='New Product Boot QA Owner', companyName='Fresh singleton smoke company')
+    barrier = threading.Barrier(2)
+    def attempt():
+        client = Client(base)
+        barrier.wait(timeout=10)
+        return client.request('/api/v1/setup', payload, expect=(201, 409), include_status=True, setup=True)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(attempt) for _ in range(2)]
+        responses = [future.result(timeout=60) for future in futures]
+        statuses = sorted(status for status, _ in responses)
+    if statuses != [201, 409]:
+        raise RuntimeError('FIRST_ADMIN_RACE_MUST_HAVE_EXACTLY_ONE_WINNER')
+    created = next(body for status, body in responses if status == 201)
+    if (created.get('setupComplete') is not True or not created.get('companyId')
+            or any(key in created for key in ('password', 'token', 'access_token'))):
+        raise RuntimeError('FIRST_ADMIN_RESPONSE_CONTRACT_MISMATCH')
+    Client(base).request('/api/v1/setup', payload, expect=(409,), setup=True)
+    return created['companyId']
 
 
 def stop(process):
@@ -220,7 +256,7 @@ def wait_ready(process, client, backend, deadline):
             raise RuntimeError('PRODUCT_PROCESS_EXITED')
         try:
             health = backend.request('/health')
-            if (health.get('status') != 'ready' or not str(health.get('backend', '')).startswith('NEW_COMPANY_')
+            if (health.get('status') not in ('ready', 'setup_required') or not str(health.get('backend', '')).startswith('NEW_COMPANY_')
                     or health.get('nativeAuth') is not True or health.get('nativeMessaging') is not True):
                 raise RuntimeError('WRONG_PRODUCT_CAPABILITY_HEALTH')
             if client.base != backend.base:
@@ -262,7 +298,8 @@ def diagnostic_metadata(case):
 
 
 def source_metadata():
-    files = ('product/src/routes/app/+page.svelte', 'product-backend/local_server.py',
+    files = ('product/src/routes/+page.svelte', 'product/src/routes/app/+page.svelte',
+             'product-backend/local_server.py', 'product-backend/local_installation.py',
              'product-backend/LOCAL-NATIVE-PINS.json', 'installer/product.mjs')
     result = {'sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in files}}
     try:
@@ -304,7 +341,8 @@ def run(args):
     client, backend = Client(front_origin), Client(backend_origin)
     process, stream, own_config = None, None, None
     checks = []
-    report = {'schema': 'starli.new-product-boot-smoke.v1', 'attempt': ATTEMPT, 'host': target, 'status': 'FAIL',
+    report = {'schema': 'starli.new-product-boot-smoke.v2', 'attempt': ATTEMPT, 'host': target, 'status': 'FAIL',
+              'deploymentProfile': 'single-company-browser-first',
               'productSource': 'product/', 'backendEntrypoint': 'product-backend/local_server.py',
               'launchMode': 'public-installer-start' if args.installer else 'backend-entrypoint-only',
               'publicInstall': 'PASS' if os.environ.get('STARLI_NEW_PRODUCT_PUBLIC_INSTALL_PASSED') == '1' else 'NOT_TESTED',
@@ -312,25 +350,17 @@ def run(args):
               'checks': checks, 'requestedModelCalls': 0, 'fixtureBotTurns': 0,
               'modelIntegration': 'NOT_TESTED', 'externalActions': 'NOT_REQUESTED',
               'notTested': ['live model/provider execution', 'autonomous agent delegation', 'generated-app preview lifecycle',
-                            'VM execution', 'full browser interaction/parity', 'interactive terminal setup prompts']}
+                            'VM execution', 'full browser interaction/parity']}
     record = lambda name, **evidence: checks.append({'name': name, 'status': 'PASS', 'evidence': evidence})
     try:
-        PHASE = 'actual-local-owner-init'
-        command = [sys.executable, str(Path(__file__).resolve()), '--bootstrap', str(case), '--backend-port', str(args.backend_port),
-                   '--frontend-port', str(args.frontend_port), '--output', str(case / 'init-result.json')] + (['--installer'] if args.installer else [])
-        with (case / 'init.log').open('w', encoding='utf-8') as log:
-            result = subprocess.run(command, cwd=ROOT, env=env, stdout=log, stderr=log, timeout=240,
-                                    creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
-        if result.returncode:
-            raise RuntimeError('ACTUAL_PRODUCT_OWNER_INIT_FAILED')
-        record('actual-product-init-function', credentialsInArguments=False)
         if args.installer:
-            PHASE = 'fresh-installer-config'
-            own_config = json.dumps({'schema': 'starli.product-install.v1', 'state': str(case / 'instance'),
-                                     'frontendPort': args.frontend_port, 'backendPort': args.backend_port}, indent=2).encode()
-            CONFIG.parent.mkdir(parents=True, exist_ok=True)
-            with os.fdopen(os.open(CONFIG, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600), 'wb') as output:
-                output.write(own_config)
+            # Root start itself must support a fresh unconfigured installation.
+            # Only nonsecret path/ports are injected; no CLI owner initializer.
+            env.update(STARLI_PRODUCT_STATE=str(case / 'instance'),
+                       STARLI_PRODUCT_FRONTEND_PORT=str(args.frontend_port),
+                       STARLI_PRODUCT_BACKEND_PORT=str(args.backend_port))
+            if args.instance:
+                env['STARLI_PRODUCT_INSTANCE'] = args.instance
 
         def launch():
             nonlocal stream
@@ -345,15 +375,51 @@ def run(args):
         PHASE = 'joined-socket-boot'
         process = launch()
         health = wait_ready(process, client, backend, time.monotonic() + args.timeout)
+        if args.installer:
+            candidate = CONFIG.read_bytes()
+            config = json.loads(candidate)
+            if (Path(config.get('state', '')).resolve() != (case / 'instance').resolve()
+                    or config.get('frontendPort') != args.frontend_port or config.get('backendPort') != args.backend_port):
+                raise RuntimeError('ROOT_START_CONFIG_DOES_NOT_MATCH_FRESH_TEST_INSTANCE')
+            own_config = candidate
         record('new-product-socket-health', backend=health['backend'], frontendProxy=args.installer)
+        PHASE = 'browser-first-owner-setup'
+        setup_status(client, True)
+        # Wrong frontend Origin must not acquire this fresh installation.
+        wrong_origin = 'http://127.0.0.1:1'
+        Client(front_origin, origin=wrong_origin).request('/api/v1/setup', {
+            'email': credentials['email'], 'password': credentials['password'],
+            'name': 'Origin denied owner', 'companyName': 'Origin denied company'}, expect=(403,), setup=True)
+        setup_status(client, True)
+        bootstrap_company = browser_setup_race(front_origin, credentials)
+        setup_status(client, False)
+        record('public-http-first-admin-atomic-race-and-replay-denial', concurrentRequests=2,
+               createdAdmins=1, replayStatus=409, frontendProxy=args.installer, cliOwnerInitialization=False)
         PHASE = 'native-owner-login'
         auth = client.request('/api/v1/auths/signin', {key: credentials[key] for key in ('email', 'password')})
         if auth.get('role') != 'admin' or not auth.get('token'):
             raise RuntimeError('NATIVE_OWNER_LOGIN_FAILED')
         client.token = auth['token']
         record('actual-native-owner-login')
+        PHASE = 'autoprovisioned-singleton-company-read'
+        companies = client.request('/api/v1/companies')
+        if not isinstance(companies, list) or len(companies) != 1:
+            raise RuntimeError('EXACTLY_ONE_AUTOPROVISIONED_COMPANY_REQUIRED')
+        company = companies[0]['id'] if isinstance(companies[0], dict) else companies[0][0]
+        if company != bootstrap_company:
+            raise RuntimeError('SETUP_AND_WORKSPACE_COMPANY_ID_MISMATCH')
+        PHASE = 'second-company-creation-denial'
+        client.request('/api/v1/companies', {'name': 'Forbidden second company'}, expect=(409,))
+        PHASE = 'signup-and-guest-denial'
+        anonymous = Client(front_origin)
+        anonymous.request('/api/v1/auths/signup', {'email': 'second@example.invalid', 'name': 'Forbidden registration',
+                          'password': credentials['password']}, expect=(403, 404))
+        anonymous.request('/api/v1/starli/public/grokbot1/intents', {'text': 'Forbidden guest'}, guest=True, expect=(403, 404))
+        anonymous.request('/api/v1/starli/public/grokbot1/provisional', {'intentId': 'forbidden-smoke-intent'}, guest=True, expect=(403, 404))
+        if client.request('/api/v1/companies') != companies:
+            raise RuntimeError('DENIED_REQUESTS_CHANGED_SINGLETON_COMPANY')
+        record('singleton-company-autoprovisioned-registration-and-guest-disabled', companies=1)
         PHASE = 'company-and-bot-install'
-        company = client.request('/api/v1/companies', {'name': 'Fresh product smoke company'})['company_id']
         templates = client.request('/api/v1/bot-directory/templates')['templates']
         if not templates:
             raise RuntimeError('NATIVE_BOT_TEMPLATES_MISSING')
@@ -387,6 +453,11 @@ def run(args):
             raise RuntimeError('UNAUTHENTICATED_COMPANIES_ALLOWED')
         record('unauthenticated-company-denial')
         PHASE = 'restart-persistence'
+        # Bot admission legitimately increments membership revisions. Snapshot
+        # after those mutations so restart compares the same state boundary.
+        companies = client.request('/api/v1/companies')
+        if (len(companies) != 1 or (companies[0]['id'] if isinstance(companies[0], dict) else companies[0][0]) != company):
+            raise RuntimeError('SINGLETON_COMPANY_CHANGED_DURING_WORKSPACE_OPERATIONS')
         stop(process)
         stream.close()
         # Public root start is a nested Node launcher. On POSIX the outer
@@ -396,6 +467,10 @@ def run(args):
         wait_ready(process, client, backend, time.monotonic() + args.timeout)
         auth = client.request('/api/v1/auths/signin', {key: credentials[key] for key in ('email', 'password')})
         client.token = auth['token']
+        setup_status(Client(front_origin), False)
+        restarted_companies = client.request('/api/v1/companies')
+        if restarted_companies != companies:
+            raise RuntimeError('SINGLETON_COMPANY_CHANGED_AFTER_RESTART')
         persisted = client.request(prefix + f'/work-sessions/{room}')
         messages = client.request(prefix + f'/rooms/{room}/messages')['messages']
         if (persisted['botIds'] != bots or persisted['administratorId'] != auth['id'] or persisted['turn'] != 0
@@ -408,6 +483,8 @@ def run(args):
         report['failure'] = {'stage': PHASE, 'type': type(error).__name__}
         if isinstance(error, ApiError):
             report['failure']['httpStatus'] = error.status
+            if error.diagnostic_code:
+                report['failure']['code'] = error.diagnostic_code
         elif re.fullmatch('[A-Z][A-Z0-9_]{1,100}', str(error)):
             report['failure']['code'] = str(error)
     finally:
@@ -435,24 +512,24 @@ def run(args):
 
 
 def main():
-    global OUTPUT, PHASE
+    global OUTPUT, PHASE, CONFIG
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', action='store_true')
     parser.add_argument('--install', action='store_true', help='Exercise public root install before the smoke')
     parser.add_argument('--installer', action='store_true', help='Use root start/frontend proxy; requires no existing installer product config')
-    parser.add_argument('--bootstrap', type=Path, help=argparse.SUPPRESS)
+    parser.add_argument('--instance', default='', help='Explicit fresh named installer instance; preserves the default preview configuration')
     parser.add_argument('--backend-port', type=int, default=18781)
     parser.add_argument('--frontend-port', type=int, default=18780)
     parser.add_argument('--timeout', type=int, default=240)
     parser.add_argument('--output', type=Path, default=OUTPUT)
     args = parser.parse_args()
     OUTPUT = args.output.absolute()
+    if args.instance:
+        if not args.installer or not re.fullmatch('[a-z0-9_-]{1,40}', args.instance):
+            raise ValueError('A bounded fresh installer instance name is required')
+        CONFIG = ROOT / 'installer/.runtime' / f'product-{args.instance}.json'
     if not (1024 <= args.backend_port <= 65535 and 1024 <= args.frontend_port <= 65535 and args.backend_port != args.frontend_port and 30 <= args.timeout <= 600):
         raise ValueError('Bounded distinct loopback ports and timeout required')
-    if args.bootstrap:
-        PHASE = 'actual-local-owner-init'
-        bootstrap(args)
-        return 0
     if args.install:
         if not args.installer or CONFIG.exists():
             raise RuntimeError('FRESH_INSTALLER_CHECKOUT_REQUIRED')
@@ -465,7 +542,8 @@ def main():
             raise RuntimeError('INSTALLER_DID_NOT_CREATE_BACKEND_PYTHON')
         PHASE = 'installed-runtime-reexecution'
         result = subprocess.call([str(py), str(Path(__file__).resolve()), '--run', '--installer', '--backend-port', str(args.backend_port),
-                                  '--frontend-port', str(args.frontend_port), '--timeout', str(args.timeout), '--output', str(OUTPUT)], cwd=ROOT,
+                                  '--frontend-port', str(args.frontend_port), '--timeout', str(args.timeout), '--output', str(OUTPUT),
+                                  *(['--instance', args.instance] if args.instance else [])], cwd=ROOT,
                                   env={**os.environ, 'STARLI_NEW_PRODUCT_SMOKE_ATTEMPT': ATTEMPT, 'STARLI_NEW_PRODUCT_PUBLIC_INSTALL_PASSED': '1'})
         try:
             child = json.loads(OUTPUT.read_text(encoding='utf-8'))
@@ -483,7 +561,8 @@ if __name__ == '__main__':
     try:
         raise SystemExit(main())
     except Exception as error:
-        report = {'schema': 'starli.new-product-boot-smoke.v1', 'attempt': ATTEMPT, 'status': 'FAIL', 'checks': [],
+        report = {'schema': 'starli.new-product-boot-smoke.v2', 'deploymentProfile': 'single-company-browser-first',
+                  'attempt': ATTEMPT, 'status': 'FAIL', 'checks': [],
                   'failure': {'stage': PHASE, 'type': type(error).__name__}, 'modelIntegration': 'NOT_TESTED'}
         if re.fullmatch('[A-Z][A-Z0-9_]{1,100}', str(error)):
             report['failure']['code'] = str(error)

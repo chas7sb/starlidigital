@@ -1,0 +1,55 @@
+{
+  "schema": "starli.installer.first-run.v1",
+  "companyPolicy": "exactly-one-company-per-instance",
+  "defaultFlow": [
+    "install",
+    "start",
+    "browser-first-admin-and-company"
+  ],
+  "cliSetupRequiredBeforeStart": false,
+  "cliSetup": "optional-privileged-console-canonical-backend-transaction",
+  "implicitDefaultCredentials": false,
+  "instanceMetadata": "create-exclusively; preserve-existing-bytes; no-passwords-or-keys",
+  "privateStatePolicy": "backend creates or validates; preserve configured keys/data; never reset",
+  "status": {
+    "method": "GET",
+    "path": "/api/v1/setup/status",
+    "body": {
+      "setupRequired": "boolean",
+      "singleCompany": true,
+      "registrationAllowed": false
+    },
+    "readiness": "must-match-through-frontend-proxy; no-inference-from-token-or-401"
+  },
+  "firstBrowserSetup": {
+    "method": "POST",
+    "path": "/api/v1/setup",
+    "bodyFields": [
+      "email",
+      "name",
+      "password",
+      "companyName"
+    ],
+    "firstSuccess": {
+      "status": 201,
+      "body": {
+        "setupComplete": true,
+        "companyId": "canonical company id"
+      }
+    },
+    "replayOrRaceLoserStatus": 409,
+    "returnsPasswordOrToken": false,
+    "requiredHeaders": {
+      "Origin": "configured frontend origin",
+      "X-Starli-Setup": "1"
+    }
+  },
+  "afterSetup": {
+    "root": "workspace-or-signin",
+    "publicRegistration": false,
+    "guestProvisionalCompanyCreation": false
+  },
+  "acceptance": "requires actual backend/frontend joined first-run+races+restart; this contract file alone is not a passed test",
+  "cliSetupEntrypoint": "installer/first-run-cli.py",
+  "cliSetupUsesRetiredLocalServerInit": false
+}

@@ -1,0 +1,245 @@
+{
+  "schema": "starli.new-product-install-evidence.v1",
+  "testedCommit": "8283115df7c116e2d620048d508df5795da511b0",
+  "status": "PASS",
+  "workflow": "https://github.com/chas7sb/starlidigital/actions/runs/45015272789",
+  "hosts": [
+    {
+      "schema": "starli.new-product-boot-smoke.v1",
+      "attempt": "fc8d3530478e1b6e",
+      "host": "macos-arm64",
+      "status": "PASS",
+      "productSource": "product/",
+      "backendEntrypoint": "product-backend/local_server.py",
+      "launchMode": "public-installer-start",
+      "publicInstall": "PASS",
+      "sourceEvidence": {
+        "sha256": {
+          "product/src/routes/app/+page.svelte": "941ff825b2fd48411ffdba7abef0ed7b564b4dc57ec949b5d21ae80b2e1c8ce4",
+          "product-backend/local_server.py": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+          "product-backend/LOCAL-NATIVE-PINS.json": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
+          "installer/product.mjs": "d8c5a400177bebfe86d7108c8b01fa13690fad86383056e1557603de8ecc8f80"
+        },
+        "commit": "8283115df7c116e2d620048d508df5795da511b0",
+        "trackedWorkingTreeChanges": false
+      },
+      "checks": [
+        {
+          "name": "actual-product-init-function",
+          "status": "PASS",
+          "evidence": {
+            "credentialsInArguments": false
+          }
+        },
+        {
+          "name": "new-product-socket-health",
+          "status": "PASS",
+          "evidence": {
+            "backend": "NEW_COMPANY_NATIVE_CANDIDATE",
+            "frontendProxy": true
+          }
+        },
+        {
+          "name": "actual-native-owner-login",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "actual-company-two-bots-explicit-admission",
+          "status": "PASS",
+          "evidence": {
+            "bots": 2
+          }
+        },
+        {
+          "name": "bounded-team-and-canonical-human-message",
+          "status": "PASS",
+          "evidence": {
+            "modelTurns": 0
+          }
+        },
+        {
+          "name": "unauthenticated-company-denial",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "real-process-restart-preserves-bots-team-and-message",
+          "status": "PASS",
+          "evidence": {}
+        }
+      ],
+      "requestedModelCalls": 0,
+      "fixtureBotTurns": 0,
+      "modelIntegration": "NOT_TESTED",
+      "externalActions": "NOT_REQUESTED",
+      "notTested": [
+        "live model/provider execution",
+        "autonomous agent delegation",
+        "generated-app preview lifecycle",
+        "VM execution",
+        "full browser interaction/parity",
+        "interactive terminal setup prompts"
+      ]
+    },
+    {
+      "schema": "starli.new-product-boot-smoke.v1",
+      "attempt": "e2ee72da1b421070",
+      "host": "linux-x64",
+      "status": "PASS",
+      "productSource": "product/",
+      "backendEntrypoint": "product-backend/local_server.py",
+      "launchMode": "public-installer-start",
+      "publicInstall": "PASS",
+      "sourceEvidence": {
+        "sha256": {
+          "product/src/routes/app/+page.svelte": "941ff825b2fd48411ffdba7abef0ed7b564b4dc57ec949b5d21ae80b2e1c8ce4",
+          "product-backend/local_server.py": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+          "product-backend/LOCAL-NATIVE-PINS.json": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
+          "installer/product.mjs": "d8c5a400177bebfe86d7108c8b01fa13690fad86383056e1557603de8ecc8f80"
+        },
+        "commit": "8283115df7c116e2d620048d508df5795da511b0",
+        "trackedWorkingTreeChanges": false
+      },
+      "checks": [
+        {
+          "name": "actual-product-init-function",
+          "status": "PASS",
+          "evidence": {
+            "credentialsInArguments": false
+          }
+        },
+        {
+          "name": "new-product-socket-health",
+          "status": "PASS",
+          "evidence": {
+            "backend": "NEW_COMPANY_NATIVE_CANDIDATE",
+            "frontendProxy": true
+          }
+        },
+        {
+          "name": "actual-native-owner-login",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "actual-company-two-bots-explicit-admission",
+          "status": "PASS",
+          "evidence": {
+            "bots": 2
+          }
+        },
+        {
+          "name": "bounded-team-and-canonical-human-message",
+          "status": "PASS",
+          "evidence": {
+            "modelTurns": 0
+          }
+        },
+        {
+          "name": "unauthenticated-company-denial",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "real-process-restart-preserves-bots-team-and-message",
+          "status": "PASS",
+          "evidence": {}
+        }
+      ],
+      "requestedModelCalls": 0,
+      "fixtureBotTurns": 0,
+      "modelIntegration": "NOT_TESTED",
+      "externalActions": "NOT_REQUESTED",
+      "notTested": [
+        "live model/provider execution",
+        "autonomous agent delegation",
+        "generated-app preview lifecycle",
+        "VM execution",
+        "full browser interaction/parity",
+        "interactive terminal setup prompts"
+      ]
+    },
+    {
+      "schema": "starli.new-product-boot-smoke.v1",
+      "attempt": "a25e4d993b98a627",
+      "host": "windows-x64",
+      "status": "PASS",
+      "productSource": "product/",
+      "backendEntrypoint": "product-backend/local_server.py",
+      "launchMode": "public-installer-start",
+      "publicInstall": "PASS",
+      "sourceEvidence": {
+        "sha256": {
+          "product/src/routes/app/+page.svelte": "941ff825b2fd48411ffdba7abef0ed7b564b4dc57ec949b5d21ae80b2e1c8ce4",
+          "product-backend/local_server.py": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+          "product-backend/LOCAL-NATIVE-PINS.json": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
+          "installer/product.mjs": "d8c5a400177bebfe86d7108c8b01fa13690fad86383056e1557603de8ecc8f80"
+        },
+        "commit": "8283115df7c116e2d620048d508df5795da511b0",
+        "trackedWorkingTreeChanges": false
+      },
+      "checks": [
+        {
+          "name": "actual-product-init-function",
+          "status": "PASS",
+          "evidence": {
+            "credentialsInArguments": false
+          }
+        },
+        {
+          "name": "new-product-socket-health",
+          "status": "PASS",
+          "evidence": {
+            "backend": "NEW_COMPANY_NATIVE_CANDIDATE",
+            "frontendProxy": true
+          }
+        },
+        {
+          "name": "actual-native-owner-login",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "actual-company-two-bots-explicit-admission",
+          "status": "PASS",
+          "evidence": {
+            "bots": 2
+          }
+        },
+        {
+          "name": "bounded-team-and-canonical-human-message",
+          "status": "PASS",
+          "evidence": {
+            "modelTurns": 0
+          }
+        },
+        {
+          "name": "unauthenticated-company-denial",
+          "status": "PASS",
+          "evidence": {}
+        },
+        {
+          "name": "real-process-restart-preserves-bots-team-and-message",
+          "status": "PASS",
+          "evidence": {}
+        }
+      ],
+      "requestedModelCalls": 0,
+      "fixtureBotTurns": 0,
+      "modelIntegration": "NOT_TESTED",
+      "externalActions": "NOT_REQUESTED",
+      "notTested": [
+        "live model/provider execution",
+        "autonomous agent delegation",
+        "generated-app preview lifecycle",
+        "VM execution",
+        "full browser interaction/parity",
+        "interactive terminal setup prompts"
+      ]
+    }
+  ],
+  "modelIntegrationInInstallRuns": "NOT_TESTED",
+  "separateLocalLiveModelProof": "qa/results/new-product-live-proof.json",
+  "fullFeatureParity": "NOT_VERIFIED"
+}

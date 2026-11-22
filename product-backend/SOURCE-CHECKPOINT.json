@@ -1,7 +1,7 @@
 {
   "status": "SOURCE_CHECKPOINT_READY",
   "date": "2026-11-22",
-  "contractSha256": "32c62ac706f97dd9ae29a19115d04d531629d3a922ae1433b12389a76a7b1573",
+  "contractSha256": "4924e8f4cec273c499a9f99f06a7ebb42ddf20955165cf679d26a51f8724c537",
   "nativePins": {
     "status": "PASS",
     "pinnedNativeFiles": 15,
@@ -13,20 +13,28 @@
     "configurationSecurity": "PASS",
     "nativeCollaborationAndDirectChat": "PASS_WITH_EXPLICIT_MODEL_FIXTURE",
     "transportNoNetworkTests": 3,
-    "actualProviderInferenceVerified": false,
-    "externalCallsByAgentX3": 0
+    "actualProviderInferenceVerified": true,
+    "externalCallsByAgentX3": 0,
+    "singleCompanySetup": "PASS: race, rollback, permanent lock, alternate writers, first-owner native team/human direction, malformed Host"
   },
-  "sourceHashVerification": "ALL_MATCH",
-  "liveRuntime": "18381; same AgentX10 native state; retained during user key handoff",
+  "sourceHashVerification": "ALL_MATCH_CANONICAL_LF",
+  "liveRuntime": "18381; preserved local test state and encrypted connection",
   "setupUrl": "http://127.0.0.1:5186/api/local/provider",
   "restartDuringKeyHandoff": false,
-  "pendingAfterSave": [
-    "coordinated same-state reload for latest receipts/timeouts/engine refinements",
-    "actual selected-model chat and Boss/team conversation QA"
+  "verifiedAfterSave": [
+    "same-state reload preserved the encrypted connection",
+    "actual selected-model chat and dependent Boss/team handoff passed",
+    "browser reload preserved the completed discussion"
   ],
   "fullJoinedGeneratedAppPreviewVerified": false,
-  "sourceBaseCommit": "b934a1b556823518d5ee2950f932950d8ac0bb9c",
   "coreTests": 19,
   "nativeFixture": "PASS: Boss plus2selected teammates, five persisted agent messages, complete participantCoverage, distinct normal bot-turn attribution",
-  "activeBackend": "PID46836: final core snapshot already loaded, same saved-key QA/native state"
+  "actualProviderVerification": {
+    "scope": "Historical UI-triggered Windows proof at 8283115; predates singleton working changes",
+    "modelCalls": 5,
+    "reportedCost": 0,
+    "evidence": "qa/results/new-product-live-proof.json",
+    "testedCodeCommit": "8283115df7c116e2d620048d508df5795da511b0"
+  },
+  "sourceBaseCommit": "8283115df7c116e2d620048d508df5795da511b0"
 }

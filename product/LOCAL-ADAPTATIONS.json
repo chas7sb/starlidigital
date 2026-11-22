@@ -1,69 +1,134 @@
 {
+  "schema": "starli.product.local-adaptations.v2",
+  "status": "CURRENT_WORKING_ADAPTATION",
   "sourceLock": "94e9416c4d8aff966dccd52794073160528bde3bea9a4656f8d24006c23c9245",
+  "originalProvenance": {
+    "path": "UPSTREAM-SOURCE-LOCK.json",
+    "sha256": "94e9416c4d8aff966dccd52794073160528bde3bea9a4656f8d24006c23c9245",
+    "role": "Original pinned upstream source; not a hash of the adapted product tree."
+  },
+  "hashNormalization": "SHA256 over current UTF-8 source bytes after CRLF-to-LF normalization, matching canonical LF Git text bytes. No current code commit is asserted.",
   "changes": [
     {
-      "path": "src/routes/+layout.svelte",
-      "sha256": "e1bfc5b2d22dff640f949f2b89992512403618a503587a19214c49f096ca22af"
-    },
-    {
-      "path": "src/lib/components/marketing/Homepage.svelte",
-      "sha256": "84e99a3a8d2b49b9798a49d6f524f2134ed0ffa185a33faa473cd28ec3355bc9"
-    },
-    {
-      "path": "vite.config.ts",
-      "sha256": "6f59e2825f01a83cd5493edc1b923e46fdbdffc6fc1be7660b82bbfba95a1f95"
-    },
-    {
-      "path": "src/routes/app/+page.svelte",
-      "sha256": "941ff825b2fd48411ffdba7abef0ed7b564b4dc57ec949b5d21ae80b2e1c8ce4"
-    },
-    {
-      "path": "src/lib/components/enterprise/company/LocalProviderConnection.svelte",
-      "sha256": "f65947ef492ea088fe130f5a69c61c986c3ac6364b20a1d68d4c104b47b4b568"
-    },
-    {
-      "path": "src/lib/components/enterprise/messaging/TeamCollaboration.svelte",
-      "sha256": "e79848343fcce97aaa147b218e76dea529d0045ee12fab1c905d1530c0240bae"
-    },
-    {
-      "path": "src/lib/components/enterprise/messaging/collaboration-client.ts",
-      "sha256": "4d40afc48716059aa13a5b3a2b523e638966cdc27e32b633dc179e7150ad9005"
-    },
-    {
-      "path": "tests/local-collaboration-client.test.mjs",
-      "sha256": "f24674990d85327c5822dbf6bc04eb03c4c53b71fa74689cb193fdf50d1b16ec"
-    },
-    {
       "path": ".env.example",
-      "sha256": "70c87c0dc000728bf4cc92ad2df7bd588ae60f839dcb0f2fa847b8b9bd6ae5f5"
+      "sha256": "70c87c0dc000728bf4cc92ad2df7bd588ae60f839dcb0f2fa847b8b9bd6ae5f5",
+      "bytes": 132
     },
     {
       "path": "src/lib/components/enterprise/CompanyApps.svelte",
-      "sha256": "12316d4cdf185300368bb27db2088c60cd411f18994dc45df52f23d61996ff93"
+      "sha256": "12316d4cdf185300368bb27db2088c60cd411f18994dc45df52f23d61996ff93",
+      "bytes": 22548
+    },
+    {
+      "path": "src/lib/components/enterprise/InitialAdministrator.svelte",
+      "sha256": "93226bd6cae95efe8d90d204df631d08f788408450727d13766df52c7965f724",
+      "bytes": 3649
+    },
+    {
+      "path": "src/lib/components/enterprise/SelfHostGate.svelte",
+      "sha256": "80cf04f99d1a9b94c671f8d5a605dd4d373117b5e26b7d0d18e20db3435ea5c0",
+      "bytes": 2596
     },
     {
       "path": "src/lib/components/enterprise/account/CustomerAPI.svelte",
-      "sha256": "3fe4d6688d30b96a7b00727a7b8cd04a79376b5de547243d6cef87b57bad0d87"
+      "sha256": "3fe4d6688d30b96a7b00727a7b8cd04a79376b5de547243d6cef87b57bad0d87",
+      "bytes": 18754
+    },
+    {
+      "path": "src/lib/components/enterprise/company/LocalProviderConnection.svelte",
+      "sha256": "f65947ef492ea088fe130f5a69c61c986c3ac6364b20a1d68d4c104b47b4b568",
+      "bytes": 6377
+    },
+    {
+      "path": "src/lib/components/enterprise/messaging/TeamCollaboration.svelte",
+      "sha256": "e79848343fcce97aaa147b218e76dea529d0045ee12fab1c905d1530c0240bae",
+      "bytes": 11546
+    },
+    {
+      "path": "src/lib/components/enterprise/messaging/collaboration-client.ts",
+      "sha256": "4d40afc48716059aa13a5b3a2b523e638966cdc27e32b633dc179e7150ad9005",
+      "bytes": 6083
     },
     {
       "path": "src/lib/components/enterprise/panes/published-preview.ts",
-      "sha256": "c8510b1d1f716d775ffa279d01b31ee437814b33971b23fb3425c63404f9e0dd"
+      "sha256": "c8510b1d1f716d775ffa279d01b31ee437814b33971b23fb3425c63404f9e0dd",
+      "bytes": 1475
     },
     {
       "path": "src/lib/components/enterprise/social/company-social-client.ts",
-      "sha256": "97f9db01b8a72478d01dcfc13434e81e2534d093ec5cfc49d24a2eb10ded30c5"
+      "sha256": "97f9db01b8a72478d01dcfc13434e81e2534d093ec5cfc49d24a2eb10ded30c5",
+      "bytes": 9515
+    },
+    {
+      "path": "src/lib/components/marketing/Homepage.svelte",
+      "sha256": "84e99a3a8d2b49b9798a49d6f524f2134ed0ffa185a33faa473cd28ec3355bc9",
+      "bytes": 26110
     },
     {
       "path": "src/lib/utils/installation-origin.ts",
-      "sha256": "f5840445381bee27ad770fbf4531aee3144a1fb27f8818400771c04ac8fa6d87"
+      "sha256": "f5840445381bee27ad770fbf4531aee3144a1fb27f8818400771c04ac8fa6d87",
+      "bytes": 3028
+    },
+    {
+      "path": "src/lib/utils/selfhost-setup.ts",
+      "sha256": "bb38e83174ba69ed2c21c738217318eb3ea8c2f2649d59307ac4391a87f3e931",
+      "bytes": 4483
+    },
+    {
+      "path": "src/routes/+layout.svelte",
+      "sha256": "baae7363f1cfc40c42824df5ea58afcea331754d9815feff093512e4cb29220f",
+      "bytes": 412
+    },
+    {
+      "path": "src/routes/+page.svelte",
+      "sha256": "f290663945b23642606788befc81f141e370f53ec566cf8bf3a284473a95ad02",
+      "bytes": 88
+    },
+    {
+      "path": "src/routes/+page.ts",
+      "sha256": "58ca28942740b2ff08d6416473a2e8038f8a660017ce0b8b0d9ab3bb44453659",
+      "bytes": 58
+    },
+    {
+      "path": "src/routes/app/+page.svelte",
+      "sha256": "e31cefcf6957183cbb1ccada1c345529096f817115a3eacdd175e8e42bf241e9",
+      "bytes": 122010
+    },
+    {
+      "path": "src/routes/guest/+page.svelte",
+      "sha256": "842e7eb1a969d775f1e3e6200299ae4d7d1ceb3bbed847c17f8bd1c9a4a0699d",
+      "bytes": 187
+    },
+    {
+      "path": "src/routes/join/+page.svelte",
+      "sha256": "842e7eb1a969d775f1e3e6200299ae4d7d1ceb3bbed847c17f8bd1c9a4a0699d",
+      "bytes": 187
     },
     {
       "path": "tests/installation-origin.test.mjs",
-      "sha256": "e4ffd4f011083b71e7128c6dd35f9b23a53ba0ae7a5f342adc6fa5653e22667c"
+      "sha256": "e4ffd4f011083b71e7128c6dd35f9b23a53ba0ae7a5f342adc6fa5653e22667c",
+      "bytes": 5698
+    },
+    {
+      "path": "tests/local-collaboration-client.test.mjs",
+      "sha256": "f24674990d85327c5822dbf6bc04eb03c4c53b71fa74689cb193fdf50d1b16ec",
+      "bytes": 6689
+    },
+    {
+      "path": "tests/selfhost-setup.test.mjs",
+      "sha256": "f9ee7ddd55cbba24140ae081feea09976be78c36cf97a09c5fa5c64f5613caa4",
+      "bytes": 5716
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "6f59e2825f01a83cd5493edc1b923e46fdbdffc6fc1be7660b82bbfba95a1f95",
+      "bytes": 1638
     }
   ],
-  "purpose": "Remove marketing showcase/legacy shell; use loopback native API; bounded native team collaboration + explicit company provider setup. Source manifests preserve original bytes. No model inference claimed by frontend build tests.",
+  "purpose": "Single-company self-hosted installation: root is native workspace/sign-in; backend-authorized one-time initial-administrator setup; no public registration or default guest/marketing entry; exact singleton membership; bounded native team collaboration and explicit company provider setup.",
   "publicOrigin": "Defaults to browser public origin; optional strictly validated VITE_STARLI_PUBLIC_ORIGIN. No original deployment origin fallback.",
-  "hashNormalization": "current staged Git blob bytes",
-  "sourceBaseCommit": "b934a1b556823518d5ee2950f932950d8ac0bb9c"
+  "inactiveRetainedSourcePaths": [
+    "src/lib/components/marketing/Homepage.svelte"
+  ],
+  "limitations": "Source hashes and frontend tests/build do not certify external provider inference, every optional integration, or cross-platform runtime acceptance."
 }

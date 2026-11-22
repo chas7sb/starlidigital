@@ -20,3 +20,9 @@ test('legacy Docker launch remains blocked',()=>{const r=invoke(cli,'start','--d
 test('Docker diagnostics remain explicit',()=>{const r=invoke(cli,'status','--docker','--dry-run');assert.equal(r.status,0,r.stderr);assert.equal(JSON.parse(r.stdout).command,'docker');});
 test('conflicting modes fail before any process plan',()=>{const r=invoke(cli,'install','--native','--docker','--dry-run');assert.equal(r.status,1);assert.equal(r.stdout,'');assert.match(r.stderr,/conflicting/);});
 test('help identifies new product and meaningful readiness',()=>{const r=invoke(cli,'--help');assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/New bots\/teams\/Boss product/);assert.match(r.stdout,/Ctrl\+C stops foreground services/);assert.match(r.stdout,/Model\/provider\/worker readiness is reported separately/);});
+test('default flow starts browser first-run and describes CLI setup as optional',()=>{
+ const r=invoke(cli,'--help');assert.equal(r.status,0,r.stderr);
+ assert.match(r.stdout,/node installer\/starli\.mjs install\nnode installer\/starli\.mjs start/);
+ assert.match(r.stdout,/first-run administrator\/company setup in your browser without creating default credentials/);
+ assert.match(r.stdout,/CLI setup is an optional privileged alternative/);
+});
