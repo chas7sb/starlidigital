@@ -1,5 +1,7 @@
 # Dashboard feature parity and acceptance
 
+This is the historical legacy dashboard inventory, not acceptance of the new product. Use [new product API coverage](new-product-api-coverage.md) and [the native runtime contract](../product-backend/runtime-contract.json) for the current installation target. Legacy pass counts cannot establish Boss/team/model behavior.
+
 Status: NOT VERIFIED. Source inventory is evidence of implementation presence, not evidence of working behavior. Observed 2026-11-22 via read-only bounded server commands. Baseline webui symlink: native-company-mcp-always-v33-20261119. Platform symlink: native-customer-oauth-dev-v34-20261118.
 
 ## Evidence and limits

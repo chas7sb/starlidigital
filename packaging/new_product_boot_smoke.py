@@ -187,6 +187,33 @@ def stop(process):
         process.wait(timeout=10)
 
 
+def wait_ports_released(ports, timeout=20):
+    """A wrapper's exit does not mean its gracefully stopping listeners exited.
+
+    Probe TCP listeners instead of binding without SO_REUSEADDR: a closed POSIX
+    server can leave TIME_WAIT sockets that Node itself can legitimately reuse.
+    No other process is signalled or adopted by this check.
+    """
+    import errno
+    refused = {errno.ECONNREFUSED, 10061}
+    deadline = time.monotonic() + timeout
+    while True:
+        active = False
+        for port in ports:
+            with socket.socket() as probe:
+                # Windows may take about two seconds to report a refused local
+                # connection. A shorter timeout falsely treats a closed port
+                # as a still-running listener.
+                probe.settimeout(3)
+                if probe.connect_ex(('127.0.0.1', port)) not in refused:
+                    active = True
+        if not active:
+            return
+        if time.monotonic() >= deadline:
+            raise RuntimeError('OWNED_PRODUCT_LISTENERS_DID_NOT_STOP')
+        time.sleep(.05)
+
+
 def wait_ready(process, client, backend, deadline):
     while time.monotonic() < deadline:
         if process.poll() is not None:
@@ -222,7 +249,15 @@ def diagnostic_metadata(case):
             frames.append({'file': name, 'line': int(line), 'function': function})
         result[path.name] = {'lastFrames': frames[-4:],
             'exceptionTypes': re.findall(r'^([A-Za-z_][A-Za-z0-9_.]*(?:Error|Exception)):', text, re.MULTILINE)[-3:],
-            'missingModules': re.findall(r"ModuleNotFoundError: No module named '([A-Za-z0-9_.]+)'", text)[-3:]}
+            'missingModules': re.findall(r"ModuleNotFoundError: No module named '([A-Za-z0-9_.]+)'", text)[-3:],
+            'lifecycleSignals': [code for code, pattern in (
+                ('START_PORT_OCCUPIED', r'Loopback port\s*\d+ is occupied'),
+                ('PRODUCT_CHILD_EXITED_EARLY', r'A product process exited before readiness'),
+                ('PRODUCT_READINESS_FAILED', r'New product readiness failed'),
+                ('NODE_EXECUTABLE_OR_PATH_MISSING', r'\bENOENT\b'),
+                ('WINDOWS_ARCHIVE_RUNTIME_MISMATCH', r'ExtractToDirectory.*argument count'),
+            ) if re.search(pattern, text)],
+            'commandExitCodes': [int(code) for code in re.findall(r'Command exited (-?\d+)', text)[-3:]]}
     return result
 
 
@@ -354,6 +389,9 @@ def run(args):
         PHASE = 'restart-persistence'
         stop(process)
         stream.close()
+        # Public root start is a nested Node launcher. On POSIX the outer
+        # wrapper can exit before the inner launcher's SIGTERM cleanup ends.
+        wait_ports_released((args.backend_port, args.frontend_port) if args.installer else (args.backend_port,))
         process = launch()
         wait_ready(process, client, backend, time.monotonic() + args.timeout)
         auth = client.request('/api/v1/auths/signin', {key: credentials[key] for key in ('email', 'password')})
@@ -374,7 +412,15 @@ def run(args):
             report['failure']['code'] = str(error)
     finally:
         PHASE = 'own-process-cleanup'
-        stop(process)
+        try:
+            stop(process)
+            wait_ports_released((args.backend_port, args.frontend_port) if args.installer else (args.backend_port,))
+        except Exception as error:
+            # Cleanup failure must fail the run while retaining earlier evidence.
+            report['status'] = 'FAIL'
+            report['cleanupFailure'] = {'stage': PHASE, 'type': type(error).__name__}
+            if re.fullmatch('[A-Z][A-Z0-9_]{1,100}', str(error)):
+                report['cleanupFailure']['code'] = str(error)
         if stream:
             stream.close()
         if own_config is not None and CONFIG.is_file() and not CONFIG.is_symlink() and CONFIG.read_bytes() == own_config:

@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createHash, randomBytes } from 'node:crypto';
 import { dirname, resolve, join, delimiter } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cacheVerifiedNodeArchive, extractCheckedNodeArchive } from './node-archive.mjs';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const cache = join(here, '.runtime');
@@ -85,13 +86,11 @@ async function bootstrap() {
   const sums = await (await get(base + 'SHASUMS256.txt')).text();
   const checksum = sums.split(/\r?\n/).find(l => l.endsWith('  ' + file))?.split(/\s+/)[0];
   if (!checksum) throw new Error('Official checksum missing.');
-  const bytes = Buffer.from(await (await get(base + file)).arrayBuffer());
-  if (createHash('sha256').update(bytes).digest('hex') !== checksum) throw new Error('Node archive checksum mismatch.');
   mkdirSync(cache, { recursive: true });
   const archive = join(cache, file);
-  writeFileSync(archive, bytes, { flag: 'wx' });
-  if (win) run('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', 'Expand-Archive -LiteralPath $env:STARLI_ARCHIVE -DestinationPath $env:STARLI_DEST'], root, { ...process.env, STARLI_ARCHIVE: archive, STARLI_DEST: cache });
-  else run('tar', ['-xzf', archive, '-C', cache]);
+  const cached = await cacheVerifiedNodeArchive(archive, checksum, async () => (await get(base + file)).arrayBuffer());
+  if (cached.reused) console.log('Reusing existing Node archive after official SHA256 verification.');
+  extractCheckedNodeArchive(archive, cache, checksum);
   const { renameSync } = await import('node:fs');
   renameSync(join(cache, name), join(cache, 'node22'));
   console.log(`Installed official ${release.version}; SHA256 ${checksum}`);
@@ -105,7 +104,8 @@ function stop() {
 }
 try {
   if (extra.length || !['all', 'platform', 'dashboard'].includes(target)) throw new Error('Invalid target or extra argument.');
-  if (action === 'help') console.log('Usage: node installer/native.mjs <bootstrap-node22|doctor|install|install-backend|install-frontend|build|start|health> [all|platform|dashboard]\nUses STARLI_NODE24, STARLI_NODE22 or local verified runtime; uv creates isolated Python 3.11.\ninstall-backend dashboard skips npm; install-frontend dashboard skips Python.\nstart runs foreground; Ctrl+C stops child process trees. No VM is created.');
+  if (!['help', 'bootstrap-node22'].includes(action) && ['all', 'dashboard'].includes(target)) throw new Error('Legacy dashboard/all native targets are retired. Use node installer/starli.mjs install/setup/start/doctor for the new product. Only explicit platform helpers and bootstrap-node22 remain available here.');
+  if (action === 'help') console.log('New product: node installer/starli.mjs install/setup/start/doctor/health\nAdvanced infrastructure: node installer/native.mjs <install|build|start|doctor|health> platform\nNode bootstrap: node installer/native.mjs bootstrap-node22\nLegacy dashboard/all targets are retired. Explicit platform helpers preserve separate video Python infrastructure. Ctrl+C stops foreground child processes; no VM is created.');
   else if (action === 'bootstrap-node22') await bootstrap();
   else if (action === 'health') {
     for (const component of target === 'all' ? ['platform', 'dashboard'] : [target]) {

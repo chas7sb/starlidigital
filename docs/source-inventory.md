@@ -1,5 +1,7 @@
 # Source inventory and extraction recommendations
 
+**UI scope corrected:** this initial inventory does not identify the requested new ULTRA BO$$ product. See docs/new-product-source.md for the active joined Starli/Boss/bots/teams candidate. Old Open WebUI UI is not an authorized release target.
+
 Observed 2026-11-22 using bounded, read-only StarliDigital server_exec. No production files, services, environment values, customer databases, or ledger were changed. Shared docs/prime-ledger.md and docs/agentx9-status.md were read.
 
 ## Confirmed source origins

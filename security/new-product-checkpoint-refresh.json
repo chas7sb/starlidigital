@@ -1,0 +1,140 @@
+{
+  "allowed_paths": 5182,
+  "held_generated_paths": 22,
+  "root_source_candidates": [
+    {
+      "path": "product-backend/local_server.py",
+      "line": 128,
+      "type": "credential-literal-review",
+      "disposition": "password-confirmation prompt"
+    },
+    {
+      "path": "product-backend/test_local_provider.py",
+      "line": 18,
+      "type": "provider-token",
+      "disposition": "explicit synthetic no-network test credential"
+    },
+    {
+      "path": "product-backend/test_local_provider.py",
+      "line": 20,
+      "type": "provider-token",
+      "disposition": "explicit synthetic no-network test credential"
+    },
+    {
+      "path": "product-backend/test_native_collaboration_routes.py",
+      "line": 25,
+      "type": "provider-token",
+      "disposition": "explicit synthetic no-network test credential"
+    },
+    {
+      "path": "product-backend/test_provider_transport.py",
+      "line": 26,
+      "type": "provider-token",
+      "disposition": "explicit synthetic no-network test credential"
+    }
+  ],
+  "tests": {
+    "collaboration_core": 14,
+    "provider_boundary": 2,
+    "native_pins": 15,
+    "raw_pin_mismatches": 0,
+    "canonical_lf_mismatches": 0
+  },
+  "reviewed_core_files": [
+    {
+      "path": "product-backend/COLLABORATION-ROUTES-VALIDATION.json",
+      "sha256": "8bd966de7217a963d16ecdad15a1c9c9bb11bca2fae4f9eca321ae4c0e15888b",
+      "size": 477
+    },
+    {
+      "path": "product-backend/LOCAL-NATIVE-PINS.json",
+      "sha256": "d1f16fd90277f6cfb995204e8e9fe6d1f129e63d6bfb3a2af6eef050b114d7a1",
+      "size": 1622
+    },
+    {
+      "path": "product-backend/LOCAL-PINS-VALIDATION.json",
+      "sha256": "2bd321af5151cb8e8899291fc0c50a573dc468368bc89e8a16d2f2c220e6d40f",
+      "size": 184
+    },
+    {
+      "path": "product-backend/LOCAL-VALIDATION.json",
+      "sha256": "864c318f3985e5faa322811d161fdc572efcb2a77f74481f61fcbdbf141f531e",
+      "size": 918
+    },
+    {
+      "path": "product-backend/PROVIDER-VALIDATION.json",
+      "sha256": "bc128e60ca2c6cad2f2dfb34368c888174768b2ae0dab4d404333a0bb49e3c00",
+      "size": 526
+    },
+    {
+      "path": "product-backend/README.md",
+      "sha256": "83d7213c94dae15effc3d46b4e000a03ad204796bc555e5d53020ea0fb2e5a6c",
+      "size": 6078
+    },
+    {
+      "path": "product-backend/SOURCE-CHECKPOINT.json",
+      "sha256": "987c9c447590152687ca2a03493e8783a215aa2261cdaebd2c5e25da1d80ae6e",
+      "size": 1065
+    },
+    {
+      "path": "product-backend/SOURCE-MANIFEST.json",
+      "sha256": "d1e1b44ad6bfde0b6fde8eb6c5eb3b6b31afa3c3995c42e6fa1e0d80a84eb985",
+      "size": 73257
+    },
+    {
+      "path": "product-backend/local_collaboration.py",
+      "sha256": "b249ecc3f793dee63a1c12966b177ddef5790841b97acf9416a8eb0fc5af6cdb",
+      "size": 26796
+    },
+    {
+      "path": "product-backend/local_collaboration_routes.py",
+      "sha256": "bdc7cab2a87e1af135243e438459ae35133d4758e1571b4bd29d6dc4bf63bc04",
+      "size": 7482
+    },
+    {
+      "path": "product-backend/local_provider.py",
+      "sha256": "6940c40115d4cd537529207f7d07915a53e15ad31f0d6ac259c53af5f88c2fc9",
+      "size": 10708
+    },
+    {
+      "path": "product-backend/local_server.py",
+      "sha256": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6",
+      "size": 10126
+    },
+    {
+      "path": "product-backend/provider-setup.html",
+      "sha256": "32c1f6b325822720e245b3e5d6a74644ed1936aa2c4c8ed9ab5da6447f4be096",
+      "size": 3979
+    },
+    {
+      "path": "product-backend/runtime-contract.json",
+      "sha256": "ad8f16b833b29947fa1b4b2ed6aa35c2f4cd598f19067e05196b55ec18d899b9",
+      "size": 4638
+    },
+    {
+      "path": "product-backend/test_local_collaboration.py",
+      "sha256": "e55afb65d9bed90778ea01c7130a581cfed3bcea439ff99814d6f3776b2a6720",
+      "size": 13576
+    },
+    {
+      "path": "product-backend/test_local_provider.py",
+      "sha256": "381d4207474173574361121d160f7f9058663c82ee9bb4c7b6a65688249b55eb",
+      "size": 3617
+    },
+    {
+      "path": "product-backend/test_local_server.py",
+      "sha256": "78bc90eb4e7757d1aa4e130210dd00f72a400ff249786ff27dc9dd63889fd082",
+      "size": 4524
+    },
+    {
+      "path": "product-backend/test_native_collaboration_routes.py",
+      "sha256": "09f31fdce2510b76c1dffde6ed56a352d411165c2555e73102da6887637e9dc7",
+      "size": 5868
+    },
+    {
+      "path": "product-backend/test_provider_transport.py",
+      "sha256": "08a6c37d72c4ccac5246acfe157462b68de50f699f1ceec277c0f97405cd7a75",
+      "size": 2539
+    }
+  ]
+}

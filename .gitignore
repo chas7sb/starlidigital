@@ -37,6 +37,16 @@ dashboard/backend/data/
 dashboard/data/
 dashboard/build/
 dashboard/.svelte-kit/
+/dashboard/src/
+/dashboard/static/
+/dashboard/scripts/
+/dashboard/package-lock.json
+/dashboard/postcss.config.js
+/dashboard/svelte.config.js
+/dashboard/tailwind.config.js
+/dashboard/tsconfig.json
+/dashboard/vite.config.ts
+/.github/workflows/native-boot.yml
 product/build/
 product/.vite-cache/
 product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120/codex/app-persistence-r1/generated/

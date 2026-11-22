@@ -1,0 +1,38 @@
+{
+  "scope": "immutable WIP source checkpoint commit only; no release or actual-inference acceptance",
+  "commit": "5f6df1edbc53057c396e19c7b78c8b9b4bfdf840",
+  "tree": "4df04650507bf29b795d06c64d72887a44823dc0",
+  "committed_file_count": 17832,
+  "prior_reviewed_index_sha256": "510205f36ac595785971f1908dbf105b80dd5ad8096e076ab0bfe356b2976501",
+  "prior_reviewed_entries": 17831,
+  "prior_reviewed_selected_blobs": 5223,
+  "prior_reviewed_entries_unchanged_in_commit": true,
+  "additional_file_review": [
+    {
+      "path": "docs/new-product-api-coverage.md",
+      "oid": "c0cb41e61c7368be8b9b0661097eed7f1228e949",
+      "sha256": "9cabddf912b7a93bb228146af2902590789d15df96f2c8440b16f14a7181166d",
+      "disposition": "read-only source/API coverage documentation; no secret-pattern candidates, credentials or customer records"
+    }
+  ],
+  "removed_paths": [],
+  "changed_prior_paths": [],
+  "candidate_review": {
+    "count": 138,
+    "open_or_actionable": 0,
+    "report": "security/new-product-final-index-review.json",
+    "retained_blob_oids_unchanged": true
+  },
+  "included_notice_status": "same reviewed blobs retained; scoped root,product/native upstream,fonts,Twemoji,Sheets,noVNC texts present",
+  "staged_native_pin_check": "15matches verified in prior snapshot; all those blobOIDs identical in committed tree",
+  "generated_demo_app_paths": [],
+  "state_key_policy": "no private key/runtime/customer data files included in reviewed tree; no user OpenRouter key received/read",
+  "decision": "source checkpoint audit complete; no identified actionable secret/data/missing-required-notice finding",
+  "not_claimed": [
+    "live provider inference",
+    "browser handoff acceptance",
+    "full product/worker feature parity",
+    "release certification"
+  ],
+  "current_index_independent": true
+}

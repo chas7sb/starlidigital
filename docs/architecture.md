@@ -1,5 +1,59 @@
 # Architecture and extraction boundaries
 
+## Running local product
+
+The default installer builds `product/` and runs `product-backend/local_server.py`. It does not serve the legacy frontend. The new frontend uses retained native authentication, company authority, profiles and messaging libraries from `dashboard/backend`; their location does not select the old UI.
+
+```mermaid
+flowchart LR
+  Browser[New product frontend] --> API[Loopback native API]
+  API --> Authority[Session and company authority]
+  Authority --> Store[Private local SQLite stores]
+  API --> Team[Bounded Boss and teammate discussion]
+  Team --> Provider[Company-selected model connection]
+  Team --> Store
+  Provider --> OpenRouter[OpenRouter Nemotron Ultra free]
+```
+
+Team discussions require an authenticated human source message, an admitted Boss and selected teammates, current room grants and configured per-bot connections. Requests, replies and the final synthesis persist as attributed native messages. The journal records provider response IDs, bounded model attempts and stop states. Fixture tests do not establish actual provider acceptance. Generated-app workers, their trusted previews and autonomous execution tools are not configured by this local composition.
+
+See [the runtime contract](../product-backend/runtime-contract.json), [current API coverage](new-product-api-coverage.md) and [source provenance](new-product-source.md). The candidate inspection below records upstream evidence separately from this local implementation.
+
+## Corrected product target and bootstrap mapping
+
+### Pinned product candidates
+
+The authoritative read-only source lead is /srv/starlidigital/mcp-workspace/server/src/grokbot-gemini-autonomous-company-wave1-20261120/codex. At inspection, coordinator-r1/CURRENT-VERIFIED-STATE.json latestPrivateDemo referenced assembly-r1/next-v9/JOINED-RELEASE-PINS.json. Its recorded browser evidence covers cosmic input, an explicit guest send into an actual temporary workspace, actual chat reply, reload persistence and company DM. This is coordinator-recorded evidence, not a new independent browser run by AgentX10.
+
+| Candidate | Nonsecret pin | Acceptance scope |
+| --- | --- | --- |
+| v9 joined manifest | SHA256 6b6307c5ff3031df981dfbe05e891a09921a562c01f020c3e547dca3345fbbc4 | Last browser-accepted joined demo in latestPrivateDemo |
+| v9 SOURCE-LOCK | SHA256 08ca05a1dcf005058364d0d369a9fbe41dcff7678ad7a9e2169be20f4678a40c | Selected source and adapter pins matched during inspection |
+| v12 SOURCE-LOCK | SHA256 94e9416c4d8aff966dccd52794073160528bde3bea9a4656f8d24006c23c9245 | Newer build/source candidate; selected source matched, browser acceptance pending |
+
+The v10–v12 build receipts explicitly say BUILT_NOT_BROWSER_ACCEPTED. The newer Nov22 mission stage is RETAINED_BROWSER_RESUME_SOURCE_READY_REPIN_AND_GO, and its v12 guest-sidebar source evidence has browserVerified=false. A newer revision number or successful build must not replace the last accepted joined pin without the coordinator's fresh acceptance. The actual current17281 served artifact was not independently pinned or browsed in this task; its private active runtime was left untouched.
+
+### Intended product journey and authority
+
+The identified custom product entry is assembly-r1/next-v12/frontend/app/src/routes/app/+page.svelte, with Company/Bots/Projects/Apps/Team navigation, company bot roster, channels and collaborative panels. It uses the existing native identity/company APIs but a different product surface from the old18280 chat UI. The matching guest surface and homepage-r8 contract specify:
+
+1. Explicit homepage intent POST and real restricted temporary workspace. Guest authority supplies actual company/project/room IDs and Starli names; the browser does not fabricate authority.
+2. Actual /api/v1/auths/signup or signin, followed by /api/v1/auths/ verification. No Desktop Express identity mapping is implied.
+3. Provisional company claim with guest session context, Bearer, X-Starli-Claim, expected revision and a stable idempotency key. Reauthentication is required when the server requests it.
+4. Complete claimed conversation readback at /api/v1/starli/grokbot1/claims/{intent}/conversation and exact verified owner navigation to /app?onboardingIntent=... . A failed/denied claim retains the guest workspace rather than silently inventing a new company.
+5. Product /app lists /api/v1/companies, switches the selected company via POST, verifies membership scope, reads its directory and real rooms, then exposes the scoped bots/team/channel experience.
+6. Model app preview, when present, uses a build/artifact/lease/generation/company/project-bound opaque ticket on a dedicated app origin. Parent JWTs do not travel into that app. Owner claim requires fresh owner-bound authority; old guest tickets are not a fallback.
+
+For fresh self-hosting, the offline first_run account/company foundation may be reused only after these actual adapters are extracted. It does not yet provision or verify this full guest-claim/coordinator/room journey. Account-scoped legacy STARLI BOSS and company-owned Starli coordinator identities are distinct. Staging bootstrap endpoints found in source tests must not be published as an end-user owner API. No private demo configuration, credentials, profiles or customer state should accompany source extraction.
+
+The user explicitly requires the new bots/teams/Boss collaborative product, not the old OpenWebUI frontend. The source baseline and passing compatibility-owner checks below must not be interpreted as acceptance of that UI. Preserve the existing 18280 compatibility state while the new product source and preview are integrated.
+
+Read-only Desktop reference inspection found React19/Vite routing, including /appbuilder -> ChatPage mode=team, backed by Express /api/auth/signup and Prisma/PostgreSQL users. Signup creates a session and the schema defaults role to USER. The inspected auth route and schema do not establish first-owner privileges, Team/Bot/Boss entities or collaborative bootstrap. Marketing routes in that source are outside scope. No environment or live data was read.
+
+The compatibility Python runtime separately supports company authority and native bots. Its authenticated /api/v1/starli/v3-native/agents route calls _boss to create/reuse boss:<native-owner-id>, named STARLI BOSS. That is an account-scoped directory identity; it does not establish a product team Boss, configure inference or start execution. Company bot creation uses its own registry/template/profile model and owner/admin checks. Existing first_run setup initializes accounts, private platform binding, company membership and registry schema, but intentionally does not manufacture a product team/Boss relationship.
+
+When incoming AgentX1/2 product source is available, map its actual UI requests to: identity/signup/bootstrap, team create/list/member authority, canonical Boss creation and chat binding, bot creation/provider assignment, collaborative messages/tasks/artifacts, and computer authority. Validate through the selected product frontend and repeat after restart. Do not link distinct identity systems by matching email, reuse production state, equate company membership with a team, or treat a visual team prop as a persistent collaboration model.
+
 This document records the initial upstream source baseline. It is not the current readiness report: subsequent extraction changes and passing Windows owner/authentication/company/provider/tool/VM-read checks are summarized in [AgentX10 status](agentx10-status.md). Use the [root README](../README.md), [installation guide](install.md) and [feature parity matrix](feature-parity.md) for current runtime commands and acceptance status. Requirements described as unverified in this baseline must be read against those later results.
 
 Evidence inspected on 2026-11-22 through read-only StarliDigital source tools and bounded server reads. These observations describe upstream source; they do not certify the assembled local extraction.

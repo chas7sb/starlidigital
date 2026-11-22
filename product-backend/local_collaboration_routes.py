@@ -63,7 +63,9 @@ def install(app,state,store,runtime):
    meta={'version':'starli.local-collaboration.native.v1','done':True,'attribution':{'requestedBy':session.user_id},'collaboration':metadata}
    mentions=[{'kind':'agent','id':metadata['targetAgentId']}]if metadata.get('targetAgentId')else[]
    db.execute('INSERT INTO message(id,user_id,channel_id,parent_id,content,data,meta,created_at,updated_at) VALUES(?,?,?,NULL,?,?,?,?,?)',(message,session.user_id,scope['room_id'],text,'{}',json.dumps(meta),now,now))
-   db.execute('INSERT INTO cm_messages VALUES(?,?,?,?,?,?,0,?,?,?)',(message,scope['room_id'],seq,'agent',bot,1,json.dumps(mentions),'[]',scope['run_id']))
+   # cm_messages.run is exclusively a canonical cr_turns ID. Collaboration
+   # attribution stays in native metadata and the collaboration receipt API.
+   db.execute('INSERT INTO cm_messages VALUES(?,?,?,?,?,?,0,?,?,?)',(message,scope['room_id'],seq,'agent',bot,1,json.dumps(mentions),'[]',None))
    db.execute('UPDATE cm_rooms SET seq=? WHERE id=?',(seq,scope['room_id']));store.event(db,scope['room_id'],'message.created',message)
    db.execute('INSERT INTO local_collaboration_sinks VALUES(?,?,?,?,?,?,?)',(key,scope['company_id'],scope['room_id'],session.user_id,bot,digest,message))
    session_for(scope);return message

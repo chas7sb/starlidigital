@@ -1,3 +1,5 @@
+> Target correction (2026-11-22): the current frontend target is the joined bots/teams/Boss product. See docs/new-product-configuration.md. Earlier frontend/old-UI validation is component evidence only, not acceptance of the requested product.
+
 # Configuration and bring-your-own integrations
 
 Configuration review date: 2026-11-22. Scope: production source names inspected through read-only StarliDigital code tools. No production environment file or configured values was read. Files under config/ contain invented local defaults and empty secrets.

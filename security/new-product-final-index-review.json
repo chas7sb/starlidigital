@@ -1,0 +1,1203 @@
+{
+  "scope": "Exact immutable WIP source checkpoint; not release/runtime or live-model acceptance",
+  "index_entry_count": 17831,
+  "selected_blobs": 5223,
+  "index_listing_sha256": "510205f36ac595785971f1908dbf105b80dd5ad8096e076ab0bfe356b2976501",
+  "index_stable_during_scan": true,
+  "index_still_matches_at_attestation": true,
+  "decision": "no-actionable-secret-customer-runtime-data-or-missing-required-notice-finding-in-reviewed-staged-checkpoint",
+  "findings": [
+    {
+      "path": "product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/vendor/guest_intents.py",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "5fdaa34ef4af9a136cd34eca7e0ca4108ce09362",
+      "sha256": "630cd708486ecbb3a58d66a17fc1a792646b36b50b0fecc78127697c15e211b1",
+      "disposition": "source-dependency",
+      "reason": "Two recovered Python source dependencies (guest_intents/provisional); vendor names source code, not runtime state."
+    },
+    {
+      "path": "product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120/grokbot1/vendor/provisional.py",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "b2e33fb8ad1ef2d40f77456199bc065ae9f3b57d",
+      "sha256": "e87117b33cfe39577be1510c78ce887408c4d68d585a6749bddb1e18ebbfcd0e",
+      "disposition": "source-dependency",
+      "reason": "Two recovered Python source dependencies (guest_intents/provisional); vendor names source code, not runtime state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/AUTHORS",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "e8fb12404b12c78ea3b7d292f9b52c48f410a770",
+      "sha256": "16ee0ef356d5107a4bc039f91abc99a341dc62b9aa8dd47547a2baed38507509",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/LICENSE.txt",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "0581c11ed02ed57c82335a4691fd805621edd5b6",
+      "sha256": "3ccd2242d7f5b6c5ae831a486f63cce1f18d8cd11c511f6a7a7251673763b2d1",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/README.md",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "3c831be6f17b390f8655566aaa01a86f137e3349",
+      "sha256": "70fb38dacd32911760059b744b44d1991a93b34e5923e61c2c47aa9b8c80ba9a",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/base64.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "db572c2db4c044cb3f3c9e680cbb49584d89f490",
+      "sha256": "76d6b7ec73aed8cbc72b49b8b865bcb334acc59a6b0e96b19bc39c9e8e053ae3",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/aes.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "e6aaea7c2f4ac9b9a0bfef675ea998426fe06a2a",
+      "sha256": "00b9a69185f913b882270c4cc7a076b4dd3a083981edb91c1e55db22f8ffcef3",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/bigint.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "d34432650e747097bcc6f3580dc153464c580a41",
+      "sha256": "e7880d27af8bf439579f6fc40d7b81fd379a9babb1d13c83999effd8c64823ab",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/crypto.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "cc17da22855318cc81395e1033a74614934cb65b",
+      "sha256": "e6006697ce1d195c951ef1e986172d17174e533909df19e07be583ac75dd344b",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/des.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "8dab31fb43d027da68905a15b612af64f3ce160d",
+      "sha256": "91d8c8ed596d2beda7da9dd68c9ae1d325c673822e3ccfc8a4091e121c99a316",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/dh.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "bd705d9bf1dad9f18f3faf2adcdefafe1014fe31",
+      "sha256": "9102454282ba646ee4a4ce34c5db5d2a9979179f9d4606737fc6bb7a669e5ebe",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/md5.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "b01ba6fd04bf0226490ffc68143f45aafc55d72c",
+      "sha256": "364c0f0d44d3f8fd608c18a0e1253e5a77e9b8e4c48e3c6503a0f45c9bb2ff8d",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/crypto/rsa.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "68e8e869f915e906d3a99aca184a95da6aa06044",
+      "sha256": "83875db9e5d978ea0eb2a1e2af8afbb7dedfb0f18eca2bab75c2756285037476",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/copyrect.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "3c7e0d5dc9e69870f97fd6b8cbafe21e21a835ad",
+      "sha256": "da3b571e10984438ea49559738e11034b5d0c85154a68eac1a6bf9ef10e5aa02",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/h264.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "a508b674181a6af0cac82dab577e23c9e28a7a49",
+      "sha256": "96d47901c5e26dc02256b152aa642490d936bbcc395f59ffd580356118edff84",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/hextile.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "db0792bd434d61a3976cd94d9839e9c1ac088d3a",
+      "sha256": "63eb86247bea83119af75f3d145a4515a2411ff28a72492d2d7b925268d50163",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/jpeg.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "f79846034b12e16457750b0d8c1abec2d4e5a485",
+      "sha256": "6747ac900d09a5899c3a6fff897e58e88607e69b39ff4a6bddddee2e9e6bc6b4",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/raw.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "bd5d20445e89e8ad7536dc220a5e4665c715598c",
+      "sha256": "bc7d4517213dc1df8626e8198eadf32b2c1946f75228b31387d3916963af0727",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/rre.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "a5fea7c46b5bdd38928633f808676dec05f242e4",
+      "sha256": "b3380dbc75310769ef24e956e1fa1f13d8217f8b1d7d6f5c9d08db9a336a4c0d",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/tight.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "1a145d4e5d6f4c2bd3539f0308ce00c442e2eb01",
+      "sha256": "a7f01df99922be812ea21c5e46597b76379a5d8267f99ec8bea9a202bec34130",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/tightpng.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "cf1df6ba147b6a1bf6564409664652a34aaaf36b",
+      "sha256": "38bd2fd200f5c8e9b0905eca2389fb8e6ad2151de886e4fa9a9c59cc1c7696f0",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/zlib.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "a876908b61ab14b9e9b1246714d858c34071b5f1",
+      "sha256": "1d1c05cdca4840ff46082103ab35aa7696b41504bec91ebd74fae9e0e5f61380",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/decoders/zrle.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "ef1726f691b7dd3f2ced91a46d21c88f1dd334e4",
+      "sha256": "6853c115f97a1d4de39ca71ab8b519a05916bb8c173aa8112ce4881cbb612cbd",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/deflator.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "af24009e1f3c0ab797437fc458c2b770d932113d",
+      "sha256": "ceb6763eb3fcc53f34d08534a8d1df9b63af3a95c58f8d96d238ef5ce639ad1f",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/display.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "4efd6f4b97dfda3ab450723ff8c722c8258d60fc",
+      "sha256": "10d298551124a172c97dcb54d8d30fca416e6038b064c93ba5f7cf079fa4bf1f",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/encodings.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "7afcb17fcc0f55210f03ec1bd9e894378ee648e1",
+      "sha256": "4975904fe1da6dc22b53ecb8462ec7c9a43e99db72dba4aab9f625c4177e355d",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/inflator.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "7ef47f13f656974cef449a7bf695a9050b7dc16d",
+      "sha256": "b1955cbd1608619911b8dfd451fae07f38c5767098f6f47e4a2a1682c11feb65",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/domkeytable.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "9e599f74882ff5d0c7b64733b8824816af8f0474",
+      "sha256": "5eb985e1a412d1be6b606ba0d7e912fc0842d873d252bd7ec8a363670dfc800c",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/fixedkeys.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "6a9221580afd28338bb50453983505f28a83c85f",
+      "sha256": "6bb21b0a2d5f5d7ad73e75b80ddc1d844ac770c4426b312d5740f2443455f0c0",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/gesturehandler.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "b072e01db8d994e27bfd8b41c6330dc8dd6a41da",
+      "sha256": "c04b67fdae6ac061c7d51cb5ee8ca296ee9c7c80aa246cee5751e74eefe61758",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/keyboard.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "3cc89174de31b0b0b086e83f22d0ba3fa1059d68",
+      "sha256": "46f82adef772b726ae3db144fb9c12b3d03374b7c803b8a5106e422a10ddcdba",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/keysym.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "22ba0584eae170150e21827c50142158bb359995",
+      "sha256": "4ddf0e21f07328358974d91aa2d7f839ba2116688b28e43d3f6f4e2eae8c45cf",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/keysymdef.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "951cacab673fa34adf7039eac1c8d4ccab934c7e",
+      "sha256": "76f338d45fb73b7decb7d8b4ef6e95edf7ce9583722c5220642a9be85fc2cc89",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/util.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "36b698176512dfc184498f8186fe86785a7b994c",
+      "sha256": "2e156ea656404afcb6cc54dd85cbe5dd2dd0ba209ae9a6fb1b78ec5db17d01ce",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/vkeys.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "d848337a7a7869e52830303b2b50cc44be12e394",
+      "sha256": "9a1ce4393e1aa4ace5dcdcf7e032f4a1c03a9cb964b4e0e7b7fcffd3a982eb84",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/input/xtscancodes.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "8ab9c17fde2aa41477f77933712fa72c77286d78",
+      "sha256": "f0fc982627e1c02feaac1bd50d7fdd3bcbb05f0062b910d8002f47d1b08967a6",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/ra2.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "d330b848d24f370c423e24df06e5b24ee5fc967a",
+      "sha256": "4aeffb60af9c163365170e2af392acb6f0a7c21a0cb6827f85dd776d33277bee",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/rfb.d.ts",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "ea1c7747270228a67d6a8863de827b089810cafb",
+      "sha256": "90684f3fc3f7088249ba7341bba94e7446e52e7d07af4bec7a7811c24f587fb7",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/rfb.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "80011e4a10203806f14df1ffc3b8425861a965a7",
+      "sha256": "c46dfefbf869eda0c6d06c5dd86c42e96fc8a77c125e91599a2cdf3841261564",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/browser.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "98a111682e9ee787e08304fb443ba86b601c725a",
+      "sha256": "2718ff96f55188592727cfa70ffd03ff8adc3d18625adb44a70c1707a1326f9d",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/cursor.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "6d689e7d5a30326261306152410449d3fde32b16",
+      "sha256": "adabe605d73f38e5f29abd302489d4b9e98a9e495823a06a2edbe7f6744856fa",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/element.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "17d82d58f8a5b3d203e779fabeb5d8a4f697edf2",
+      "sha256": "13845321fc5abccc1de25594082d8db15405af56c5f4fc32b3bdd0878bd891e3",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/events.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "26aa97908580392eb51b52b272c3127d93da853a",
+      "sha256": "ec7f4da0407ea67f5d6f5ce53bd9b3342155feb9407707de3992c5261e460ead",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/eventtarget.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "547bf5fa28db3d012be3be991bbb913492fd3c53",
+      "sha256": "9481965aa6cee36ae2decdccc6ca5203c9371a8afc33346ad4170e471766e0da",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/int.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "303ddc5fd3d394d987086bd2f5531add59055090",
+      "sha256": "b1c4b7dec2e7767322b3464f3c186b13138cdf341c621db44ddd06ce78180c01",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/logging.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "0db083856e7c7356888e8c059904be2680d22be5",
+      "sha256": "c3a49715c9f908d5bb385de5787e99b824faf34d26036d993eea4740bac9d482",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/util/strings.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "432b0a9d29713b76ba6a03d5da822a9d4a14d7a1",
+      "sha256": "77d0604c7bf9e95de780f8cb9764d918ae24c86811a0a1c5b08cd30e50ad2a3a",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/core/websock.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "ee8a4bc42819ca0a9f55472ccc29bfd1f25c8887",
+      "sha256": "d1a96fc1316eaab9badcba9b0f1a7a55d748a4d4d26dc0263cc179dba2131cf4",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/API.md",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "c1f6fac91d1f0ee5597d1de15af82805f4bce612",
+      "sha256": "e3846cf626fb1106892c493d51e0bf2ff570b552570ea0fd55ab6db467a9759c",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/LIBRARY.md",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "ec2f4e02c4ea344825715e463c359d6b450bedaf",
+      "sha256": "5a6d56558d390d52a78c393b40a50858f218c64a0e31e0329992c991b1544b95",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/LICENSE.BSD-2-Clause",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "9d66ec911bf4b8fde856458eba4a89b8276ff4d5",
+      "sha256": "f4371b28457e3e9f2db1fc972eb5ba16353dc5f8d7f42b2d5c3c2e576e40dd05",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/LICENSE.BSD-3-Clause",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "e160466c4e0659df7a0731f5317d49182ead14a3",
+      "sha256": "c08e5ef2e6d004c97f92d45eee4f3a0257b6c957a6c68c7b2053d013ec3725c2",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/LICENSE.MPL-2.0",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "14e2f777f6c395e7e04ab4aa306bbcc4b0c1120e",
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/docs/LICENSE.OFL-1.1",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "77b17316cf1e8ab216bd6743996dfc67cc86216a",
+      "sha256": "e564f06d018e7b95bc3594c96a17f1d41865af4038c375e7aa974dd69df38602",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/package.json",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "b1df39020d960b90b7a5702927fbf951b85e0d53",
+      "sha256": "f8c225592d43c9a63e1ed4cb1ba8e9abee222ad7da9f1108f43f556a6c9db5e7",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/LICENSE",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "d082ae325333e6fd74d7066de3964f949e006f86",
+      "sha256": "3bc404ffa7888053253eedcc5a667619aa08dc1be0bea400e5ff28c51602180f",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/README.md",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "755df643d76f0eb92b4e3f4e8d5a6ed71d153528",
+      "sha256": "f78ded7db9ffa4be474ce75020659f165d97adc4276ef5c7fcd698a3aa03e6ce",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/utils/common.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "576fd59dc1b1c16519ced5d1f5b4366530145f03",
+      "sha256": "0749bc4661ed186714b90e7f2321c9625a8ce7c680563bfe3ac6df7aa332bf28",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/adler32.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "058a534ad07d06859c34c02e92d9d1f8a6ef99a1",
+      "sha256": "7412dd3ecc015888b99292f45e4d4ba69abc77f208508c9a1c93e8dfe54ba6cd",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/constants.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "7d80502d6545d4373fb20aa777ad0df861d13a80",
+      "sha256": "9d2c0dd36349e6eec9d41a37f965b2ff7e7374fbf00fb139e3116d428b551898",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/crc32.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "611ffb29bb76493e7ac07371fc7a5f1c6e43a0a7",
+      "sha256": "897fa9eabd2bb239ec632326dbff85bc72cc81d4da80265cde59520db339f405",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/deflate.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "c3a5ba49aa7443a864038312f0112664493a4a69",
+      "sha256": "d2a498ad04bb5d1f67ba01696c31a2e88e8b88e4fc6c36c635294d1c445b22c1",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/gzheader.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "2ec586d3a951e7db665331fc097f623a41399a84",
+      "sha256": "9f9b2da72593769fcc97d397ceb771bb11d5b96f202759e2ed014c2be24d40d7",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/inffast.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "889dcc7a689537aef93737c963ab3913670ea6fa",
+      "sha256": "ec1e0f7abeec681a0d5e3da46d06f499969cbf265eaaa5e21a135d2a9b878c16",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/inflate.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "1d2063bc40548522d366aed162268cadebf2596e",
+      "sha256": "321582ddc4023e47aa981a71caed0e1dad8b58f0d9e93a0b0a34fe7e3c45e05f",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/inftrees.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "78b7c9eb578adeb40ce912539af0740a4ebd8b51",
+      "sha256": "94780cbdef562bcd0434c7e6f4faca1ff6be6980bf7305a200809d98d419d9c7",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/messages.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "f95cb70405ce1386108d03f173ba89ad9b9f11dc",
+      "sha256": "7860a8d3c873c28e4f5f92db9ca3e45006e21b084210d87b8b7775cddccf05ed",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/trees.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "a69b8a592fe02a275b6ddca6ae124f7364e9ad5a",
+      "sha256": "ad9cb5245b9e39edd164234d6ca19febb9dba683f1f99a67af48d62931d91426",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/src/lib/vendor/novnc-1.7.0/vendor/pako/lib/zlib/zstream.js",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "e7e674e78598dc7e6a6a2a2d97789193288bbfe2",
+      "sha256": "240917347c379b1ad33b8bf07cc6981557173bc3408f35e9875866a14b9967b2",
+      "disposition": "licensed-vendored-source",
+      "reason": "Vendored noVNC/pako source with included root AUTHORS/LICENSE and MPL/OFL/BSD/pako texts; no runtime/session state."
+    },
+    {
+      "path": "product/static/vendor/novnc-1.7.0-source.tgz",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "0d2e6a339dddb3446ac76cea7507630942381fec",
+      "sha256": "32689f18d6abe96bc6530828a6bd0b9ae33bda07c083a6575ed255b5a8f2e903",
+      "disposition": "licensed-source-archive",
+      "reason": "Source TGZ inspected without extraction: no traversal/symlink/private-key/database/private-JSON members; embedded license texts retained."
+    },
+    {
+      "path": "product/static/vendor/novnc-1.7.0-starli-source.tgz",
+      "type": "runtime-or-vendor-path-review",
+      "oid": "fce49c190fee9ce89c8679535fa36d2f554508c8",
+      "sha256": "b875b90e80807c21d9aa3bf5f7ac534b6bfb014cc5b28188d746fce4a132e01c",
+      "disposition": "licensed-source-archive",
+      "reason": "Source TGZ inspected without extraction: no traversal/symlink/private-key/database/private-JSON members; embedded license texts retained."
+    },
+    {
+      "path": "packaging/test_new_product_boot_smoke.py",
+      "line": 14,
+      "type": "credential-url",
+      "oid": "7375b8156c29b1b2dfd05af41824ae45e5fe9d00",
+      "disposition": "synthetic-fixture",
+      "reason": "Current immutable staged test rejects credential-bearing loopback URL with assertRaises.",
+      "sha256": "d750ec26226c988353469ac5b7aee091259194f0659f0a26e1414a7369565434"
+    },
+    {
+      "path": "product-backend/local_server.py",
+      "line": 128,
+      "type": "credential-literal-review",
+      "oid": "5d8ad3d0569c02298738f3b07ade98b4bb58e441",
+      "disposition": "password-confirmation-prompt",
+      "reason": "getpass confirmation prompt and failure message; not a password literal.",
+      "sha256": "3430d188eb4f52454136a48e1199960bc7930ac99c4839ff5144fb55f38920a6"
+    },
+    {
+      "path": "product-backend/server-src/grokbot-gemini-autonomous-company-wave1-20261120/gemini1/integration-r4/tests_r4_all.mjs",
+      "line": 193,
+      "type": "credential-literal-review",
+      "oid": "a99b6cb80f4fc4954a3c7bca9dc19494aeb49927",
+      "sha256": "6ad9522ff912cb675b24f9a5d138a78ef17c37a3705b6b11181ff9eef6f60059",
+      "disposition": "synthetic-fixture",
+      "reason": "Reviewed current source test context: mocked authentication/shared-secret or revocation input, not deployed credential/config."
+    },
+    {
+      "path": "product-backend/server-src/operator-auth.ts",
+      "line": 77,
+      "type": "credential-literal-review",
+      "oid": "ddbf3131036f5cd01217e2d2aa6266dd063a0715",
+      "sha256": "8e1626ad573bb66a4c9ff0a71fb8bff5543b372283c474f89490c679cb3552b3",
+      "disposition": "generated-prefix",
+      "reason": "Literal is only a type prefix concatenated with randomBytes(32), not an issued secret."
+    },
+    {
+      "path": "product-backend/test_local_provider.py",
+      "line": 18,
+      "type": "provider-token",
+      "oid": "ebdc2f9f37591209f8ed174afa14020552d105ae",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit synthetic key literal used only in isolated provider/mock transport/native-route tests; no user/provider credential was received.",
+      "sha256": "381d4207474173574361121d160f7f9058663c82ee9bb4c7b6a65688249b55eb"
+    },
+    {
+      "path": "product-backend/test_local_provider.py",
+      "line": 20,
+      "type": "provider-token",
+      "oid": "ebdc2f9f37591209f8ed174afa14020552d105ae",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit synthetic key literal used only in isolated provider/mock transport/native-route tests; no user/provider credential was received.",
+      "sha256": "381d4207474173574361121d160f7f9058663c82ee9bb4c7b6a65688249b55eb"
+    },
+    {
+      "path": "product-backend/test_native_collaboration_routes.py",
+      "line": 25,
+      "type": "provider-token",
+      "oid": "a1c0d0c13959d66d03fad172beee318e32dc19c9",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit synthetic key literal used only in isolated provider/mock transport/native-route tests; no user/provider credential was received.",
+      "sha256": "09f31fdce2510b76c1dffde6ed56a352d411165c2555e73102da6887637e9dc7"
+    },
+    {
+      "path": "product-backend/test_provider_transport.py",
+      "line": 26,
+      "type": "provider-token",
+      "oid": "0f3686ff9701a5fb1ce0ba88d77416401282786f",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit synthetic key literal used only in isolated provider/mock transport/native-route tests; no user/provider credential was received.",
+      "sha256": "08a6c37d72c4ccac5246acfe157462b68de50f699f1ceec277c0f97405cd7a75"
+    },
+    {
+      "path": "product/src/lib/components/admin/Settings/WebSearch.svelte",
+      "line": 680,
+      "type": "credential-url",
+      "oid": "d9771f8354c7f22b64e7bff549471b232951ce3d",
+      "sha256": "d0047eb0f5dfc3eaf32075b3be319062243ec89855cf4b691fc720c866185fc3",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/components/company/panels/composition-tests/native-revocation.test.mjs",
+      "line": 6,
+      "type": "credential-literal-review",
+      "oid": "3a1add0e7af4c68129aa69b1bfbf2f54e3fb2d3e",
+      "sha256": "d2da2dfb71c4c9f939b8303678141014491f6dbbc0f4246d82aec7244d4b262c",
+      "disposition": "synthetic-fixture",
+      "reason": "Reviewed current source test context: mocked authentication/shared-secret or revocation input, not deployed credential/config."
+    },
+    {
+      "path": "product/src/lib/components/company/panels/composition-tests/native-revocation.test.mjs",
+      "line": 8,
+      "type": "credential-literal-review",
+      "oid": "3a1add0e7af4c68129aa69b1bfbf2f54e3fb2d3e",
+      "sha256": "d2da2dfb71c4c9f939b8303678141014491f6dbbc0f4246d82aec7244d4b262c",
+      "disposition": "synthetic-fixture",
+      "reason": "Reviewed current source test context: mocked authentication/shared-secret or revocation input, not deployed credential/config."
+    },
+    {
+      "path": "product/src/lib/components/enterprise/automations/automations-client.test.cjs",
+      "line": 7,
+      "type": "credential-url",
+      "oid": "28fcaf9984c725b91b10a5e1df70a0f4fdc7f583",
+      "sha256": "2f8dce125af59ba566a9ef04c34e2cf193802e278b8c46bf45d0213b48c91467",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit assert rejects credential-bearing authorization URL; synthetic validation input."
+    },
+    {
+      "path": "product/src/lib/components/enterprise/automations/company-connections-client.test.cjs",
+      "line": 1,
+      "type": "credential-literal-review",
+      "oid": "04e7117c6024d3c2345f5891169e279a1c141022",
+      "sha256": "69d1cbd6d52a7581e69db0a0caf8ec1c7e75fd972ed0be74d10ff152dd039e21",
+      "disposition": "synthetic-fixture",
+      "reason": "Reviewed current source test context: mocked authentication/shared-secret or revocation input, not deployed credential/config."
+    },
+    {
+      "path": "product/src/lib/components/enterprise/company/providers-client.test.cjs",
+      "line": 12,
+      "type": "credential-url",
+      "oid": "c1539f92df688e9fc172b072202e291bce829d2d",
+      "sha256": "bc1086be2460991d582a6a52a0736f0ca34cfe2b3c5ec55c19599f16deef2bcb",
+      "disposition": "synthetic-fixture",
+      "reason": "Explicit assert rejects credential-bearing authorization URL; synthetic validation input."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ar-BH/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "b391cfecd498861f9d05dfc5414ecfd6bf60bbbb",
+      "sha256": "a6b277146b6f95f77c79c7264afc43a53424ad390bb857a8098ca088e7edc67d",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ar/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "264b6b8685744a145e1ce540fc3960c74c24027f",
+      "sha256": "d2bb3fd3f8dd1f8b2215f0c03aad46f047c0a112ab963b65794e501f32a5c198",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/bg-BG/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f48faa24f40205f22107b5712b922527fccf9562",
+      "sha256": "baddf51261564027e27d56b81959dd01839dcf427bb0706d0f4fea434e01ca9a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/bn-BD/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "e669ec3ec8e19c36e1018a38064dd976bf6aafc9",
+      "sha256": "2c17f23bf673f8e3b7f3dbf19351ca6a9b04d6b211357b2e96ee42957cda3b82",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/bo-TB/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "d747d1d4927cbe22612a2a5a509cbe2a9582b7ef",
+      "sha256": "bc87e653b2735c6761bc3645953a00179817dd57a28226444f09b3412b665b9d",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ca-ES/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f726721d21f6a27829c5ee3dab719169fb12f665",
+      "sha256": "5a84dd43e10f1c04d432201d675b23dd1a3994521cdad0b28e080876e26bafbf",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ceb-PH/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "30608b163faac6c193ef9e30a94e6debae7dcc2d",
+      "sha256": "693466b91dde9cef5a5bb9e928ebf83901ef87b3767231e14992b6445a293a45",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/cs-CZ/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ec735ac8595e2cc3e8b2f1e255ef6e94e2399cea",
+      "sha256": "95321aea90ee19c1a4b41fd9209b156ca823e4fbd80eaea27dc47b435915446e",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/da-DK/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f5b535f1ab29004c6d6a293c9b2551d406be4ae0",
+      "sha256": "7c59437a504f743d217d09cc5b9830deeeba6e28ce33dfbc9cae1941e33a2d20",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/de-DE/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "b4a0e0776fc9d64166b71883c29331b5c2d6d8f2",
+      "sha256": "6d1f0f452f8e83e61c679e594448ee1788f8b3f2bc259d16a5be8fc131e52adc",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/dg-DG/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "a8d1ec01907baf15ef90f04eafb347edfb517065",
+      "sha256": "40c588670bf6fffebe53b61f52f673ddf615c7773a092f2ef3680af4a15295b3",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/el-GR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "fde031da34d63ae43ed3745d81eb1b9121523c25",
+      "sha256": "abb313cb14c5b8695db1d7fd7ce959184e3ff3b30adecba77c626bb46daef12a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/en-GB/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ef83bdf422552ca4687c6e1a7748317501454910",
+      "sha256": "4751c5ea84404c2300d27343e46701c51aeeac4bab25b476e549cac314acd0d7",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/en-US/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ef83bdf422552ca4687c6e1a7748317501454910",
+      "sha256": "4751c5ea84404c2300d27343e46701c51aeeac4bab25b476e549cac314acd0d7",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/es-ES/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "3e31790310cdef46253543bd65b9b4aff41cd354",
+      "sha256": "199a42de01007a29465ea96c36e1e69e7a7e07ce618c4c735beca0c27b9a20d4",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/et-EE/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "a6b34f5f4cb81ef1c3e80aeff02ac9941353d455",
+      "sha256": "5e3b4ecd8cdd4ee445e8e43235cde3d275e280f9df1ff22acb4ece8eda4ee09e",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/eu-ES/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "53a8b3e6a962d26f6caa9f11dcad485ae02f76fd",
+      "sha256": "23480578cee6db31eddd379c4d6952c0093324f30b1b52a5b0f72412a8916276",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/fa-IR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "2badcedbf036c2485ba75208c83ff999b46b1a8c",
+      "sha256": "035c21412aceb142cb28aec7acb0108814b1f20a3525e47a62166b6a835f47ec",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/fi-FI/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "e1022e938eb1e10ef7a618aacb90b612f894423b",
+      "sha256": "0197c659a8a0c56c500b4a91cd41004cd2ece0c1954757b4b52042bb98ce0db7",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/fr-CA/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "5c9cb4cff56ba0dd00c7a7fc26868ac3fb6dd8df",
+      "sha256": "8d984b68ba872e9ca229a141b1d707a85b57b6a27d50c41425243d9ef4dd53a3",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/fr-FR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "1de002e5fd8fc0cfa7dd187b741f38a18d44b845",
+      "sha256": "6bc77361e09a8974a0d1da0210d2307b6cf14419f5e6dd10cbe9363e7b79fc43",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/gl-ES/translation.json",
+      "line": 407,
+      "type": "credential-url",
+      "oid": "2ffb07a4a1dbc069a846175128c06c01f7ae2807",
+      "sha256": "b706655939b489cccc847e1e2e97f9aa0881c256492fe61c3e5d3280d652e283",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/he-IL/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "4b23fd46a0de3aa7709f80efbe23b85d2e482046",
+      "sha256": "ec0ef8f213254550cc2681ee8699c5dbd906f5854105c920291033d6651a9267",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/hi-IN/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "5efe1d46108bf75674bbf4680f282ede3711a97c",
+      "sha256": "babfe26d6b60989ff727892ddf6c4cddedd10bd03aa50938e767039c26363814",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/hr-HR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "3ce092c71b6d3fc7043babc8f83668fbbcd440af",
+      "sha256": "a6305de64f25d430f702282a84d341efb26254cf06cf51b49de026bbdfce42b6",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/hu-HU/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "d4daf78f2c55ddd8b8347ad14dd45c08ff16d184",
+      "sha256": "2b31bc7c961dcb2dad86e9a32c61ed4c6377dedc3a2dab581f1a81dd5d10e6a7",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/id-ID/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "c8c6eb4822e6a62b47d096b5d640af96562f1175",
+      "sha256": "e010d7e905dab9846569c296b23f538ea3dbf0cdd982f15673b6a44e4a3cd0dc",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ie-GA/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "516c68a10ec2bb7e0b951de5a9ed2d446b34b80d",
+      "sha256": "e2e9ca4e5e8e8218fd235b274775289d5b3c5390fb8601af9f1d29b6a6c6971a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/it-IT/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f4e8492755389c9e143fbd56f88352367ab41dad",
+      "sha256": "18fdebb8cafff15ee2c9a0ec130f74f1eb54fc736e537982c5e980f9cb52dbc1",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ja-JP/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "def6a39791b0544623147bd94a840fd2fb63e5e2",
+      "sha256": "be46038b4618c64705385c71f85cd89086ba624ac36de545d8886c913a8e034c",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ka-GE/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "a1d6f2f301b7b3a3ab26e63b52f559bb227ef712",
+      "sha256": "00a7d02bf60d12a5eb911503429b3c22d7de8ef52b546faa411fefa66b6aa87d",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ko-KR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f593260351b6e101df42023fe442de4fd9334642",
+      "sha256": "07cb788c2018b005751d3f1293566af9feba11b5db535bff10ad28202374a454",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/lt-LT/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "32abbcc1413b36b5977e82c6fba4a1a4151c9697",
+      "sha256": "a618d1a00e7dd03549278e171389ee9896fad4b5baee54cb4f80b7d54565639a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ms-MY/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f07dda04270df0e9461e57b943f0d9f6e60330b1",
+      "sha256": "7fa4e4dd64eb9d3f93e2af12f957f9da325b26475f30c019b2e482e7f76d4186",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/nb-NO/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "cb35dc38a4198f316cabac596c6548093961056c",
+      "sha256": "6c45983f55c86ce358d14787cdc6dfc954b0de1a42885a6cf085940d27a1c116",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/nl-NL/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "913aca7682b2d3e5544d7a9de90e8cc9654bb0b6",
+      "sha256": "93553247b14903395bcf3f77ef52c95f4bac0ffe9ce3499a99c7faf85fdad15a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/pa-IN/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "01b0717d778c7c88a2e0aa11b27a63830ba8006f",
+      "sha256": "6d93319281ba8dac57dd2fd503e08ad403dd612205a32ef316bbb51717c99dcc",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/pl-PL/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ab15e12c643fa2270a6ca1f5d489520ba33e93e1",
+      "sha256": "20720d1d5bf240ec833e2921da34b93bcd56513da5d8ba8d48390d95c01d752e",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/pt-BR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f6965a60d3f2552707a3df4a100d79b5a84ad9b5",
+      "sha256": "eea3982b5155c7c50c37582071b28fad2933b6ff5f4270c49a5ddee950f7399f",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/pt-PT/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "4376f96df0caf94cb4046cd42b84017285915c61",
+      "sha256": "99c57c8b037127d814f0e639487ecc47e9b4b3a8c8885333ad9c889df2735c14",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ro-RO/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "593a822a0b7019a7353744abfa0b66bd91b830f1",
+      "sha256": "371f832689a22779d69031689fe3aaac2c924e9082401350fa07db6ff43e8f51",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ru-RU/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "a691ad2c1826431b00932c5cd99627e99d69fbe1",
+      "sha256": "c5f64d906770dbe651874899ec0fad8903c5008eb401cc43102caca3a2fd944a",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/sk-SK/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "b0b7d62c9f14247c1b10e20b18383a75de05a3ad",
+      "sha256": "07f79f4077be361f5db50293ecad1c6285b932586375cbff706c28a14021ec0f",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/sr-RS/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "c9ed9afe59a2dd259162bd6d173f84c4011eb9b5",
+      "sha256": "18397da7c14a7d3378fa6ecb26e205907fcf1f8392c2a5863ad3bd9051109669",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/sv-SE/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "fe9c07420da29a64a9214fac5abb3df79c21203e",
+      "sha256": "0542fb6d34fce1011d3bca9d2bad1250a3d5f82474acc01e4f2fee0bd4911ee9",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/th-TH/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ca20fc7dce8ee88868d2c8228396db262d52aebf",
+      "sha256": "f64c2ee892a56d88903f0e98cc4427048ccb2f9eba037a8fea46d70c1cebe8c8",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/tk-TW/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "ef83bdf422552ca4687c6e1a7748317501454910",
+      "sha256": "4751c5ea84404c2300d27343e46701c51aeeac4bab25b476e549cac314acd0d7",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/tr-TR/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "cccf6fe4fd5a8c58be58762c21a46ee95ccd0b40",
+      "sha256": "0106723c72024a5a0fce566525a197af2cda1193d006e28390353085b3eac366",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/uk-UA/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "5b2f95312f77401f65705890e7dfa37f54983da8",
+      "sha256": "5882d4a5d2628bcb5654077a021e6a7418f3d36f57ce8c37632f2e5cc44519a8",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/ur-PK/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "6110aa82060376d9ab66b974e121d8b618046ecd",
+      "sha256": "1f15d43669f26c929eb40f42659c4bf20e145c62ee43ccfbe3f518eb44a80c1d",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/vi-VN/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "464c374f8efe34ceb33dcddd0dfe1a25ddd73ec8",
+      "sha256": "2dc38b2c4674dc801f948de8a39b7f03a16c40ce89ebadc96dd90762c2e64070",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/zh-CN/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "f775849a4ab1ccd57e6927131b718fe3bdcec4ce",
+      "sha256": "0e341515a5edc838c48325c08a2217a67a6f7542e97b03c4e3a893b01a2cccb6",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    },
+    {
+      "path": "product/src/lib/i18n/locales/zh-TW/translation.json",
+      "line": 438,
+      "type": "credential-url",
+      "oid": "4eb15355058bd20913e382315a469c6ab8119476",
+      "sha256": "099227e977f9308120531cbf063083739c4da6a473bfa3e6eb25624291ce1fb5",
+      "disposition": "ui-placeholder",
+      "reason": "Translated form proxy-URL example/placeholder, not stored connection."
+    }
+  ],
+  "counts": {
+    "runtime-or-vendor-path-review": 71,
+    "credential-url": 57,
+    "credential-literal-review": 6,
+    "provider-token": 4
+  },
+  "open_findings": [],
+  "skipped_count": 44,
+  "skip_review": "All44skipped blobs have sameOID as prior asset review: screenshots visually inspected, bundled fonts and notices matched,6.97MB Sheets JS separately scanned,source archives member/license checked; static binary/steganographic guarantee not claimed.",
+  "native_pins": {
+    "staged_count": 15,
+    "staged_byte_mismatches": 0
+  },
+  "required_notices": "Scoped root,product upstream,native dashboard,product fonts,Twemoji,Sheets,noVNC notice files present in index",
+  "generated_demo_apps_indexed": 0,
+  "tests_independently_run": {
+    "collaboration_core": 14,
+    "provider_boundary": 2
+  },
+  "network_model_or_key_access": "none",
+  "parent_owns_commit": true
+}

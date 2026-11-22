@@ -6,9 +6,11 @@
     "installer/product.mjs": "d8c5a400177bebfe86d7108c8b01fa13690fad86383056e1557603de8ecc8f80",
     "installer/starli.mjs": "7e14da975185ccc11046f6bee5c9b340670ca6f3883fae403fb514bd65f5ea8c",
     "installer/starli.test.mjs": "034c1fbb8b9434043d67fd11834a2b919378bea705a2ed2024203e4cda780bc6",
-    "installer/native.mjs": "27d6796d126784ef6794753fe4399772df500a719ba0b7a36e791bfe87d0decb",
+    "installer/native.mjs": "802f33e1bd3a27a73ccc3b818c2171e5b2dad4c88aeb158d0c7bff0e8cbfe84f",
     "installer/starli.ps1": "132a9740aa251022796ea98bd49164e0394f55f36b5fcdc54660aa92320af64d",
     "installer/starli.sh": "f5e303a70ea54393b6ee3f897ebba5229f52ed42adf954d4337c2ed90dab6b4a",
-    "docs/install.md": "cdac51c50172b013edfacc8ce91303dca6b366564ab4aba080dd7aa721d206ae"
+    "docs/install.md": "d00dd006882d6e70d172fbd5f1e50f5884504da42d02325a5866bb04a884d186",
+    "installer/node-archive.mjs": "268646bd7cb470a45b19ff728418a64a9691978a234460b07a3a224952195763",
+    "installer/native-bootstrap.test.mjs": "a838137a101269bed8c04f9910ca0de940f4faa357b6fb47058df32ad584dc65"
   }
 }

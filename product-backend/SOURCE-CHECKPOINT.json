@@ -1,7 +1,7 @@
 {
   "status": "SOURCE_CHECKPOINT_READY",
   "date": "2026-11-22",
-  "contractSha256": "ad8f16b833b29947fa1b4b2ed6aa35c2f4cd598f19067e05196b55ec18d899b9",
+  "contractSha256": "ef424a0c567f932f8d356ffbd8ca839cc2b023d0480432fb32325909e6ffcc90",
   "nativePins": {
     "status": "PASS",
     "pinnedNativeFiles": 15,

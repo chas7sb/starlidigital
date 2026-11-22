@@ -27,6 +27,8 @@ API integration:
 - Collaboration: POST `/api/v1/starli/companies/{company}/messaging/rooms/{room}/collaborations` with `bossId`, `teammateIds`, `sourceMessageId` and `Idempotency-Key`; GET `/{run}` for persisted status/messages/model receipts; POST `/{run}/stop` for bounded cancellation. The source must already be an actual canonical message by the initiating human. Use a normal private group conversation containing the approved bots, not the separate native work-session protocol.
 - Native provider usage evidence: `/api/v1/companies/{company}/rooms/{room}/model-receipts?runId={run}`. Receipts contain provider/model/response ID and allowed numeric usage/cost, never credentials or session scope.
 
+Collaboration message attribution uses native `message.meta.collaboration.runId` and the dedicated team API's native message IDs. Its `cm_messages.run` / normal message DTO `runId` is null. Those normal fields are reserved for real `cr_turns` IDs, which the company frontend polls through the single-bot runtime API. Collaboration never fabricates a `cr_turns` record; ordinary native chat retains its real turn ID.
+
 Mutations require current native bearer authentication, the configured Origin and company/room/bot permissions. Restart never automatically replays a pending model request or resumes an orphan collaboration. Unknown effects retain review/pending states; no synthetic success receipt is substituted.
 
 Run actual native HTTP/ASGI regression checks with:

@@ -1,0 +1,67 @@
+{
+  "sourceLock": "94e9416c4d8aff966dccd52794073160528bde3bea9a4656f8d24006c23c9245",
+  "changes": [
+    {
+      "path": "src/routes/+layout.svelte",
+      "sha256": "7a8abc19d55dca77a7a8336d4bbcd746a6c4a9160e29113ff209d97767d80988"
+    },
+    {
+      "path": "src/lib/components/marketing/Homepage.svelte",
+      "sha256": "0ca6739892685820badae623e62f2a56a51f00fc814a6ef4a87f862f77b1a36a"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "cea19f3c8d58ca04f9721914b42dd0cd29ff72972c07f43b267d76bcf814b642"
+    },
+    {
+      "path": "src/routes/app/+page.svelte",
+      "sha256": "652cb13113f3e2156629a6f232e1bab1e3e56649480bd3957942970bf423789a"
+    },
+    {
+      "path": "src/lib/components/enterprise/company/LocalProviderConnection.svelte",
+      "sha256": "f65947ef492ea088fe130f5a69c61c986c3ac6364b20a1d68d4c104b47b4b568"
+    },
+    {
+      "path": "src/lib/components/enterprise/messaging/TeamCollaboration.svelte",
+      "sha256": "c582c1ad1600aa3a22ceb735769b6e95d74e46a4be6523f9fc7b775acc0abab9"
+    },
+    {
+      "path": "src/lib/components/enterprise/messaging/collaboration-client.ts",
+      "sha256": "11b158a32a2729de0d172e2804943d3121203df7c2539b76e5ae1ac24414390f"
+    },
+    {
+      "path": "tests/local-collaboration-client.test.mjs",
+      "sha256": "c9ae5f1e129353dd91b4e9cfc279c1f52dcbab44a3e9aee3d04feea995dd8bd5"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "88d49a0d07e8589684ccf8dc6e276acf6945752e0c97b3a61a68289a45e70b64"
+    },
+    {
+      "path": "src/lib/components/enterprise/CompanyApps.svelte",
+      "sha256": "5f689a5494663d7bb811d3925bc3359633cb4994203fce3612448ebfe9628638"
+    },
+    {
+      "path": "src/lib/components/enterprise/account/CustomerAPI.svelte",
+      "sha256": "b8dcea06381a2cbbf56a45a2d037db4d6efa8c7570cdfecd0723745f4dc64853"
+    },
+    {
+      "path": "src/lib/components/enterprise/panes/published-preview.ts",
+      "sha256": "411aef28545401adf482e7b8449a54b5058e81c407a77867012b47c1eb2eeaaa"
+    },
+    {
+      "path": "src/lib/components/enterprise/social/company-social-client.ts",
+      "sha256": "b579409e96270242f288e91e1023fa1105419e1e30e2a779122237bc6ad08f33"
+    },
+    {
+      "path": "src/lib/utils/installation-origin.ts",
+      "sha256": "2f00effef236268fb96822b3069201f304404c79da4ad3c5d82b3569d8cf1e31"
+    },
+    {
+      "path": "tests/installation-origin.test.mjs",
+      "sha256": "e6a3e4fb47d02b587defb93ebb0b0401c097ffb23418cb02eaa639b46f4d8816"
+    }
+  ],
+  "purpose": "Remove marketing showcase/legacy shell; use loopback native API; bounded native team collaboration + explicit company provider setup. Source manifests preserve original bytes. No model inference claimed by frontend build tests.",
+  "publicOrigin": "Defaults to browser public origin; optional strictly validated VITE_STARLI_PUBLIC_ORIGIN. No original deployment origin fallback."
+}

@@ -1,3 +1,4 @@
+import {installationAuthorizationUrl} from '$lib/utils/installation-origin';
 export const SOCIAL_VERSION='starli.company-social.v1';
 export type SocialPage={pageId:string;pageConnectionId:string;name:string;instagramAccountIds:string[]};
 export type SocialDelegation={id:string;revision:number;ownerUserId:string;status:'ACTIVE'|'REVOKED';pages:SocialPage[];rulesDigest:string};
@@ -7,7 +8,7 @@ export type DelegationSelection={pageId:string;pageConnectionId:string;instagram
 export class CompanySocialError extends Error{constructor(public status:number,message:string){super(message);}}
 const str=(v:unknown)=>typeof v==='string'&&v.length>0;const revision=(v:unknown)=>Number.isSafeInteger(v)&&Number(v)>=0;
 function delegation(v:any):SocialDelegation{if(!v||!str(v.id)||!revision(v.revision)||!str(v.ownerUserId)||!['ACTIVE','REVOKED'].includes(v.status)||!str(v.rulesDigest)||!Array.isArray(v.pages)||v.pages.some((p:any)=>!str(p.pageId)||!str(p.pageConnectionId)||typeof p.name!=='string'||!Array.isArray(p.instagramAccountIds)||p.instagramAccountIds.some((id:unknown)=>!str(id))))throw new CompanySocialError(0,'Company social access could not be verified.');return v;}
-export function socialAuthorizationUrl(value:unknown):string|null{if(typeof value!=='string')return null;try{const url=new URL(value);return url.origin==='https://api.starlidigital.ro'&&url.pathname==='/customer/oauth/authorize'&&!url.username&&!url.password?url.href:null;}catch{return null;}}
+export function socialAuthorizationUrl(value:unknown):string|null{return installationAuthorizationUrl(value,'/customer/oauth/authorize');}
 export class CompanySocialClient{
  private controller=new AbortController();private session:string;private detach:()=>void;readonly root:string;
  constructor(readonly companyId:string,private tokenNow:()=>string,signal:AbortSignal,private transport:typeof fetch=(input,init)=>globalThis.fetch(input,init)){this.session=tokenNow();this.root='/api/v1/starli/companies/'+encodeURIComponent(companyId)+'/social';const stop=()=>this.close();signal.addEventListener('abort',stop,{once:true});this.detach=()=>signal.removeEventListener('abort',stop);if(signal.aborted)this.close();}

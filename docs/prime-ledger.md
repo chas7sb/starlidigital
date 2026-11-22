@@ -15,3 +15,7 @@ GitHub repository: https://github.com/chas7sb/starlidigital (private during inte
 ## Corrected frontend target — 2026-11-22
 User explicitly requires the new native bots, teams, Boss and agent-to-agent product. Earlier OpenWebUI frontend preview and checks are legacy compatibility evidence only, not acceptance of the requested product. New immutable V12 frontend extraction is product/; native runtime closure is being assembled in product-backend/. Release remains blocked pending correct local preview and joined-flow verification.
 
+
+## New product local checkpoint — 2026-11-22
+Pushed native product source/installer at 5f6df1edbc53057c396e19c7b78c8b9b4bfdf840. Actual browser shows new company workspace with Boss, Pico, Pixel and native team channel at loopback5186. Model setup is user handoff; providerConfigured=false at last check, no actual inference claimed. Bounded collaboration core14 fixture tests and native sink integration pass; source archive15 boundary tests pass. Untouched clone installation and three-OS new-product boot CI are running. Generated app workers, trusted preview lifecycle and autonomous execution tools remain unconfigured. No release/tag published.
+

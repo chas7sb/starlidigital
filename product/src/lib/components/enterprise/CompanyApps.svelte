@@ -1,5 +1,6 @@
 <script lang="ts">
  import {onMount,onDestroy,createEventDispatcher} from 'svelte';
+ import {installationPublicUrl,verifiedMcpAuthorization} from '$lib/utils/installation-origin';
  import {EnterpriseServices} from './company-services';
  import {mcpFields,mcpError,type McpServer,type McpCapabilities} from '$lib/utils/starli-account-mcp';
  export let companyId:string;export let actorId:string;export let accessSignal:AbortSignal;
@@ -13,7 +14,7 @@
  function closeEditor(){editor=undefined;name='';url='';credential='';clearCredential=false;}
  function clear(){service?.close();service=null;resources=[];tools=[];servers=[];caps=null;oauthOptions=null;cursor='';hasMore=false;closeEditor();removeConfirm='';query='';loading=false;busy=false;}
  function fail(cause:any){if(cause.name==='AbortError')return;error=cause.message||'The service is unavailable.';if(cause.status===401||cause.companyDenied){clear();dispatch('denied',{status:cause.status});}}
- async function load(){const current=service;if(!current||busy)return;loading=true;error='';resourceError='';toolError='';mcpLoadError='';try{await current.authority();const result=await Promise.allSettled([current.manifests(),current.catalog(),current.mcp().capabilities!(accessSignal),current.mcp().list('',accessSignal),current.json('/api/v1/starli/mcp/oauth/options')]);if(current!==service)return;current.current();for(const r of result)if(r.status==='rejected'&&(r.reason.companyDenied||r.reason.status===401)){fail(r.reason);return;}resources=result[0].status==='fulfilled'?result[0].value:[];tools=result[1].status==='fulfilled'?result[1].value:[];caps=result[2].status==='fulfilled'?result[2].value:null;if(result[3].status==='fulfilled'){servers=result[3].value.items;cursor=result[3].value.cursor;hasMore=result[3].value.hasMore;}else{servers=[];cursor='';hasMore=false;}oauthOptions=result[4].status==='fulfilled'&&result[4].value?.version==='starli.mcp-oauth.v1'&&result[4].value?.supported===true&&result[4].value?.endpoint==='https://api.starlidigital.ro/mcp'&&result[4].value?.requiresControlPlaneAdministrator===true&&JSON.stringify(result[4].value?.scopes)==='["read"]'?result[4].value:null;if(result[0].status==='rejected')resourceError='Company resource discovery is unavailable.';if(result[1].status==='rejected')toolError='The authenticated tool catalog is unavailable.';if(result[2].status==='rejected'||result[3].status==='rejected'){
+ async function load(){const current=service;if(!current||busy)return;loading=true;error='';resourceError='';toolError='';mcpLoadError='';try{await current.authority();const result=await Promise.allSettled([current.manifests(),current.catalog(),current.mcp().capabilities!(accessSignal),current.mcp().list('',accessSignal),current.json('/api/v1/starli/mcp/oauth/options')]);if(current!==service)return;current.current();for(const r of result)if(r.status==='rejected'&&(r.reason.companyDenied||r.reason.status===401)){fail(r.reason);return;}resources=result[0].status==='fulfilled'?result[0].value:[];tools=result[1].status==='fulfilled'?result[1].value:[];caps=result[2].status==='fulfilled'?result[2].value:null;if(result[3].status==='fulfilled'){servers=result[3].value.items;cursor=result[3].value.cursor;hasMore=result[3].value.hasMore;}else{servers=[];cursor='';hasMore=false;}oauthOptions=result[4].status==='fulfilled'&&result[4].value?.version==='starli.mcp-oauth.v1'&&result[4].value?.supported===true&&!!oauthEndpoint&&result[4].value?.endpoint===oauthEndpoint&&result[4].value?.requiresControlPlaneAdministrator===true&&JSON.stringify(result[4].value?.scopes)==='["read"]'?result[4].value:null;if(result[0].status==='rejected')resourceError='Company resource discovery is unavailable.';if(result[1].status==='rejected')toolError='The authenticated tool catalog is unavailable.';if(result[2].status==='rejected'||result[3].status==='rejected'){
  const c=result[2].status==='rejected'?result[2].reason:null;
  const l=result[3].status==='rejected'?result[3].reason:null;
  const codes=[c,l].map((v:any)=>typeof v?.message==='string'?v.message:'');
@@ -26,8 +27,8 @@
  function edit(row:McpServer|null){editor=row;name=row?.name||'';url=row?.url||'';transport=row?.transport||'streamable-http';credential='';clearCredential=false;error='';notice='';removeConfirm='';}
  async function mutation(fn:(api:ReturnType<EnterpriseServices['mcp']>)=>Promise<any>,message:string,after?:(value:any)=>void){const current=service;if(!current||busy)return;busy=true;error='';notice='';try{await current.authority();const value=await fn(current.mcp());if(current!==service)return;current.current();if(value?.version==='starli.account-mcp.v1')servers=[...servers.filter(s=>s.id!==value.id),value].sort((a,b)=>a.name.localeCompare(b.name));after?.(value);notice=message;}catch(e){if(current===service){if((e as any).companyDenied||(e as any).status===401)fail(e);else error=mcpError(e);}}finally{if(current===service)busy=false;}}
  async function save(){let fields;try{fields=mcpFields(name,url,transport,credential,clearCredential);}catch(e){error=mcpError(e);credential='';return;}credential='';const selected=editor;await mutation(api=>selected?api.update(selected.id,{...fields,expectedRevision:selected.revision},accessSignal):api.create(fields,accessSignal),'Connection saved. Test and discover before using its tools.',closeEditor);}
- const oauthEndpoint='https://api.starlidigital.ro/mcp';
- function oauthEligible(row:McpServer){return oauthOptions?.supported===true&&row.url===oauthEndpoint&&row.transport==='streamable-http';}
+ const oauthEndpoint=installationPublicUrl('/mcp');
+ function oauthEligible(row:McpServer){return oauthOptions?.supported===true&&!!oauthEndpoint&&row.url===oauthEndpoint&&row.transport==='streamable-http';}
  function oauthPopup():Window|null{
   const pop=window.open('about:blank','_blank','popup,width=540,height=730');
   if(!pop)error='Allow the Starli Control Plane sign-in window in your browser, then try again.';
@@ -36,11 +37,9 @@
  async function startOauth(row:McpServer,pop:Window,current:EnterpriseServices){
   const data=await current.json('/api/v1/starli/mcp/oauth/start',{method:'POST',body:JSON.stringify({serverId:row.id,expectedRevision:row.revision})});
   current.current();
-  const link=new URL(String(data.authorizationUrl||''));
-  const returnUrl=location.origin+'/api/v1/starli/mcp/oauth/callback';
-  if(data.version!=='starli.mcp-oauth.v1'||data.scope!=='read'||data.issuer!=='https://api.starlidigital.ro'||link.origin!=='https://api.starlidigital.ro'||link.pathname!=='/oauth/authorize'||link.searchParams.get('redirect_uri')!==returnUrl||link.searchParams.get('scope')!=='read')
-   throw Error('MCP_OAUTH_AUTHORIZATION_UNVERIFIED');
-  pop.location.assign(link.href);
+  const link=verifiedMcpAuthorization(data,location.origin);
+  if(!link)throw Error('MCP_OAUTH_AUTHORIZATION_UNVERIFIED');
+  pop.location.assign(link);
   notice='Complete the separate Starli Control Plane administrator sign-in. Afterwards return here and click Refresh to test and discover tools. No access is granted to a bot automatically.';
  }
  async function signIn(row:McpServer){

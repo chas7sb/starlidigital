@@ -42,6 +42,13 @@ def main():
    native=c.get(prefix+'/rooms/'+room+'/messages',headers=h).json()['messages'];ids={p['messageId']for p in posted}
    saved=[x for x in native if x['id']in ids];assert len(saved)==3 and all(x['speaker']['kind']=='agent' for x in saved)
    assert {x['speaker']['id']for x in saved}==set(bots)
+   assert all(x['runId'] is None and x['attribution']['requestedBy'] for x in saved)
+   with app.state.company_messaging.db(readonly=True) as db:
+    assert db.execute('SELECT 1 FROM cr_turns WHERE id=?',(run,)).fetchone()is None
+    for message in saved:
+     meta=json.loads(db.execute('SELECT meta FROM message WHERE id=?',(message['id'],)).fetchone()[0])
+     assert meta['collaboration']['runId']==run
+     assert meta['attribution']['requestedBy']==message['attribution']['requestedBy']
    replay=c.post(url,headers={**h,'idempotency-key':'fixture-run'},json=body);assert replay.status_code==202 and replay.json()['runId']==run
    assert c.post(url,headers={**h,'Origin':'http://127.0.0.1:9999','idempotency-key':'blocked'},json=body).status_code==403
    turn_url='/api/v1/starli/companies/'+company+'/rooms/'+room+'/bots/'+bots[0]+'/runtime/turns'
@@ -51,6 +58,8 @@ def main():
     if current.json()['status']not in ('RUNNING','QUEUED'):break
     time.sleep(.05)
    assert current.json()['status']=='ANSWERED',current.text
+   direct=c.get(prefix+'/rooms/'+room+'/messages',headers=h).json()['messages']
+   assert any(x['id']==current.json()['assistantMessageId'] and x['runId']==turn for x in direct)
    result=c.get(base+'/rooms/'+room+'/bots/'+bots[0]+'/runs/'+turn+'/receipt',headers=h);assert result.status_code==200,result.text
    assert result.json()['receipt']['executionClass']=='TEST_FIXTURE'
   report={'status':'PASS','scope':'native collaboration integration with explicit model fixture','actualInference':False,'externalCalls':0,'checks':['native human source required','selected company bots only','Boss request/teammate reply/Boss final native persisted agent messages','per-bot selected configuration captured','durable run/model/message receipts','idempotent replay','cross-origin mutation denied']}

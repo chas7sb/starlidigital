@@ -2,7 +2,7 @@
 
 Open-source extraction of the new StarliDigital product: companies, bots, teams, Boss coordination, conversations between agents, and generated app previews. Sales pages are excluded. This is an integration workspace, not a completed release.
 
-The requested frontend is being assembled in `product/`, with its native runtime in `product-backend/`. Its exact source and verification limits are recorded in [new product source](docs/new-product-source.md). The earlier `dashboard/` extraction and its previews belong to the legacy OpenWebUI-based application; they do not demonstrate acceptance of this product.
+The frontend lives in `product/`, with its native runtime in `product-backend/`. Its exact source and verification limits are recorded in [new product source](docs/new-product-source.md). The superseded frontend has been removed from the current tree. `dashboard/backend` retains the native foundation libraries and their upstream notices; the new installer serves only `product/`.
 
 ## Getting started
 
@@ -28,7 +28,7 @@ Windows, macOS and Linux are installation targets. Platform validation and outst
 | --- | --- |
 | `product/` | New StarliDigital bots, teams and Boss frontend |
 | `product-backend/` | Native company, orchestration and app runtime source |
-| `dashboard/` | Legacy application source; compatibility dependencies under review |
+| `dashboard/` | Retained native backend foundation, metadata and upstream notices |
 | `platform/` | Node platform, active MCP control-plane, CLI and device source |
 | `platform/extensions/` | Additional production feature runtimes, extracted without live state |
 | `runtime/` | Isolated computer-use VM lifecycle |
