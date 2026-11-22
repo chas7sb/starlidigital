@@ -43,5 +43,5 @@ jobs:
         with:
           name: native-boot-${{ matrix.os }}
           path: work/native-boot-result.json
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 7

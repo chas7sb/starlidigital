@@ -53,3 +53,21 @@ checks with Python 3.11.9, 42 installed providers and 69 scoped tools. Both API
 process trees were stopped after validation. This reused the already installed
 dashboard environment; the workflow's fresh hash-lock installation still needs
 its own hosted execution.
+
+The first hosted POSIX attempt found a harness preflight bug: creating
+`local/home` with `mkdir(parents=True, mode=0700)` left the intermediate `local`
+directory at the host's default mode. The unchanged privacy helper correctly
+rejected it before API startup. The harness now explicitly creates and validates
+the private state root before any children. Actual Linux reproduction showed
+the old parent at 0775 was rejected and the corrected parent/file at 0700/0600
+passed the exact shared privacy validator. The corrected Windows boot again
+passed all eight checks.
+
+Every harness failure now writes a structured result with a fixed stage/code,
+exception class and numeric OS/HTTP status where available. Private traceback
+diagnostics expose only frame filenames/functions and exception/module names;
+raw exception messages, service logs and credentials are not uploaded. Installer
+and child reexecution attempts carry a fresh identifier, so an old result cannot
+be mistaken for the current attempt. Missing result artifacts fail the upload
+step instead of being reported only as a warning. New hosted POSIX execution is
+still required to establish API boot after this harness correction.
