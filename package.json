@@ -1,0 +1,17 @@
+{
+  "name": "starlidigital",
+  "version": "0.1.0-dev",
+  "private": true,
+  "description": "Self-hosted StarliDigital dashboard, platform and isolated computer runtime",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "starli": "node installer/starli.mjs",
+    "doctor": "node installer/starli.mjs doctor",
+    "setup": "node installer/starli.mjs init",
+    "build": "node installer/starli.mjs install",
+    "start": "node installer/starli.mjs start",
+    "stop": "node installer/starli.mjs stop",
+    "status": "node installer/starli.mjs status"
+  }
+}
