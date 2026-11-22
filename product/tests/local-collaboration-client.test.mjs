@@ -7,7 +7,7 @@ const root=new URL('../',import.meta.url);
 const moduleUrl=(source)=>'data:text/javascript;base64,'+Buffer.from(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText).toString('base64');
 const workspace=moduleUrl(readFileSync(new URL('src/lib/utils/company-workspace.ts',root),'utf8'));
 const source=readFileSync(new URL('src/lib/components/enterprise/messaging/collaboration-client.ts',root),'utf8').replace('$lib/utils/company-workspace',workspace);
-const {CollaborationClient,verifiedTeamRun}=await import(moduleUrl(source));
+const {CollaborationClient,verifiedTeamRun,incompleteReviewFingerprint,teamRunBlocksStart}=await import(moduleUrl(source));
 const run={version:'starli.collaboration.run.v1',runId:'run-a',companyId:'company-a',conversationId:'room-a',bossId:'boss-a',teammateIds:['bot-b'],sourceMessageId:'message-a',state:'QUEUED',round:0,modelCalls:0,stopRequested:false,confirmedStopped:false,needsReview:false};
 const response=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json'}});
 
@@ -42,4 +42,28 @@ test('HTTP failure is not retried automatically',async()=>{
 test('room/message scope is freshly checked before choosing source',async()=>{
  const client=new CollaborationClient('company-a','room-a',()=> 'session-a',async url=>url.endsWith('/room-a')?response({id:'room-a',companyId:'company-a',agentIds:['boss-a','bot-b'],lastMessageSequence:1}):response({messages:[{id:'message-a',roomId:'foreign'}]}));
  await assert.rejects(client.context());client.close();
+});
+
+const incomplete={...run,state:'FAILED',storedState:'COMPLETED',needsReview:true,errorCode:'COLLABORATION_TEAM_COVERAGE_INCOMPLETE',teammateIds:['bot-b','bot-c'],participantCoverage:{selectedIds:['bot-b','bot-c'],repliedIds:['bot-b'],missingIds:['bot-c']},messages:[{botId:'bot-b',kind:'reply',content:'Saved reply',state:'POSTED',messageId:'native-message-b'}]};
+test('coverage preserves exact selected order and an ordered disjoint partition',()=>{
+ const parsed=verifiedTeamRun(incomplete,'company-a','room-a');assert.deepEqual(parsed.participantCoverage,incomplete.participantCoverage);assert.equal(parsed.storedState,'COMPLETED');
+ for(const coverage of [
+  {selectedIds:['bot-c','bot-b'],repliedIds:['bot-b'],missingIds:['bot-c']},
+  {selectedIds:['bot-b','bot-c'],repliedIds:['bot-b'],missingIds:['bot-b','bot-c']},
+  {selectedIds:['bot-b','bot-c'],repliedIds:['foreign'],missingIds:['bot-b','bot-c']},
+  {selectedIds:['bot-b','bot-c'],repliedIds:[],missingIds:['bot-b']},
+  {selectedIds:['bot-b','bot-c'],repliedIds:[],missingIds:['bot-c','bot-b']},
+  {selectedIds:['bot-b','bot-c'],repliedIds:['bot-b','bot-b'],missingIds:['bot-c']}
+ ])assert.throws(()=>verifiedTeamRun({...incomplete,participantCoverage:coverage},'company-a','room-a'));
+});
+test('only an exact reviewed legacy incomplete run unlocks an explicit new start',()=>{
+ const fingerprint=incompleteReviewFingerprint(incomplete);assert(fingerprint);assert.equal(teamRunBlocksStart(incomplete),true);assert.equal(teamRunBlocksStart(incomplete,fingerprint),false);
+ assert.equal(incomplete.needsReview,true);assert.equal(incomplete.state,'FAILED');
+ for(const patch of [{runId:'different-run'},{conversationId:'different-room'},{sourceMessageId:'different-source'},{participantCoverage:{selectedIds:['bot-b','bot-c'],repliedIds:[],missingIds:['bot-b','bot-c']}}])assert.equal(teamRunBlocksStart({...incomplete,...patch},fingerprint),true);
+});
+test('acknowledgment never unlocks uncertain, orphan-active or ambiguous runs',()=>{
+ const fingerprint=incompleteReviewFingerprint(incomplete);
+ for(const patch of [{state:'UNCERTAIN',storedState:'UNCERTAIN'},{state:'STOP_PENDING',storedState:'RUNNING'},{state:'RUNNING',storedState:'RUNNING'},{storedState:'FAILED'},{errorCode:'COLLABORATION_MESSAGE_UNCERTAIN'},{stopRequested:true},{confirmedStopped:true},{participantCoverage:undefined},{messages:undefined},{messages:[{botId:'bot-b',kind:'reply',content:'Unconfirmed',state:'INTENT',messageId:null}]}]){
+  const value={...incomplete,...patch};assert.equal(incompleteReviewFingerprint(value),'');assert.equal(teamRunBlocksStart(value,fingerprint),true);
+ }
 });

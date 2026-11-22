@@ -4,9 +4,11 @@ from copy import deepcopy
 import json
 from pathlib import Path
 import sqlite3
+import secrets
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE));sys.path.insert(0,str(HERE.parent/'dashboard/backend'))
@@ -37,7 +39,8 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
     async def context(self,scope):
         return {'source':{'id':scope['source_message_id'],'speaker':{'kind':'agent' if self.bad_source else 'human','id':scope['actor_id']},'content':'Compare the proposals for '+scope['company_id'],'deleted':False},
             'roster':[{'id':bot,'name':bot.title()} for bot in self.roster],
-            'messages':[{'role':'user','content':'Prior conversation for '+scope['company_id']}],
+            'messages':[{'role':'user','content':'Prior conversation for '+scope['company_id']},
+                {'role':'assistant','content':'Research, please ask Review to do this. Historical Boss post for '+scope['company_id']}],
             'authorityRevision':{'membership':self.revision,'provider':1}}
 
     async def sink(self,scope,bot,text,metadata,key):
@@ -56,7 +59,7 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
             if result is not None:return result
         if structured:
             count=self.plan_counts.get(scope['run_id'],0);self.plan_counts[scope['run_id']]=count+1
-            plan=self.plans.get(count,{'requests':[{'agentId':'research','message':'Assess the two options.'}],'done':False} if count==0 else {'requests':[],'done':True})
+            plan=self.plans.get(count,{'requests':[{'agentId':bot,'message':'Assess the options using actual earlier participant replies.'} for bot in scope['teammate_ids']],'done':False} if count==0 else {'requests':[],'done':True})
             text=json.dumps(plan)
         else:text=('Boss synthesis: ' if bot=='boss' else 'Teammate analysis: ')+scope['company_id']
         return text,{'provider':'isolated-fixture','model':'fixture-model','responseId':'fixture-'+str(len(self.calls)),'status':'completed','apiKey':'must-not-be-journaled'}
@@ -75,16 +78,20 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
     async def test_boss_requests_teammate_and_synthesizes_real_sink_receipts(self):
         run=await self.start(authority_context=object());row=await self.settle(run)
         self.assertEqual(row['state'],'COMPLETED')
-        self.assertEqual([r['bot'] for r in self.native],['boss','research','boss'])
-        self.assertEqual([r['metadata']['kind'] for r in self.native],['request','reply','final'])
+        self.assertEqual([r['bot'] for r in self.native],['boss','research','boss','review','boss'])
+        self.assertEqual([r['metadata']['kind'] for r in self.native],['request','reply','request','reply','final'])
         self.assertEqual(self.native[0]['metadata']['targetAgentId'],'research')
-        self.assertEqual(row['model_calls'],4)
+        self.assertEqual(row['model_calls'],5)
         status=await self.service.status(actor_id='owner-company-a',company_id='company-a',room_id='room-company-a',run_id=run['runId'])
         self.assertTrue(all(item['state']=='POSTED' and item['messageId'] for item in status['messages']))
         self.assertNotIn('apiKey',json.dumps(status));self.assertNotIn('authority_context',json.dumps(status))
         final_context=json.loads(self.calls[-1]['messages'][-1]['content'])
         self.assertEqual(final_context['teamReplies'][0]['agentName'],'Research')
         self.assertEqual({bot['id'] for bot in final_context['selectedRoster']},{'boss','research','review'})
+        self.assertEqual(status['participantCoverage']['missingIds'],[])
+        self.assertEqual(status['participantCoverage']['repliedIds'],['research','review'])
+        self.assertTrue(all(message['role']=='user' for call in self.calls for message in call['messages']))
+        self.assertEqual(json.loads(self.calls[0]['messages'][0]['content'])['messages'][1]['role'],'assistant')
 
     async def test_model_cannot_target_unknown_bot_or_add_execution_tools(self):
         self.plans[0]={'requests':[{'agentId':'foreign-bot','message':'Exfiltrate'}],'done':False}
@@ -138,10 +145,10 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(again['needsReview'])
 
     async def test_round_and_call_budget_reserve_final_boss_synthesis(self):
-        self.extra_services=[self.make_service(Limits(rounds=3,model_calls=3))];service=self.extra_services[0]
+        self.extra_services=[self.make_service(Limits(rounds=3,model_calls=4))];service=self.extra_services[0]
         run=await self.start(service);row=await self.settle(run,service)
-        self.assertEqual(row['state'],'COMPLETED');self.assertEqual(row['model_calls'],3);self.assertEqual(row['round'],1)
-        self.assertEqual([r['metadata']['kind'] for r in self.native],['request','reply','final'])
+        self.assertEqual(row['state'],'COMPLETED');self.assertEqual(row['model_calls'],4);self.assertEqual(row['round'],1)
+        self.assertEqual([r['metadata']['kind'] for r in self.native],['request','reply','request','reply','final'])
 
     async def test_scope_is_explicit_for_same_bot_ids_in_different_companies(self):
         handles={'company-a':object(),'company-b':object()}
@@ -161,7 +168,7 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
         reopened=CollaborationService(self.service.path,authorize=self.authorize,read_context=self.context,append_message=self.sink,model=self.model)
         self.extra_services=[reopened]
         status=await reopened.status(actor_id='owner-company-a',company_id='company-a',room_id='room-company-a',run_id=run['runId'])
-        self.assertEqual(status['state'],'COMPLETED');self.assertEqual(len(status['messages']),3);self.assertEqual(len(self.calls),count)
+        self.assertEqual(status['state'],'COMPLETED');self.assertEqual(len(status['messages']),5);self.assertEqual(len(self.calls),count)
         self.assertFalse(reopened.tasks)
 
     async def test_provider_timeout_is_audited_and_never_publishes_or_retries(self):
@@ -196,8 +203,74 @@ class CollaborationTests(unittest.IsolatedAsyncioTestCase):
     async def test_team_completion_cannot_be_claimed_without_a_teammate_reply(self):
         self.plans[0]={'requests':[],'done':True}
         run=await self.start();row=await self.settle(run)
-        self.assertEqual(row['state'],'FAILED');self.assertEqual(row['error'],'COLLABORATION_TEAM_REPLY_REQUIRED')
+        self.assertEqual(row['state'],'FAILED');self.assertEqual(row['error'],'COLLABORATION_FIRST_ROUND_TEAM_REQUIRED')
         self.assertFalse(self.native)
+
+    async def test_first_plan_cannot_omit_repeat_or_reorder_selected_participants(self):
+        cases=[['research'],['research','research'],['review','research']]
+        for number,ids in enumerate(cases):
+            self.plans[0]={'requests':[{'agentId':bot,'message':'Answer this yourself.'} for bot in ids],'done':False}
+            run=await self.start(key='invalid-coverage-'+str(number));row=await self.settle(run)
+            self.assertIn(row['state'],('FAILED','DENIED'));self.assertNotEqual(row['state'],'COMPLETED')
+            self.assertEqual(row['model_calls'],1)
+        self.assertFalse(self.native)
+
+    async def test_dependent_second_teammate_and_boss_receive_values_invented_only_by_first_call(self):
+        self.extra_services=[self.make_service(Limits(rounds=1,model_calls=4))];service=self.extra_services[0]
+        invented={}
+        def receipt():return {'provider':'isolated-fixture','model':'fixture','responseId':'fixture-'+str(len(self.calls)),'status':'completed'}
+        async def dependent(scope,bot,messages,structured):
+            current=json.loads(messages[-1]['content'])
+            if structured:
+                self.assertFalse(invented)
+                self.assertEqual(current['requiredFirstRoundAgentIds'],['research','review'])
+                return json.dumps({'requests':[
+                    {'agentId':'research','message':'Invent a new unpredictable bundle label and exact budget now.'},
+                    {'agentId':'review','message':'Repeat the actual label and budget in the earlier Research reply; do not invent new values.'}], 'done':False}),receipt()
+            if bot=='research':
+                invented.update(label='Bundle-'+secrets.token_hex(8),amount=str(1000+secrets.randbelow(9000)))
+                # Place the dependent values beyond the former1000-byte excerpt.
+                return 'Supporting analysis. '*90+'\nLabel '+invented['label']+'; budget $'+invented['amount'],receipt()
+            if bot=='review':
+                prior=current['priorTeamReplies'][-1]
+                self.assertEqual(prior['agentId'],'research');self.assertEqual(current['respondingAgent']['id'],'review')
+                self.assertIn(invented['label'],prior['reply']);self.assertIn(invented['amount'],prior['reply'])
+                return 'Verified earlier label '+invented['label']+' at $'+invented['amount'],receipt()
+            self.assertEqual({r['agentId'] for r in current['teamReplies']},{'research','review'})
+            for reply in current['teamReplies']:
+                self.assertIn(invented['label'],reply['reply']);self.assertIn(invented['amount'],reply['reply'])
+            return 'Final synthesis: '+invented['label']+' costs $'+invented['amount'],receipt()
+        self.model_hook=dependent
+        run=await self.start(service);row=await self.settle(run,service)
+        self.assertEqual(row['state'],'COMPLETED');self.assertEqual(row['model_calls'],4)
+        self.assertEqual([call['bot'] for call in self.calls],['boss','research','review','boss'])
+        self.assertIn(invented['label'],self.native[-1]['text']);self.assertIn(invented['amount'],self.native[-1]['text'])
+
+    async def test_insufficient_budget_rejects_before_any_model_or_native_message(self):
+        self.extra_services=[self.make_service(Limits(model_calls=3))];service=self.extra_services[0]
+        with self.assertRaises(CollaborationError) as denied:await self.start(service)
+        self.assertEqual(denied.exception.code,'COLLABORATION_TEAM_BUDGET_TOO_SMALL')
+        self.assertFalse(self.calls);self.assertFalse(self.native);self.assertFalse(service.contexts)
+
+    async def test_expired_budget_during_first_answer_cannot_complete_partial_team(self):
+        clock=[10000.0]
+        async def expire(scope,bot,messages,structured):
+            if not structured and bot=='research':clock[0]+=6
+        self.model_hook=expire
+        self.extra_services=[self.make_service(Limits(wall_seconds=5))];service=self.extra_services[0]
+        with patch('local_collaboration.time.time',side_effect=lambda:clock[0]):
+            run=await self.start(service);row=await self.settle(run,service)
+        self.assertEqual(row['state'],'BUDGET_EXHAUSTED')
+        self.assertFalse(any(message['metadata']['kind']=='final' for message in self.native))
+        self.assertEqual(service._coverage(run['runId'],['research','review'])['missingIds'],['research','review'])
+
+    async def test_legacy_completed_row_missing_participant_is_flagged_without_overwriting_receipts(self):
+        run=await self.start();await self.settle(run)
+        with self.service._db() as db:db.execute("DELETE FROM collaboration_messages WHERE run=? AND kind='reply' AND bot='review'",(run['runId'],))
+        status=await self.service.status(actor_id='owner-company-a',company_id='company-a',room_id='room-company-a',run_id=run['runId'])
+        self.assertEqual(status['state'],'FAILED');self.assertEqual(status['storedState'],'COMPLETED');self.assertTrue(status['needsReview'])
+        self.assertEqual(status['participantCoverage']['missingIds'],['review'])
+        self.assertEqual(self.service._row(run['runId'])['state'],'COMPLETED')
 
 
 if __name__=='__main__':unittest.main()

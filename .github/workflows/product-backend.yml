@@ -35,9 +35,9 @@ jobs:
         run: python -m pip install --disable-pip-version-check uv==0.11.19
       - name: Verify target locks
         run: python packaging/check_backend_locks.py
-      - name: Run actual new product core APIs in a hash-locked environment
+      - name: Run native core APIs and isolated collaboration fixtures in a hash-locked environment
         run: python packaging/product_backend_smoke.py --install --output work/product-backend-result.json
-      - name: Upload only sanitized core validation evidence
+      - name: Upload only sanitized core and separate fixture evidence (no inference claim)
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

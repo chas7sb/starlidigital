@@ -1,7 +1,7 @@
 {
   "status": "SOURCE_CHECKPOINT_READY",
   "date": "2026-11-22",
-  "contractSha256": "ef424a0c567f932f8d356ffbd8ca839cc2b023d0480432fb32325909e6ffcc90",
+  "contractSha256": "32c62ac706f97dd9ae29a19115d04d531629d3a922ae1433b12389a76a7b1573",
   "nativePins": {
     "status": "PASS",
     "pinnedNativeFiles": 15,
@@ -24,5 +24,9 @@
     "coordinated same-state reload for latest receipts/timeouts/engine refinements",
     "actual selected-model chat and Boss/team conversation QA"
   ],
-  "fullJoinedGeneratedAppPreviewVerified": false
+  "fullJoinedGeneratedAppPreviewVerified": false,
+  "sourceBaseCommit": "b934a1b556823518d5ee2950f932950d8ac0bb9c",
+  "coreTests": 19,
+  "nativeFixture": "PASS: Boss plus2selected teammates, five persisted agent messages, complete participantCoverage, distinct normal bot-turn attribution",
+  "activeBackend": "PID46836: final core snapshot already loaded, same saved-key QA/native state"
 }

@@ -3,19 +3,19 @@
   "changes": [
     {
       "path": "src/routes/+layout.svelte",
-      "sha256": "7a8abc19d55dca77a7a8336d4bbcd746a6c4a9160e29113ff209d97767d80988"
+      "sha256": "e1bfc5b2d22dff640f949f2b89992512403618a503587a19214c49f096ca22af"
     },
     {
       "path": "src/lib/components/marketing/Homepage.svelte",
-      "sha256": "0ca6739892685820badae623e62f2a56a51f00fc814a6ef4a87f862f77b1a36a"
+      "sha256": "84e99a3a8d2b49b9798a49d6f524f2134ed0ffa185a33faa473cd28ec3355bc9"
     },
     {
       "path": "vite.config.ts",
-      "sha256": "cea19f3c8d58ca04f9721914b42dd0cd29ff72972c07f43b267d76bcf814b642"
+      "sha256": "6f59e2825f01a83cd5493edc1b923e46fdbdffc6fc1be7660b82bbfba95a1f95"
     },
     {
       "path": "src/routes/app/+page.svelte",
-      "sha256": "652cb13113f3e2156629a6f232e1bab1e3e56649480bd3957942970bf423789a"
+      "sha256": "941ff825b2fd48411ffdba7abef0ed7b564b4dc57ec949b5d21ae80b2e1c8ce4"
     },
     {
       "path": "src/lib/components/enterprise/company/LocalProviderConnection.svelte",
@@ -23,45 +23,47 @@
     },
     {
       "path": "src/lib/components/enterprise/messaging/TeamCollaboration.svelte",
-      "sha256": "c582c1ad1600aa3a22ceb735769b6e95d74e46a4be6523f9fc7b775acc0abab9"
+      "sha256": "e79848343fcce97aaa147b218e76dea529d0045ee12fab1c905d1530c0240bae"
     },
     {
       "path": "src/lib/components/enterprise/messaging/collaboration-client.ts",
-      "sha256": "11b158a32a2729de0d172e2804943d3121203df7c2539b76e5ae1ac24414390f"
+      "sha256": "4d40afc48716059aa13a5b3a2b523e638966cdc27e32b633dc179e7150ad9005"
     },
     {
       "path": "tests/local-collaboration-client.test.mjs",
-      "sha256": "c9ae5f1e129353dd91b4e9cfc279c1f52dcbab44a3e9aee3d04feea995dd8bd5"
+      "sha256": "f24674990d85327c5822dbf6bc04eb03c4c53b71fa74689cb193fdf50d1b16ec"
     },
     {
       "path": ".env.example",
-      "sha256": "88d49a0d07e8589684ccf8dc6e276acf6945752e0c97b3a61a68289a45e70b64"
+      "sha256": "70c87c0dc000728bf4cc92ad2df7bd588ae60f839dcb0f2fa847b8b9bd6ae5f5"
     },
     {
       "path": "src/lib/components/enterprise/CompanyApps.svelte",
-      "sha256": "5f689a5494663d7bb811d3925bc3359633cb4994203fce3612448ebfe9628638"
+      "sha256": "12316d4cdf185300368bb27db2088c60cd411f18994dc45df52f23d61996ff93"
     },
     {
       "path": "src/lib/components/enterprise/account/CustomerAPI.svelte",
-      "sha256": "b8dcea06381a2cbbf56a45a2d037db4d6efa8c7570cdfecd0723745f4dc64853"
+      "sha256": "3fe4d6688d30b96a7b00727a7b8cd04a79376b5de547243d6cef87b57bad0d87"
     },
     {
       "path": "src/lib/components/enterprise/panes/published-preview.ts",
-      "sha256": "411aef28545401adf482e7b8449a54b5058e81c407a77867012b47c1eb2eeaaa"
+      "sha256": "c8510b1d1f716d775ffa279d01b31ee437814b33971b23fb3425c63404f9e0dd"
     },
     {
       "path": "src/lib/components/enterprise/social/company-social-client.ts",
-      "sha256": "b579409e96270242f288e91e1023fa1105419e1e30e2a779122237bc6ad08f33"
+      "sha256": "97f9db01b8a72478d01dcfc13434e81e2534d093ec5cfc49d24a2eb10ded30c5"
     },
     {
       "path": "src/lib/utils/installation-origin.ts",
-      "sha256": "2f00effef236268fb96822b3069201f304404c79da4ad3c5d82b3569d8cf1e31"
+      "sha256": "f5840445381bee27ad770fbf4531aee3144a1fb27f8818400771c04ac8fa6d87"
     },
     {
       "path": "tests/installation-origin.test.mjs",
-      "sha256": "e6a3e4fb47d02b587defb93ebb0b0401c097ffb23418cb02eaa639b46f4d8816"
+      "sha256": "e4ffd4f011083b71e7128c6dd35f9b23a53ba0ae7a5f342adc6fa5653e22667c"
     }
   ],
   "purpose": "Remove marketing showcase/legacy shell; use loopback native API; bounded native team collaboration + explicit company provider setup. Source manifests preserve original bytes. No model inference claimed by frontend build tests.",
-  "publicOrigin": "Defaults to browser public origin; optional strictly validated VITE_STARLI_PUBLIC_ORIGIN. No original deployment origin fallback."
+  "publicOrigin": "Defaults to browser public origin; optional strictly validated VITE_STARLI_PUBLIC_ORIGIN. No original deployment origin fallback.",
+  "hashNormalization": "current staged Git blob bytes",
+  "sourceBaseCommit": "b934a1b556823518d5ee2950f932950d8ac0bb9c"
 }

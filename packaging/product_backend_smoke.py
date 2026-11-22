@@ -1,7 +1,8 @@
 """Run the actual new-product native core API checks using the target hash lock.
 
-This proves core auth/company/bot/team/guest boundaries, not configured inference,
-workers or the joined preview. Only sanitized reports are CI artifacts.
+This proves core auth/company/bot/team/guest boundaries and isolated collaboration
+fixtures, not configured inference, workers or the joined preview. Only sanitized
+reports are CI artifacts.
 """
 import argparse
 import json
@@ -30,23 +31,66 @@ def execute(output):
     filesystem.ensure_private_directory(private)
     allowed=['PATH','SYSTEMROOT','SystemRoot','WINDIR','COMSPEC','ComSpec','PATHEXT','LANG','LC_ALL','TZ','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE']
     env={key:os.environ[key] for key in allowed if key in os.environ}
-    for name in ['home','tmp']:filesystem.ensure_private_directory(private/name)
-    env.update(HOME=str(private/'home'),USERPROFILE=str(private/'home'),TMP=str(private/'tmp'),TEMP=str(private/'tmp'),PYTHONUTF8='1',PYTHONIOENCODING='utf-8',ANONYMIZED_TELEMETRY='false',DO_NOT_TRACK='true')
-    result=subprocess.run([sys.executable,str(ROOT/'product-backend/test_local_server.py')],cwd=ROOT,env=env,capture_output=True,text=True,timeout=180)
-    (private/'private-test.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
-    report=None
-    if result.returncode==0:
-        for line in reversed(result.stdout.splitlines()):
-            try:value=json.loads(line)
-            except ValueError:continue
-            if isinstance(value,dict) and value.get('status')=='PASS' and isinstance(value.get('checks'),list):
-                report={'status':'PASS','attempt':attempt,'scope':'new product native core ASGI APIs; no configured model execution', 'checks':value['checks'],'modelCalls':value.get('modelCalls'),'externalActions':value.get('externalActions'),'limitations':value.get('limitations',[])}
-                break
-    if report is None:
-        report={'status':'FAIL','attempt':attempt,'stage':'new-product-core-ASGI-test','returncode':result.returncode,'private_logs_uploaded':False}
+    # unittest owns a fresh TemporaryDirectory per test. Keep those directories,
+    # suite homes and all captured output within this attempt's private boundary.
+    unit_runner="""import json,sys,unittest
+suite=unittest.defaultTestLoader.discover(sys.argv[1],pattern='test_local_collaboration.py')
+count=suite.countTestCases()
+result=unittest.TextTestRunner(verbosity=2).run(suite)
+ok=result.wasSuccessful() and count>0 and not result.skipped
+print(json.dumps({'status':'PASS' if ok else 'FAIL','testsRun':result.testsRun,'skipped':len(result.skipped)}))
+raise SystemExit(0 if ok else 1)
+"""
+    suites=[('foundation','test_local_server.py',None),
+            ('collaboration-fixtures','test_local_collaboration.py',unit_runner),
+            ('native-collaboration-fixtures','test_native_collaboration_routes.py',None)]
+    reports=[]
+    for label,filename,runner in suites:
+        case=private/label
+        for name in ['', 'home','tmp','home/appdata','home/localappdata']:
+            filesystem.ensure_private_directory(case/name)
+        child_env={**env,'HOME':str(case/'home'),'USERPROFILE':str(case/'home'),
+                   'TMP':str(case/'tmp'),'TEMP':str(case/'tmp'),'TMPDIR':str(case/'tmp'),
+                   'APPDATA':str(case/'home/appdata'),'LOCALAPPDATA':str(case/'home/localappdata'),
+                   'PYTHONUTF8':'1','PYTHONIOENCODING':'utf-8','OFFLINE_MODE':'true',
+                   'HF_HUB_OFFLINE':'1','ANONYMIZED_TELEMETRY':'false','DO_NOT_TRACK':'true'}
+        command=([sys.executable,'-c',runner,str(ROOT/'product-backend')] if runner
+                 else [sys.executable,str(ROOT/'product-backend'/filename)])
+        entry={'suite':label,'status':'FAIL','private_logs_uploaded':False}
+        if label!='foundation':entry.update(actualInference=False,externalCalls=0,executionClass='TEST_FIXTURE')
+        try:
+            result=subprocess.run(command,cwd=ROOT,env=child_env,capture_output=True,text=True,timeout=240)
+            (case/'private-test.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
+            entry['returncode']=result.returncode
+            if result.returncode==0:
+                for line in reversed(result.stdout.splitlines()):
+                    try:value=json.loads(line)
+                    except ValueError:continue
+                    if not isinstance(value,dict) or value.get('status')!='PASS':continue
+                    if runner:
+                        if not isinstance(value.get('testsRun'),int) or value['testsRun']<1 or value.get('skipped')!=0:continue
+                        entry.update(status='PASS',testsRun=value['testsRun'],skipped=0)
+                    elif isinstance(value.get('checks'),list):
+                        if label=='foundation' and (value.get('modelCalls')!=0 or value.get('externalActions')!=0):continue
+                        if label!='foundation' and (value.get('actualInference') is not False or value.get('externalCalls')!=0):continue
+                        entry.update(status='PASS',checks=value['checks'])
+                    else:continue
+                    break
+        except (OSError,subprocess.TimeoutExpired) as error:
+            entry['failure_type']=type(error).__name__
+        reports.append(entry)
+    foundation=reports[0]
+    report={'status':'PASS' if all(item['status']=='PASS' for item in reports) else 'FAIL',
+            'attempt':attempt,'scope':'native core ASGI APIs and separate isolated collaboration fixtures; no actual inference',
+            'checks':foundation.get('checks',[]),'modelCalls':0,'externalActions':0,
+            'actualInference':False,'suites':reports,'private_logs_uploaded':False,
+            'limitations':['Collaboration model/native callback results use explicit fixtures, not actual inference',
+                           'No configured provider, worker execution or joined preview lifecycle claimed',
+                           'ASGI TestClient validation; separate socket launch validation required']}
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps({'status':report['status'],'scope':report.get('scope'),'checks':len(report.get('checks',[]))}))
+    print(json.dumps({'status':report['status'],'scope':report['scope'],'checks':len(report['checks']),
+                      'suites':[{'suite':item['suite'],'status':item['status'],'testsRun':item.get('testsRun')} for item in reports]}))
     return 0 if report['status']=='PASS' else 1
 
 def main():
