@@ -1,12 +1,12 @@
 # StarliDigital
 
-Self-hosted extraction of the existing StarliDigital dashboard and agent platform, excluding marketing pages. This is an integration workspace, not a completed or certified release.
+Open-source extraction of the new StarliDigital product: companies, bots, teams, Boss coordination, conversations between agents, and generated app previews. Sales pages are excluded. This is an integration workspace, not a completed release.
 
-The existing dashboard source is preserved rather than replaced with a mockup. Source includes chat, company tools, CRM, mail, projects, proposals, hosted agents, videos, social tools, approvals and computer controls. Availability in a fresh installation is tracked in [feature parity](docs/feature-parity.md).
+The requested frontend is being assembled in `product/`, with its native runtime in `product-backend/`. Its exact source and verification limits are recorded in [new product source](docs/new-product-source.md). The earlier `dashboard/` extraction and its previews belong to the legacy OpenWebUI-based application; they do not demonstrate acceptance of this product.
 
 ## Getting started
 
-Read [installation](docs/install.md) and run `npm run doctor` to check prerequisites. For a native installation, run `npm run install:app`, `npm run setup`, then `npm start`. Setup prompts privately for the first owner and creates fresh local state. The dashboard requires its Python backend as well as its frontend. Docker Compose is an additional deployment option described in the guide.
+The new product installer and joined runtime are being integrated. Release packaging is disabled until the correct frontend preview and bot/team/Boss flows pass local verification. Earlier installation commands and CI results must not be treated as validation of the new product. Read [installation](docs/install.md) for current integration status.
 
 The native server runs in the foreground; stop it with Ctrl+C. Keep the extracted project in a writable, persistent directory. Node 24+, `uv`, and FFmpeg are prerequisites; the installer prepares the separate application runtimes. QEMU is an additional prerequisite for the isolated computer.
 
@@ -16,7 +16,9 @@ Windows, macOS and Linux are installation targets. Platform validation and outst
 
 | Directory | Contents |
 | --- | --- |
-| `dashboard/` | Existing Svelte dashboard and Python application |
+| `product/` | New StarliDigital bots, teams and Boss frontend |
+| `product-backend/` | Native company, orchestration and app runtime source |
+| `dashboard/` | Legacy application source; compatibility dependencies under review |
 | `platform/` | Node platform, active MCP control-plane, CLI and device source |
 | `platform/extensions/` | Additional production feature runtimes, extracted without live state |
 | `runtime/` | Isolated computer-use VM lifecycle |
